@@ -77,9 +77,34 @@ If enabled, the function will display:
 - The Bayer filter matrix in the console log (below the line Filter matrix:).
 - The Swapping matrix in the console log (only if ord is set to 2, which is explained in the 6th argument).
 #### 4th argument (optional) - rgb:
-Pick colors that you wanna apply the filter. For example, if you wanna apply red & blue filter, you can put `[true false true]` as the input of the argument:
+- Pick colors to apply the filter. 1st element represents the red color, 2nd one represents the green color, 3rd one represents the blue color.
+- Example: To apply red & blue filters, use `ImageProcessor.convert2Bayer(img, filter, true, [true false true]);`:
 ![{0ED9AA32-9DC5-451B-B05F-7C228026B3C4}](https://github.com/user-attachments/assets/79c319d7-5189-4b60-92d0-7c9ed85a3583)
 #### 5th argument (optional) - filtersize:
-Expand the filter into a bigger size. For example, from 2x2 filter into 4x5 filter (in MATLAB, put `[4 5]`).  
+Expand the filter into a larger size. For example, from 2x2 filter into 4x5 filter (in MATLAB, I put `[4 5]`).  
 ![{EB4FE867-5B9D-440B-8664-5C2A181AEFE5}](https://github.com/user-attachments/assets/ee9ccdb4-7bc3-4d09-97f6-371cb6300c4c)
+However, this doesn't affect the image without the 6th argument due to the nature of the calculation.
+#### 6th argument (optional) - `ord`:
+Sorts the **Bayer filter** based on the specified order.  
+Currently, there are **3 modes**:
 
+- **Mode `0`**: No sorting applied.  
+- **Mode `1`**: Sorts by **color order only**:
+  - The default order is **`R < G < B`** (this can be adjusted in future versions).
+  - Sorting is performed **column-wise first, then row-wise** (this can also be adjusted in the future).  
+- **Mode `2`**: Sorts by **color order**, affecting the **position of the matrices**:
+  - This mode swaps the order of matrices according to the color order in **Mode `1`**.
+  - The **Swapping matrix** will be displayed in the console log to visualize how the positions have been altered.
+
+Example usage:
+```
+ImageProcessor.convert2Bayer(img, filter, true, [true false true], [4 5], 2);
+```
+Visual example for mode `1`:
+![{2C550A8F-714B-4309-95F9-DCA1D59750CB}](https://github.com/user-attachments/assets/f37fdda0-4bbf-4f55-9441-612b2c168252)
+Visual example for mode `2`:
+![{8246FC8B-6697-4320-B6D2-EAE65E9A26A1}](https://github.com/user-attachments/assets/855d0441-1182-4ba9-a580-3df5dfee308d)
+In this example, you can see the Swapping matrix in the console log. Let's use the element at position [1, 3] as an example. The element at position [1, 3] will be swapped with the element at position [1, 5].  
+The element at [1, 3] stands at the 1st row and 3rd column of the image.  
+When applying the Bayer filter in mode 2, the element at [1, 3] will be replaced with the element at [1, 5] (as seen in the Swapping matrix).  
+This swap is based on the color order defined in mode 1 and happens according to the positions in the Swapping matrix.  
