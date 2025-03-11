@@ -7,6 +7,9 @@ classdef ImageProcessor
             if ~log
                 warning('off', 'all')
                 disp('Log is disable!')
+            else
+                warning('on', 'all')
+                disp('Log is enable!')
             end
             img = imread(filename);
         end
@@ -15,7 +18,7 @@ classdef ImageProcessor
         end
         function saveImage(img, filename)
             imwrite(img, filename);
-            disp("Image is saved at: " + pwd)
+            disp("Image is saved at: " + pwd);
         end
         function bayerImage = convert2Bayer(rgbImage, filter, show, rgb, filtersize, ord)
             cls = class(rgbImage(:,:,1));
@@ -33,6 +36,9 @@ classdef ImageProcessor
             end
             [rf, cf] = size(filter);
             if ord == 2
+                rgbImage = imresize(rgbImage, [ri+rf-mod(ri,rf), ci+cf-mod(ci,cf)]);
+                ri = ri+rf-mod(ri,rf);
+                ci = ci+cf-mod(ci,cf);
                 [cols, rows] = meshgrid(1:cf, 1:rf);
                 cols = cols - 1;
                 rows = rows - 1;
@@ -80,13 +86,16 @@ classdef ImageProcessor
                 disp("Filter maxtrix:");
                 disp(filter);
                 if ord == 2
-                    disp("Swaping matrix:");
+                    disp("Swapping matrix:");
                     disp(rows + ", " + cols);
                 end
             end
         end
+        function showImage(img)
+            imshow(img, [])
+        end
         function dimension(img)
-            disp("Dimension of the object: ")
+            disp("Dimention: ")
             disp(size(img))
         end
     end
