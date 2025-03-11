@@ -112,4 +112,28 @@ This swap is based on the color order defined in mode 1 and happens according to
 This function converts a 2D Bayer image into a 3D RGB image using a Bayer filter. The parameters are almost the same as ImageProcessor.convert2Bayer, except for the 6th parameter:
 - `ord` == 0 → No sorting
 - `ord` > 0 → Sorts by color order (R < G < B). Sorting is applied column-first, then row-wise (this can be adjusted in the future).  
-![{4287F959-1393-4967-B19E-2AE8F60B04EE}](https://github.com/user-attachments/assets/2230400e-e16c-4c39-8fc2-dd3b6163a7bb)
+![{4287F959-1393-4967-B19E-2AE8F60B04EE}](https://github.com/user-attachments/assets/2230400e-e16c-4c39-8fc2-dd3b6163a7bb)  
+### Custom Sorting Function - Feature  
+Usage: Use `ImageProcessor.customSorting(data, custom_order, ord)` to get the sorted 2D matrix. For example:  
+![{D497C850-D8B3-4A76-B43B-CFFDBB3D80E4}](https://github.com/user-attachments/assets/c62b12f9-4694-4ece-a1f1-eb952eb946b5)  
+#### 1st Parameter (required) - data
+- The 2D matrix that you want to sort.
+- It will return the sorted matrix along with the row and column indices where the values were swapped.
+#### 2nd parameter (required) - `ord`
+Defines the order in which sorting happens:
+- `r`: Sort by rows first.
+- `c`: Sort by columns first.
+- `rc`: Sort by rows first, then columns.
+You can repeat the sorting type (e.g., rcr), but it won't change the outcome (since sorting by rows twice is redundant).
+#### 3rd parameter (optional) - `custom_order`
+- Default: The default custom order is [1 2 3 ...], meaning the sorting order is ascending (1 < 2 < 3 ...).
+- Custom Example: In the example, you can set the custom order as [2 1 3], meaning that 2 < 1 < 3 for sorting purposes.
+#### Naming Clarification:
+- rows: Although it is named "rows," it actually represents the column indices where the values have been moved in the sorted matrix. You can display these column indices with the following code:
+```
+disp(rows)  % This represents the column indices, but the name might be confusing
+```
+cols: Similarly, cols represents the row indices where the values have been moved in the sorted matrix. You can display these row indices with the following code:
+```
+disp(cols)  % This represents the row indices, but the name might be confusing
+```
