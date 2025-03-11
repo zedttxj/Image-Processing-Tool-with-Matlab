@@ -133,7 +133,7 @@ You can repeat the sorting type (e.g., rcr), but it won't change the outcome (si
 ```
 disp(rows)  % This represents the column indices, but the name might be confusing
 ```
-cols: Similarly, cols represents the row indices where the values have been moved in the sorted matrix. You can display these row indices with the following code:
+- cols: Similarly, cols represents the row indices where the values have been moved in the sorted matrix. You can display these row indices with the following code:
 ```
 disp(cols)  % This represents the row indices, but the name might be confusing
 ```
