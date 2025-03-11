@@ -34,8 +34,13 @@ Use `ImageProcess.showImage` to show your image in MATLAB. For example:
 ```
 ImageProcessor.showImage(img);
 ```
+##### 1st argument (required) - img: 
+- The image variable that you want to display. It can be a 2D image (height x width), typically used for black-and-white images, or a 3D image (height x width x channels), which is used for RGB color images.
+- Ensure that the image variable (`img` in this case) has already been loaded or processed before calling this function.
+- 3D image example (dimension is showed in the left): ![{B38A2799-8675-4D87-B6F3-AFD516DD7E42}](https://github.com/user-attachments/assets/30471daf-6ae5-4414-b3ce-d964c1a533ed)  
+- 2D image example (dimension is showed in the left): ![{FBCBEBFB-5EC1-4259-9BBF-FC0BAA67F9B7}](https://github.com/user-attachments/assets/3e46f42d-1237-4a3a-b46c-c189a634c454)  
 ### 4. ImageProcessor.saveImage - Feature  
-Use `ImageProcess.showImage` to save your image in MATLAB folder. For example:  
+Use `ImageProcess.saveImage` to save your image in MATLAB folder. For example:  
 #### 1st argument (required) - img:
 - The image object that you want to save. It can be a 2D or 3D matrix.
 
@@ -48,11 +53,6 @@ Use `ImageProcess.showImage` to save your image in MATLAB folder. For example:
 ImageProcessor.saveImage(bayerImage, 'output.png');
 ```
 ![{A4290582-DA96-4C45-BB61-DC1EE93F2F80}](https://github.com/user-attachments/assets/53d7271c-e1b1-4387-8ff2-8e2c978e450f)
-##### 1st argument (required) - img: 
-- The image variable that you want to display. It can be a 2D image (height x width), typically used for black-and-white images, or a 3D image (height x width x channels), which is used for RGB color images.
-- Ensure that the image variable (`img` in this case) has already been loaded or processed before calling this function.
-- 3D image example (dimension is showed in the left): ![{B38A2799-8675-4D87-B6F3-AFD516DD7E42}](https://github.com/user-attachments/assets/30471daf-6ae5-4414-b3ce-d964c1a533ed)  
-- 2D image example (dimension is showed in the left): ![{FBCBEBFB-5EC1-4259-9BBF-FC0BAA67F9B7}](https://github.com/user-attachments/assets/3e46f42d-1237-4a3a-b46c-c189a634c454)  
 ### Convert image object from 3D into 2D using Bayer Filter - Feature  
 Usage: ImageProcessor.convert2Bayer  
 #### 1st argument (required) - rgbImage:
