@@ -114,12 +114,11 @@ This function converts a 2D Bayer image into a 3D RGB image using a Bayer filter
 - `ord` > 0 → Sorts by color order (R < G < B). Sorting is applied column-first, then row-wise (this can be adjusted in the future).  
 ![{4287F959-1393-4967-B19E-2AE8F60B04EE}](https://github.com/user-attachments/assets/2230400e-e16c-4c39-8fc2-dd3b6163a7bb)  
 ### Custom Sorting Function - Feature  
-Usage: Use `ImageProcessor.customSorting(data, custom_order, ord)` to get the sorted 2D matrix. For example:  
+Usage: Use `ImageProcessor.customSorting(data, custom_order, ord)` to get the sorted 2D matrix. It will return the sorted matrix along with the row and column indices where the values were swapped. For example:  
 
 ![{D497C850-D8B3-4A76-B43B-CFFDBB3D80E4}](https://github.com/user-attachments/assets/c62b12f9-4694-4ece-a1f1-eb952eb946b5)  
 #### 1st Parameter (required) - `data`
 - The 2D matrix that you want to sort.
-- It will return the sorted matrix along with the row and column indices where the values were swapped.
 #### 2nd parameter (required) - `ord`
 Defines the order in which sorting happens:
 - `r`: Sort by rows first.
