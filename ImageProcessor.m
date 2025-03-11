@@ -20,6 +20,47 @@ classdef ImageProcessor
             imwrite(img, filename);
             disp("Image is saved at: " + pwd);
         end
+        function rgbImage = convertBayer2RGB(bayerImage, filter, show, rgb, filtersize, ord)
+            cls = class(bayerImage(:,:));
+            [ri, ci] = size(bayerImage);
+            if nargin < 6
+                ord = 0;
+            end
+            if nargin > 4
+                [rf, cf] = size(filter);
+                filter = repmat(filter,ceil(filtersize(1)/rf),ceil(filtersize(2)/cf));
+                filter = filter(1:filtersize(1),1:filtersize(2));
+                if ord > 0
+                    filter = sort(sort(filter,2));
+                end
+            end
+            [rf, cf] = size(filter);
+            rgbImage = cast(zeros(ri, ci, 3), cls);
+            if nargin < 4
+                rgb = [true true true];
+            end
+            for k = 1:3
+                if rgb(k)
+                    mask = cast(filter == k, cls);
+                    for i = 1:rf:ri
+                        for j = 1:cf:ci
+                            i_end = min(i + rf - 1, ri);
+                            j_end = min(j + cf - 1, ci);
+                            rgbImage(i:i_end, j:j_end,k) = bayerImage(i:i_end, j:j_end) .* mask(1:(i_end-i+1), 1:(j_end-j+1));
+                        end
+                    end
+                end
+            end
+            if nargin < 3
+                show = true;
+            end
+            % Show the Bayer-filtered image
+            if show
+                imshow(rgbImage, []);
+                disp("Filter maxtrix:");
+                disp(filter);
+            end
+        end
         function bayerImage = convert2Bayer(rgbImage, filter, show, rgb, filtersize, ord)
             cls = class(rgbImage(:,:,1));
             [ri, ci, t] = size(rgbImage);
