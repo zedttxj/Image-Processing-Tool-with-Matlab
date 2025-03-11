@@ -108,7 +108,7 @@ In this example, you can see the Swapping matrix in the console log. Let's use t
 The element at [1, 3] stands at the 1st row and 3rd column of the image.  
 When applying the Bayer filter in mode 2, the element at [1, 3] will be replaced with the element at [1, 5] (as seen in the Swapping matrix).  
 This swap is based on the color order defined in mode 1 and happens according to the positions in the Swapping matrix.  
-### Convert Bayer image object from 2D into 3D using Bayer Filter - Feature  
+### Convert Bayer image object from 2D (gray) into 3D (rgb) using Bayer Filter - Feature  
 This function converts a 2D Bayer image into a 3D RGB image using a Bayer filter. The parameters are almost the same as ImageProcessor.convert2Bayer, except for the 6th parameter:
 - `ord` == 0 → No sorting
 - `ord` > 0 → Sorts by color order (R < G < B). Sorting is applied column-first, then row-wise (this can be adjusted in the future).  
@@ -137,3 +137,8 @@ disp(rows)  % This represents the column indices, but the name might be confusin
 ```
 disp(cols)  % This represents the row indices, but the name might be confusing
 ```
+### Update: New Features for ImageProcessor.convert2Bayer and ImageProcessor.convertBayer2RGB
+Both functions now support 7th and 8th parameters, which function similarly to the 2nd and 3rd parameters in the customSorting feature.  
+- 7th parameter: Defines the primary sorting order (r, c, rc, etc.).
+- 8th parameter: Allows for a custom sorting order, enabling specific prioritization of values.
+![{8F5B8348-86CE-469A-9006-E4B73F1C2206}](https://github.com/user-attachments/assets/f267934d-6f24-496a-b017-2c165ef3287b)
