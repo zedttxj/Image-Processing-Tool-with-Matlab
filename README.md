@@ -54,7 +54,7 @@ ImageProcessor.saveImage(bayerImage, 'output.png');
 ```
 ![{A4290582-DA96-4C45-BB61-DC1EE93F2F80}](https://github.com/user-attachments/assets/53d7271c-e1b1-4387-8ff2-8e2c978e450f)
 ### Convert image object from 3D into 2D using Bayer Filter - Feature  
-Usage: ImageProcessor.convert2Bayer  
+Usage: `ImageProcessor.convert2Bayer`  
 #### 1st parameter (required) - rgbImage:
 - The 3D image object that you have imported. You can use `ImageProcessor.readImage` to import the image.
 #### 2st parameter (required) - filter:
@@ -108,3 +108,7 @@ In this example, you can see the Swapping matrix in the console log. Let's use t
 The element at [1, 3] stands at the 1st row and 3rd column of the image.  
 When applying the Bayer filter in mode 2, the element at [1, 3] will be replaced with the element at [1, 5] (as seen in the Swapping matrix).  
 This swap is based on the color order defined in mode 1 and happens according to the positions in the Swapping matrix.  
+### Convert Bayer image object from 2D into 3D using Bayer Filter - Feature  
+Usage: `ImageProcessor.convertBayer2RGB`  
+The parameters put it are almost the same as `ImageProcessor.convert2Bayer` except the 6th parameter. `ord == 0` represents no sorting while `ord > 0` represents sorting.  
+![{4287F959-1393-4967-B19E-2AE8F60B04EE}](https://github.com/user-attachments/assets/2230400e-e16c-4c39-8fc2-dd3b6163a7bb)
