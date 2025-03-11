@@ -35,8 +35,7 @@ Use `ImageProcess.showImage` to show your image in MATLAB. For example:
 ImageProcessor.showImage(img);
 ```
 ### 4. ImageProcessor.saveImage - Feature  
-Usage: `ImageProcessor.saveImage`  
-
+Use `ImageProcess.showImage` to save your image in MATLAB folder. For example:  
 #### 1st argument (required) - img:
 - The image object that you want to save. It can be a 2D or 3D matrix.
 
@@ -47,6 +46,7 @@ Usage: `ImageProcessor.saveImage`
 #### Example:
 ```matlab
 ImageProcessor.saveImage(bayerImage, 'output.png');
+```
 ![{A4290582-DA96-4C45-BB61-DC1EE93F2F80}](https://github.com/user-attachments/assets/53d7271c-e1b1-4387-8ff2-8e2c978e450f)
 ##### 1st argument (required) - img: 
 - The image variable that you want to display. It can be a 2D image (height x width), typically used for black-and-white images, or a 3D image (height x width x channels), which is used for RGB color images.
