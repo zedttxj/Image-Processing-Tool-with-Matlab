@@ -65,15 +65,21 @@ filter = [
     2, 3;
 ];
 ```
-In this case, the filter is 'grbg', which is the most common Bayer filter pattern.  
+In this case, the filter is 'RGGB'.  
 - `3` represents the blue channel.
 - `2` represents the green channel.
 - `1` represents the red channel.
 The filter size doesn't have to be a square matrix.
 #### 3rd argument (optional) - show:
 A boolean variable that is automatically set to true. For example:
-```
-```
+![{EE49952E-F8CB-41C8-A691-24E18E29EF1A}](https://github.com/user-attachments/assets/8d137ace-91fa-4c77-acb5-e720ceaba63c)  
 If enabled, the function will display:
 - The Bayer filter matrix in the console log (below the line Filter matrix:).
 - The Swapping matrix in the console log (only if ord is set to 2, which is explained in the 6th argument).
+#### 4th argument (optional) - rgb:
+Pick colors that you wanna apply the filter. For example, if you wanna apply red & blue filter, you can put `[true false true]` as the input of the argument:
+![{0ED9AA32-9DC5-451B-B05F-7C228026B3C4}](https://github.com/user-attachments/assets/79c319d7-5189-4b60-92d0-7c9ed85a3583)
+#### 5th argument (optional) - filtersize:
+Expand the filter into a bigger size. For example, from 2x2 filter into 4x5 filter (in MATLAB, put `[4 5]`).  
+![{EB4FE867-5B9D-440B-8664-5C2A181AEFE5}](https://github.com/user-attachments/assets/ee9ccdb4-7bc3-4d09-97f6-371cb6300c4c)
+
