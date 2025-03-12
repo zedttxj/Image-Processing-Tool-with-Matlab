@@ -2,6 +2,12 @@
 **Disclaimer**: This project is provided "as is" without any warranties or representations, express or implied, including but not limited to the implied warranties of merchantability and fitness for a particular purpose. No copyrights, patents, licenses, or trade secrets are applied to this project. You are free to use, modify, and distribute it for academic, research, or commercial purposes, subject to applicable laws and regulations.
 ## Overview
 The goal of this project is to simplify image processing tools in MATLAB, particularly for academic use, such as presentations in LaTeX. Currently, the goal is to simplify Bayer filter application tools that are easy to work with. To use it, download [ImageProcess.m](https://github.com/zedttxj/Image-Processing-Tool-with-Matlab/blob/main/ImageProcessor.m). Additionally, you can test it with [test-script.m](https://github.com/zedttxj/Image-Processing-Tool-with-Matlab/blob/main/test-script.m).  
+## Current Significant Tools:
+`convertPartition2Matrix` – Converts a partitioned structure (1D) into a matrix representation (2D).
+`convertMatrix2Partition` – Transforms a 2D matrix into a partitioned structure (1D).
+`partitionDecomposition` – Generates all possible 2D matrices that match the same partition structure.  
+`convert2Bayer` – Converts an image into a Bayer pattern using a specified filter and configuration.
+`convertBayer2RGB` – Converts a Bayer-patterned image back into an RGB image.  
 ## Warning
 When calling a command in MATLAB, please make sure to put a `;` at the end of the command to prevent unnecessary logs. This helps keep your MATLAB console clean and avoids displaying function outputs that you do not need.
 
