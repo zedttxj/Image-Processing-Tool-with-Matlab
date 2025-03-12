@@ -148,10 +148,10 @@ classdef ImageProcessor
                 filter = filter(1:filtersize(1),1:filtersize(2));
             end
             [rf, cf] = size(filter);
+            rgbImage = imresize(rgbImage, [ri+rf-mod(ri,rf), ci+cf-mod(ci,cf)]);
+            ri = ri+rf-mod(ri,rf);
+            ci = ci+cf-mod(ci,cf);
             if ord > 0
-                rgbImage = imresize(rgbImage, [ri+rf-mod(ri,rf), ci+cf-mod(ci,cf)]);
-                ri = ri+rf-mod(ri,rf);
-                ci = ci+cf-mod(ci,cf);
                 if nargin == 8
                     [filter, rows, cols] = ImageProcessor.customSorting(filter, sortorder, custom_order);
                 elseif nargin == 7
@@ -159,10 +159,10 @@ classdef ImageProcessor
                 else
                     [filter, rows, cols] = ImageProcessor.customSorting(filter, "rc");
                 end
-                if ord == 1
-                    rows = repmat(1:cf,rf, 1);
-                    cols = repmat((1:rf) .',1,cf);
-                end
+            end
+            if ord < 2
+                rows = repmat(1:cf,rf, 1);
+                cols = repmat((1:rf) .',1,cf);
             end
             bayerImage = cast(zeros(ri, ci), cls);
             if nargin < 4
@@ -201,4 +201,3 @@ classdef ImageProcessor
         end
     end
 end
-
