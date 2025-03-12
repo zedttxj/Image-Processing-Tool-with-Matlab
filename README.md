@@ -1,4 +1,4 @@
-# Image-Processing-Tool-with-Matlab
+# Image Processing Tool with Matlab
 **Disclaimer**:  
 This project is provided "as is" without any warranties or representations, express or implied, including but not limited to the implied warranties of merchantability and fitness for a particular purpose. No copyrights, patents, licenses, or trade secrets are applied to this project. You are free to use, modify, and distribute it for academic, research, or commercial purposes, subject to applicable laws and regulations
 ## Overview
