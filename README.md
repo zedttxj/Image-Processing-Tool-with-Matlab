@@ -78,7 +78,7 @@ If enabled, the function will display:
 - The Swapping matrix in the console log (only if ord is set to 2, which is explained in the 6th parameter).
 #### 4th parameter (optional) - rgb:
 - Pick colors to apply the filter. 1st element represents the red color, 2nd one represents the green color, 3rd one represents the blue color.
-- Example: To apply red & blue filters, use `ImageProcessor.convert2Bayer(img, filter, true, [true false true]);`:
+- Example: To use the red & blue pixels matrix only, set the 4th parameter to `[true false true]` (excluding the green pixels matrix by setting it to `false`):
 ![{0ED9AA32-9DC5-451B-B05F-7C228026B3C4}](https://github.com/user-attachments/assets/79c319d7-5189-4b60-92d0-7c9ed85a3583)
 #### 5th parameter (optional) - filtersize:
 Expand the filter into a larger size. For example, from 2x2 filter into 4x5 filter (in MATLAB, I put `[4 5]`).  
