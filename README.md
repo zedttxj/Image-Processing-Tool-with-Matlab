@@ -154,7 +154,7 @@ The partition form follows this structure: [ <number of rows> <number of columns
 - The first value represents the number of rows in the matrix.
 - The second value represents the number of columns in the matrix.
 - The remaining values represent the partition data, where each entry defines the number of filled positions (1s) per row.  
-**Example 1**:
+#### **Example 1**:
 A partition like:
 ```
 partition = [3, 4, 2, 3, 1];
@@ -165,7 +165,7 @@ Means the corresponding 2D matrix would be:
 1 1 1 0
 1 0 0 0
 ```
-**Example 2**:
+#### **Example 2**:
 ![{FFEF9CBD-E44A-4894-8DE3-6F04D0977DBF}](https://github.com/user-attachments/assets/7d669b28-91cb-4bd6-8e73-c3592ac116c9)  
 
 **Example 3**:
@@ -187,8 +187,8 @@ Apparently, you can combine with `ImageProcessor.customSorting` to auto sort the
 ```
 ### 2. `partitionDecomposition`
 Main Usage:
-This function generates all possible matrices that match the same partition structure.
-**Example 1**:  
+This function generates all possible matrices that match the same partition structure.  
+#### **Example 1**:  
 Consider this code:
 ```
 data = [2 4 3 4];
@@ -224,5 +224,5 @@ This will output multiple 2D matrices, where each one follows the partition stru
 >>
 ```
 Each `(:,:,i)` represents a different valid matrix that satisfies the given partition `[2 4 3 4]`.  
-**Example 2**:  
+#### **Example 2**:  
 ![{563EF65F-5C19-4DA2-A380-534016B4FFCB}](https://github.com/user-attachments/assets/0285a38e-a844-4ee2-84ad-eb9dd128bf4b)  
