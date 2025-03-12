@@ -185,3 +185,44 @@ Apparently, you can combine with `ImageProcessor.customSorting` to auto sort the
      1     1     0     0
      1     0     0     0
 ```
+### 2. `partitionDecomposition`
+Main Usage:
+This function generates all possible matrices that match the same partition structure.
+**Example 1**:  
+Consider this code:
+```
+data = [2 4 3 4];
+tmp = ImageProcessor.partitionDecomposition(data);
+disp(tmp);
+return;
+```
+This will output multiple 2D matrices, where each one follows the partition structure but with different arrangements:  
+```
+(:,:,1) =
+
+     1     1     1     0
+     1     1     1     1
+
+
+(:,:,2) =
+
+     1     1     0     1
+     1     1     1     1
+
+
+(:,:,3) =
+
+     1     0     1     1
+     1     1     1     1
+
+
+(:,:,4) =
+
+     0     1     1     1
+     1     1     1     1
+
+>>
+```
+Each (:,:,i) represents a different valid matrix that satisfies the given partition `[2 4 3 4]`.  
+**Example 2**:  
+![{563EF65F-5C19-4DA2-A380-534016B4FFCB}](https://github.com/user-attachments/assets/0285a38e-a844-4ee2-84ad-eb9dd128bf4b)  
