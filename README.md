@@ -83,7 +83,7 @@ If enabled, the function will display:
 #### 5th parameter (optional) - filtersize:
 Expand the filter into a larger size. For example, from 2x2 filter into 4x5 filter (in MATLAB, I put `[4 5]`).  
 ![{EB4FE867-5B9D-440B-8664-5C2A181AEFE5}](https://github.com/user-attachments/assets/ee9ccdb4-7bc3-4d09-97f6-371cb6300c4c)
-However, this doesn't affect the image without the 6th parameter due to the nature of the calculation.
+However, if the size of the filter fits the expanded size nicely (2x2 fits 6x4 for example), this doesn't affect the image without the 6th parameter due to the nature of the calculation.
 #### 6th parameter (optional) - `ord`:
 Sorts the **Bayer filter** based on the specified order.  
 Currently, there are **3 modes**:
