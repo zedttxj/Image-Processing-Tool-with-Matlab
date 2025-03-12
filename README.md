@@ -1,7 +1,7 @@
 # Image-Processing-Tool-with-Matlab
 
 ## Overview
-The goal of this project is to simplify image processing tools in MATLAB, particularly for academic use, such as presentations in LaTeX. Currently, the goal is to simplify Bayer filter application tools that are easy to work with. To use it, download [ImageProcess.m](https://github.com/zedttxj/Image-Processing-Tool-with-Matlab/blob/main/ImageProcessor.m). Additionally, you can test it with [test.m](https://github.com/zedttxj/Image-Processing-Tool-with-Matlab/blob/main/test-script.m).
+The goal of this project is to simplify image processing tools in MATLAB, particularly for academic use, such as presentations in LaTeX. Currently, the goal is to simplify Bayer filter application tools that are easy to work with. To use it, download [ImageProcess.m](https://github.com/zedttxj/Image-Processing-Tool-with-Matlab/blob/main/ImageProcessor.m). Additionally, you can test it with [test.m](https://github.com/zedttxj/Image-Processing-Tool-with-Matlab/blob/main/test-script.m).  
 ## Warning
 When calling a command in MATLAB, please make sure to put a `;` at the end of the command to prevent unnecessary logs. This helps keep your MATLAB console clean and avoids displaying function outputs that you do not need.
 
@@ -137,8 +137,51 @@ disp(rows)  % This represents the column indices, but the name might be confusin
 ```
 disp(cols)  % This represents the row indices, but the name might be confusing
 ```
-### Update: New Features for ImageProcessor.convert2Bayer and ImageProcessor.convertBayer2RGB
+## Update: New Features for ImageProcessor.convert2Bayer and ImageProcessor.convertBayer2RGB
 Both functions now support 7th and 8th parameters, which function similarly to the 2nd and 3rd parameters in the customSorting feature.  
 - 7th parameter: Defines the primary sorting order (r, c, rc, etc.).
 - 8th parameter: Allows for a custom sorting order, enabling specific prioritization of values.
 ![{8F5B8348-86CE-469A-9006-E4B73F1C2206}](https://github.com/user-attachments/assets/f267934d-6f24-496a-b017-2c165ef3287b)
+
+## New Features: `convertPartition2Matrix`, `convertMatrix2Partition`, and `partitionDecomposition`
+### 1. `convertPartition2Matrix` & `convertMatrix2Partition`
+These two functions allow conversion between 1D partitions and 2D matrices:
+- convertPartition2Matrix: Converts a partition (1D array) into a structured 2D matrix.
+- convertMatrix2Partition: Converts a 2D matrix back into a partition (1D array).
+#### Clarification: Partition Formatthe (1D array) 
+The partition form follows this structure: [ <number of rows> <number of columns> <1d partition...> ]
+- The first value represents the number of rows in the matrix.
+- The second value represents the number of columns in the matrix.
+- The remaining values represent the partition data, where each entry defines the number of filled positions (1s) per row.
+**Example 1**:
+A partition like:
+```
+partition = [3, 4, 2, 3, 1];
+```
+Means the corresponding 2D matrix would be:
+```
+1 1 0 0
+1 1 1 0
+1 0 0 0
+```
+**Example 2**:
+![{FFEF9CBD-E44A-4894-8DE3-6F04D0977DBF}](https://github.com/user-attachments/assets/7d669b28-91cb-4bd6-8e73-c3592ac116c9)  
+
+**Example 3**:
+Consider the following matrix:
+```
+data = [
+    1 0 1 0;
+    1 1 1 0;
+    0 0 0 1;
+];
+```
+The output would be this:
+![{5D3C4B0D-5466-47FE-A705-A7AC706B5474}](https://github.com/user-attachments/assets/1897dea0-3b29-4232-b01b-4e89a3b790b6)  
+Apparently, you can combine with `ImageProcessor.customSorting` to auto sort the `data` matrix (using `ImageProcessor.customSorting(data, "rc", [1 0])`) by rows and columns into this:
+```
+     1     1     1     0
+     1     1     0     0
+     1     0     0     0
+```
+This is good for separate the colors and analyze it in young tableau or partition form.
