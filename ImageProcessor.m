@@ -196,7 +196,7 @@ classdef ImageProcessor
             imshow(img, [])
         end
         function dimension(img)
-            disp("Dimention: ")
+            disp("Dimension: ")
             disp(size(img))
         end
     end
