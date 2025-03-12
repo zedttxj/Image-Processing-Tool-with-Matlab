@@ -223,6 +223,6 @@ This will output multiple 2D matrices, where each one follows the partition stru
 
 >>
 ```
-Each (:,:,i) represents a different valid matrix that satisfies the given partition `[2 4 3 4]`.  
+Each `(:,:,i)` represents a different valid matrix that satisfies the given partition `[2 4 3 4]`.  
 **Example 2**:  
 ![{563EF65F-5C19-4DA2-A380-534016B4FFCB}](https://github.com/user-attachments/assets/0285a38e-a844-4ee2-84ad-eb9dd128bf4b)  
