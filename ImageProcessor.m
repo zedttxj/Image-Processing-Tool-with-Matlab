@@ -20,6 +20,51 @@ classdef ImageProcessor
             imwrite(img, filename);
             disp("Image is saved at: " + pwd);
         end
+        function matrix = convertPartition2Matrix(data)
+            matrix = zeros(data(1),data(2));
+            for i = 3:length(data);
+                matrix(i-2,1:data(i)) = 1;
+            end
+        end
+        function partition = convertMatrix2Partition(data)
+            partition = [size(data, 1), size(data, 2) sum(data == 1, 2) .'];
+        end
+        function combinations = partitionDecomposition(partition)
+            matrices = arrayfun(@(i) setDecomposition(partition(2), i), partition(3:end), 'UniformOutput', false);
+            numMatrices = numel(matrices);
+            ranges = arrayfun(@(i) 1:size(matrices{i}, 1), 1:numMatrices, 'UniformOutput', false);
+            [grids{1:numMatrices}] = ndgrid(ranges{:});
+            indices = cellfun(@(g) g(:), grids, 'UniformOutput', false);
+            combinations = [];
+            for i = 1:numel(indices{1})
+                rowCombination = cell(1, numMatrices);
+                for j = 1:numMatrices
+                    rowCombination{j} = matrices{j}(indices{j}(i), :);
+                end
+                combinations = cat(3, combinations, cell2mat(rowCombination'));
+            end
+            function tmp = setDecomposition(numColumns, numOnes)
+                tmp = zeros(1, numColumns);
+                decomposition = nchoosek(1:numColumns, numOnes);
+                for j = 1:size(decomposition, 1)
+                    tmp(j, decomposition(j,:)) = 1;
+                end
+            end
+        end
+        function combinations = createCombinations(tmp)
+            numMatrices = numel(tmp);
+            ranges = arrayfun(@(i) 1:size(tmp{i}, 1), 1:numMatrices, 'UniformOutput', false);
+            [grids{1:numMatrices}] = ndgrid(ranges{:});
+            indices = cellfun(@(g) g(:), grids, 'UniformOutput', false);
+            combinations = [];
+            for i = 1:numel(indices{1})
+                rowCombination = cell(1, numMatrices);
+                for j = 1:numMatrices
+                    rowCombination{j} = tmp{j}(indices{j}(i), :);
+                end
+                combinations = cat(3, combinations, cell2mat(rowCombination'));
+            end
+        end
         function [sorted_matrix, rows, cols] = customSorting(data, ord, custom_order)
             ord = char(ord);
             if nargin < 3
