@@ -51,21 +51,6 @@ classdef ImageProcessor
                 end
             end
         end
-        function combinations = createCombinations(tmp)
-            numMatrices = numel(tmp);
-            ranges = arrayfun(@(i) 1:size(tmp{i}, 1), 1:numMatrices, 'UniformOutput', false);
-            [grids{1:numMatrices}] = ndgrid(ranges{:});
-            indices = cellfun(@(g) g(:), grids, 'UniformOutput', false);
-            combinations = [];
-            for i = 1:numel(indices{1})
-                rowCombination = cell(1, numMatrices);
-                for j = 1:numMatrices
-                    rowCombination{j} = tmp{j}(indices{j}(i), :);
-                end
-                combinations = cat(3, combinations, cell2mat(rowCombination'));
-                % Can perform without manual loops but costs more data and it's not ideal for this function since it generates large data for partition
-            end
-        end
         % This function is for analyzing the algorithmic purposes
         function [sorted_matrix, rows, cols] = customSorting(data, ord, custom_order)
             ord = char(ord);
