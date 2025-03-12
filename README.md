@@ -1,6 +1,5 @@
 # Image Processing Tool with Matlab
-**Disclaimer**:  
-This project is provided "as is" without any warranties or representations, express or implied, including but not limited to the implied warranties of merchantability and fitness for a particular purpose. No copyrights, patents, licenses, or trade secrets are applied to this project. You are free to use, modify, and distribute it for academic, research, or commercial purposes, subject to applicable laws and regulations
+**Disclaimer**: This project is provided "as is" without any warranties or representations, express or implied, including but not limited to the implied warranties of merchantability and fitness for a particular purpose. No copyrights, patents, licenses, or trade secrets are applied to this project. You are free to use, modify, and distribute it for academic, research, or commercial purposes, subject to applicable laws and regulations
 ## Overview
 The goal of this project is to simplify image processing tools in MATLAB, particularly for academic use, such as presentations in LaTeX. Currently, the goal is to simplify Bayer filter application tools that are easy to work with. To use it, download [ImageProcess.m](https://github.com/zedttxj/Image-Processing-Tool-with-Matlab/blob/main/ImageProcessor.m). Additionally, you can test it with [test-script.m](https://github.com/zedttxj/Image-Processing-Tool-with-Matlab/blob/main/test-script.m).  
 ## Warning
