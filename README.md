@@ -8,17 +8,17 @@ When calling a command in MATLAB, please make sure to put a `;` at the end of th
 ## Features
 ### Common Features
 #### 1. ImageProcessor.readImage
-Use `ImageProcess.readImage` to input your image into variable in MATLAB. For example:  
+- Use `ImageProcess.readImage` to input your image into variable in MATLAB. For example:  
 ```
 img = ImageProcessor.readImage('test.png', true);
 ```
 ##### 1st parameter (required) - filename: The file path of the image you want to load. In this case, 'test.png' is used as the input file name.
-Make sure that the image file is in the same directory as `ImageProcessor.m`.  
+- Make sure that the image file is in the same directory as `ImageProcessor.m`.  
 ##### 2nd parameter (optional) - log: A boolean flag that controls whether logs are displayed when the image is read.
-Default: false (Logs are disabled).  
-Recommended: Do not pass the second parameter unless you want to display logs in the console (it is generally not needed for typical usage).  
+- Default: false (Logs are disabled).  
+- Recommended: Do not pass the second parameter unless you want to display logs in the console (it is generally not needed for typical usage).  
 #### 2. ImageProcessor.dimension
-Use `ImageProcess.dimension` to check dimension of the object of your image in MATLAB. For example:  
+- Use `ImageProcess.dimension` to check dimension of the object of your image in MATLAB. For example:  
 ```
 ImageProcessor.dimension(img);
 ```
@@ -30,7 +30,7 @@ Here, `408` is the height, `612` is the width, and `3` is the number of the chan
   - For a grayscale image, the dimension will be (height x width).
   - For an RGB image, the dimension will be (height x width x 3), where 3 represents the three color channels (Red, Green, and Blue).
 #### 3. ImageProcessor.showImage - Feature
-Use `ImageProcess.showImage` to show your image in MATLAB. For example:  
+- Use `ImageProcess.showImage` to show your image in MATLAB. For example:  
 ```
 ImageProcessor.showImage(img);
 ```
@@ -40,7 +40,7 @@ ImageProcessor.showImage(img);
 - 3D image example (dimension is showed in the left): ![{B38A2799-8675-4D87-B6F3-AFD516DD7E42}](https://github.com/user-attachments/assets/30471daf-6ae5-4414-b3ce-d964c1a533ed)  
 - 2D image example (dimension is showed in the left): ![{FBCBEBFB-5EC1-4259-9BBF-FC0BAA67F9B7}](https://github.com/user-attachments/assets/3e46f42d-1237-4a3a-b46c-c189a634c454)  
 ### 4. ImageProcessor.saveImage - Feature  
-Use `ImageProcess.saveImage` to save your image in MATLAB folder. For example:  
+- Use `ImageProcess.saveImage` to save your image in MATLAB folder. For example:  
 #### 1st parameter (required) - img:
 - The image object that you want to save. It can be a 2D or 3D matrix.
 
@@ -49,12 +49,12 @@ Use `ImageProcess.saveImage` to save your image in MATLAB folder. For example:
 - Additionally, it also shows the path where the image is saved.
 
 #### Example:
-```matlab
+```
 ImageProcessor.saveImage(bayerImage, 'output.png');
 ```
 ![{A4290582-DA96-4C45-BB61-DC1EE93F2F80}](https://github.com/user-attachments/assets/53d7271c-e1b1-4387-8ff2-8e2c978e450f)
 ### Convert image object from 3D (rgb) into 2D (gray) using Bayer Filter - Feature  
-Usage: `ImageProcessor.convert2Bayer`  
+- Usage: `ImageProcessor.convert2Bayer`  
 #### 1st parameter (required) - rgbImage:
 - The 3D image object that you have imported. You can use `ImageProcessor.readImage` to import the image.
 #### 2st parameter (required) - filter:
@@ -81,7 +81,7 @@ If enabled, the function will display:
 - Example: To use the red & blue pixel matrices only, set the 4th parameter to `[true false true]` (excluding the green pixel matrix by setting it to `false`):
 ![{0ED9AA32-9DC5-451B-B05F-7C228026B3C4}](https://github.com/user-attachments/assets/79c319d7-5189-4b60-92d0-7c9ed85a3583)
 #### 5th parameter (optional) - filtersize:
-Expand the filter into a larger size. For example, from 2x2 filter into 4x5 filter (in MATLAB, I put `[4 5]`).  
+- Expand the filter into a larger size. For example, from 2x2 filter into 4x5 filter (in MATLAB, I put `[4 5]`).  
 ![{EB4FE867-5B9D-440B-8664-5C2A181AEFE5}](https://github.com/user-attachments/assets/ee9ccdb4-7bc3-4d09-97f6-371cb6300c4c)
 However, if the size of the filter fits the expanded size nicely (2x2 fits 6x4 for example), this doesn't affect the image without the 6th parameter due to the nature of the calculation.
 #### 6th parameter (optional) - `ord`:
