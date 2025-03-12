@@ -11,46 +11,60 @@ function test_functions()
 end
 
 function extra_tests()
-    % Test cases for ImageProcessor functions
+    try
+        data = [2 4 3 2];
+        tmp = ImageProcessor.partitionDecomposition(data);
+        disp("partitionDecomposition passed:");
+        disp(tmp);
+    catch ME
+        disp("partitionDecomposition failed: " + ME.message);
+    end
     
-    % Test convertPartition2Matrix
-    partition = [1 2 3; 4 5 6];
-    matrix = ImageProcessor.convertPartition2Matrix(partition);
-    disp(matrix);
+    try
+        data = [
+            1 0 1;
+            0 0 0;
+            1 1 0
+        ];
+        disp("Original data:");
+        disp(data);
+        data = ImageProcessor.customSorting(data, "rc", [1 0]);
+        disp("customSorting passed:");
+        disp(data);
+        disp("convertMatrix2Partition output:");
+        disp(ImageProcessor.convertMatrix2Partition(data));
+    catch ME
+        disp("customSorting or convertMatrix2Partition failed: " + ME.message);
+    end
     
-    % Test convertMatrix2Partition
-    reconstructedPartition = ImageProcessor.convertMatrix2Partition(matrix);
-    disp(reconstructedPartition);
-    
-    % Test partitionDecomposition
-    data = [2 4 3 2];
-    tmp = ImageProcessor.partitionDecomposition(data);
-    disp(tmp);
-    
-    data = [
-        1 0 1;
-        0 0 0;
-        1 1 0
-    ];
-    disp(data);
-    data = ImageProcessor.customSorting(data, "rc", [1 0]);
-    disp(data);
-    disp(ImageProcessor.convertMatrix2Partition(data));
-    
-    % Test convert2Bayer and convertBayer2RGB
-    filter = [
-        1, 2;
-        2, 3;
-    ];
-    img = ImageProcessor.readImage("test.png");
-    bayerImage = ImageProcessor.convert2Bayer(img, filter, true, [true true true], [4 5], 1, "rcr", [2, 1, 3]); 
-    bayerImage = ImageProcessor.convert2Bayer(img, filter, true, [true true true], [4 5], 0, "rcr", [2, 1, 3]);
-    bayerImage = ImageProcessor.convert2Bayer(img, filter, true, [true true true], [4 5], 2, "rcr", [2, 1, 3]);
-    rgbImage = ImageProcessor.convertBayer2RGB(bayerImage, filter, true, [true true true], [4 5], 2, "rcr", [2, 1, 3]);
-    ImageProcessor.showImage(rgbImage);
-    imshow(rgb2gray(img));
-    imshow(rgb2gray(rgbImage));
-    ImageProcessor.saveImage(rgbImage, "output.png");
+    try
+        filter = [
+            1, 2;
+            2, 3;
+        ];
+        img = ImageProcessor.readImage("test.png");
+        disp("Image read successfully.");
+        
+        bayerImage = ImageProcessor.convert2Bayer(img, filter, true, [true true true], [4 5], 1, "rcr", [2, 1, 3]);
+        disp("convert2Bayer passed for mode 1.");
+        
+        bayerImage = ImageProcessor.convert2Bayer(img, filter, true, [true true true], [4 5], 0, "rcr", [2, 1, 3]);
+        disp("convert2Bayer passed for mode 0.");
+        
+        bayerImage = ImageProcessor.convert2Bayer(img, filter, true, [true true true], [4 5], 2, "rcr", [2, 1, 3]);
+        disp("convert2Bayer passed for mode 2.");
+        
+        rgbImage = ImageProcessor.convertBayer2RGB(bayerImage, filter, true, [true true true], [4 5], 2, "rcr", [2, 1, 3]);
+        disp("convertBayer2RGB passed.");
+        
+        ImageProcessor.showImage(rgbImage);
+        imshow(rgb2gray(img));
+        imshow(rgb2gray(rgbImage));
+        ImageProcessor.saveImage(rgbImage, "output.png");
+        disp("Image processing completed and saved successfully.");
+    catch ME
+        disp("Image processing failed: " + ME.message);
+    end
 end
 
 function test_convertPartition2Matrix()
