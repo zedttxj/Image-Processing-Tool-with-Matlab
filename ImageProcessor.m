@@ -63,8 +63,10 @@ classdef ImageProcessor
                     rowCombination{j} = tmp{j}(indices{j}(i), :);
                 end
                 combinations = cat(3, combinations, cell2mat(rowCombination'));
+                % Can perform without manual loops but costs more data and it's not ideal for this function since it generates large data for partition
             end
         end
+        % This function is for analyzing the algorithmic purposes
         function [sorted_matrix, rows, cols] = customSorting(data, ord, custom_order)
             ord = char(ord);
             if nargin < 3
