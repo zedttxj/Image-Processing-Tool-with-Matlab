@@ -148,11 +148,12 @@ Both functions now support 7th and 8th parameters, which function similarly to t
 These two functions allow conversion between 1D partitions and 2D matrices:
 - convertPartition2Matrix: Converts a partition (1D array) into a structured 2D matrix.
 - convertMatrix2Partition: Converts a 2D matrix back into a partition (1D array).
+Main usage: This is good for analyzing the 2D matrices in young tableau or partition form.
 #### Clarification: Partition Formatthe (1D array) 
 The partition form follows this structure: [ <number of rows> <number of columns> <1d partition...> ]
 - The first value represents the number of rows in the matrix.
 - The second value represents the number of columns in the matrix.
-- The remaining values represent the partition data, where each entry defines the number of filled positions (1s) per row.
+- The remaining values represent the partition data, where each entry defines the number of filled positions (1s) per row.  
 **Example 1**:
 A partition like:
 ```
@@ -184,4 +185,3 @@ Apparently, you can combine with `ImageProcessor.customSorting` to auto sort the
      1     1     0     0
      1     0     0     0
 ```
-This is good for separate the colors and analyze it in young tableau or partition form.
