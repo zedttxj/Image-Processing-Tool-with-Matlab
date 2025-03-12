@@ -74,7 +74,7 @@ The filter size doesn't have to be a square matrix.
 A boolean variable that is automatically set to true. For example:
 ![{EE49952E-F8CB-41C8-A691-24E18E29EF1A}](https://github.com/user-attachments/assets/8d137ace-91fa-4c77-acb5-e720ceaba63c)  
 If enabled, the function will display:
-- The Bayer filter matrix in the console log (below the line Filter matrix:).
+- The Bayer filter matrix in the console log (below the line "Filter matrix:").
 - The Swapping matrix in the console log (only if ord is set to 2, which is explained in the 6th parameter).
 #### 4th parameter (optional) - rgb:
 - Pick colors to apply the filter. 1st element represents the red color, 2nd one represents the green color, 3rd one represents the blue color.
