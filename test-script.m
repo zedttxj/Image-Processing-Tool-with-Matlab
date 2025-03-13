@@ -71,7 +71,28 @@ function extra_tests()
     disp(tmp(:,:,1005:1010));
     data = [5 6 1:6];
     tmp = ImageProcessor.partitionDecomposition(data, true);
-    disp(size(tmp));
+    sz1 = size(tmp);
+    data = [6 6 1:4];
+    tmp = ImageProcessor.partitionDecomposition(data, true);
+    sz2 = size(tmp);
+    data = [6 6 1:5];
+    tmp = ImageProcessor.partitionDecomposition(data, true);
+    sz3 = size(tmp);
+    if sz2(3) == sz3(3)
+        error("Test Failed: Sizes (1) should have been different");
+    else
+        disp("Test Passed: Sizes (1) are different");
+    end
+    if sz1(1) == sz3(1)
+        error("Test Failed: Sizes (2) should have been different");
+    else
+        disp("Test Passed: Sizes (2) are different");
+    end
+    if sz1(3) ~= sz3(3)
+        error("Test Failed: Sizes (3) should have been different");
+    else
+        disp("Test Passed: Sizes (3) are the same");
+    end
 end
 
 function test_convertPartition2Matrix()
