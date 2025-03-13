@@ -69,6 +69,9 @@ function extra_tests()
     tmp = ImageProcessor.partitionDecomposition(data, true);
     disp(size(tmp));
     disp(tmp(:,:,1005:1010));
+    data = [5 6 1:6];
+    tmp = ImageProcessor.partitionDecomposition(data, true);
+    disp(size(tmp));
 end
 
 function test_convertPartition2Matrix()
