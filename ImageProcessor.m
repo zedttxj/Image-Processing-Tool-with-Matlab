@@ -146,7 +146,7 @@ classdef ImageProcessor
             if nargin < 3
                 show = true;
             end
-            % Show the Bayer-filtered image
+            % Show the rgb Bayer-filtered image
             if show
                 imshow(rgbImage, []);
                 disp("Filter maxtrix:");
