@@ -29,21 +29,37 @@ classdef ImageProcessor
         function partition = convertMatrix2Partition(data)
             partition = [size(data, 1), size(data, 2) sum(data == 1, 2) .'];
         end
-        function combinations = partitionDecomposition(partition)
-            matrices = arrayfun(@(i) setDecomposition(partition(2), i), partition(3:end), 'UniformOutput', false);
+        function combinations = partitionDecomposition(partition, binary)
+            if nargin < 2
+                binary = false;
+            end
+            if binary
+                matrices = arrayfun(@(i) setDecompositionBinary(partition(2), i), partition(3:end), 'UniformOutput', false);
+            else
+                matrices = arrayfun(@(i) setDecompositionNumeric(partition(2), i), partition(3:end), 'UniformOutput', false);
+            end
             numMatrices = numel(matrices);
             ranges = arrayfun(@(i) 1:size(matrices{i}, 1), 1:numMatrices, 'UniformOutput', false);
             [grids{1:numMatrices}] = ndgrid(ranges{:});
             indices = cellfun(@(g) g(:), grids, 'UniformOutput', false);
-            combinations = [];
-            for i = 1:numel(indices{1})
-                rowCombination = cell(1, numMatrices);
-                for j = 1:numMatrices
-                    rowCombination{j} = matrices{j}(indices{j}(i), :);
-                end
-                combinations = cat(3, combinations, cell2mat(rowCombination'));
+            if binary
+                combinations = false(numMatrices, partition(2), numel(indices{1}));
+            else
+                combinations = zeros(numMatrices, partition(2), numel(indices{1}));
             end
-            function tmp = setDecomposition(numColumns, numOnes)
+            for i = 1:numel(indices{1})
+                for j = 1:numMatrices
+                    combinations(j, :, i) = matrices{j}(indices{j}(i), :);
+                end
+            end
+            function tmp = setDecompositionBinary(numColumns, numOnes)
+                tmp = false(1, numColumns);
+                decomposition = nchoosek(1:numColumns, numOnes);
+                for j = 1:size(decomposition, 1)
+                    tmp(j, decomposition(j,:)) = true;
+                end
+            end
+            function tmp = setDecompositionNumeric(numColumns, numOnes)
                 tmp = zeros(1, numColumns);
                 decomposition = nchoosek(1:numColumns, numOnes);
                 for j = 1:size(decomposition, 1)
