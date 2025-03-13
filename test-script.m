@@ -65,6 +65,10 @@ function extra_tests()
     catch ME
         disp("Image processing failed: " + ME.message);
     end
+    data = [4 5 1:4];
+    tmp = ImageProcessor.partitionDecomposition(data, true);
+    disp(size(tmp));
+    disp(tmp(:,:,1005:1010));
 end
 
 function test_convertPartition2Matrix()
