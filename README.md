@@ -233,4 +233,4 @@ Each `(:,:,i)` represents a different valid matrix that satisfies the given part
 #### **Example 2**:  
 ![{563EF65F-5C19-4DA2-A380-534016B4FFCB}](https://github.com/user-attachments/assets/0285a38e-a844-4ee2-84ad-eb9dd128bf4b)  
 - 1st parameter (required) - data: the partition (1D) structure you wanna decompose into all possible matrices
-- 2nd parameter (optional) - binary: set it into `true` if you want binary matrices instead of numeric matrices. This helps reduce the amount of data used for construct the matrices. 
+- 2nd parameter (optional) - binary: set it into `true` if you want binary matrices instead of numeric matrices. This helps reduce the amount of data used for constructing the matrices. 
