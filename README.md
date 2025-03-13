@@ -154,7 +154,10 @@ Main usage: analyzing the 2D matrices in young tableau or partition form.
 ### 1. `convertPartition2Matrix` & `convertMatrix2Partition`
 These two functions allow conversion between 1D partitions and 2D matrices:
 - convertPartition2Matrix: Converts a partition (1D array) into a structured 2D matrix.
-- convertMatrix2Partition: Converts a 2D matrix back into a partition (1D array).  
+- convertMatrix2Partition: Converts a 2D matrix back into a partition (1D array).
+Both functions serve different purposes and are not interchangeable.
+- Use `convertPartition2Matrix` when you need to map a partition into a matrix.
+% - Use `convertMatrix2Partition` when you need to flatten a matrix back into its original partition.
 #### Clarification: Partition Format (1D array) 
 The partition form follows this structure: `[ <number of rows> <number of columns> <1d partition...> ]`
 - The first value represents the number of rows in the matrix.
@@ -192,8 +195,10 @@ Apparently, you can combine with `ImageProcessor.customSorting` to auto sort the
      1     0     0     0
 ```
 ### 2. `partitionDecomposition`
-Main Usage:
-This function generates all possible matrices that match the same partition structure.  
+Main Usage: This function generates all possible matrices that match the same partition structure.  
+Recommendation: set the 2nd parameter into `true`. Explained below:
+- 1st parameter (required) - partition: the partition (1D) structure you wanna decompose into all possible matrices
+- 2nd parameter (optional) - binary: set it into `true` if you want binary matrices instead of numeric matrices. This helps reduce the amount of data used for constructing the matrices. 
 #### **Example 1**:  
 Consider this code:
 ```
@@ -232,5 +237,3 @@ This will output multiple 2D matrices, where each one follows the partition stru
 Each `(:,:,i)` represents a different valid matrix that satisfies the given partition `[2 4 3 4]`.  
 #### **Example 2**:  
 ![{563EF65F-5C19-4DA2-A380-534016B4FFCB}](https://github.com/user-attachments/assets/0285a38e-a844-4ee2-84ad-eb9dd128bf4b)  
-- 1st parameter (required) - partition: the partition (1D) structure you wanna decompose into all possible matrices
-- 2nd parameter (optional) - binary: set it into `true` if you want binary matrices instead of numeric matrices. This helps reduce the amount of data used for constructing the matrices. 
