@@ -33,22 +33,23 @@ classdef ImageProcessor
             if nargin < 2
                 binary = false;
             end
+            rend = min(3+partition(1)-1, length(partition));
             if binary
-                matrices = arrayfun(@(i) setDecompositionBinary(partition(2), i), partition(3:end), 'UniformOutput', false);
+                matrices = arrayfun(@(i) setDecompositionBinary(partition(2), i), partition(3:rend), 'UniformOutput', false);
             else
-                matrices = arrayfun(@(i) setDecompositionNumeric(partition(2), i), partition(3:end), 'UniformOutput', false);
+                matrices = arrayfun(@(i) setDecompositionNumeric(partition(2), i), partition(3:rend), 'UniformOutput', false);
             end
-            numMatrices = numel(matrices);
-            ranges = arrayfun(@(i) 1:size(matrices{i}, 1), 1:numMatrices, 'UniformOutput', false);
-            [grids{1:numMatrices}] = ndgrid(ranges{:});
+            rend = rend-2;
+            ranges = arrayfun(@(i) 1:size(matrices{i}, 1), 1:rend, 'UniformOutput', false);
+            [grids{1:rend}] = ndgrid(ranges{:});
             indices = cellfun(@(g) g(:), grids, 'UniformOutput', false);
             if binary
-                combinations = false(numMatrices, partition(2), numel(indices{1}));
+                combinations = false(partition(1), partition(2), numel(indices{1}));
             else
-                combinations = zeros(numMatrices, partition(2), numel(indices{1}));
+                combinations = zeros(partition(1), partition(2), numel(indices{1}));
             end
             for i = 1:numel(indices{1})
-                for j = 1:numMatrices
+                for j = 1:rend
                     combinations(j, :, i) = matrices{j}(indices{j}(i), :);
                 end
             end
