@@ -150,7 +150,7 @@ Both functions now support 7th and 8th parameters, which function similarly to t
 ![{8F5B8348-86CE-469A-9006-E4B73F1C2206}](https://github.com/user-attachments/assets/f267934d-6f24-496a-b017-2c165ef3287b)
 
 ## New Features: `convertPartition2Matrix`, `convertMatrix2Partition`, and `partitionDecomposition`
-Main usage: This is good for analyzing the 2D matrices in young tableau or partition form.  
+Main usage: analyzing the 2D matrices in young tableau or partition form.  
 ### 1. `convertPartition2Matrix` & `convertMatrix2Partition`
 These two functions allow conversion between 1D partitions and 2D matrices:
 - convertPartition2Matrix: Converts a partition (1D array) into a structured 2D matrix.
