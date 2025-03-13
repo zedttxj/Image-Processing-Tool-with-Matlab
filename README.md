@@ -152,12 +152,10 @@ Both functions now support 7th and 8th parameters, which function similarly to t
 ## New Features: `convertPartition2Matrix`, `convertMatrix2Partition`, and `partitionDecomposition`
 Main usage: analyzing the 2D matrices in young tableau or partition form.  
 ### 1. `convertPartition2Matrix` & `convertMatrix2Partition`
-These two functions allow conversion between 1D partitions and 2D matrices:
-- convertPartition2Matrix: Converts a partition (1D array) into a structured 2D matrix.
-- convertMatrix2Partition: Converts a 2D matrix back into a partition (1D array).
-Both functions serve different purposes and are not interchangeable.
-- Use `convertPartition2Matrix` when you need to map a partition into a matrix.
-% - Use `convertMatrix2Partition` when you need to flatten a matrix back into its original partition.
+These two functions allow conversion between 1D partitions and 2D matrices:  
+- convertPartition2Matrix: map a partition (1D) into a 2D matrix in a **sorted** order.  
+- convertMatrix2Partition: flatten a matrix back into its original partition.  
+Both functions serve different purposes and are not interchangeable.  
 #### Clarification: Partition Format (1D array) 
 The partition form follows this structure: `[ <number of rows> <number of columns> <1d partition...> ]`
 - The first value represents the number of rows in the matrix.
