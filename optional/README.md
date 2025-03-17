@@ -253,3 +253,11 @@ Think of this function as a derivative of `BP(A)`. The parameters `lambda` and `
     [0, 0, A(1,1,3)] [0, A(2,1,2), 0]
   ];
   ```
+
+## Dilation1, Erosion1, Opening1, Closing1 (binaryMatrix1, binaryMatrix2)
+- Notes: Some books have different definition of these functions. Their functions of dilation and erosion are commutative. However, it's different in my case, which will be demonstrated in the example below.
+- Input:
+  - binaryMatrix1 (2D or 3D logical): an image with or without red, green, and blue channels.
+  - binaryMatrix2 (2D or 3D logical): a kernel with or without red, green, and blue channels.
+- Explanation. When applying `dilation1` and `erosion1`, it will scale the values (colored or gray values) by multiplying the values inside the kernel and then find `max` and `min`, respectively.
+- Example: Consider the binary matrices of `test.png` and `test2.png` in this case:
