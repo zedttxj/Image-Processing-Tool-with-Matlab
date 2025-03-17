@@ -188,7 +188,7 @@ Think of this function as a derivative of `BP(A)`. The parameters `lambda` and `
   ];
   ```
 
-## Bayer1(image, G, order, correspondingEntries)
+## Bayer1(image, G, order)
 - Input (3D):
   - Image (or binary image, 3D): an image with red, green, and blue channels
   - G (string or charArray): similar to `IC2` and `IC1`
