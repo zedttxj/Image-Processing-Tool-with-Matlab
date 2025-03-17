@@ -15,7 +15,7 @@
   ];
   disp(ImageProcessor.BP(data));
   ```
-- Run the code:
+- Run the code:  
   ```
   >> 
      3     4     3     2     1
@@ -166,8 +166,8 @@ Think of this function as a derivative of `BP(A)`. The parameters `lambda` and `
   output = ImageProcessor.IC3(image,"RB",order);
   ImageProcessor.showImage(output);
   ```
-- Run the code:
-  ![{5B9BA0E2-804D-4AFF-AB8D-40B4D9BB4452}](https://github.com/user-attachments/assets/9c8cec0a-c268-4b13-9d48-12963bd0b8bf)
+- Run the code:  
+  ![{5B9BA0E2-804D-4AFF-AB8D-40B4D9BB4452}](https://github.com/user-attachments/assets/9c8cec0a-c268-4b13-9d48-12963bd0b8bf)  
 - Explanation: Think of this like an enhanced version of `IC3` that works for 3D instead of 2D. It keeps all 3 channels as it swapping the values. Let's say the `image` can be represented like this:
   ```
   [
