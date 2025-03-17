@@ -193,7 +193,6 @@ Think of this function as a derivative of `BP(A)`. The parameters `lambda` and `
   - Image (or binary image, 3D): an image with red, green, and blue channels
   - G (string or charArray): similar to `IC2` and `IC1`
   - order (2D): similar to `IC2` and `IC1`
-  - correspondingEntries (logical value): true or false. True 
 - Output (2D): filtered matrix
 - Explanation: It functions similar to `IC2` except it will only pick one channel to represent on the gray scale. Let's say the `image` can be represented like this:
   ```
@@ -231,8 +230,26 @@ Think of this function as a derivative of `BP(A)`. The parameters `lambda` and `
   ImageProcessor.showImage(output);
   ```
 - Run the code:  
-  ![{0C4DD568-5E21-46F8-BA03-1CD7DB52B62D}](https://github.com/user-attachments/assets/5073cef6-5244-4668-b211-03a4d4d81502)
+  ![{E5F123A2-BC6C-4F87-A5CE-7EEE3BFFEB3A}](https://github.com/user-attachments/assets/40ad3e33-cc9c-4050-83f4-1c618831bf7b)
 
 ## Bayer2(image, G, order)
-- Input: Images
-- Output: Filter
+- Input (3D):
+  - `image` (3D): an image (or binary image) with red, green, and blue channels.
+  - `G` (string or charArray): similar to `G` in `IC1` and `IC2` functions.
+  - `order` (2D): similar to `order` in `IC1` and `IC2` functions.
+- Output (3D): a filtered image with red, green, and blue channel.
+- Explanation: similar to `Bayer1` function but instead of producing gray image, it erases other colors and only keep the color based on the sorted `order` (which doesn't have to be sorted as input).
+- Example: Pick the same example in `Bayer1` explanation. Instead of this output
+  ```
+  [
+    A(2,2,1) A(1,2,2);
+    A(1,1,3) A(2,1,2)
+  ];
+  ```
+  , it will have this output:
+  ```
+  [
+    [A(2,2,1), 0, 0] [0, A(1,2,2), 0];
+    [0, 0, A(1,1,3)] [0, A(2,1,2), 0]
+  ];
+  ```
