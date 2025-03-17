@@ -153,3 +153,37 @@ Think of this function as a derivative of `BP(A)`. The parameters `lambda` and `
         9     13    11    15
     ```
 
+## IC3(image, G, order)
+- Input (3D): an image with red, green, and blue channels
+- Output (3D): a filtered image with red, green, and blue channels (sorted based on GBR, BGR, etc, and the corresponding entries sorted at the same time).
+- Example code:
+  ```
+  image = ImageProcessor.readImage('test.png');
+  order = [
+      3 2;
+      2 1
+  ];
+  output = ImageProcessor.IC3(image,"RB",order);
+  ImageProcessor.showImage(output);
+  ```
+- Run the code:
+  ![{5B9BA0E2-804D-4AFF-AB8D-40B4D9BB4452}](https://github.com/user-attachments/assets/9c8cec0a-c268-4b13-9d48-12963bd0b8bf)
+- Explanation: Think of this like an enhanced version of `IC3` that works for 3D instead of 2D. It keeps all 3 channels as it swapping the values. Let's say the `image` can be represented like this:
+  ```
+  [
+    A(1,1,:) A(1,2,:);
+    A(2,1,:) A(2,2,:)
+  ];
+  ```
+  If the indices are
+  ```
+        "2,2"    "1,2"
+        "1,1"    "2,1"
+  ```
+  , the function `IC3` will swap the entries like this:
+  ```
+  [
+    A(2,2,:) A(1,2,:);
+    A(1,1,:) A(2,1,:)
+  ];
+  ```
