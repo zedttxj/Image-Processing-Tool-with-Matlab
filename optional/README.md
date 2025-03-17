@@ -90,7 +90,7 @@ Think of this function as a derivative of `BP(A)`. The parameters `lambda` and `
   ```
   To disable the warning, put 'false' in the 4th parameter (after `order`).
 
-## IC2(A, G, order)
+## IC1(A, G, order)
 
 - **Input:**
   - `A` (2D): A 2D matrix (e.g., an image matrix or any numerical matrix).
@@ -101,7 +101,7 @@ Think of this function as a derivative of `BP(A)`. The parameters `lambda` and `
   - **Filtered Matrices:** The function sorts the matrix `A` based on the channel order specified in `G` and `order`. It tracks the corresponding entries' positions during the sorting process and applies those changes to `A`.
 
 - **Explanation:**
-  1. **Matrix Sorting by Channel Order:** The `IC2` function takes an input matrix `A` and sorts it according to the channel order specified in `G` and `order`. For example, if `G = "RB"` and `order = [1 3 2]`, the matrix `A` will be sorted first by the Red channel, then Blue, and lastly by Green. If `order = [2 1 3]`, it will sort by Green, then Red, and then Blue.
+  1. **Matrix Sorting by Channel Order:** The `IC1` function takes an input matrix `A` and sorts it according to the channel order specified in `G` and `order`. For example, if `G = "RB"` and `order = [1 3 2]`, the matrix `A` will be sorted first by the Red channel, then Blue, and lastly by Green. If `order = [2 1 3]`, it will sort by Green, then Red, and then Blue.
   
   2. **Tracking Indices:** The function keeps track of the indices during sorting, so that after sorting, it can correctly reapply the changes to the original matrix `A`.
 
@@ -122,7 +122,7 @@ Think of this function as a derivative of `BP(A)`. The parameters `lambda` and `
           1     2
           3     2
      ```
-     The `IC2` function uses these row and column indices to apply the sorting to the matrix `A`.
+     The `IC1` function uses these row and column indices to apply the sorting to the matrix `A`.
 
 - **Example Code + Explanation:**
     ```matlab
@@ -136,7 +136,7 @@ Think of this function as a derivative of `BP(A)`. The parameters `lambda` and `
         3 2;
         2 1;
     ];
-    disp(ImageProcessor.IC2(A, "RB", order));
+    disp(ImageProcessor.IC1(A, "RB", order));
     ```
 
 - **Explanation of Example:**  
@@ -144,7 +144,7 @@ Think of this function as a derivative of `BP(A)`. The parameters `lambda` and `
    - `3` stands for Blue (B), `2` stands for Green (G), and `1` stands for Red (R).  
    - The `order = [3 2]` means Blue is sorted first, followed by Green. So, the sorting process will rearrange the elements based on the order: Blue, then Green.
 
-- **Run the Code (Output of `disp(ImageProcessor.IC2(A, "RB", order));`):**
+- **Run the Code (Output of `disp(ImageProcessor.IC1(A, "RB", order));`):**
     ```matlab
     >> script
         6     2     8     4
@@ -153,7 +153,7 @@ Think of this function as a derivative of `BP(A)`. The parameters `lambda` and `
         9     13    11    15
     ```
 
-## IC3(image, G, order)
+## IC2(image, G, order)
 - Input (3D): an image with red, green, and blue channels
 - Output (3D): a filtered image with red, green, and blue channels (sorted based on GBR, BGR, etc, and the corresponding entries sorted at the same time).
 - Example code:
@@ -163,12 +163,12 @@ Think of this function as a derivative of `BP(A)`. The parameters `lambda` and `
       3 2;
       2 1
   ];
-  output = ImageProcessor.IC3(image,"RB",order);
+  output = ImageProcessor.IC2(image,"RB",order);
   ImageProcessor.showImage(output);
   ```
 - Run the code:  
   ![{5B9BA0E2-804D-4AFF-AB8D-40B4D9BB4452}](https://github.com/user-attachments/assets/9c8cec0a-c268-4b13-9d48-12963bd0b8bf)  
-- Explanation: Think of this like an enhanced version of `IC3` that works for 3D instead of 2D. It keeps all 3 channels as it swapping the values. Let's say the `image` can be represented like this:
+- Explanation: Think of this like an enhanced version of `IC2` that works for 3D instead of 2D. It keeps all 3 channels as it swapping the values. Let's say the `image` can be represented like this:
   ```
   [
     A(1,1,:) A(1,2,:);
@@ -180,10 +180,14 @@ Think of this function as a derivative of `BP(A)`. The parameters `lambda` and `
         "2,2"    "1,2"
         "1,1"    "2,1"
   ```
-  , the function `IC3` will swap the entries like this:
+  , the function `IC2` will swap the entries like this:
   ```
   [
     A(2,2,:) A(1,2,:);
     A(1,1,:) A(2,1,:)
   ];
   ```
+
+## Bayer1(image, G, order)
+- Input (3D): image with red, green, and blue channels
+- Output (4
