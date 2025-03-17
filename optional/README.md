@@ -142,7 +142,7 @@ Think of this function as a derivative of `BP(A)`. The parameters `lambda` and `
 - **Explanation of Example:**  
    In this example:
    - `3` stands for Blue (B), `2` stands for Green (G), and `1` stands for Red (R).  
-   - The `order = [3 2]` means Blue is sorted first, followed by Green. So, the sorting process will rearrange the elements based on the order: Blue, then Green.
+   - The `order = [1 3]` means Red is sorted first, followed by Blue, and then Green (not explicitly). So, the sorting process will rearrange the elements based on the order.
 
 - **Run the Code (Output of `disp(ImageProcessor.IC1(A, "RB", order));`):**
     ```matlab
@@ -168,7 +168,7 @@ Think of this function as a derivative of `BP(A)`. The parameters `lambda` and `
   ```
 - Run the code:  
   ![{5B9BA0E2-804D-4AFF-AB8D-40B4D9BB4452}](https://github.com/user-attachments/assets/9c8cec0a-c268-4b13-9d48-12963bd0b8bf)  
-- Explanation: Think of this like an enhanced version of `IC2` that works for 3D instead of 2D. It keeps all 3 channels as it swapping the values. Let's say the `image` can be represented like this:
+- Explanation: Think of this like an enhanced version of `IC1` that works for 3D instead of 2D. It keeps all 3 channels as it swapping the values. Let's say the `image` can be represented like this:
   ```
   [
     A(1,1,:) A(1,2,:);
@@ -188,6 +188,51 @@ Think of this function as a derivative of `BP(A)`. The parameters `lambda` and `
   ];
   ```
 
-## Bayer1(image, G, order)
-- Input (3D): image with red, green, and blue channels
-- Output (4
+## Bayer1(image, G, order, correspondingEntries)
+- Input (3D):
+  - Image (or binary image, 3D): an image with red, green, and blue channels
+  - G (string or charArray): similar to `IC2` and `IC1`
+  - order (2D): similar to `IC2` and `IC1`
+  - correspondingEntries (logical value): true or false. True 
+- Output (2D): filtered matrix
+- Explanation: It functions similar to `IC2` except it will only pick one channel to represent on the gray scale. Let's say the `image` can be represented like this:
+  ```
+  [
+    A(1,1,1:3) A(1,2,1:3);
+    A(2,1,1:3) A(2,2,1:3)
+  ];
+  ```
+  If the indices after sorting are
+  ```
+        "2,2"    "1,2"
+        "1,1"    "2,1"
+  ```
+  and the order sorted (the input order doesn't have to be sorted) in the order of "RB" is
+  ```
+     Sorted order:
+          1     2
+          3     2
+  ```
+  , the function `IC2` will pick the entries like this:
+  ```
+  [
+    A(2,2,1) A(1,2,2);
+    A(1,1,3) A(2,1,2)
+  ];
+  ```  
+- Example code:  
+  ```
+  image = ImageProcessor.readImage('test.png');
+  order = [
+      3 2;
+      2 1
+  ];
+  output = ImageProcessor.Bayer1(image,"RB",order);
+  ImageProcessor.showImage(output);
+  ```
+- Run the code:  
+  ![{0C4DD568-5E21-46F8-BA03-1CD7DB52B62D}](https://github.com/user-attachments/assets/5073cef6-5244-4668-b211-03a4d4d81502)
+
+## Bayer2(image, G, order)
+- Input: Images
+- Output: Filter
