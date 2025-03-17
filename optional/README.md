@@ -62,3 +62,28 @@ Think of this function as a derivative of `BP(A)`. The parameters `lambda` and `
     3 2 3 2 ...
     2 1 2 1 2 1 ...
     ...
+    ```
+
+  - Now, we cut the rows according to `lambda` to get the following structure:
+    ```
+    3 2 3 2
+    2 1
+    3
+    ```
+
+  - We then extract the red and blue colors since `G = "RB"`. The extracted values are:
+    ```
+    1 0 1 0
+    0 1
+    1
+    ```
+
+  - Finally, we apply the `BP(A)` function to get the `coloredPartition`, which is the output without the size of the constructed matrix.
+
+- **Run the Code:**
+  ```
+  >> script
+    Warning: lambda shouldn't contain the sizes of the matrix
+         2     1     1
+  ```
+  To disable the warning, put 'false' in the 4th parameter (after `order`).
