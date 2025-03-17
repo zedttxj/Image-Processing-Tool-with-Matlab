@@ -1,4 +1,5 @@
-# FUNCTIONS-CODES.PDF
+# FUNCTIONS-CODES.pdf
+
 ## BP(A)
 - Input:
   - Binary matrix: 2D
@@ -28,6 +29,7 @@
        1     1     0     0
        1     0     0     0
     ```
+
 ## PC(lambda, G, order)
 
 - **Explanation:**  
@@ -87,3 +89,49 @@ Think of this function as a derivative of `BP(A)`. The parameters `lambda` and `
          2     1     1
   ```
   To disable the warning, put 'false' in the 4th parameter (after `order`).
+
+## IC2(A, G, order)
+- Input:
+  - A (2D): 2D matrix
+  - G (string or charArray): similar to `G` in `PC` function
+  - order (2D): similar to `order` in `PC` function
+- Output: Filtered Matrices (sorted based on GBR, BGR, etc, and the corresponding entries sorted at the same time).
+- Example code + explanation:
+  ```
+  A = [
+      1 2 3 4;
+      5 6 7 8;
+      9 10 11 12;
+      13 14 15 16;
+  ];
+  order = [
+      3 2;
+      2 1;
+  ];
+  disp(ImageProcessor.IC2(A, "RB", order));
+  ```
+  In this example, `3` stands for blue (B), `2` stands for green (G), and `1` stands for red (R).
+  `order` will be sorted based on the order `R < B < G`. Although `G` wasn't explicitly written, the program automatically fill in the order. Another example of order is "BR" where `B < R < G`.
+  When sorts the `order`, the program will keep track of the indices that corresponding to the values being swapped. You can track the indices by using `customSorting` like this where "rc" stands for sorting by rows first then by columns and `[1 3 2]` stands for sorting in order of `R < B < G`:
+  ```
+  [data, rows, cols] = ImageProcessor.customSorting(order,"rc",[1 3 2]);
+  disp(cols + "," + rows);
+  ```
+  And the output after running the above code is like this:
+  ```
+  >> script
+    "2,2"    "1,2"
+    "1,1"    "2,1"
+  
+  Sorted order:
+       1     2
+       3     2
+  ```
+  The function `IC2` tracks the indices when swapping (like `"2,1"` stands for second row and first column) so that later it can apply on the `A` matrix.
+- Run the code (output of `disp(ImageProcessor.IC2(A, "RB", order));`):
+  ```
+     6     2     8     4
+     1     5     3     7
+    14    10    16    12
+     9    13    11    15
+  ```
