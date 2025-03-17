@@ -91,47 +91,65 @@ Think of this function as a derivative of `BP(A)`. The parameters `lambda` and `
   To disable the warning, put 'false' in the 4th parameter (after `order`).
 
 ## IC2(A, G, order)
-- Input:
-  - A (2D): 2D matrix
-  - G (string or charArray): similar to `G` in `PC` function
-  - order (2D): similar to `order` in `PC` function
-- Output: Filtered Matrices (sorted based on GBR, BGR, etc, and the corresponding entries sorted at the same time).
-- Example code + explanation:
-  ```
-  A = [
-      1 2 3 4;
-      5 6 7 8;
-      9 10 11 12;
-      13 14 15 16;
-  ];
-  order = [
-      3 2;
-      2 1;
-  ];
-  disp(ImageProcessor.IC2(A, "RB", order));
-  ```
-  In this example, `3` stands for blue (B), `2` stands for green (G), and `1` stands for red (R).  
-  `order` will be sorted based on the order `R < B < G`. Although `G` wasn't explicitly written, the program automatically fill in the order. Another example of order is "BR" where `B < R < G`.  
-  When sorts the `order`, the program will keep track of the indices that corresponding to the values being swapped. You can track the indices by using `customSorting` like this where "rc" stands for sorting by rows first then by columns and `[1 3 2]` stands for sorting in order of `R < B < G`:
-  ```
-  [data, rows, cols] = ImageProcessor.customSorting(order,"rc",[1 3 2]);
-  disp(cols + "," + rows);
-  ```
-  And the output after running the above code is like this:
-  ```
-  >> script
-    "2,2"    "1,2"
-    "1,1"    "2,1"
+
+- **Input:**
+  - `A` (2D): A 2D matrix (e.g., an image matrix or any numerical matrix).
+  - `G` (string or charArray): Specifies the color channels (similar to the `G` parameter in the `PC` function).
+  - `order` (2D): A matrix that indicates the sorting order of the channels. For example, "RB" would mean sorting by Red first, then Blue, and "BR" would mean sorting by Blue first, then Red.
+
+- **Output:**  
+  - **Filtered Matrices:** The function sorts the matrix `A` based on the channel order specified in `G` and `order`. It tracks the corresponding entries' positions during the sorting process and applies those changes to `A`.
+
+- **Explanation:**
+  1. **Matrix Sorting by Channel Order:** The `IC2` function takes an input matrix `A` and sorts it according to the channel order specified in `G` and `order`. For example, if `G = "RB"` and `order = [1 3 2]`, the matrix `A` will be sorted first by the Red channel, then Blue, and lastly by Green. If `order = [2 1 3]`, it will sort by Green, then Red, and then Blue.
   
-  Sorted order:
-       1     2
-       3     2
-  ```
-  The function `IC2` tracks the indices when swapping (like `"2,1"` stands for second row and first column) so that later it can apply on the `A` matrix.
-- Run the code (output of `disp(ImageProcessor.IC2(A, "RB", order));`):
-  ```
-     6     2     8     4
-     1     5     3     7
-    14    10    16    12
-     9    13    11    15
-  ```
+  2. **Tracking Indices:** The function keeps track of the indices during sorting, so that after sorting, it can correctly reapply the changes to the original matrix `A`.
+
+  3. **Custom Sorting:** To see how the sorting works, you can track the row and column indices of `order` using the `customSorting` function. Here's an example:
+    ```matlab
+    [data, rows, cols] = ImageProcessor.customSorting(order,"rc",[1 3 2]);
+    disp(cols + "," + rows);
+    ```
+
+  4. **Sorted Output Example:**  
+     If the `order` is `[1 3 2]` (meaning sorting by Red, then Blue, then Green), the output might look like this:
+     ```matlab
+     >> script
+        "2,2"    "1,2"
+        "1,1"    "2,1"
+      
+     Sorted order:
+          1     2
+          3     2
+     ```
+     The `IC2` function uses these row and column indices to apply the sorting to the matrix `A`.
+
+- **Example Code + Explanation:**
+    ```matlab
+    A = [
+        1 2 3 4;
+        5 6 7 8;
+        9 10 11 12;
+        13 14 15 16;
+    ];
+    order = [
+        3 2;
+        2 1;
+    ];
+    disp(ImageProcessor.IC2(A, "RB", order));
+    ```
+
+- **Explanation of Example:**  
+   In this example:
+   - `3` stands for Blue (B), `2` stands for Green (G), and `1` stands for Red (R).  
+   - The `order = [3 2]` means Blue is sorted first, followed by Green. So, the sorting process will rearrange the elements based on the order: Blue, then Green.
+
+- **Run the Code (Output of `disp(ImageProcessor.IC2(A, "RB", order));`):**
+    ```matlab
+    >> script
+        6     2     8     4
+        1     5     3     7
+        14    10    16    12
+        9     13    11    15
+    ```
+
