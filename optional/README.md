@@ -55,7 +55,7 @@ Think of this function as a derivative of `BP(A)`. The parameters `lambda` and `
 
 - **Explanation of Example:**
 
-  - In this example, `3` stands for blue, `2` stands for green, and `1` stands for red.
+  - In this example, `3` stands for blue, `2` stands for green, and `1` stands for red.  
   - The `order` matrix will be replicated according to `lambda` to match the row sizes. Here’s how `order` looks after replication:
   
     ```
@@ -110,8 +110,8 @@ Think of this function as a derivative of `BP(A)`. The parameters `lambda` and `
   ];
   disp(ImageProcessor.IC2(A, "RB", order));
   ```
-  In this example, `3` stands for blue (B), `2` stands for green (G), and `1` stands for red (R).
-  `order` will be sorted based on the order `R < B < G`. Although `G` wasn't explicitly written, the program automatically fill in the order. Another example of order is "BR" where `B < R < G`.
+  In this example, `3` stands for blue (B), `2` stands for green (G), and `1` stands for red (R).  
+  `order` will be sorted based on the order `R < B < G`. Although `G` wasn't explicitly written, the program automatically fill in the order. Another example of order is "BR" where `B < R < G`.  
   When sorts the `order`, the program will keep track of the indices that corresponding to the values being swapped. You can track the indices by using `customSorting` like this where "rc" stands for sorting by rows first then by columns and `[1 3 2]` stands for sorting in order of `R < B < G`:
   ```
   [data, rows, cols] = ImageProcessor.customSorting(order,"rc",[1 3 2]);
