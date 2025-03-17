@@ -260,4 +260,24 @@ Think of this function as a derivative of `BP(A)`. The parameters `lambda` and `
   - binaryMatrix1 (2D or 3D logical): an image with or without red, green, and blue channels.
   - binaryMatrix2 (2D or 3D logical): a kernel with or without red, green, and blue channels.
 - Explanation. When applying `dilation1` and `erosion1`, it will scale the values (colored or gray values) by multiplying the values inside the kernel and then find `max` and `min`, respectively.
-- Example: Consider the binary matrices of `test.png` and `test2.png` in this case:
+- Example: Consider the binary matrices of `test.png` and `test2.png` (downloaded the images) in this case:
+  ```
+  image = ImageProcessor.readImage('test.png');
+  image2 = ImageProcessor.readImage('test2.png');
+  image2 = image2(230:235,230:235,:);
+  image = image > 100;
+  image2 = image2 > 100;
+  ```
+  I used `imshow(uint8(image) * 255);` to show the image: ![{7ABCE2D5-D49C-4DA8-9E40-2E58CACD13D0}](https://github.com/user-attachments/assets/b87f9b0e-588d-4ee9-8a11-7252f3622684)
+  Same thing goes for image2: ![{15C73C8D-005E-463D-9FD2-E8C506C2BD8B}](https://github.com/user-attachments/assets/17ccaf34-ae27-4ecf-8c7e-f0763ce9cca7)
+  I only extract 5x5 grid of the image2 in this example (which explains why it appears to be small). Now, I apply `Erosion1`:
+  ```
+  output = ImageProcessor.Erosion1(image,image2);
+  imshow(output);
+  ```  
+  The output is like this: ![{67D74618-8800-4307-9F3F-DC83350AC4E1}](https://github.com/user-attachments/assets/57a8d9c2-77ab-47d0-9b0d-039b913ed7c6)
+  I tried with Dilation1, Opening1, and Closing1 respectively:
+  ![{B99D868B-E78F-4281-8C07-93736746A745}](https://github.com/user-attachments/assets/ba115749-bdfb-4307-bd36-f49e63da4f50)
+  ![{541CA048-BFAB-43B4-A79A-C3A40FD97550}](https://github.com/user-attachments/assets/1e381d0a-ccd0-48bb-8f20-f270ff430b69)
+  ![{5E195FDB-AD2B-4068-B312-1E8912D7B8C0}](https://github.com/user-attachments/assets/db1c5a0c-4d35-4f0e-8e78-cc498a9a7368)
+  If I swap the input position of `image` and `image2` (`image` becoming 2nd parameter and `image2` becoming 1st parameter) and apply Erosion1, Dilation1, Opening1, and Closing1 respectively:
