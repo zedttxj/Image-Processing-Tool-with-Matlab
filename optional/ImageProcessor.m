@@ -335,6 +335,15 @@ classdef ImageProcessor
             image = ImageProcessor.convert2Bayer(image, order, show, [true true true], size(order), 2, "rc", custom_order);
             filteredImage = ImageProcessor.convertBayer2RGB(image, order, show, [true true true], size(order), 2, "rc", custom_order);
         end
+        function erodedImage = erosionWithConv2(A, B)
+            B = double(B); 
+            convResult = conv2(double(A), B, 'same');
+            threshold = sum(B(:));
+            erodedImage = (convResult == threshold);
+        end
+        function dilatedImage = dilationWithCon2(A, B)
+            dilatedImage = conv2(A, B, 'same') > 0;
+        end
         function dilatedImage = subdilation(A, B, mode)
             [ri ci] = size(B);
             tmp = cast(zeros(size(A)+([ri ci]-1)*2),class(A(:,:)));
