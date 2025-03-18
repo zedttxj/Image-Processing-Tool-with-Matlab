@@ -368,7 +368,7 @@ Think of this function as a derivative of `BP(A)`. The parameters `lambda` and `
 
 ## PPP2(partition1, partition2)
 - Input:
-  - Partition 1 (1D): 1D array that contains the coefficients of the first polynomial.
+  - Partition 1 (1D): sorted 1D array.
   - Partition 2 (1D): similar to partition1.
 - Output: 1D array that contains the coefficients of the product of the 2 polynomials using special operation '⊔'.
 - Explanation: the partition obtained by taking the multiset union of the parts of `partition1` and `partition2`, and then reordering them to make them weakly decreasing. For instance, μ=(3,3,2,1) and ν=(4,1,1). Then μ⊔ν=(4,3,3,2,1,1,1).
@@ -385,4 +385,16 @@ Think of this function as a derivative of `BP(A)`. The parameters `lambda` and `
   ```
   >> 
     1.6179
+  ```
+
+- Another example code:
+  ```matlab
+  partition1 = [6 4 2];
+  partition2 = [8 5 3 1];
+  disp(ImageProcessor.PPP2(partition1,partition2));
+  ```
+- Run the code:
+  ```
+  >> 
+     8     6     5     4     3     2     1
   ```
