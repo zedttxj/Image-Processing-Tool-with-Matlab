@@ -240,7 +240,7 @@ classdef ImageProcessor
             coloredPartitions = [size(mat, 1), size(mat, 2) sum(mat < 4, 2) .'];
             coloredPartitions = coloredPartitions(3:end);
         end
-        function filteredMatrix = IC2(A, G, order, print)
+        function filteredMatrix = IC1(A, G, order, print)
             [rf, cf] = size(order);
             [ri, ci] = size(A);
             A = imresize(A, [ri+rf-mod(ri+rf-1,rf)-1, ci+cf-mod(ci+cf-1,cf)-1]);
@@ -274,7 +274,7 @@ classdef ImageProcessor
                 disp(order);
             end
         end
-        function filteredImage = IC3(image, G, order, print)
+        function filteredImage = IC2(image, G, order, print)
             [rf, cf] = size(order);
             [ri, ci, chl] = size(image);
             image = imresize(image, [ri+rf-mod(ri+rf-1,rf)-1, ci+cf-mod(ci+cf-1,cf)-1]);
@@ -312,8 +312,8 @@ classdef ImageProcessor
                 disp(order);
             end
         end
-        function filteredImage = IC4(image,G,order,correspondingEntries,show)
-            if nargin < 5
+        function filteredImage = Bayer1(image,G,order,show)
+            if nargin < 4
                 show = false
             end
             G = char(G);
@@ -321,10 +321,10 @@ classdef ImageProcessor
             [~, idx] = ismember(G, charMap);
             custom_order = 1:3;
             custom_order = [custom_order(idx), custom_order(~ismember(charMap, G))];
-            filteredImage = ImageProcessor.convert2Bayer(image, order, show, [true true true], size(order), 1 + correspondingEntries, "rc", custom_order);
+            filteredImage = ImageProcessor.convert2Bayer(image, order, show, [true true true], size(order), 2, "rc", custom_order);
         end
-        function filteredImage = Bayer2(image,G,order,correspondingEntries,show)
-            if nargin < 5
+        function filteredImage = Bayer2(image,G,order,show)
+            if nargin < 4
                 show = false
             end
             G = char(G);
@@ -332,14 +332,16 @@ classdef ImageProcessor
             [~, idx] = ismember(G, charMap);
             custom_order = 1:3;
             custom_order = [custom_order(idx), custom_order(~ismember(charMap, G))];
-            image = ImageProcessor.convert2Bayer(image, order, show, [true true true], size(order), 1 + correspondingEntries, "rc", custom_order);
-            filteredImage = ImageProcessor.convertBayer2RGB(image, order, show, [true true true], size(order), 1 + correspondingEntries, "rc", custom_order);
+            image = ImageProcessor.convert2Bayer(image, order, show, [true true true], size(order), 2, "rc", custom_order);
+            filteredImage = ImageProcessor.convertBayer2RGB(image, order, show, [true true true], size(order), 2, "rc", custom_order);
         end
-        function dilatedImage = dilation2(A, B)
+        function dilatedImage = subdilation(A, B, mode)
             [ri ci] = size(B);
             tmp = cast(zeros(size(A)+([ri ci]-1)*2),class(A(:,:)));
-            A = A/16;
-            B = B/16;
+            if mode == 2
+                A = A/16;
+                B = B/16;
+            end
             dilatedImage = cast(zeros(size(A)+([ri ci]-1)),class(A(:,:)));
             tmp(ri:end-ri+1,ci:end-ci+1) = A;
             for i = 1:size(dilatedImage,1)
@@ -348,22 +350,13 @@ classdef ImageProcessor
                 end
             end
         end
-        function dilatedBinaryMatrix = dilation1(A, B)
+        function erodedImage = suberosion(A, B, mode)
             [ri ci] = size(B);
             tmp = cast(zeros(size(A)+([ri ci]-1)*2),class(A(:,:)));
-            dilatedBinaryMatrix = cast(zeros(size(A)+([ri ci]-1)),class(A(:,:)));
-            tmp(ri:end-ri+1,ci:end-ci+1) = A;
-            for i = 1:size(dilatedBinaryMatrix,1)
-                for j = 1:size(dilatedBinaryMatrix,2)
-                    dilatedBinaryMatrix(i,j) = max(max(tmp(i:i+ri-1,j:j+ci-1) .* B));
-                end
+            if mode == 2
+                A = A/16;
+                B = B/16;
             end
-        end
-        function erodedImage = erosion2(A, B)
-            [ri ci] = size(B);
-            tmp = cast(zeros(size(A)+([ri ci]-1)*2),class(A(:,:)));
-            A = A/16;
-            B = B/16;
             erodedImage = cast(zeros(size(A)+([ri ci]-1)),class(A(:,:)));
             tmp(ri:end-ri+1,ci:end-ci+1) = A;
             for i = 1:size(erodedImage,1)
@@ -372,30 +365,47 @@ classdef ImageProcessor
                 end
             end
         end
-        function erodedBinaryMatrix = erosion1(A, B)
-            [ri ci] = size(B);
-            tmp = cast(zeros(size(A)+([ri ci]-1)*2),class(A(:,:)));
-            erodedBinaryMatrix = cast(zeros(size(A)+([ri ci]-1)),class(A(:,:)));
-            tmp(ri:end-ri+1,ci:end-ci+1) = A;
-            for i = 1:size(erodedBinaryMatrix,1)
-                for j = 1:size(erodedBinaryMatrix,2)
-                    erodedBinaryMatrix(i,j) = min(min(tmp(i:i+ri-1,j:j+ci-1) .* B));
-                end
+        function dilatedImage = Dilation2(A, B)
+            dilatedImage = [];
+            [ri ci chn] = size(A);
+            for i = 1:chn
+                dilatedImage = cat(3,dilatedImage,ImageProcessor.subdilation(A(:,:,i),B(:,:,i), 2));
             end
         end
-        function binaryMatrix = opening1(binaryMatrix1, binaryMatrix2)
-            binaryMatrix = ImageProcessor.dilation1(ImageProcessor.erosion1(binaryMatrix1, binaryMatrix2), binaryMatrix2);
+        function erodedImage = Erosion2(A, B)
+            erodedImage = [];
+            [ri ci chn] = size(A);
+            for i = 1:chn
+                erodedImage = cat(3,erodedImage,ImageProcessor.suberosion(A(:,:,i),B(:,:,i), 2));
+            end
         end
-        function binaryMatrix = opening2(binaryMatrix1, binaryMatrix2)
+        function dilatedImage = Dilation1(A, B)
+            dilatedImage = [];
+            [ri ci chn] = size(A);
+            for i = 1:chn
+                dilatedImage = cat(3,dilatedImage,ImageProcessor.subdilation(A(:,:,i),B(:,:,i), 1));
+            end
+        end
+        function erodedImage = Erosion1(A, B)
+            erodedImage = [];
+            [ri ci chn] = size(A);
+            for i = 1:chn
+                erodedImage = cat(3,erodedImage,ImageProcessor.suberosion(A(:,:,i),B(:,:,i), 1));
+            end
+        end
+        function binaryMatrix = Opening1(binaryMatrix1, binaryMatrix2)
+            binaryMatrix = ImageProcessor.Dilation1(ImageProcessor.Erosion1(binaryMatrix1, binaryMatrix2), binaryMatrix2);
+        end
+        function binaryMatrix = Opening2(binaryMatrix1, binaryMatrix2)
             
-            binaryMatrix = ImageProcessor.dilation2(ImageProcessor.erosion2(binaryMatrix1, binaryMatrix2), binaryMatrix2);
+            binaryMatrix = ImageProcessor.Dilation2(ImageProcessor.Erosion2(binaryMatrix1, binaryMatrix2), binaryMatrix2);
         end
-        function binaryMatrix = closing1(binaryMatrix1, binaryMatrix2)
-            binaryMatrix = ImageProcessor.erosion1(ImageProcessor.dilation1(binaryMatrix1, binaryMatrix2), binaryMatrix2);
+        function binaryMatrix = Closing1(binaryMatrix1, binaryMatrix2)
+            binaryMatrix = ImageProcessor.Erosion1(ImageProcessor.Dilation1(binaryMatrix1, binaryMatrix2), binaryMatrix2);
         end
-        function binaryMatrix = closing2(binaryMatrix1, binaryMatrix2)
+        function binaryMatrix = Closing2(binaryMatrix1, binaryMatrix2)
             
-            binaryMatrix = ImageProcessor.erosion2(ImageProcessor.dilation2(binaryMatrix1, binaryMatrix2), binaryMatrix2);
+            binaryMatrix = ImageProcessor.Erosion2(ImageProcessor.Dilation2(binaryMatrix1, binaryMatrix2), binaryMatrix2);
         end
         function polynomialProduct = PPP1(partition1, partition2)
             polynomialProduct = conv(partition1, partition2);
