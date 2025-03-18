@@ -255,11 +255,11 @@ Think of this function as a derivative of `BP(A)`. The parameters `lambda` and `
   ```
 
 ## Dilation1, Erosion1, Opening1, Closing1 (binaryMatrix1, binaryMatrix2)
-- Notes: Some books have different definition of erosion function. Their functions of dilation and erosion are commutative. I keep the traditional erosion and dilation functions as many book described in `Erosion1` and `Dilation1`, respectively. However, only `Dilation1` is commutative.
+- Notes: Some books have different definition of erosion function. Although, most of their functions of dilation are commutative. I keep the traditional erosion and dilation functions as many book described in `Erosion1` and `Dilation1`, respectively. Hence, only `Dilation1` is commutative.
 - Input:
   - binaryMatrix1 (2D or 3D logical): an image with or without red, green, and blue channels.
   - binaryMatrix2 (2D or 3D logical): a kernel with or without red, green, and blue channels.
-- Explanation. When applying `dilation1` and `erosion1`, it will scale the values (colored or gray values) by multiplying the values inside the kernel and then find `max` and `min`, respectively.
+- Explanation. When applying `Dilation1` and `Erosion1`, it will scale the values (logical values) by multiplying the values inside the kernel and then find `max` and `min`, respectively. In the case of `Erosion1`, if any "0" is encountered in the kernel, it simply ignores that part and does not reduce the center value to "0". This means that the center pixel value will be preserved as long as there are enough "1"s in the region to meet the kernel’s size, effectively only removing noise or small interruptions in the foreground. This adds additional flexibility to the function.
 - Example: Consider the binary matrices of `test.png` and `test2.png` (downloaded the images) in this case:
   ```matlab
   image = ImageProcessor.readImage('test.png');
@@ -301,7 +301,7 @@ Think of this function as a derivative of `BP(A)`. The parameters `lambda` and `
 - Input:
   - binaryMatrix1 (2D or 3D logical): an image with or without red, green, and blue channels.
   - binaryMatrix2 (2D or 3D logical): a kernel with or without red, green, and blue channels.
-- Explanation. When applying `dilation1` and `erosion1`, it will scale the values (colored or gray values) by multiplying the values inside the kernel and then find `max` and `min`, respectively.
+- Explanation. When applying `Dilation2` and `Erosion2`, it will scale the values (colored or gray values) by multiplying the values inside the kernel and then find `max` and `min`, respectively.
 - Example: Consider the binary matrices of `test.png` and `test2.png` (downloaded the images) in this case:
   ```matlab
   image = ImageProcessor.readImage('test.png');
