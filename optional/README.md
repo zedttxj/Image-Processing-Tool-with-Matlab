@@ -281,4 +281,43 @@ Think of this function as a derivative of `BP(A)`. The parameters `lambda` and `
   ![{B99D868B-E78F-4281-8C07-93736746A745}](https://github.com/user-attachments/assets/ba115749-bdfb-4307-bd36-f49e63da4f50)  
   ![{541CA048-BFAB-43B4-A79A-C3A40FD97550}](https://github.com/user-attachments/assets/1e381d0a-ccd0-48bb-8f20-f270ff430b69)  
   ![{5E195FDB-AD2B-4068-B312-1E8912D7B8C0}](https://github.com/user-attachments/assets/db1c5a0c-4d35-4f0e-8e78-cc498a9a7368)  
-  If I swap the input position of `image` and `image2` (`image` becoming 2nd parameter and `image2` becoming 1st parameter) and apply Erosion1, Dilation1, Opening1, and Closing1 respectively:
+  If I swap the input position of `image` and `image2` (`image` becoming 2nd parameter and `image2` becoming 1st parameter), the program stucks forever due to the larger mask being applied in the calculation. It's recommend to have smaller size of `image2` (ideally 5 to 35). Swapping the input position doesn't results in the output image being flipped up-side-down, left-to-right, or identical image compared the original output. However (fun fact), applying Bayer filter seems to make the outputs very identical. In fact, if you flip the image up-side-down and left-to-right, it looks almost the same:
+  For `ImageProcessor.Erosion2(image2,image)`: ![{58DEFB5D-F4CB-46C0-9E1D-CB703B6AA823}](https://github.com/user-attachments/assets/2386d765-06b5-4ac2-8ca5-d62324ca80ee)  
+  For `ImageProcessor.Erosion2(image,image2)`: ![{7456C810-A333-4377-8619-9B2EAAC39A7D}](https://github.com/user-attachments/assets/2cefa4a9-c625-4c17-b7e2-4168ff0febf6)
+  
+  An example of applying 2D binary matrices as inputs:  
+  image = ![{45231E59-FDB2-4AAA-B240-A97CBB56902E}](https://github.com/user-attachments/assets/4f476b09-2cf9-4002-b99b-6d74636e7bb6)  
+  image2 = ![{742CCC11-EEF9-4A5F-A291-EF20376FECE0}](https://github.com/user-attachments/assets/dc8d838e-d6f9-403d-aeb0-d82a6b40b773)  
+  output = ![{670A86FF-918B-4EF0-9E8F-5D0D659B15D7}](https://github.com/user-attachments/assets/aad91a6f-780f-44cf-85aa-cbdb3c197f23)
+  
+## Dilation2, Erosion2, Opening2, Closing2 (binaryMatrix1, binaryMatrix2)
+- Input:
+  - binaryMatrix1 (2D or 3D logical): an image with or without red, green, and blue channels.
+  - binaryMatrix2 (2D or 3D logical): a kernel with or without red, green, and blue channels.
+- Explanation. When applying `dilation1` and `erosion1`, it will scale the values (colored or gray values) by multiplying the values inside the kernel and then find `max` and `min`, respectively.
+- Example: Consider the binary matrices of `test.png` and `test2.png` (downloaded the images) in this case:
+  ```
+  image = ImageProcessor.readImage('test.png');
+  image2 = ImageProcessor.readImage('test2.png');
+  image2 = image2(230:235,230:235,:);
+  ```
+  I used `imshow(uint8(image) * 255);` to show the image: ![{5334DE9F-F56B-461A-8A9F-60EB776444AE}](https://github.com/user-attachments/assets/79579b7e-c97b-4cd6-bc30-34acd2153da3)  
+  Same thing goes for image2: ![{9C13C4B2-ACD4-4D8B-9944-18DAB2370919}](https://github.com/user-attachments/assets/8d931f6b-08c9-4fc5-9d21-b96644b64084)  
+  I only extract 5x5 grid of the image2 in this example (which explains why it appears to be small). Now, I apply `Erosion2`:
+  ```
+  output = ImageProcessor.Erosion2(image,image2);
+  imshow(output);
+  ```  
+  The output is like this:
+  ![{1ED3106D-9CF6-4EED-80AC-3CC55BBD884D}](https://github.com/user-attachments/assets/059abf02-e842-40fe-b5a2-17afcb41df2a)  
+  I tried with Dilation2, Opening2, and Closing2 respectively:  
+  ![{DD04683F-FD41-4A38-90A1-19F021958589}](https://github.com/user-attachments/assets/fc85a739-e66d-47d7-9422-c388a18e05c3)  
+  ![{66DA5B83-6D0B-4E07-A60B-35A41044C6FC}](https://github.com/user-attachments/assets/6fa8f52b-8b8e-459b-a7b3-f23356babb29)  
+  ![{21F5E61E-380C-41DF-A713-EE63BE25A0FE}](https://github.com/user-attachments/assets/d16940a8-70b9-4204-b2fc-3674788a0aea)  
+  If I swap the input position of `image` and `image2` (`image` becoming 2nd parameter and `image2` becoming 1st parameter), the program stucks forever due to the larger mask being applied in the calculation. It's recommend to have smaller size of `image2` (ideally 5 to 35). Swapping the input position doesn't results in the output image being flipped up-side-down, left-to-right, or identical image compared to the original output. However (fun fact), applying Bayer filter seems to make the outputs very identical. In fact, if you flip the image up-side-down and left-to-right, it looks almost the same:
+  For `ImageProcessor.Erosion2(image2,image)`: ![{10A3ED5F-C358-4CF9-ABC4-987CC81FF38F}](https://github.com/user-attachments/assets/99e9b567-5603-460b-b313-25e06f7d3613)
+  For `ImageProcessor.Erosion2(image,image2)`: ![{F3449905-059C-43AF-B5A1-648F653C771B}](https://github.com/user-attachments/assets/a5522c27-722a-46e6-9093-b746ee7436aa)  
+  An example of applying 2D binary matrices as inputs:  
+  image = ![{3BC14EFE-9688-499C-A05F-D0EDA888D444}](https://github.com/user-attachments/assets/1b1d0a09-582a-4859-867b-96bdedfe6679)  
+  image2 = ![{BE12C0BB-22E1-4B8D-92AD-998610501BB6}](https://github.com/user-attachments/assets/62345f1f-0fa3-47e9-89eb-3e4b3b02c301)  
+  output = ![{5EAF7C85-D2C5-4FBD-9F65-0341703D94C7}](https://github.com/user-attachments/assets/4d37f91f-75d1-4534-a60f-3ef5b8fb28d6)
