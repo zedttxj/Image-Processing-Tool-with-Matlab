@@ -287,7 +287,7 @@ Think of this function as a derivative of `BP(A)`. The parameters `lambda` and `
   ![{C40E3C47-5960-47BB-A05F-01140E2E3C30}](https://github.com/user-attachments/assets/16518dae-74f4-4d3f-95a5-17b880a633df)  
   ![{3CB73E92-8936-4F7C-98CB-FE8F9FC5E521}](https://github.com/user-attachments/assets/c44ec77c-894c-4382-8956-0cac16e04cc5)  
   ![{83643EB6-3FA3-4DFE-8193-664B6521D73D}](https://github.com/user-attachments/assets/e910e18f-ae29-4f8c-a3b8-7f0c233d004e)  
-  ![{83643EB6-3FA3-4DFE-8193-664B6521D73D}](https://github.com/user-attachments/assets/5882f480-f27d-4416-9ce8-fee3d8ee7665)  
+  ![{60B3C1E7-CEC7-469C-B71E-069EB4F7E830}](https://github.com/user-attachments/assets/800b2c12-a578-4b40-8a6c-9a9d8897a32d)  
   
   An example of applying 2D binary matrices as inputs:  
   image =  
