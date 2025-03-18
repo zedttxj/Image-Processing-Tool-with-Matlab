@@ -7,7 +7,7 @@
   - Partition (contains the original size of the binary matrix): 1D
 - Explanation: The function BP(A) processes a binary matrix by sorting each row and each column, then counting the number of ones in each row and storing this count in a partition vector. The partition vector represents the number of ones in each row. An alternative approach is to count the number of ones in each row first, and then sort them in descending order. Both approaches produce the same result.
 - Example code:
-  ```
+  ```matlab
   data = [
     1 1 1 0;
     0 1 0 1;
@@ -157,7 +157,7 @@ Think of this function as a derivative of `BP(A)`. The parameters `lambda` and `
 - Input (3D): an image with red, green, and blue channels
 - Output (3D): a filtered image with red, green, and blue channels (sorted based on GBR, BGR, etc, and the corresponding entries sorted at the same time).
 - Example code:
-  ```
+  ```matlab
   image = ImageProcessor.readImage('test.png');
   order = [
       3 2;
@@ -169,7 +169,7 @@ Think of this function as a derivative of `BP(A)`. The parameters `lambda` and `
 - Run the code:  
   ![{5B9BA0E2-804D-4AFF-AB8D-40B4D9BB4452}](https://github.com/user-attachments/assets/9c8cec0a-c268-4b13-9d48-12963bd0b8bf)  
 - Explanation: Think of this like an enhanced version of `IC1` that works for 3D instead of 2D. It keeps all 3 channels as it swapping the values. Let's say the `image` can be represented like this:
-  ```
+  ```matlab
   [
     A(1,1,:) A(1,2,:);
     A(2,1,:) A(2,2,:)
@@ -181,7 +181,7 @@ Think of this function as a derivative of `BP(A)`. The parameters `lambda` and `
         "1,1"    "2,1"
   ```
   , the function `IC2` will swap the entries like this:
-  ```
+  ```matlab
   [
     A(2,2,:) A(1,2,:);
     A(1,1,:) A(2,1,:)
@@ -195,7 +195,7 @@ Think of this function as a derivative of `BP(A)`. The parameters `lambda` and `
   - order (2D): similar to `IC2` and `IC1`
 - Output (2D): filtered matrix
 - Explanation: It functions similar to `IC2` except it will only pick one channel to represent on the gray scale. Let's say the `image` can be represented like this:
-  ```
+  ```matlab
   [
     A(1,1,1:3) A(1,2,1:3);
     A(2,1,1:3) A(2,2,1:3)
@@ -213,14 +213,14 @@ Think of this function as a derivative of `BP(A)`. The parameters `lambda` and `
           3     2
   ```
   , the function `IC2` will pick the entries like this:
-  ```
+  ```matlab
   [
     A(2,2,1) A(1,2,2);
     A(1,1,3) A(2,1,2)
   ];
   ```  
 - Example code:  
-  ```
+  ```matlab
   image = ImageProcessor.readImage('test.png');
   order = [
       3 2;
@@ -240,14 +240,14 @@ Think of this function as a derivative of `BP(A)`. The parameters `lambda` and `
 - Output (3D): a filtered image with red, green, and blue channel.
 - Explanation: similar to `Bayer1` function but instead of producing gray image, it erases other colors and only keep the color based on the sorted `order` (which doesn't have to be sorted as input).
 - Example: Pick the same example in `Bayer1` explanation. Instead of this output
-  ```
+  ```matlab
   [
     A(2,2,1) A(1,2,2);
     A(1,1,3) A(2,1,2)
   ];
   ```
   , it will have this output:
-  ```
+  ```matlab
   [
     [A(2,2,1), 0, 0] [0, A(1,2,2), 0];
     [0, 0, A(1,1,3)] [0, A(2,1,2), 0]
@@ -261,7 +261,7 @@ Think of this function as a derivative of `BP(A)`. The parameters `lambda` and `
   - binaryMatrix2 (2D or 3D logical): a kernel with or without red, green, and blue channels.
 - Explanation. When applying `dilation1` and `erosion1`, it will scale the values (colored or gray values) by multiplying the values inside the kernel and then find `max` and `min`, respectively.
 - Example: Consider the binary matrices of `test.png` and `test2.png` (downloaded the images) in this case:
-  ```
+  ```matlab
   image = ImageProcessor.readImage('test.png');
   image2 = ImageProcessor.readImage('test2.png');
   image2 = image2(230:235,230:235,:);
@@ -273,7 +273,7 @@ Think of this function as a derivative of `BP(A)`. The parameters `lambda` and `
   Same thing goes for image2:  
   ![{15C73C8D-005E-463D-9FD2-E8C506C2BD8B}](https://github.com/user-attachments/assets/17ccaf34-ae27-4ecf-8c7e-f0763ce9cca7)  
   I only extract 5x5 grid of the image2 in this example (which explains why it appears to be small). Now, I apply `Erosion1`:
-  ```
+  ```matlab
   output = ImageProcessor.Erosion1(image,image2);
   imshow(output);
   ```  
@@ -300,7 +300,7 @@ Think of this function as a derivative of `BP(A)`. The parameters `lambda` and `
   - binaryMatrix2 (2D or 3D logical): a kernel with or without red, green, and blue channels.
 - Explanation. When applying `dilation1` and `erosion1`, it will scale the values (colored or gray values) by multiplying the values inside the kernel and then find `max` and `min`, respectively.
 - Example: Consider the binary matrices of `test.png` and `test2.png` (downloaded the images) in this case:
-  ```
+  ```matlab
   image = ImageProcessor.readImage('test.png');
   image2 = ImageProcessor.readImage('test2.png');
   image2 = image2(230:235,230:235,:);
@@ -310,7 +310,7 @@ Think of this function as a derivative of `BP(A)`. The parameters `lambda` and `
   Same thing goes for image2:  
   ![{9C13C4B2-ACD4-4D8B-9944-18DAB2370919}](https://github.com/user-attachments/assets/8d931f6b-08c9-4fc5-9d21-b96644b64084)  
   I only extract 5x5 grid of the image2 in this example (which explains why it appears to be small). Now, I apply `Erosion2`:
-  ```
+  ```matlab
   output = ImageProcessor.Erosion2(image,image2);
   imshow(output);
   ```  
@@ -337,7 +337,7 @@ Think of this function as a derivative of `BP(A)`. The parameters `lambda` and `
   - Partition 2 (1D): similar to partition1.
 - Output: 1D array that contains the coefficients of the product of the 2 polynomials.
 - Example code:
-  ```
+  ```matlab
   tic;
   partition1 = 1:100000;
   partition2 = 1:100000;
