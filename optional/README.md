@@ -365,3 +365,24 @@ Think of this function as a derivative of `BP(A)`. The parameters `lambda` and `
   Elapsed time: 0.252894 seconds
   ```
   Even without using NTT, the code runs very fast thanks to built-in function `conv`.
+
+## PPP2(partition1, partition2)
+- Input:
+  - Partition 1 (1D): 1D array that contains the coefficients of the first polynomial.
+  - Partition 2 (1D): similar to partition1.
+- Output: 1D array that contains the coefficients of the product of the 2 polynomials using special operation '⊔'.
+- Explanation: the partition obtained by taking the multiset union of the parts of `partition1` and `partition2`, and then reordering them to make them weakly decreasing. For instance, μ=(3,3,2,1) and ν=(4,1,1). Then μ⊔ν=(4,3,3,2,1,1,1).
+- Example code:
+  ```matlab
+  tic;
+  partition1 = 50000000:-1:1;
+  partition2 = 50000000:-1:1;
+  ImageProcessor.PPP2(partition1,partition2);
+  elapsedTime = toc;
+  disp(elapsedTime);
+  ```
+- Run the code:
+  ```
+  >> 
+    1.6179
+  ```
