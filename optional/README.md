@@ -94,8 +94,8 @@ Think of this function as a derivative of `BP(A)`. The parameters `lambda` and `
 
 - **Input:**
   - `A` (2D): A 2D matrix (e.g., an image matrix or any numerical matrix).
-  - `G` (string or charArray): Specifies the color channels (similar to the `G` parameter in the `PC` function).
-  - `order` (2D): A matrix that indicates the sorting order of the channels. For example, "RB" would mean sorting by Red first, then Blue, and "BR" would mean sorting by Blue first, then Red.
+  - `G` (string or charArray): Specifies the color channels (similar to the `G` parameter in the `PC` function). For example, "RB" would mean sorting by Red first, then Blue, and "BR" would mean sorting by Blue first, then Red.
+  - `order` (2D): A matrix that indicates the sorting order of the channels. It's similar to `order` in `PC` function.
 
 - **Output:**  
   - **Filtered Matrices:** The function sorts the matrix `A` based on the channel order specified in `G` and `order`. It tracks the corresponding entries' positions during the sorting process and applies those changes to `A`.
