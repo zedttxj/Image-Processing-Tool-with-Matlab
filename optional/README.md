@@ -101,7 +101,7 @@ Think of this function as a derivative of `BP(A)`. The parameters `lambda` and `
   - **Filtered Matrices:** The function sorts the matrix `A` based on the channel order specified in `G` and `order`. It tracks the corresponding entries' positions during the sorting process and applies those changes to `A`.
 
 - **Explanation:**
-  1. **Matrix Sorting by Channel Order:** The `IC1` function takes an input matrix `A` and sorts it according to the channel order specified in `G` and `order`. For example, if `G = "RB"` and `order = [1 3 2]`, the matrix `A` will be sorted first by the Red channel, then Blue, and lastly by Green. If `order = [2 1 3]`, it will sort by Green, then Red, and then Blue.
+  1. **Matrix Sorting by Channel Order:** The `IC1` function takes an input matrix `A` and sorts it according to the channel order specified in `G` and `order`. For example, if `G = "RB"` (meaning `order = [1 3 2]` in `customSorting`), the matrix `A` will be sorted first by the Red channel, then Blue, and lastly by Green. If `order = [2 1 3]`, it will sort by Green, then Red, and then Blue.
   
   2. **Tracking Indices:** The function keeps track of the indices during sorting, so that after sorting, it can correctly reapply the changes to the original matrix `A`.
 
