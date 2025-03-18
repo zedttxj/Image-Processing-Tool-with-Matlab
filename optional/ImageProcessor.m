@@ -337,12 +337,12 @@ classdef ImageProcessor
         end
         function erodedImage = erosionWithConv2(A, B)
             B = double(B); 
-            convResult = conv2(double(A), B, 'same');
+            convResult = conv2(double(A), B, 'full');
             threshold = sum(B(:));
             erodedImage = (convResult == threshold);
         end
         function dilatedImage = dilationWithCon2(A, B)
-            dilatedImage = conv2(A, B, 'same') > 0;
+            dilatedImage = conv2(A, B, 'full') > 0;
         end
         function dilatedImage = subdilation(A, B, mode)
             [ri ci] = size(B);
@@ -392,14 +392,14 @@ classdef ImageProcessor
             dilatedImage = [];
             [ri ci chn] = size(A);
             for i = 1:chn
-                dilatedImage = cat(3,dilatedImage,ImageProcessor.subdilation(A(:,:,i),B(:,:,i), 1));
+                dilatedImage = cat(3,dilatedImage,ImageProcessor.dilationWithCon2(A(:,:,i),B(:,:,i)));
             end
         end
         function erodedImage = Erosion1(A, B)
             erodedImage = [];
             [ri ci chn] = size(A);
             for i = 1:chn
-                erodedImage = cat(3,erodedImage,ImageProcessor.suberosion(A(:,:,i),B(:,:,i), 1));
+                erodedImage = cat(3,erodedImage,ImageProcessor.erosionWithConv2(A(:,:,i),B(:,:,i)));
             end
         end
         function binaryMatrix = Opening1(binaryMatrix1, binaryMatrix2)
