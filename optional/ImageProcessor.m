@@ -395,11 +395,18 @@ classdef ImageProcessor
                 dilatedImage = cat(3,dilatedImage,ImageProcessor.dilationWithCon2(A(:,:,i),B(:,:,i)));
             end
         end
-        function erodedImage = Erosion1(A, B)
+        function erodedImage = CommutativeErosion(A, B)
             erodedImage = [];
             [ri ci chn] = size(A);
             for i = 1:chn
                 erodedImage = cat(3,erodedImage,ImageProcessor.erosionWithConv2(A(:,:,i),B(:,:,i)));
+            end
+        end
+        function erodedImage = Erosion1(A, B)
+            erodedImage = [];
+            [ri ci chn] = size(A);
+            for i = 1:chn
+                erodedImage = cat(3,erodedImage,ImageProcessor.suberosion(A(:,:,i),B(:,:,i), 1));
             end
         end
         function binaryMatrix = Opening1(binaryMatrix1, binaryMatrix2)
