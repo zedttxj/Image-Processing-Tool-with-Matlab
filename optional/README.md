@@ -289,9 +289,12 @@ Think of this function as a derivative of `BP(A)`. The parameters `lambda` and `
   For `ImageProcessor.Erosion2(image,image2)`:
   ![{7456C810-A333-4377-8619-9B2EAAC39A7D}](https://github.com/user-attachments/assets/2cefa4a9-c625-4c17-b7e2-4168ff0febf6)  
   An example of applying 2D binary matrices as inputs:  
-  image = ![{45231E59-FDB2-4AAA-B240-A97CBB56902E}](https://github.com/user-attachments/assets/4f476b09-2cf9-4002-b99b-6d74636e7bb6)  
-  image2 = ![{742CCC11-EEF9-4A5F-A291-EF20376FECE0}](https://github.com/user-attachments/assets/dc8d838e-d6f9-403d-aeb0-d82a6b40b773)  
-  output = ![{670A86FF-918B-4EF0-9E8F-5D0D659B15D7}](https://github.com/user-attachments/assets/aad91a6f-780f-44cf-85aa-cbdb3c197f23)
+  image =
+  ![{45231E59-FDB2-4AAA-B240-A97CBB56902E}](https://github.com/user-attachments/assets/4f476b09-2cf9-4002-b99b-6d74636e7bb6)  
+  image2 =
+  ![{742CCC11-EEF9-4A5F-A291-EF20376FECE0}](https://github.com/user-attachments/assets/dc8d838e-d6f9-403d-aeb0-d82a6b40b773)  
+  output =
+  ![{670A86FF-918B-4EF0-9E8F-5D0D659B15D7}](https://github.com/user-attachments/assets/aad91a6f-780f-44cf-85aa-cbdb3c197f23)
   
 ## Dilation2, Erosion2, Opening2, Closing2 (binaryMatrix1, binaryMatrix2)
 - Input:
@@ -325,6 +328,9 @@ Think of this function as a derivative of `BP(A)`. The parameters `lambda` and `
   For `ImageProcessor.Erosion2(image,image2)`:  
   ![{F3449905-059C-43AF-B5A1-648F653C771B}](https://github.com/user-attachments/assets/a5522c27-722a-46e6-9093-b746ee7436aa)  
   An example of applying 2D binary matrices as inputs:  
-  image = ![{3BC14EFE-9688-499C-A05F-D0EDA888D444}](https://github.com/user-attachments/assets/1b1d0a09-582a-4859-867b-96bdedfe6679)  
-  image2 = ![{BE12C0BB-22E1-4B8D-92AD-998610501BB6}](https://github.com/user-attachments/assets/62345f1f-0fa3-47e9-89eb-3e4b3b02c301)  
-  output = ![{5EAF7C85-D2C5-4FBD-9F65-0341703D94C7}](https://github.com/user-attachments/assets/4d37f91f-75d1-4534-a60f-3ef5b8fb28d6)
+  image =
+  ![{3BC14EFE-9688-499C-A05F-D0EDA888D444}](https://github.com/user-attachments/assets/1b1d0a09-582a-4859-867b-96bdedfe6679)  
+  image2 =
+  ![{BE12C0BB-22E1-4B8D-92AD-998610501BB6}](https://github.com/user-attachments/assets/62345f1f-0fa3-47e9-89eb-3e4b3b02c301)  
+  output =
+  ![{5EAF7C85-D2C5-4FBD-9F65-0341703D94C7}](https://github.com/user-attachments/assets/4d37f91f-75d1-4534-a60f-3ef5b8fb28d6)
