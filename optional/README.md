@@ -284,9 +284,7 @@ Think of this function as a derivative of `BP(A)`. The parameters `lambda` and `
   ![{541CA048-BFAB-43B4-A79A-C3A40FD97550}](https://github.com/user-attachments/assets/1e381d0a-ccd0-48bb-8f20-f270ff430b69)  
   ![{5E195FDB-AD2B-4068-B312-1E8912D7B8C0}](https://github.com/user-attachments/assets/db1c5a0c-4d35-4f0e-8e78-cc498a9a7368)  
   If I swap the input position of `image` and `image2` (`image` becoming 2nd parameter and `image2` becoming 1st parameter), the program stucks forever due to the larger mask being applied in the calculation. It's recommend to have smaller size of `image2` (ideally 5 to 35). Swapping the input position doesn't results in the output image being flipped up-side-down, left-to-right, or identical image compared the original output. However (fun fact), applying Bayer filter seems to make the outputs very identical. In fact, if you flip the image up-side-down and left-to-right, it looks almost the same:  
-  For `ImageProcessor.Erosion2(image2,image)`:
   ![{58DEFB5D-F4CB-46C0-9E1D-CB703B6AA823}](https://github.com/user-attachments/assets/2386d765-06b5-4ac2-8ca5-d62324ca80ee)  
-  For `ImageProcessor.Erosion2(image,image2)`:
   ![{7456C810-A333-4377-8619-9B2EAAC39A7D}](https://github.com/user-attachments/assets/2cefa4a9-c625-4c17-b7e2-4168ff0febf6)  
   An example of applying 2D binary matrices as inputs:  
   image =  
@@ -323,9 +321,7 @@ Think of this function as a derivative of `BP(A)`. The parameters `lambda` and `
   ![{66DA5B83-6D0B-4E07-A60B-35A41044C6FC}](https://github.com/user-attachments/assets/6fa8f52b-8b8e-459b-a7b3-f23356babb29)  
   ![{21F5E61E-380C-41DF-A713-EE63BE25A0FE}](https://github.com/user-attachments/assets/d16940a8-70b9-4204-b2fc-3674788a0aea)  
   If I swap the input position of `image` and `image2` (`image` becoming 2nd parameter and `image2` becoming 1st parameter), the program stucks forever due to the larger mask being applied in the calculation. It's recommend to have smaller size of `image2` (ideally 5 to 35). Swapping the input position doesn't results in the output image being flipped up-side-down, left-to-right, or identical image compared to the original output. However (fun fact), applying Bayer filter seems to make the outputs very identical. In fact, if you flip the image up-side-down and left-to-right, it looks almost the same:  
-  For `ImageProcessor.Erosion2(image2,image)`:  
-  ![{10A3ED5F-C358-4CF9-ABC4-987CC81FF38F}](https://github.com/user-attachments/assets/99e9b567-5603-460b-b313-25e06f7d3613)
-  For `ImageProcessor.Erosion2(image,image2)`:  
+  ![{10A3ED5F-C358-4CF9-ABC4-987CC81FF38F}](https://github.com/user-attachments/assets/99e9b567-5603-460b-b313-25e06f7d3613)  
   ![{F3449905-059C-43AF-B5A1-648F653C771B}](https://github.com/user-attachments/assets/a5522c27-722a-46e6-9093-b746ee7436aa)  
   An example of applying 2D binary matrices as inputs:  
   image =  
