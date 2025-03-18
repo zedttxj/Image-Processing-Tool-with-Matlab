@@ -313,10 +313,10 @@ Think of this function as a derivative of `BP(A)`. The parameters `lambda` and `
   - Same thing goes for image2:  
   ![{9C13C4B2-ACD4-4D8B-9944-18DAB2370919}](https://github.com/user-attachments/assets/8d931f6b-08c9-4fc5-9d21-b96644b64084)  
   - I only extract 5x5 grid of the image2 in this example (which explains why it appears to be small). Now, I apply `Erosion2`:
-  ```matlab
-  output = ImageProcessor.Erosion2(image,image2);
-  imshow(output);
-  ```  
+    ```matlab
+    output = ImageProcessor.Erosion2(image,image2);
+    imshow(output);
+    ```  
   - The output is like this:  
   ![{1ED3106D-9CF6-4EED-80AC-3CC55BBD884D}](https://github.com/user-attachments/assets/059abf02-e842-40fe-b5a2-17afcb41df2a)  
   - I tried with Dilation2, Opening2, and Closing2 respectively:  
