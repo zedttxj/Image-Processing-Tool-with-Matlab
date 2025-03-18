@@ -419,5 +419,32 @@ classdef ImageProcessor
         function polynomialProduct = PPP1(partition1, partition2)
             polynomialProduct = conv(partition1, partition2);
         end
+        function polynomialProduct = PPP2(partition1, partition2)
+            i = 1; j = 1;
+            len_mu = length(partition1);
+            len_nu = length(partition2);
+            polynomialProduct = zeros(1, len_mu + len_nu);
+            k = 1;
+            while i <= len_mu && j <= len_nu
+                if partition1(i) >= partition2(j)
+                    polynomialProduct(k) = partition1(i);
+                    i = i + 1;
+                else
+                    polynomialProduct(k) = partition2(j);
+                    j = j + 1;
+                end
+                k = k + 1;
+            end
+            while i <= len_mu
+                polynomialProduct(k) = partition1(i);
+                i = i + 1;
+                k = k + 1;
+            end
+            while j <= len_nu
+                polynomialProduct(k) = partition2(j);
+                j = j + 1;
+                k = k + 1;
+            end
+        end
     end
 end
