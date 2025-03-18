@@ -268,16 +268,16 @@ Think of this function as a derivative of `BP(A)`. The parameters `lambda` and `
   image = image > 100;
   image2 = image2 > 100;
   ```
-  I used `imshow(uint8(image) * 255);` to show the image:
+  I used `imshow(uint8(image) * 255);` to show the image:  
   ![{7ABCE2D5-D49C-4DA8-9E40-2E58CACD13D0}](https://github.com/user-attachments/assets/b87f9b0e-588d-4ee9-8a11-7252f3622684)  
-  Same thing goes for image2:
+  Same thing goes for image2:  
   ![{15C73C8D-005E-463D-9FD2-E8C506C2BD8B}](https://github.com/user-attachments/assets/17ccaf34-ae27-4ecf-8c7e-f0763ce9cca7)  
   I only extract 5x5 grid of the image2 in this example (which explains why it appears to be small). Now, I apply `Erosion1`:
   ```
   output = ImageProcessor.Erosion1(image,image2);
   imshow(output);
   ```  
-  The output is like this:
+  The output is like this:  
   ![{67D74618-8800-4307-9F3F-DC83350AC4E1}](https://github.com/user-attachments/assets/57a8d9c2-77ab-47d0-9b0d-039b913ed7c6)  
   I tried with Dilation1, Opening1, and Closing1 respectively:  
   ![{B99D868B-E78F-4281-8C07-93736746A745}](https://github.com/user-attachments/assets/ba115749-bdfb-4307-bd36-f49e63da4f50)  
@@ -289,11 +289,11 @@ Think of this function as a derivative of `BP(A)`. The parameters `lambda` and `
   For `ImageProcessor.Erosion2(image,image2)`:
   ![{7456C810-A333-4377-8619-9B2EAAC39A7D}](https://github.com/user-attachments/assets/2cefa4a9-c625-4c17-b7e2-4168ff0febf6)  
   An example of applying 2D binary matrices as inputs:  
-  image =
+  image =  
   ![{45231E59-FDB2-4AAA-B240-A97CBB56902E}](https://github.com/user-attachments/assets/4f476b09-2cf9-4002-b99b-6d74636e7bb6)  
-  image2 =
+  image2 =  
   ![{742CCC11-EEF9-4A5F-A291-EF20376FECE0}](https://github.com/user-attachments/assets/dc8d838e-d6f9-403d-aeb0-d82a6b40b773)  
-  output =
+  output =  
   ![{670A86FF-918B-4EF0-9E8F-5D0D659B15D7}](https://github.com/user-attachments/assets/aad91a6f-780f-44cf-85aa-cbdb3c197f23)
   
 ## Dilation2, Erosion2, Opening2, Closing2 (binaryMatrix1, binaryMatrix2)
@@ -307,9 +307,9 @@ Think of this function as a derivative of `BP(A)`. The parameters `lambda` and `
   image2 = ImageProcessor.readImage('test2.png');
   image2 = image2(230:235,230:235,:);
   ```
-  I used `imshow(uint8(image) * 255);` to show the image:
+  I used `imshow(uint8(image) * 255);` to show the image:  
   ![{5334DE9F-F56B-461A-8A9F-60EB776444AE}](https://github.com/user-attachments/assets/79579b7e-c97b-4cd6-bc30-34acd2153da3)  
-  Same thing goes for image2:
+  Same thing goes for image2:  
   ![{9C13C4B2-ACD4-4D8B-9944-18DAB2370919}](https://github.com/user-attachments/assets/8d931f6b-08c9-4fc5-9d21-b96644b64084)  
   I only extract 5x5 grid of the image2 in this example (which explains why it appears to be small). Now, I apply `Erosion2`:
   ```
@@ -328,9 +328,9 @@ Think of this function as a derivative of `BP(A)`. The parameters `lambda` and `
   For `ImageProcessor.Erosion2(image,image2)`:  
   ![{F3449905-059C-43AF-B5A1-648F653C771B}](https://github.com/user-attachments/assets/a5522c27-722a-46e6-9093-b746ee7436aa)  
   An example of applying 2D binary matrices as inputs:  
-  image =
+  image =  
   ![{3BC14EFE-9688-499C-A05F-D0EDA888D444}](https://github.com/user-attachments/assets/1b1d0a09-582a-4859-867b-96bdedfe6679)  
-  image2 =
+  image2 =  
   ![{BE12C0BB-22E1-4B8D-92AD-998610501BB6}](https://github.com/user-attachments/assets/62345f1f-0fa3-47e9-89eb-3e4b3b02c301)  
-  output =
+  output =  
   ![{5EAF7C85-D2C5-4FBD-9F65-0341703D94C7}](https://github.com/user-attachments/assets/4d37f91f-75d1-4534-a60f-3ef5b8fb28d6)
