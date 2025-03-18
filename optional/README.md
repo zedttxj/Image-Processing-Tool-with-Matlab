@@ -255,7 +255,7 @@ Think of this function as a derivative of `BP(A)`. The parameters `lambda` and `
   ```
 
 ## Dilation1, Erosion1, Opening1, Closing1 (binaryMatrix1, binaryMatrix2)
-- Notes: Some books have different definition of erosion function. Their functions of dilation and erosion are commutative. However, it's different in my case (where only my dilaton function is commutative like traditional dilation function defined in many books), which will be demonstrated in the example below. Additionally, I keep the traditional erosion function as many book described (which is commutative) in `CommutativeErosion` function instead of put it in `Erosion1`.
+- Notes: Some books have different definition of erosion function. Their functions of dilation and erosion are commutative. I keep the traditional erosion and dilation functions as many book described in `Erosion1` and `Dilation1`, respectively. However, only `Dilation1` is commutative.
 - Input:
   - binaryMatrix1 (2D or 3D logical): an image with or without red, green, and blue channels.
   - binaryMatrix2 (2D or 3D logical): a kernel with or without red, green, and blue channels.
@@ -283,9 +283,12 @@ Think of this function as a derivative of `BP(A)`. The parameters `lambda` and `
   ![{B99D868B-E78F-4281-8C07-93736746A745}](https://github.com/user-attachments/assets/ba115749-bdfb-4307-bd36-f49e63da4f50)  
   ![{541CA048-BFAB-43B4-A79A-C3A40FD97550}](https://github.com/user-attachments/assets/1e381d0a-ccd0-48bb-8f20-f270ff430b69)  
   ![{5E195FDB-AD2B-4068-B312-1E8912D7B8C0}](https://github.com/user-attachments/assets/db1c5a0c-4d35-4f0e-8e78-cc498a9a7368)  
-  If I swap the input position of `image` and `image2` (`image` becoming 2nd parameter and `image2` becoming 1st parameter), the program stucks forever due to the larger mask being applied in the calculation. It's recommend to have smaller size of `image2` (ideally 5 to 35). Swapping the input position doesn't results in the output image being flipped up-side-down, left-to-right, or identical image compared the original output. However (fun fact), applying Bayer filter seems to make the outputs very identical. In fact, if you flip the image up-side-down and left-to-right, it looks almost the same:  
-  ![{58DEFB5D-F4CB-46C0-9E1D-CB703B6AA823}](https://github.com/user-attachments/assets/2386d765-06b5-4ac2-8ca5-d62324ca80ee)  
-  ![{7456C810-A333-4377-8619-9B2EAAC39A7D}](https://github.com/user-attachments/assets/2cefa4a9-c625-4c17-b7e2-4168ff0febf6)  
+  It's recommend to have smaller size of `image2` (ideally 5 to 35). Swapping the input position results in the same output image:    
+  ![{C40E3C47-5960-47BB-A05F-01140E2E3C30}](https://github.com/user-attachments/assets/16518dae-74f4-4d3f-95a5-17b880a633df)  
+  ![{3CB73E92-8936-4F7C-98CB-FE8F9FC5E521}](https://github.com/user-attachments/assets/c44ec77c-894c-4382-8956-0cac16e04cc5)  
+  ![{83643EB6-3FA3-4DFE-8193-664B6521D73D}](https://github.com/user-attachments/assets/e910e18f-ae29-4f8c-a3b8-7f0c233d004e)  
+  ![{83643EB6-3FA3-4DFE-8193-664B6521D73D}](https://github.com/user-attachments/assets/5882f480-f27d-4416-9ce8-fee3d8ee7665)  
+  
   An example of applying 2D binary matrices as inputs:  
   image =  
   ![{45231E59-FDB2-4AAA-B240-A97CBB56902E}](https://github.com/user-attachments/assets/4f476b09-2cf9-4002-b99b-6d74636e7bb6)  
