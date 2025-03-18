@@ -112,7 +112,7 @@ Think of this function as a derivative of `BP(A)`. The parameters `lambda` and `
     ```
 
   4. **Sorted Output Example:**  
-     If the `order` is `[1 3 2]` (meaning sorting by Red, then Blue, then Green), the output might look like this:
+     If the `order` is `[3 2; 2 1]` (2D matrix), the output might look like this:
      ```matlab
      >> script
         "2,2"    "1,2"
