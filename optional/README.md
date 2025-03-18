@@ -268,33 +268,33 @@ Think of this function as a derivative of `BP(A)`. The parameters `lambda` and `
   image = image > 100;
   image2 = image2 > 100;
   ```
-  I used `imshow(uint8(image) * 255);` to show the image:  
+  - I used `imshow(uint8(image) * 255);` to show the image:  
   ![{7ABCE2D5-D49C-4DA8-9E40-2E58CACD13D0}](https://github.com/user-attachments/assets/b87f9b0e-588d-4ee9-8a11-7252f3622684)  
-  Same thing goes for image2:  
+  - Same thing goes for image2:  
   ![{15C73C8D-005E-463D-9FD2-E8C506C2BD8B}](https://github.com/user-attachments/assets/17ccaf34-ae27-4ecf-8c7e-f0763ce9cca7)  
-  I only extract 5x5 grid of the image2 in this example (which explains why it appears to be small). Now, I apply `Erosion1`:
-  ```matlab
-  output = ImageProcessor.Erosion1(image,image2);
-  imshow(output);
-  ```  
-  The output is like this:  
-  ![{67D74618-8800-4307-9F3F-DC83350AC4E1}](https://github.com/user-attachments/assets/57a8d9c2-77ab-47d0-9b0d-039b913ed7c6)  
-  I tried with Dilation1, Opening1, and Closing1 respectively:  
-  ![{B99D868B-E78F-4281-8C07-93736746A745}](https://github.com/user-attachments/assets/ba115749-bdfb-4307-bd36-f49e63da4f50)  
-  ![{541CA048-BFAB-43B4-A79A-C3A40FD97550}](https://github.com/user-attachments/assets/1e381d0a-ccd0-48bb-8f20-f270ff430b69)  
-  ![{5E195FDB-AD2B-4068-B312-1E8912D7B8C0}](https://github.com/user-attachments/assets/db1c5a0c-4d35-4f0e-8e78-cc498a9a7368)  
-  It's recommend to have smaller size of `image2` (ideally 5 to 35). Swapping the input position results in the same output image (only for dilation function):    
-  ![{C40E3C47-5960-47BB-A05F-01140E2E3C30}](https://github.com/user-attachments/assets/16518dae-74f4-4d3f-95a5-17b880a633df)  
-  ![{3CB73E92-8936-4F7C-98CB-FE8F9FC5E521}](https://github.com/user-attachments/assets/c44ec77c-894c-4382-8956-0cac16e04cc5)  
-  ![{83643EB6-3FA3-4DFE-8193-664B6521D73D}](https://github.com/user-attachments/assets/e910e18f-ae29-4f8c-a3b8-7f0c233d004e)  
-  ![{60B3C1E7-CEC7-469C-B71E-069EB4F7E830}](https://github.com/user-attachments/assets/800b2c12-a578-4b40-8a6c-9a9d8897a32d)  
+  - I only extract 5x5 grid of the image2 in this example (which explains why it appears to be small). Now, I apply `Erosion1`:
+    ```matlab
+    output = ImageProcessor.Erosion1(image,image2);
+    imshow(output);
+    ```  
+  - The output is like this:  
+    ![{67D74618-8800-4307-9F3F-DC83350AC4E1}](https://github.com/user-attachments/assets/57a8d9c2-77ab-47d0-9b0d-039b913ed7c6)  
+  - I tried with Dilation1, Opening1, and Closing1 respectively:  
+    ![{B99D868B-E78F-4281-8C07-93736746A745}](https://github.com/user-attachments/assets/ba115749-bdfb-4307-bd36-f49e63da4f50)  
+    ![{541CA048-BFAB-43B4-A79A-C3A40FD97550}](https://github.com/user-attachments/assets/1e381d0a-ccd0-48bb-8f20-f270ff430b69)  
+    ![{5E195FDB-AD2B-4068-B312-1E8912D7B8C0}](https://github.com/user-attachments/assets/db1c5a0c-4d35-4f0e-8e78-cc498a9a7368)  
+    - It's recommend to have smaller size of `image2` (ideally 5 to 35). Swapping the input position results in the same output image (only for dilation function):    
+      ![{C40E3C47-5960-47BB-A05F-01140E2E3C30}](https://github.com/user-attachments/assets/16518dae-74f4-4d3f-95a5-17b880a633df)  
+      ![{3CB73E92-8936-4F7C-98CB-FE8F9FC5E521}](https://github.com/user-attachments/assets/c44ec77c-894c-4382-8956-0cac16e04cc5)  
+      ![{83643EB6-3FA3-4DFE-8193-664B6521D73D}](https://github.com/user-attachments/assets/e910e18f-ae29-4f8c-a3b8-7f0c233d004e)  
+      ![{60B3C1E7-CEC7-469C-B71E-069EB4F7E830}](https://github.com/user-attachments/assets/800b2c12-a578-4b40-8a6c-9a9d8897a32d)  
   
-  An example of applying 2D binary matrices as inputs:  
-  image =  
+  - An example of applying 2D binary matrices as inputs:  
+    - `image` =  
   ![{45231E59-FDB2-4AAA-B240-A97CBB56902E}](https://github.com/user-attachments/assets/4f476b09-2cf9-4002-b99b-6d74636e7bb6)  
-  image2 =  
+    - `image2` =  
   ![{742CCC11-EEF9-4A5F-A291-EF20376FECE0}](https://github.com/user-attachments/assets/dc8d838e-d6f9-403d-aeb0-d82a6b40b773)  
-  output =  
+    - `output` =  
   ![{670A86FF-918B-4EF0-9E8F-5D0D659B15D7}](https://github.com/user-attachments/assets/aad91a6f-780f-44cf-85aa-cbdb3c197f23)
   
 ## Dilation2, Erosion2, Opening2, Closing2 (binaryMatrix1, binaryMatrix2)
@@ -308,30 +308,30 @@ Think of this function as a derivative of `BP(A)`. The parameters `lambda` and `
   image2 = ImageProcessor.readImage('test2.png');
   image2 = image2(230:235,230:235,:);
   ```
-  I used `imshow(image);` to show the image:  
+  - I used `imshow(image);` to show the image:  
   ![{5334DE9F-F56B-461A-8A9F-60EB776444AE}](https://github.com/user-attachments/assets/79579b7e-c97b-4cd6-bc30-34acd2153da3)  
-  Same thing goes for image2:  
+  - Same thing goes for image2:  
   ![{9C13C4B2-ACD4-4D8B-9944-18DAB2370919}](https://github.com/user-attachments/assets/8d931f6b-08c9-4fc5-9d21-b96644b64084)  
-  I only extract 5x5 grid of the image2 in this example (which explains why it appears to be small). Now, I apply `Erosion2`:
+  - I only extract 5x5 grid of the image2 in this example (which explains why it appears to be small). Now, I apply `Erosion2`:
   ```matlab
   output = ImageProcessor.Erosion2(image,image2);
   imshow(output);
   ```  
-  The output is like this:  
+  - The output is like this:  
   ![{1ED3106D-9CF6-4EED-80AC-3CC55BBD884D}](https://github.com/user-attachments/assets/059abf02-e842-40fe-b5a2-17afcb41df2a)  
-  I tried with Dilation2, Opening2, and Closing2 respectively:  
+  - I tried with Dilation2, Opening2, and Closing2 respectively:  
   ![{DD04683F-FD41-4A38-90A1-19F021958589}](https://github.com/user-attachments/assets/fc85a739-e66d-47d7-9422-c388a18e05c3)  
   ![{66DA5B83-6D0B-4E07-A60B-35A41044C6FC}](https://github.com/user-attachments/assets/6fa8f52b-8b8e-459b-a7b3-f23356babb29)  
   ![{21F5E61E-380C-41DF-A713-EE63BE25A0FE}](https://github.com/user-attachments/assets/d16940a8-70b9-4204-b2fc-3674788a0aea)  
-  If I swap the input position of `image` and `image2` (`image` becoming 2nd parameter and `image2` becoming 1st parameter), the program stucks forever due to the larger mask being applied in the calculation. It's recommend to have smaller size of `image2` (ideally 5 to 35). Swapping the input position doesn't results in the output image being flipped up-side-down, left-to-right, or identical image compared to the original output. However (fun fact), applying Bayer filter seems to make the outputs very identical. In fact, if you flip the image up-side-down and left-to-right, it looks almost the same:  
-  ![{10A3ED5F-C358-4CF9-ABC4-987CC81FF38F}](https://github.com/user-attachments/assets/99e9b567-5603-460b-b313-25e06f7d3613)  
-  ![{F3449905-059C-43AF-B5A1-648F653C771B}](https://github.com/user-attachments/assets/a5522c27-722a-46e6-9093-b746ee7436aa)  
-  An example of applying 2D binary matrices as inputs:  
-  image =  
+    - If I swap the input position of `image` and `image2` (`image` becoming 2nd parameter and `image2` becoming 1st parameter), the program stucks forever due to the larger mask being applied in the calculation. It's recommend to have smaller size of `image2` (ideally 5 to 35). Swapping the input position doesn't results in the output image being flipped up-side-down, left-to-right, or identical image compared to the original output. However (fun fact), applying Bayer filter seems to make the outputs very identical. In fact, if you flip the image up-side-down and left-to-right, it looks almost the same:  
+    ![{10A3ED5F-C358-4CF9-ABC4-987CC81FF38F}](https://github.com/user-attachments/assets/99e9b567-5603-460b-b313-25e06f7d3613)  
+    ![{F3449905-059C-43AF-B5A1-648F653C771B}](https://github.com/user-attachments/assets/a5522c27-722a-46e6-9093-b746ee7436aa)  
+  - An example of applying 2D binary matrices as inputs:  
+    - `image` =  
   ![{3BC14EFE-9688-499C-A05F-D0EDA888D444}](https://github.com/user-attachments/assets/1b1d0a09-582a-4859-867b-96bdedfe6679)  
-  image2 =  
+    - `image2` =  
   ![{BE12C0BB-22E1-4B8D-92AD-998610501BB6}](https://github.com/user-attachments/assets/62345f1f-0fa3-47e9-89eb-3e4b3b02c301)  
-  output =  
+    - `output` =  
   ![{5EAF7C85-D2C5-4FBD-9F65-0341703D94C7}](https://github.com/user-attachments/assets/4d37f91f-75d1-4534-a60f-3ef5b8fb28d6)
 
 ## PPP1(partition1, partition2)
