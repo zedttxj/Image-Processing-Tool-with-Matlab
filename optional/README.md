@@ -316,7 +316,7 @@ Think of this function as a derivative of `BP(A)`. The parameters `lambda` and `
   output = ImageProcessor.Erosion2(image,image2);
   imshow(output);
   ```  
-  The output is like this:
+  The output is like this:  
   ![{1ED3106D-9CF6-4EED-80AC-3CC55BBD884D}](https://github.com/user-attachments/assets/059abf02-e842-40fe-b5a2-17afcb41df2a)  
   I tried with Dilation2, Opening2, and Closing2 respectively:  
   ![{DD04683F-FD41-4A38-90A1-19F021958589}](https://github.com/user-attachments/assets/fc85a739-e66d-47d7-9422-c388a18e05c3)  
