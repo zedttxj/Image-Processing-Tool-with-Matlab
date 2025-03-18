@@ -255,7 +255,7 @@ Think of this function as a derivative of `BP(A)`. The parameters `lambda` and `
   ```
 
 ## Dilation1, Erosion1, Opening1, Closing1 (binaryMatrix1, binaryMatrix2)
-- Notes: Some books have different definition of erosion function. Their functions of dilation and erosion are commutative. However, it's different in my case (where only my dilaton function is commutative), which will be demonstrated in the example below. Additionally, I keep the traditional erosion function as many book described (which is commutative) in `CommutativeErosion` function instead of put it in `Erosion1`.
+- Notes: Some books have different definition of erosion function. Their functions of dilation and erosion are commutative. However, it's different in my case (where only my dilaton function is commutative like traditional dilation function defined in many books), which will be demonstrated in the example below. Additionally, I keep the traditional erosion function as many book described (which is commutative) in `CommutativeErosion` function instead of put it in `Erosion1`.
 - Input:
   - binaryMatrix1 (2D or 3D logical): an image with or without red, green, and blue channels.
   - binaryMatrix2 (2D or 3D logical): a kernel with or without red, green, and blue channels.
