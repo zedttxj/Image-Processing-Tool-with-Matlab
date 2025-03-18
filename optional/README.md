@@ -341,6 +341,17 @@ Think of this function as a derivative of `BP(A)`. The parameters `lambda` and `
 - Output: 1D array that contains the coefficients of the product of the 2 polynomials.
 - Example code:
   ```matlab
+  partition1 = [1 2 3 4];
+  partition2 = [1 3 2 1];
+  disp(ImageProcessor.PPP1(partition1, partition2));
+  ```
+- Run the code:
+  ```
+  >> 
+     1     5    11    18    20    11     4
+  ```
+- Another example code:
+  ```matlab
   tic;
   partition1 = 1:100000;
   partition2 = 1:100000;
