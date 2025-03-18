@@ -308,7 +308,7 @@ Think of this function as a derivative of `BP(A)`. The parameters `lambda` and `
   image2 = ImageProcessor.readImage('test2.png');
   image2 = image2(230:235,230:235,:);
   ```
-  I used `imshow(uint8(image) * 255);` to show the image:  
+  I used `imshow(image);` to show the image:  
   ![{5334DE9F-F56B-461A-8A9F-60EB776444AE}](https://github.com/user-attachments/assets/79579b7e-c97b-4cd6-bc30-34acd2153da3)  
   Same thing goes for image2:  
   ![{9C13C4B2-ACD4-4D8B-9944-18DAB2370919}](https://github.com/user-attachments/assets/8d931f6b-08c9-4fc5-9d21-b96644b64084)  
