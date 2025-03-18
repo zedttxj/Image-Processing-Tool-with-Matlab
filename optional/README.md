@@ -330,3 +330,24 @@ Think of this function as a derivative of `BP(A)`. The parameters `lambda` and `
   ![{BE12C0BB-22E1-4B8D-92AD-998610501BB6}](https://github.com/user-attachments/assets/62345f1f-0fa3-47e9-89eb-3e4b3b02c301)  
   output =  
   ![{5EAF7C85-D2C5-4FBD-9F65-0341703D94C7}](https://github.com/user-attachments/assets/4d37f91f-75d1-4534-a60f-3ef5b8fb28d6)
+
+## PPP1(partition1, partition2)
+- Input:
+  - Partition 1 (1D): 1D array that contains the coefficients of the first polynomial.
+  - Partition 2 (1D): similar to partition1.
+- Output: 1D array that contains the coefficients of the product of the 2 polynomials.
+- Example code:
+  ```
+  tic;
+  partition1 = 1:100000;
+  partition2 = 1:100000;
+  ImageProcessor.PPP1(partition1, partition2);
+  elapsedTime = toc;
+  fprintf('Elapsed time: %.6f seconds\n', elapsedTime);
+  ```
+- Run the code:
+  ```
+  >> 
+  Elapsed time: 0.252894 seconds
+  ```
+  Even without using NTT, the code runs very fast thanks to built-in function `conv`.
