@@ -253,6 +253,19 @@ Think of this function as a derivative of `BP(A)`. The parameters `lambda` and `
     [0, 0, A(1,1,3)] [0, A(2,1,2), 0]
   ];
   ```
+- Example code:
+  ```matlab
+  order = [
+      3 2 2 1;
+      2 1 3 3;
+      2 3 1 2;
+      3 3 1 1
+  ];
+  image = ImageProcessor.readImage('test.png');
+  imshow(ImageProcessor.Bayer2(image,"RBG",order));
+  ```
+- Run the code:  
+  ![{E00ACA93-416A-401F-8015-4878DB7E3892}](https://github.com/user-attachments/assets/c996b159-844a-4963-8bc1-1c3a887a1707)  
 
 ## Dilation1, Erosion1, Opening1, Closing1 (binaryMatrix1, binaryMatrix2)
 - Notes: Some books have different definition of erosion function though most of their functions of dilation are commutative. I keep the traditional erosion and dilation functions as many book described in `Erosion1` and `Dilation1`, respectively. Hence, only `Dilation1` is commutative.
