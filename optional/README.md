@@ -430,8 +430,10 @@ Think of this function as a derivative of `BP(A)`. The parameters `lambda` and `
 ### Output:
 - A **logical** 2D (grayscale) or 3D (RGB) **image** after dilation.
 
-### Process:
-This function applies a **special transformation** to both input matrices before performing **standard dilation**. The process is as follows:
+### Explanation:
+Dilation in matrix form is a well-known operation, but before applying it, we introduce a **special function** that transforms the input matrices. This special function modifies both `A` and `B`, and then we apply **standard dilation** to the transformed versions.
+
+The transformation works as follows:
 
 1. **Extract the coordinates** of all `1` values in the matrix and represent them as ordered pairs `(x, y)`. The first coordinate always starts at `[0,0]` (zero-based index).
    - Example: Given the matrix `A`:
@@ -443,8 +445,8 @@ This function applies a **special transformation** to both input matrices before
      ```
      The extracted set of coordinates is `{[0,0], [0,1], [1,1], [1,3]}`.
 
-2. **Compute a transformed set**:
-   - Generate a new set based on the condition:
+2. **Apply the special function to transform the matrices:**
+   - Compute a new set of coordinates satisfying:
      ```
      {(a,b) + (c,d) + ... : (a,b), (c,d), ... ∈ A and (a,b) ≠ (c,d) ≠ ...}
      ```
@@ -455,8 +457,8 @@ This function applies a **special transformation** to both input matrices before
 4. **Apply standard matrix dilation** (as defined in most image processing literature) to the transformed matrices.
 
 ### Efficiency Considerations:
-- **Matrix-based dilation is computationally efficient** compared to set-based dilation, which has an exponential complexity of `O(2^(|A|+|B|))`.
-- The matrix approach reduces the complexity to approximately `O((max(rows(A)) × max(cols(A)))²)`.
-- MATLAB's built-in functions like `find()` can efficiently extract coordinates, while convolution-based dilation speeds up processing.  
+- **Matrix-based dilation is computationally more efficient** than set-based dilation.
+- Using the set approach has an exponential complexity of `O(2^(|A|+|B|))`, whereas matrix-based dilation reduces this to approximately `O((max(rows(A)) × max(cols(A)))²)`.
+- MATLAB’s `find()` function efficiently extracts coordinates, while convolution-based dilation speeds up processing.
 
 - Example: Consider the binary matrices of `test.png` and `test2.png` (downloaded the images) in this case:
