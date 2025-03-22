@@ -463,11 +463,36 @@ This means for every point `(a,b)` in `A`, we add all points `(c,d)` from `B` to
 
 ### Matrix-Based Dilation (Efficient Form):
 - Instead of iterating over sets, **matrix dilation** is efficiently computed using **convolution operations** or **max filtering**, where a **structuring element (kernel)** is applied to the binary image.
-- This **reduces computation time** from `O(2^(|A|+|B|))` in the set-based approach to `O((max(rows(A)) × max(cols(A)))²)`.
+- This **reduces computation time** from `O(2^(|A|+|B|))` in the set-based approach to `O((max(rows(A)) × max(cols(A)))²)` for the `matrixDecomposition` function that transforms the input matrices.
 
-## Efficiency Considerations:
-- **Matrix-based dilation is significantly more efficient** than set-based dilation.
-- MATLAB’s `find()` function efficiently extracts coordinates, while convolution-based dilation speeds up processing.
+### MatrixDecomposition as Multiple Dilations
 
+We can redefine the **MatrixDecomposition** as a series of dilations for each element in the set, where the dilation operator `+` applies to each element of the set \( A \), based on its coordinates. The special function then becomes the **Riemann sum** of these dilations, where each dilation operation is applied individually to the coordinates and then summed.
 
-- Example: Consider the binary matrices of `test.png` and `test2.png` (downloaded the images) in this case:
+### SpecialDilation: Riemann Sum-Based Approach
+
+Let’s break down the steps:
+
+1. **Start with the original set \( A \)**:
+   - The set \( A \) contains the coordinates of all `1` values in the binary matrix.
+
+2. **Apply the dilation operator `+` to each element**:
+   - For each element \( A(i) \) in the set \( A \), apply dilation by adding each point in the structuring element \( B \) to \( A(i) \). In other words, each \( A(i) \) is dilated by all coordinates in \( B \).
+   
+   Example:
+   - Let \( A = \{[0,0], [0,1], [1,1]\} \) and \( B = \{[0,0], [1,0]\} \).
+   - Each coordinate in \( A \) will generate multiple dilated coordinates based on \( B \).
+
+3. **Sum the dilated coordinates**:
+   - This step is akin to a **Riemann sum** over the set \( A \), where each dilated element \( A(i) + B \) contributes to the final dilated set. This reduces the complexity of the dilation process compared to the traditional matrix-based approach, which would have a higher time complexity.
+
+4. **Transform the sum back into a matrix**:
+   - After the dilated set is computed, convert the resulting set of coordinates back into a matrix, which represents the dilated image.
+
+### Efficiency Reduction
+
+The computation time for the **MatrixDecomposition** function can be reduced by the following:
+
+- **Set-Based Approach**: The complexity of iterating through all pairs of points in \( A \) and \( B \) leads to an \( O(2^{|A|+|B|}) \) time complexity, as each combination needs to be computed individually.
+
+- **Special Function with Riemann Sum**: Instead of considering every possible pair of points, we only compute dilations for each point in the set \( A \), which reduces the time complexity to \( O((\text{max(rows}(A)) \times \text{max(cols}(A)))^2) \). This is achieved by treating the dilation process as a series of smaller, independent operations, which is computationally efficient.
