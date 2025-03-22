@@ -465,7 +465,7 @@ This means for every point `(a,b)` in `A`, we add all points `(c,d)` from `B` to
 
 - Example: ![{E86B4DFF-EDAC-4652-B698-685318D7A79E}](https://github.com/user-attachments/assets/fe38f19a-ce1f-4588-90ef-1d8a075f718f)  
 - Another example: ![{BD9875CA-0779-4290-B6A4-7C20D8919CC0}](https://github.com/user-attachments/assets/5d52c232-d2de-45c4-9a12-3e75d0dd332a)  
-- **Fun fact**: No matter how you twist your input image, if it has enough entries that have value `1`, it will turn into this image shape.
+- **Fun fact**: No matter how you twist your input image, if it has enough entries that have value `1`, it will turn into this image shape. (Note: I used `matrixDecomposition` here for demonstration. `EXTRA.DILATION` also works with 2D binary matrices.
   - Example:  
     ![{69B45C5E-510D-4A13-B104-0F8992509B0F}](https://github.com/user-attachments/assets/c5d59428-4abd-4c9a-a3aa-ecb5f28570af)  
     As I increase the number of ones:  
