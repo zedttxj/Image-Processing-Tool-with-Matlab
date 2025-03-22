@@ -314,7 +314,7 @@ classdef ImageProcessor
         end
         function filteredImage = Bayer1(image,G,order,show)
             if nargin < 4
-                show = false
+                show = false;
             end
             G = char(G);
             charMap = 'RGB';
@@ -325,7 +325,7 @@ classdef ImageProcessor
         end
         function filteredImage = Bayer2(image,G,order,show)
             if nargin < 4
-                show = false
+                show = false;
             end
             G = char(G);
             charMap = 'RGB';
@@ -376,28 +376,28 @@ classdef ImageProcessor
         end
         function dilatedImage = Dilation2(A, B)
             dilatedImage = [];
-            [ri ci chn] = size(A);
+            chn = size(A,3);
             for i = 1:chn
                 dilatedImage = cat(3,dilatedImage,ImageProcessor.subdilation(A(:,:,i),B(:,:,i), 2));
             end
         end
         function erodedImage = Erosion2(A, B)
             erodedImage = [];
-            [ri ci chn] = size(A);
+            chn = size(A,3);
             for i = 1:chn
                 erodedImage = cat(3,erodedImage,ImageProcessor.suberosion(A(:,:,i),B(:,:,i), 2));
             end
         end
         function dilatedImage = Dilation1(A, B)
             dilatedImage = [];
-            [ri ci chn] = size(A);
+            chn = size(A,3);
             for i = 1:chn
                 dilatedImage = cat(3,dilatedImage,ImageProcessor.dilationWithCon2(A(:,:,i),B(:,:,i)));
             end
         end
         function erodedImage = Erosion1(A, B)
             erodedImage = [];
-            [ri ci chn] = size(A);
+            chn = size(A,3);
             for i = 1:chn
                 erodedImage = cat(3,erodedImage,ImageProcessor.erosionWithConv2(A(:,:,i),B(:,:,i)));
             end
@@ -444,6 +444,38 @@ classdef ImageProcessor
                 polynomialProduct(k) = partition2(j);
                 j = j + 1;
                 k = k + 1;
+            end
+        end
+        function comb = matrixDecomposition(B)
+            B(1,1) = 1;
+            comb = ones([1 1]);
+            [rows, cols] = find(B);
+            t = zeros(max(rows),max(cols));
+            t(1,1) = 1;
+            for i = 2:sum(B,"all")
+                t(rows(i),cols(i)) = 1;
+                comb = conv2(comb,t(1:rows(i),1:cols(i)),"full") > 0;
+                t(rows(i),cols(i)) = 0;
+            end
+        end
+        function dilatedImage = SpecialDilation(A,B)
+            dilatedImage = [];
+            chn = size(A,3);
+            dilatedImageCell = cell(1, chn);
+            if (prod(size(B))<prod(size(A)))
+                for i = 1:chn
+                    dilatedImageCell{i} = cat(3,dilatedImage,ImageProcessor.dilationWithCon2(ImageProcessor.matrixDecomposition(A(:,:,i)),ImageProcessor.matrixDecomposition(B(:,:,i))));
+                end
+            else
+                for i = 1:chn
+                    dilatedImageCell{i} = cat(3,dilatedImage,ImageProcessor.dilationWithCon2(ImageProcessor.matrixDecomposition(B(:,:,i)),ImageProcessor.matrixDecomposition(A(:,:,i))));
+                end
+            end
+            maxRows = max(cellfun(@(x) size(x, 1), dilatedImageCell));
+            maxCols = max(cellfun(@(x) size(x, 2), dilatedImageCell));
+            dilatedImage = zeros(maxRows, maxCols, chn);
+            for i = 1:chn
+                dilatedImage(:,:,i) = imresize(dilatedImageCell{i}, [maxRows, maxCols]);
             end
         end
     end
