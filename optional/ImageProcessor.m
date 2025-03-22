@@ -458,7 +458,7 @@ classdef ImageProcessor
                 t(rows(i),cols(i)) = 0;
             end
         end
-        function dilatedImage = SpecialDilation(A,B)
+        function dilatedImage = extraDilation(A,B)
             dilatedImage = [];
             chn = size(A,3);
             dilatedImageCell = cell(1, chn);
@@ -478,5 +478,8 @@ classdef ImageProcessor
                 dilatedImage(:,:,i) = imresize(dilatedImageCell{i}, [maxRows, maxCols]);
             end
         end
+    end
+    properties (Constant)
+        EXTRA = struct('DILATION', @ImageProcessor.extraDilation);
     end
 end
