@@ -446,7 +446,7 @@ Before applying a function similar to `Dilation1`, we apply another special func
    
 2. Find the set (no repeated pair values) that matches this condition: 
    
-   `{(a,b) + (c,d) : (a,b), (c,d) are elements of A and (a,b) ≠ (c,d)}`.
+   `{(a,b) + (c,d) + ... : (a,b), (c,d), ... are elements of A and (a,b) ≠ (c,d) ≠ ...}`. (`...` can be empty or many elements)
    
 3. Convert these coordinates back to the original matrix.
 
