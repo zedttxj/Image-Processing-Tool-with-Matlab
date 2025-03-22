@@ -433,7 +433,7 @@ Think of this function as a derivative of `BP(A)`. The parameters `lambda` and `
 ### Explanation:
 Dilation in matrix form is a well-known operation, but before applying it, we introduce a **special function**, called **MatrixDecomposition**, that transforms the input matrices. This function modifies both `A` and `B`, and then we apply **standard dilation** to the transformed versions.
 
-## MatrixDecomposition Transformation
+### MatrixDecomposition Transformation
 MatrixDecomposition works as follows:
 
 1. **Extract the coordinates** of all `1` values in the matrix and represent them as ordered pairs `(x, y)`. The first coordinate always starts at `[0,0]` (zero-based index).
@@ -454,14 +454,14 @@ where `...` can be empty or multiple elements.
 
 4. **Apply standard matrix dilation** (as defined in most image processing literature) to the transformed matrices.
 
-## Comparison Between Set-Based and Matrix-Based Dilation
+### Comparison Between Set-Based and Matrix-Based Dilation
 
-### Set-Based Dilation:
+#### Set-Based Dilation:
 In set notation, the **dilation of two sets** `A` and `B` is defined as:  
 A ⊕ B = { (a,b) + (c,d) | (a,b) ∈ A, (c,d) ∈ B }  
 This means for every point `(a,b)` in `A`, we add all points `(c,d)` from `B` to generate the dilated result.
 
-### Matrix-Based Dilation (Efficient Form):
+#### Matrix-Based Dilation (Efficient Form):
 - Instead of iterating over sets, **matrix dilation** is efficiently computed using **convolution operations** or **max filtering**, where a **structuring element (kernel)** is applied to the binary image.
 - **MatrixDecomposition as Multiple Dilations**: We can redefine the **MatrixDecomposition** as a series of dilations for each element in the set, where the dilation operator ⊕ applies to each element in the set 𝐴. For each element, we consider the set that contains the coordinate [0,0] (the first coordinate) and the element itself so that ⊕ can be applied. The special function then becomes the **Riemann Dilation sum** of these dilations (like how `+` has **Riemann sum**, ⊕ has **Riemann Dilation sum**). This **reduces computation time** from `O(2^(|A|+|B|))` in the set-based approach to `O((max(rows(A)) × max(cols(A)))²)` for the `matrixDecomposition` function that transforms the input matrices.
 
