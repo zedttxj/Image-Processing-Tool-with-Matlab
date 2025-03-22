@@ -470,7 +470,7 @@ This means for every point `(a,b)` in `A`, we add all points `(c,d)` from `B` to
 - **Fun fact**: No matter how you twist your input image, if it has enough entries that have value `1`, it will turn into this image shape.
   - Example:  
     ![{69B45C5E-510D-4A13-B104-0F8992509B0F}](https://github.com/user-attachments/assets/c5d59428-4abd-4c9a-a3aa-ecb5f28570af)
-    - As I increase the number of ones:  
+    As I increase the number of ones:  
     ![{74BE45FD-6BC5-4A01-A617-D92FBEF43327}](https://github.com/user-attachments/assets/1a524198-4f0f-43c1-82cc-7a9b0d87921f)
 
 
