@@ -370,8 +370,8 @@ Think of this function as a derivative of `BP(A)`. The parameters `lambda` and `
 - Another example code:
   ```matlab
   tic;
-  partition1 = 1:100000;
-  partition2 = 1:100000;
+  partition1 = 1:1000000;
+  partition2 = 1:1000000;
   ImageProcessor.PPP1(partition1, partition2);
   elapsedTime = toc;
   fprintf('Elapsed time: %.6f seconds\n', elapsedTime);
@@ -379,7 +379,7 @@ Think of this function as a derivative of `BP(A)`. The parameters `lambda` and `
 - Run the code:
   ```
   >> 
-  Elapsed time: 0.252894 seconds
+  Elapsed time: 25.461543 seconds
   ```
   Even without using NTT, the code runs very fast thanks to built-in function `conv`.
 
