@@ -421,7 +421,7 @@ Think of this function as a derivative of `BP(A)`. The parameters `lambda` and `
      8     6     5     4     3     2     1
   ```
 
-## SpecialDilation(binaryMatrix1, binaryMatrix2)
+## EXTRA.DILATION(binaryMatrix1, binaryMatrix2)
 
 ### Input:
 - `binaryMatrix1` (2D or 3D logical): A binary image, with or without color channels (RGB).
@@ -431,7 +431,7 @@ Think of this function as a derivative of `BP(A)`. The parameters `lambda` and `
 - A **logical** 2D (grayscale) or 3D (RGB) **image** after dilation.
 
 ### Explanation:
-Dilation in matrix form is a well-known operation, but before applying it, we introduce a **special function**, called **MatrixDecomposition**, that transforms the input matrices. This function modifies both `A` and `B`, and then we apply **standard dilation** to the transformed versions.
+Dilation in matrix form is a well-known operation, but before applying it, we introduce a **special function**, called **MatrixDecomposition**, that transforms the input matrices. This function modifies both `A` and `B`, and then we apply **standard dilation** (as defined in most image processing literature) to the transformed versions.
 
 ### MatrixDecomposition Transformation
 MatrixDecomposition works as follows:
@@ -452,8 +452,6 @@ where `...` can be empty or multiple elements of `A`.
 
 3. **Convert this transformed set back into a matrix** representation.
 
-4. **Apply standard matrix dilation** (as defined in most image processing literature) to the transformed matrices.
-
 ### Comparison Between Set-Based and Matrix-Based Dilation
 
 #### Set-Based Dilation:
@@ -465,12 +463,10 @@ This means for every point `(a,b)` in `A`, we add all points `(c,d)` from `B` to
 - Instead of iterating over sets, **matrix dilation** is efficiently computed using **convolution operations** or **max filtering**, where a **structuring element (kernel)** is applied to the binary image.
 - **MatrixDecomposition as Multiple Dilations**: We can redefine the **MatrixDecomposition** as a series of dilations for each element in the set, where the dilation operator ⊕ applies to each element in the set 𝐴. For each element, we consider the set that contains the coordinate [0,0] (the first coordinate) and the element itself so that ⊕ can be applied. The special function then becomes the **Riemann Dilation sum** of these dilations (like how `+` has **Riemann sum**, ⊕ has **Riemann Dilation sum**). This **reduces computation time** from `O(2^(|A|+|B|))` in the set-based approach to `O((max(rows(A)) × max(cols(A)))²)` for the `matrixDecomposition` function that transforms the input matrices.
 
-- Example: ![{1FCE1028-064E-4A91-9979-18B4D9DB7772}](https://github.com/user-attachments/assets/a709a8cb-46bb-49b0-ab4f-af6bf0480f13)
-- Another example: ![{44EFD1DD-D6AA-4527-969E-275E8BDC59F6}](https://github.com/user-attachments/assets/a248cdfd-81d5-4557-a783-caeff966e90e)  
+- Example: ![{E86B4DFF-EDAC-4652-B698-685318D7A79E}](https://github.com/user-attachments/assets/fe38f19a-ce1f-4588-90ef-1d8a075f718f)  
+- Another example: ![{BD9875CA-0779-4290-B6A4-7C20D8919CC0}](https://github.com/user-attachments/assets/5d52c232-d2de-45c4-9a12-3e75d0dd332a)  
 - **Fun fact**: No matter how you twist your input image, if it has enough entries that have value `1`, it will turn into this image shape.
   - Example:  
     ![{69B45C5E-510D-4A13-B104-0F8992509B0F}](https://github.com/user-attachments/assets/c5d59428-4abd-4c9a-a3aa-ecb5f28570af)  
     As I increase the number of ones:  
     ![{74BE45FD-6BC5-4A01-A617-D92FBEF43327}](https://github.com/user-attachments/assets/1a524198-4f0f-43c1-82cc-7a9b0d87921f)
-
-
