@@ -431,9 +431,10 @@ Think of this function as a derivative of `BP(A)`. The parameters `lambda` and `
 - A **logical** 2D (grayscale) or 3D (RGB) **image** after dilation.
 
 ### Explanation:
-Dilation in matrix form is a well-known operation, but before applying it, we introduce a **special function** that transforms the input matrices. This special function modifies both `A` and `B`, and then we apply **standard dilation** to the transformed versions.
+Dilation in matrix form is a well-known operation, but before applying it, we introduce a **special function**, called **MatrixDecomposition**, that transforms the input matrices. This function modifies both `A` and `B`, and then we apply **standard dilation** to the transformed versions.
 
-The transformation works as follows:
+## MatrixDecomposition Transformation
+MatrixDecomposition works as follows:
 
 1. **Extract the coordinates** of all `1` values in the matrix and represent them as ordered pairs `(x, y)`. The first coordinate always starts at `[0,0]` (zero-based index).
    - Example: Given the matrix `A`:
@@ -445,20 +446,28 @@ The transformation works as follows:
      ```
      The extracted set of coordinates is `{[0,0], [0,1], [1,1], [1,3]}`.
 
-2. **Apply the special function to transform the matrices:**
-   - Compute a new set of coordinates satisfying:
-     ```
-     {(a,b) + (c,d) + ... : (a,b), (c,d), ... ∈ A and (a,b) ≠ (c,d) ≠ ...}
-     ```
-     where `...` can be empty or multiple elements.
+2. **Compute a new transformed set** satisfying:  
+{(a,b) + (c,d) + ... : (a,b), (c,d), ... ∈ A and (a,b) ≠ (c,d) ≠ ...}
+where `...` can be empty or multiple elements.
 
 3. **Convert this transformed set back into a matrix** representation.
 
 4. **Apply standard matrix dilation** (as defined in most image processing literature) to the transformed matrices.
 
-### Efficiency Considerations:
-- **Matrix-based dilation is computationally more efficient** than set-based dilation.
-- Using the set approach has an exponential complexity of `O(2^(|A|+|B|))`, whereas matrix-based dilation reduces this to approximately `O((max(rows(A)) × max(cols(A)))²)`.
+## Comparison Between Set-Based and Matrix-Based Dilation
+
+### Set-Based Dilation:
+In set notation, the **dilation of two sets** `A` and `B` is defined as:  
+A ⊕ B = { (a,b) + (c,d) | (a,b) ∈ A, (c,d) ∈ B }  
+This means for every point `(a,b)` in `A`, we add all points `(c,d)` from `B` to generate the dilated result.
+
+### Matrix-Based Dilation (Efficient Form):
+- Instead of iterating over sets, **matrix dilation** is efficiently computed using **convolution operations** or **max filtering**, where a **structuring element (kernel)** is applied to the binary image.
+- This **reduces computation time** from `O(2^(|A|+|B|))` in the set-based approach to `O((max(rows(A)) × max(cols(A)))²)`.
+
+## Efficiency Considerations:
+- **Matrix-based dilation is significantly more efficient** than set-based dilation.
 - MATLAB’s `find()` function efficiently extracts coordinates, while convolution-based dilation speeds up processing.
+
 
 - Example: Consider the binary matrices of `test.png` and `test2.png` (downloaded the images) in this case:
