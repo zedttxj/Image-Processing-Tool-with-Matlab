@@ -272,6 +272,8 @@ Think of this function as a derivative of `BP(A)`. The parameters `lambda` and `
 - Input:
   - binaryMatrix1 (2D or 3D logical): an image with or without red, green, and blue channels.
   - binaryMatrix2 (2D or 3D logical): a kernel with or without red, green, and blue channels.
+- Output:
+  - Logical 2D (gray) or 3D (rgb) image.
 - Explanation. When applying `Dilation1` and `Erosion1`, it will scale the values (logical values) by multiplying the values inside the kernel and then find `max` and `min`, respectively. In the case of `Erosion1`, if any "0" is encountered in the kernel, it simply ignores that part and does not reduce the center value to "0". This means that the center pixel value will be preserved as long as there are enough "1"s in the region to meet the kernel’s size, effectively only removing noise or small interruptions in the foreground. This adds additional flexibility to the function.
 - Example: Consider the binary matrices of `test.png` and `test2.png` (downloaded the images) in this case:
   ```matlab
@@ -314,6 +316,8 @@ Think of this function as a derivative of `BP(A)`. The parameters `lambda` and `
 - Input:
   - binaryMatrix1 (2D or 3D logical): an image with or without red, green, and blue channels.
   - binaryMatrix2 (2D or 3D logical): a kernel with or without red, green, and blue channels.
+- Output:
+  - Logical 2D (gray) or 3D (rgb) image.
 - Explanation. When applying `Dilation2` and `Erosion2`, it will scale the values (colored or gray values) by multiplying the values inside the kernel and then find `max` and `min`, respectively.
 - Example: Consider the binary matrices of `test.png` and `test2.png` (downloaded the images) in this case:
   ```matlab
@@ -416,3 +420,56 @@ Think of this function as a derivative of `BP(A)`. The parameters `lambda` and `
   >> 
      8     6     5     4     3     2     1
   ```
+
+## SpecialDilation(binaryMatrix1, binaryMatrix2)
+
+### Input:
+- **binaryMatrix1** (2D or 3D logical): An image with or without red, green, and blue channels.
+- **binaryMatrix2** (2D or 3D logical): A kernel with or without red, green, and blue channels.
+
+### Output:
+- A logical 2D (grayscale) or 3D (RGB) image.
+
+### Explanation:
+Before applying a function similar to `Dilation1`, we apply a special function that transforms both `binaryMatrix1` and `binaryMatrix2` into different binary matrices. This transformation follows these steps:
+
+#### 1. Extract Coordinates of `1` Values:
+For every `1` in the matrix, extract its coordinate as a pair of integers. The first entry corresponds to `[0,0]`. Example:
+
+```matlab
+A = [
+  1 1 0 0;
+  0 1 0 1
+];
+```
+The extracted coordinate set is:
+
+```
+{[0,0], [0,1], [1,1], [1,3]}
+```
+
+#### 2. Generate New Set by Pairwise Addition:
+We define a transformation where we add every pair `(a,b) + (c,d)`, provided `(a,b) ≠ (c,d)`. The result is a new set of unique coordinates.
+
+#### 3. Convert the Set Back to Matrix Form:
+Using `find()` in MATLAB, the coordinate set is converted back into a binary matrix.
+
+### Efficient Set-Based Dilation:
+In the set form, dilation is defined as:
+
+```
+{(a,b) + (c,d) : (a,b) ∈ A, (c,d) ∈ B}
+```
+
+#### Advantages of Set-Based Dilation:
+- The identity element is defined as `{[0,0]}`.
+- It allows a **Riemann sum-like computation**: 
+  
+  ```
+  {[0,0] + A(1)} + {[0,0] + A(2)} + ...
+  ```
+- **Time Complexity:**
+  - **Matrix-based dilation:** ~`(maxrow(A) * maxcol(A))^2`
+  - **Set-based dilation:** ~`O(2^(|A| + |B|))`  
+
+- Example: Consider the binary matrices of `test.png` and `test2.png` (downloaded the images) in this case:
