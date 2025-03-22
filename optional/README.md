@@ -424,52 +424,44 @@ Think of this function as a derivative of `BP(A)`. The parameters `lambda` and `
 ## SpecialDilation(binaryMatrix1, binaryMatrix2)
 
 ### Input:
-- **binaryMatrix1** (2D or 3D logical): An image with or without red, green, and blue channels.
-- **binaryMatrix2** (2D or 3D logical): A kernel with or without red, green, and blue channels.
+- `binaryMatrix1` (2D or 3D logical): an image with or without red, green, and blue channels.
+- `binaryMatrix2` (2D or 3D logical): a kernel with or without red, green, and blue channels.
 
 ### Output:
-- A logical 2D (grayscale) or 3D (RGB) image.
+- Logical 2D (gray) or 3D (rgb) image.
 
 ### Explanation:
-Before applying a function similar to `Dilation1`, we apply a special function that transforms both `binaryMatrix1` and `binaryMatrix2` into different binary matrices. This transformation follows these steps:
+Before applying a function similar to `Dilation1`, we apply another special function that transforms both `binaryMatrix1` and `binaryMatrix2` into different binary matrices. This special transform works as follows:
 
-#### 1. Extract Coordinates of `1` Values:
-For every `1` in the matrix, extract its coordinate as a pair of integers. The first entry corresponds to `[0,0]`. Example:
+1. Extract the coordinates of every entry with the value `1` as pairs of integers. The first entry corresponds to the pair `[0, 0]` as we start at 0. For example, consider this matrix `A`:
+   
+   ```matlab
+   A = [
+     1 1 0 0;
+     0 1 0 1
+   ];
+   ```
+   
+   The set of coordinates will be `{[0,0], [0,1], [1,1], [1,3]}`.
+   
+2. Find the set (no repeated pair values) that matches this condition: 
+   
+   `{(a,b) + (c,d) : (a,b), (c,d) are elements of A and (a,b) ≠ (c,d)}`.
+   
+3. Convert these coordinates back to the original matrix.
 
-```matlab
-A = [
-  1 1 0 0;
-  0 1 0 1
-];
-```
-The extracted coordinate set is:
+In MATLAB, these coordinates can be extracted easily with the function `find()`, then adjusted by subtracting `1`. The dilation operation in this set form is homomorphic (or isomorphic) to the dilation in matrix form and is defined as:
 
-```
-{[0,0], [0,1], [1,1], [1,3]}
-```
+`{(a,b) + (c,d) : (a,b) is an element of A and (c,d) is an element of B}`.
 
-#### 2. Generate New Set by Pairwise Addition:
-We define a transformation where we add every pair `(a,b) + (c,d)`, provided `(a,b) ≠ (c,d)`. The result is a new set of unique coordinates.
+The computation for this dilation is not expensive compared to the function dilation in matrix form. However, using the dilation function in matrix form has key advantages when applying the special function mentioned above:
 
-#### 3. Convert the Set Back to Matrix Form:
-Using `find()` in MATLAB, the coordinate set is converted back into a binary matrix.
-
-### Efficient Set-Based Dilation:
-In the set form, dilation is defined as:
-
-```
-{(a,b) + (c,d) : (a,b) ∈ A, (c,d) ∈ B}
-```
-
-#### Advantages of Set-Based Dilation:
-- The identity element is defined as `{[0,0]}`.
-- It allows a **Riemann sum-like computation**: 
+- In the set form, we define the empty set as `{[0,0]}` so that it becomes the identity element for the dilation operation.
+- The special function can be defined as multiple dilations of each element from the set:
   
-  ```
-  {[0,0] + A(1)} + {[0,0] + A(2)} + ...
-  ```
-- **Time Complexity:**
-  - **Matrix-based dilation:** ~`(maxrow(A) * maxcol(A))^2`
-  - **Set-based dilation:** ~`O(2^(|A| + |B|))`  
+  `{[0,0] + A(1)} + {[0,0] + A(2)} + {[0,0] + A(3)} ...`
+  
+  which is equivalent to the Riemann sum of `{[0,0] + A(i)}`, where `A(i)` is an element of `A`.
+- In matrix form, the time complexity is approximately `(maxofrow(A) * maxofcol(A))^2`, whereas in the set form, it would take `2^(length(A) + length(B))`.  
 
 - Example: Consider the binary matrices of `test.png` and `test2.png` (downloaded the images) in this case:
