@@ -468,3 +468,5 @@ This means for every point `(a,b)` in `A`, we add all points `(c,d)` from `B` to
 - Example: ![{1FCE1028-064E-4A91-9979-18B4D9DB7772}](https://github.com/user-attachments/assets/a709a8cb-46bb-49b0-ab4f-af6bf0480f13)
 - Another example: ![{44EFD1DD-D6AA-4527-969E-275E8BDC59F6}](https://github.com/user-attachments/assets/a248cdfd-81d5-4557-a783-caeff966e90e)  
 - **Fun fact**: No matter how you twist your input image, if it has enough entries that have value `1`, it will turn into this image shape.
+  - Example: ![{69B45C5E-510D-4A13-B104-0F8992509B0F}](https://github.com/user-attachments/assets/c5d59428-4abd-4c9a-a3aa-ecb5f28570af)
+
