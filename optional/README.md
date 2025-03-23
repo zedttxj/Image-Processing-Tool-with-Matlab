@@ -541,21 +541,24 @@ This means for every point `(a,b)` in `A`, we add all points `(c,d)` from `B` to
    - **How it works**: The function expands both sets using `ndgrid`, then adds their coordinates to create a new set of dilated coordinates.
    - **Example**:
      ```matlab
-     A = [1 1; 1 2; 2 2; 2 4];  % Example set A
-     B = [1 1; 1 0];            % Example set B
+     A = [0 0; 0 1; 1 1; 1 3];  % Example set A
+     B = [0 0; 0 1; 1 0];       % Example set B
      C = ImageProcessor.dilationSet(A, B);
      disp(C);
      ```
      Output:
      ```
      >> 
+     0     0
+     0     1
+     0     2
+     1     0
+     1     1
+     1     2
+     1     3
+     1     4
      2     1
-     2     2
      2     3
-     3     2
-     3     3
-     3     4
-     3     5
      ```
 
 ### `EXTRA.DILATIONSET` Function and its Comparison to `EXTRA.DILATION`
