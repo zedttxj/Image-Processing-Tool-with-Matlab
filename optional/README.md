@@ -497,7 +497,7 @@ This means for every point `(a,b)` in `A`, we add all points `(c,d)` from `B` to
     As I increase the number of ones:  
     ![{74BE45FD-6BC5-4A01-A617-D92FBEF43327}](https://github.com/user-attachments/assets/1a524198-4f0f-43c1-82cc-7a9b0d87921f)
 
-## EXTRA.DILATIONSET Functions and Their Workflow
+## EXTRA.DILATIONSET Function and Their Workflow
 
 ### 1. **`matrixToCoords(A)`**
    - **Purpose**: This function converts a matrix (like `A`) into a set of coordinates where the value is `1`.
