@@ -597,6 +597,8 @@ C = ImageProcessor.coordsToMatrix(C);
 disp(C);
 ```
 
+- Output:
+
 ```
 >> 
      1     1     1     0     0     0     0
@@ -612,6 +614,6 @@ disp(C);
 
 ### Summary:
 
-- `EXTRA.DILATIONSET` = Works similarly to `EXTRA.DILATION`, but only for 2D logical matrices.
-- `EXTRA.DILATIONSET` is **not suitable** for RGB images or matrices with multiple channels.
+- `EXTRA.DILATIONSET` = Works similarly to `EXTRA.DILATION`.
+- `EXTRA.DILATIONSET` is **not suitable** for RGB images or matrices with multiple channels so you may have to manually separate the channels to calculate it.
 - Both `EXTRA.DILATION` and `EXTRA.DILATIONSET` can be considered **homomorphic** in their operation.
