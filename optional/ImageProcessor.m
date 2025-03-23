@@ -478,6 +478,9 @@ classdef ImageProcessor
         function comb = Decomposition2(B)
             t = [0 0; 0 0];
             comb = [0 0];
+            if isempty(B)
+                return;
+            end
             if B(1,:) == [0 0]
                 startIndex = 2;
             else
