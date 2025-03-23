@@ -458,6 +458,36 @@ classdef ImageProcessor
                 t(rows(i),cols(i)) = 0;
             end
         end
+        function B = matrixToCoords(A)
+            [rows, cols] = find(A == 1);
+            B = [rows, cols] - 1;
+        end
+        function A = coordsToMatrix(B)
+            B = B + 1;
+            sz = max(B, [], 1);
+            A = zeros(sz);
+            A(sub2ind(sz, B(:,1), B(:,2))) = 1;
+        end
+        function C = dilationSet(A, B)
+            numA = size(A, 1);
+            numB = size(B, 1);
+            [A1, B1] = ndgrid(A(:,1), B(:,1));
+            [A2, B2] = ndgrid(A(:,2), B(:,2));
+            C = unique([A1(:) + B1(:), A2(:) + B2(:)], 'rows');
+        end
+        function comb = Decomposition2(B)
+            t = [0 0; 0 0];
+            comb = [0 0];
+            for i = 2:length(B)
+                t(2,:) = B(i,:);
+                comb = ImageProcessor.dilationSet(comb(:,:), t(:,:));
+            end
+        end
+        function dilatedSet = extraDilationSet(A,B)
+            A = ImageProcessor.Decomposition2(A(:,:));
+            B = ImageProcessor.Decomposition2(B(:,:));
+            dilatedSet = ImageProcessor.dilationSet(A,B);
+        end
         function dilatedImage = extraDilation(A,B)
             dilatedImage = [];
             chn = size(A,3);
@@ -480,6 +510,6 @@ classdef ImageProcessor
         end
     end
     properties (Constant)
-        EXTRA = struct('DILATION', @ImageProcessor.extraDilation);
+        EXTRA = struct('DILATION', @ImageProcessor.extraDilation, 'DILATIONSET', @ImageProcessor.extraDilationSet);
     end
 end
