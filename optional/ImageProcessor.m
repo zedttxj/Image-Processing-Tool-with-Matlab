@@ -478,7 +478,12 @@ classdef ImageProcessor
         function comb = Decomposition2(B)
             t = [0 0; 0 0];
             comb = [0 0];
-            for i = 2:length(B)
+            if B(1,:) == [0 0]
+                startIndex = 2;
+            else
+                startIndex = 1;
+            end;
+            for i = startIndex:length(B)
                 t(2,:) = B(i,:);
                 comb = ImageProcessor.dilationSet(comb(:,:), t(:,:));
             end
