@@ -558,9 +558,19 @@ This means for every point `(a,b)` in `A`, we add all points `(c,d)` from `B` to
      3     5
      ```
 
----
+### `EXTRA.DILATIONSET` Function and its Comparison to `EXTRA.DILATION`
 
-### Final Test Flow
+The function `EXTRA.DILATIONSET` operates in a way that is conceptually similar to the function `EXTRA.DILATION`. Both of these functions can be considered **homomorphic**, meaning they perform a similar dilation operation, but on different data structures. The same concept applies to the relationship between `dilationSet` and the **standard dilation on matrices**.
+
+- **Key Difference**: Unlike `EXTRA.DILATION`, which is designed to handle dilation on matrices of various dimensions, **`EXTRA.DILATIONSET`** is specifically optimized for working with 2D logical matrices (where elements are either `0` or `1`).
+  
+- **Important Note**: It is not recommended to use `EXTRA.DILATIONSET` on RGB images or matrices with more than two dimensions. This function is intended to work with **2D logical matrices**.
+
+### Dilation Process
+
+This process ensures that the dilation operation is applied correctly, and the final result is returned as a matrix. The output is a new logical matrix that represents the dilation of the input sets.
+
+### Test Flow
 
 1. **Define the sets `A` and `B`** as matrices.
 2. **Convert the matrices into coordinates** using `matrixToCoords`.
@@ -587,21 +597,7 @@ C = ImageProcessor.coordsToMatrix(C);
 disp(C);
 ```
 
-### `EXTRA.DILATIONSET` Function and its Comparison to `EXTRA.DILATION`
-
-The function `EXTRA.DILATIONSET` operates in a way that is conceptually similar to the function `EXTRA.DILATION`. Both of these functions can be considered **homomorphic**, meaning they perform a similar dilation operation, but on different data structures. The same concept applies to the relationship between `dilationSet` and the **standard dilation on matrices**.
-
-- **Key Difference**: Unlike `EXTRA.DILATION`, which is designed to handle dilation on matrices of various dimensions, **`EXTRA.DILATIONSET`** is specifically optimized for working with 2D logical matrices (where elements are either `0` or `1`).
-  
-- **Important Note**: It is not recommended to use `EXTRA.DILATIONSET` on RGB images or matrices with more than two dimensions. This function is intended to work with **2D logical matrices**.
-
----
-
-### Dilation Process
-
-This process ensures that the dilation operation is applied correctly, and the final result is returned as a matrix. The output is a new logical matrix that represents the dilation of the input sets.
-
-```matlab
+```
 >> 
      1     1     1     0     0     0     0
      1     1     1     1     1     1     0
