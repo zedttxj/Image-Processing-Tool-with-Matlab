@@ -567,7 +567,7 @@ The function `EXTRA.DILATIONSET` operates in a way that is conceptually similar 
 
 - **Key Difference**: Unlike `EXTRA.DILATION`, which is designed to handle dilation on matrices of various dimensions, **`EXTRA.DILATIONSET`** is specifically optimized for working with 2D logical matrices (where elements are either `0` or `1`).
   
-- **Important Note**: It is not recommended to use `EXTRA.DILATIONSET` on RGB images or matrices with more than two dimensions. This function is intended to work with **2D logical matrices**.
+- **Important Note**: It is not recommended to use `EXTRA.DILATIONSET` on RGB images or matrices with more than two dimensions. This function is intended to work with **2D logical matrices** represented in the set form.
 
 ### Dilation Process
 
