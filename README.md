@@ -8,6 +8,8 @@ The goal of this project is to simplify image processing tools in MATLAB, partic
 `partitionDecomposition` – Generates all possible 2D matrices that match the same partition structure.  
 `convert2Bayer` – Converts an image into a Bayer pattern using a specified filter and configuration.  
 `convertBayer2RGB` – Converts a Bayer-patterned image back into an RGB image.  
+## Additional Tools
+If you need more tools, you can explore the `optional` folder.
 ## Warning
 When calling a command in MATLAB, please make sure to put a `;` at the end of the command to prevent unnecessary logs. This helps keep your MATLAB console clean and avoids displaying function outputs that you do not need.
 
