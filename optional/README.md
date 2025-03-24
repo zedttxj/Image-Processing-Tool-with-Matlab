@@ -5,7 +5,7 @@
   - Binary matrix: 2D
 - Output:
   - Partition (contains the original size of the binary matrix): 1D
-- Explanation: The function BP(A) processes a binary matrix by sorting each row and each column, then counting the number of ones in each row and storing this count in a partition vector. The partition vector represents the number of ones in each row. An alternative approach is to count the number of ones in each row first, and then sort them in descending order. Both approaches produce the same result.
+- Explanation: The function BP(A) processes a binary matrix by sorting each row and each column, counting the number of ones in each row, and then storing the count in a partition vector. The partition vector represents the number of ones in each row. An alternative approach is to count the number of ones in each row first, and then sort them in descending order. Both approaches produce the same result.
 - Example code:
   ```matlab
   data = [
@@ -33,7 +33,7 @@
 ## PC(lambda, G, order)
 
 - **Explanation:**  
-Think of this function as a derivative of `BP(A)`. The parameters `lambda` and `order` are used to construct the `data` matrix (whose structure is unknown initially). Then, we extract the colors from `data` based on the provided `G`. Finally, we apply the sorting and counting procedure, similar to `BP(A)`.
+Think of this function as a derivation of `BP(A)`. The parameters `lambda` and `order` are used to construct the `data` matrix (whose structure is unknown initially). Then, we extract the colors from `data` based on the provided `G`. Finally, we sort and count, similar to `BP(A)`.
 
 - **Input:**
   - `lambda` (1D): Contains the lengths of each row of the matrix to be constructed.
@@ -112,7 +112,7 @@ Think of this function as a derivative of `BP(A)`. The parameters `lambda` and `
     ```
 
   4. **Sorted Output Example:**  
-     If the `order` is `[3 2; 2 1]` (2D matrix) and the 3rd parameter of the `customSorting` function is `[1 3 2]` (meaning "R < B < G"), the output might look like this:
+     If the `order` is `[3 2; 2 1]` (2D matrix) and the 3rd parameter of the `customSorting` function is `[1 3 2]` (meaning "R < B < G"), the output looks like this:
      ```matlab
      >> script
         "2,2"    "1,2"
@@ -274,8 +274,8 @@ Think of this function as a derivative of `BP(A)`. The parameters `lambda` and `
   - binaryMatrix2 (2D or 3D logical): a kernel with or without red, green, and blue channels.
 - Output:
   - Logical 2D (gray) or 3D (rgb) image.
-- Explanation. When applying `Dilation1` and `Erosion1`, it will scale the values (logical values) by multiplying the values inside the kernel and then find `max` and `min`, respectively. In the case of `Erosion1`, if any "0" is encountered in the kernel, it simply ignores that part and does not reduce the center value to "0". This means that the center pixel value will be preserved as long as there are enough "1"s in the region to meet the kernel’s size, effectively only removing noise or small interruptions in the foreground. This adds additional flexibility to the function.
-- Example: Consider the binary matrices of `test.png` and `test2.png` (downloaded the images) in this case:
+- Explanation. When applying `Dilation1` and `Erosion1`, it will scale the values (logical values) by multiplying the values inside the kernel and then find `max` and `min`, respectively. In the case of `Erosion1`, if any "0" is encountered in the kernel, it simply ignores that part and does not reduce the center value to "0". This means that the center pixel value will be preserved as long as there are enough "1"s in the region to meet the kernel’s size, effectively only removing noise or small interruptions in the foreground, adding additional flexibility to the function.
+- Example: Consider the binary matrices of `test.png` and `test2.png` (downloaded the images):
   ```matlab
   image = ImageProcessor.readImage('test.png');
   image2 = ImageProcessor.readImage('test2.png');
@@ -319,7 +319,7 @@ Think of this function as a derivative of `BP(A)`. The parameters `lambda` and `
 - Output:
   - Logical 2D (gray) or 3D (rgb) image.
 - Explanation. When applying `Dilation2` and `Erosion2`, it will scale the values (colored or gray values) by multiplying the values inside the kernel and then find `max` and `min`, respectively.
-- Example: Consider the binary matrices of `test.png` and `test2.png` (downloaded the images) in this case:
+- Example: Consider the binary matrices of `test.png` and `test2.png` (downloaded the images):
   ```matlab
   image = ImageProcessor.readImage('test.png');
   image2 = ImageProcessor.readImage('test2.png');
@@ -431,7 +431,7 @@ Think of this function as a derivative of `BP(A)`. The parameters `lambda` and `
 - A **logical** 2D (grayscale) or 3D (RGB) **image** after dilation.
 
 ### Explanation:
-Dilation in matrix form is a well-known operation, but before applying it, we introduce a **special function**, called **MatrixDecomposition**, that transforms the input matrices. This function modifies both `A` and `B`, and then we apply **standard dilation** (as defined in most image processing literature) to the transformed versions.
+Dilation in matrix form is a well-known operation, but before applying it, we introduce a **special function** (called **MatrixDecomposition**) that transforms the input matrices. This function modifies both `A` and `B`, and apply **standard dilation** (as defined in most image processing books) to the transformed versions.
 
 ### MatrixDecomposition Transformation
 MatrixDecomposition works as follows:
@@ -457,11 +457,11 @@ where `...` can be empty or multiple elements of `A`.
 #### Set-Based Dilation:
 In set notation, the **dilation of two sets** `A` and `B` is defined as:  
 A ⊕ B = { (a,b) + (c,d) | (a,b) ∈ A, (c,d) ∈ B }  
-This means for every point `(a,b)` in `A`, we add all points `(c,d)` from `B` to generate the dilated result.
+For every point `(a,b)` in `A`, we add all points `(c,d)` from `B` to generate the dilated result.
 
 #### Matrix-Based Dilation (Efficient Form):
 - Instead of iterating over sets, **matrix dilation** is efficiently computed using **convolution operations** or **max filtering**, where a **structuring element (kernel)** is applied to the binary image.
-- **MatrixDecomposition as Multiple Dilations**: We can redefine the **MatrixDecomposition** as a series of dilations for each element in the set, where the dilation operator ⊕ applies to each element in the set 𝐴. For each element, we consider the set that contains the coordinate [0,0] (the first coordinate) and the element itself so that ⊕ can be applied. The special function then becomes the **Riemann Dilation sum** of these dilations (like how `+` has **Riemann sum**, ⊕ has **Riemann Dilation sum**). This **reduces computation time** from `O(2^(|A|+|B|))` in the set-based approach to `O([max(rows(A)) × max(cols(A))]³)` for the `matrixDecomposition` function that transforms the input matrices.
+- **MatrixDecomposition as Multiple Dilations**: We can redefine the **MatrixDecomposition** as a series of dilations for each element in the set, where the dilation operator ⊕ applies to each element in the set 𝐴. For each element, we consider the set that contains the coordinate [0,0] (the first coordinate) and the element itself so that ⊕ can be applied. The special function then becomes the **Riemann Dilation sum** of these dilations (like how `+` has **Riemann sum**, ⊕ has **Riemann Dilation sum**). This **reduces computation time** from `O(2^(max(|A|,|B|)))` in the set-based approach to `O([max(rows(A)) × max(cols(A))]³)` for the `matrixDecomposition` function that transforms the input matrices.
 
 - Example code:
   ```matlab
@@ -491,13 +491,14 @@ This means for every point `(a,b)` in `A`, we add all points `(c,d)` from `B` to
   disp("Size of output image: " + strjoin(arrayfun(@num2str, size(t), 'UniformOutput', false), ' '));
   ```
 - Run the code: ![{BD9875CA-0779-4290-B6A4-7C20D8919CC0}](https://github.com/user-attachments/assets/5d52c232-d2de-45c4-9a12-3e75d0dd332a)  
-- **Fun fact**: No matter how you twist your input image, if it has enough entries that have value `1`, it will turn into this image shape. (Note: I used `matrixDecomposition` here for demonstration. `EXTRA.DILATION` also works with 2D binary matrices.
+- **Fun fact**: No matter how you twist your input image, if it has enough entries that have value `1`, it will turn into the oval-like form with two pointed ends.
+  - Note: I used `matrixDecomposition` here for demonstration. `EXTRA.DILATION` also works with 2D binary matrices.
   - Example:  
     ![{69B45C5E-510D-4A13-B104-0F8992509B0F}](https://github.com/user-attachments/assets/c5d59428-4abd-4c9a-a3aa-ecb5f28570af)  
     As I increase the number of ones:  
     ![{74BE45FD-6BC5-4A01-A617-D92FBEF43327}](https://github.com/user-attachments/assets/1a524198-4f0f-43c1-82cc-7a9b0d87921f)
 
-## EXTRA.DILATIONSET Function and Their Workflow
+## EXTRA.DILATIONSET and dilationSet Functions with Added Customized Functions
 
 ### 1. **`matrixToCoords(A)`**
    - **Purpose**: This function converts a matrix (like `A`) into a set of coordinates where the value is `1`.
@@ -521,7 +522,7 @@ This means for every point `(a,b)` in `A`, we add all points `(c,d)` from `B` to
      ```
 
 ### 2. **`coordsToMatrix(B)`**
-   - **Purpose**: This function takes a set of coordinates (like those generated by `matrixToCoords`) and converts them back into a binary matrix where `1`s are placed at the corresponding positions.
+   - **Purpose**: Takes a set of coordinates (like those generated by `matrixToCoords`) and converts them back into a binary matrix where `1`s are placed at the corresponding positions.
    - **How it works**: It initializes a zero matrix of the appropriate size, then iterates over the list of coordinates, placing `1`s at each position.
    - **Example**:
      ```matlab
@@ -537,7 +538,7 @@ This means for every point `(a,b)` in `A`, we add all points `(c,d)` from `B` to
      ```
 
 ### 3. **`dilationSet(A, B)`**
-   - **Purpose**: This function performs the dilation operation between two sets, `A` and `B`. It calculates the set `A ⊕ B = { (a,b) + (c,d) | (a,b) ∈ A, (c,d) ∈ B }`, which involves adding every element of `B` to every element of `A`. 
+   - **Purpose**: Performs the dilation operation between two sets, `A` and `B`. It calculates the set `A ⊕ B = { (a,b) + (c,d) | (a,b) ∈ A, (c,d) ∈ B }`, which involves adding every element of `B` to every element of `A`. 
    - **How it works**: The function expands both sets using `ndgrid`, then adds their coordinates to create a new set of dilated coordinates.
    - **Example**:
      ```matlab
@@ -565,13 +566,11 @@ This means for every point `(a,b)` in `A`, we add all points `(c,d)` from `B` to
 
 The function `EXTRA.DILATIONSET` operates in a way that is conceptually similar to the function `EXTRA.DILATION`. Both of these functions can be considered **homomorphic**, meaning they perform a similar dilation operation, but on different data structures. The same concept applies to the relationship between `dilationSet` and the **standard dilation on matrices**.
 
-- **Key Difference**: Unlike `EXTRA.DILATION`, which is designed to handle dilation on matrices of various dimensions, **`EXTRA.DILATIONSET`** is specifically optimized for working with 2D logical matrices in the set form (where elements are either `0` or `1` in matrix form are converted into set of coordinates).
-  
-- **Important Note**: It is not recommended to use `EXTRA.DILATIONSET` on RGB images or matrices with more than two dimensions. This function is intended to work with **2D logical matrices** represented in the set form.
+- **Important Note**: Unlike `EXTRA.DILATION`, which is designed to handle dilation on matrices of various dimensions, **`EXTRA.DILATIONSET`** is specifically optimized for working with 2D logical matrices in the **set form** (where elements are either `0` or `1` in matrix form are converted into set of coordinates).
 
 ### Test Flow
 
-This process ensures that the dilation operation is applied correctly, and the final result is returned as a matrix. The output is a new logical matrix that represents the dilation of the input sets.
+This process ensures that the dilation operation is applied correctly, and the final result is returned as a matrix. The output is a new logical matrix that represents the dilation of the specially transformed input sets.
 
 1. **Define the sets `A` and `B`** as matrices.
 2. **Convert the matrices into coordinates** using `matrixToCoords`.
