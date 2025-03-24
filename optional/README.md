@@ -538,7 +538,7 @@ For every point `(a,b)` in `A`, we add all points `(c,d)` from `B` to generate t
      ```
 
 ### 3. **`dilationSet(A, B)`**
-   - **Purpose**: Performs the dilation operation between two sets, `A` and `B`. It calculates the set `A ⊕ B = { (a,b) + (c,d) | (a,b) ∈ A, (c,d) ∈ B }`, which involves adding every element of `B` to every element of `A`. 
+   - **Purpose**: Performs the dilation operation between two sets, `A` and `B`. It calculates the set `A ⊕ B = { (a,b) + (c,d) | (a,b) ∈ A, (c,d) ∈ B }`, adding every element of `B` to every element of `A`. 
    - **How it works**: The function expands both sets using `ndgrid`, then adds their coordinates to create a new set of dilated coordinates.
    - **Example**:
      ```matlab
