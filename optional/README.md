@@ -569,11 +569,9 @@ The function `EXTRA.DILATIONSET` operates in a way that is conceptually similar 
   
 - **Important Note**: It is not recommended to use `EXTRA.DILATIONSET` on RGB images or matrices with more than two dimensions. This function is intended to work with **2D logical matrices** represented in the set form.
 
-### Dilation Process
+### Test Flow
 
 This process ensures that the dilation operation is applied correctly, and the final result is returned as a matrix. The output is a new logical matrix that represents the dilation of the input sets.
-
-### Test Flow
 
 1. **Define the sets `A` and `B`** as matrices.
 2. **Convert the matrices into coordinates** using `matrixToCoords`.
