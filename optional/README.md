@@ -434,7 +434,7 @@ Think of this function as a derivation of `BP(A)`. The parameters `lambda` and `
 Dilation in matrix form is a well-known operation, but before applying it, we introduce a **special function** (called **MatrixDecomposition**) that transforms the input matrices. This function modifies both `A` and `B`, and apply **standard dilation** (as defined in most image processing books) to the transformed versions.
 
 ### MatrixDecomposition Transformation
-MatrixDecomposition works as follows:
+MatrixDecomposition works as follows (the actual code has different workflow that works in matrix-based dilation instead of set-based dilation):
 
 1. **Extract the coordinates** of all `1` values in the matrix and represent them as ordered pairs `(x, y)`. The first coordinate always starts at `[0,0]` (zero-based index).
    - Example: Given the matrix `A`:
