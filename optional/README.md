@@ -142,7 +142,7 @@ Think of this function as a derivation of `BP(A)`. The parameters `lambda` and `
 - **Explanation of Example:**  
    In this example:
    - `3` stands for Blue (B), `2` stands for Green (G), and `1` stands for Red (R).  
-   - The `order = [1 3]` means Red is sorted first, followed by Blue, and then Green (not explicitly). So, the sorting process will rearrange the elements based on the order.
+   - The string `"RB"` means Red is sorted first, followed by Blue, and then Green (not explicitly). So, the sorting process will rearrange the elements based on the order.
 
 - **Run the Code (Output of `disp(ImageProcessor.IC1(A, "RB", order));`):**
     ```matlab
