@@ -474,17 +474,17 @@ For every point `(a,b)` in `A`, we add all points `(c,d)` from `B` to generate t
     
     - Step 2: Apply Dilation with Each Element  
     
-      - First dilation with \( a \):  
-      S₁ = S₀ ⊕ {a} = {{0,0}, {a}}  
+      - First dilation with element a:  
+      S₁ = S₀ ⊕ {{0,0}, a} = {{0,0}, {a}}  
     
-      - Second dilation with \( b \):  
-      S₂ = S₁ ⊕ {b} = {{0,0}, {a}, {b}, {a,b}}
+      - Second dilation with element b:  
+      S₂ = S₁ ⊕ {{0,0}, b} = {{0,0}, {a}, {b}, {a,b}}
     
-      - Third dilation with \( c \):  
-      S₃ = S₂ ⊕ {c} = {{0,0}, {a}, {b}, {c}, {a,b}, {a,c}, {b,c}, {a,b,c}}
+      - Third dilation with element c:  
+      S₃ = S₂ ⊕ {{0,0}, c} = {{0,0}, {a}, {b}, {c}, {a,b}, {a,c}, {b,c}, {a,b,c}}
   
     - **Resulting Set:**  
-    After three dilations, we have generated all possible subsets of \( A \), mimicking how binary toggling would work.  
+    After three dilations, we have generated all possible subsets of A, mimicking how binary toggling would work.  
 
 - Effects: This **reduces computation time** from `O(2^(|A|))` (where `|A|` is the length of set A or the number of `1`s of matrix A) in the set-based approach to `O((max(rows(A)) x max(cols(A)))⁴)` for the `matrixDecomposition` function that transforms the input matrices.
 - Recommendation:
