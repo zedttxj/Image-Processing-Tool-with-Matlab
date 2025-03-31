@@ -516,6 +516,20 @@ classdef ImageProcessor
                 dilatedImage(:,:,i) = imresize(dilatedImageCell{i}, [maxRows, maxCols]);
             end
         end
+        function Jacobian = Derivative(A, d, ind)
+            n = length(A);
+            t = prod((2:d+1).' + (0:n-d-1), 1);
+            if nargin > 2
+                Jacobian = A;
+                Jacobian(1:n-d,ind) = Jacobian(1+d:end,ind) .* t .';
+                Jacobian(n-d+1:end,ind) = 0;
+            else
+                Jacobian = A(1+d:end,:);
+                Jacobian = Jacobian .* t .';
+            end
+            lastNonZeroRow = find(any(Jacobian ~= 0, 2), 1, 'last');
+            Jacobian = Jacobian(1:lastNonZeroRow, :);
+        end
     end
     properties (Constant)
         EXTRA = struct('DILATION', @ImageProcessor.extraDilation, 'DILATIONSET', @ImageProcessor.extraDilationSet);
