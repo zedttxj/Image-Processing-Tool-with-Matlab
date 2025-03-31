@@ -464,9 +464,9 @@ For every point `(a,b)` in `A`, we add all points `(c,d)` from `B` to generate t
 - **MatrixDecomposition as Multiple Dilations**: We can think of the **MatrixDecomposition** as a series of dilations for each element in the set, where the dilation operator ⊕ applies to each element in the set 𝐴. For each element, we consider the set that contains the coordinate [0,0] (the first coordinate) and the element itself so that ⊕ can be applied. The special function then becomes the **Riemann Dilation sum** of these dilations (like how `+` has **Riemann sum**, ⊕ has **Riemann Dilation sum**). Consider this example:
   - Example: Generating Subsets Using Dilation
   
-  Consider a set  
-  **A = {a, b, c}**  
-  Normally, we could generate subsets by toggling bits (e.g., using binary representation), but instead, we use the **dilation operator** (\(\oplus\)):
+    Consider a set  
+    **A = {a, b, c}**  
+    Normally, we could generate subsets by toggling bits (e.g., using binary representation), but instead, we use the **dilation operator** (⊕):
   
     - Step 1: Start with the Base Set  
       S₀ = {{0,0}}  
