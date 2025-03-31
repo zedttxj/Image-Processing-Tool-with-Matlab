@@ -650,7 +650,7 @@ disp(C);
 - Input:
   - A (required): A 2D numerical matrix containing logical, integer, or decimal values.  
   - d (required): An integer representing the number of times the derivative is computed.  
-  - ind (optional): An integer representing the column of A to differentiate. If provided, only that column is differentiated while the others remain unchanged. If omitted, the function differentiates **all** columns.  
+  - ind (optional): An integer or a list of integers representing the column or the columns of A to differentiate. If provided, only that column is differentiated while the others remain unchanged. If omitted, the function differentiates **all** columns.  
 - Output:
   - Jacobian (a 2D matrix): A 2D matrix representing the derivatives of `A` after `d` differentiations.
 - Explanation: The `Derivative` function computes the derivative of a matrix **A** a specified number of times (`d`). If an optional column index (`ind`) is provided, only that column is differentiated.
@@ -696,14 +696,29 @@ disp(C);
     1 1;
     4 0
   ];
-  disp(ImageProcessor.Derivative(A,2,2));
+  disp(ImageProcessor.Derivative(A,2,[1 2]));
   ```
   - Run the Code:
     ```
     >> 
-       3     6
-       5     0
-       1     0
-       4     0
+       6     6
+      48     0
+    ```
+- Another example code:
+  ```matlab
+  A = [
+    3 5;
+    5 4;
+    1 1;
+    4 0
+  ];
+  disp(ImageProcessor.Derivative(A,2,1));
+  ```
+  - Run the Code:
+    ```
+    >> 
+       6     5
+      48     4
+       0     1
     ```
 - **NOTICE:** The input matrix A should not contain any constant values. As a result, the output will also ignore any constant values after differentiation.
