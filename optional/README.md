@@ -645,3 +645,25 @@ disp(C);
 - `EXTRA.DILATIONSET` = Works similarly to `EXTRA.DILATION`.
 - `EXTRA.DILATIONSET` is **not suitable** for RGB images or matrices with multiple channels so you may have to manually separate the channels to calculate it.
 - Both `EXTRA.DILATION` and `EXTRA.DILATIONSET` can be considered **homomorphic** in their operation.
+
+## Derivative(A, d, ind)
+- Input:
+  - `A` (required): a 2D numerical matrix that contains logical, integer, or decimal values.
+  - `d` (required): an integer represents the number of times we find the derivative of the matrix `A`
+  - `ind` (optional): an integer represents the column that you wanna find its derivative. Consequently, the other columns will stay the same. Without this parameter, the functino will calculate the derivatives of all columns.
+- Output:
+  - Jacobian (a 2D matrix): a Jacobian matrix that represents the derivatives of the matrix `A`.
+- Explanation:
+  - For example, says that we have a polynomials P(x,y) = 3x + 5yx² + 4x⁴y²
+    - The vector of the coefficients of variable x is [3, 5, 0, 4]ᵀ, which is the same as `[3; 5; 0; 4]`.
+    - The vector of the coefficients of variable y is [5, 4, 0, 0]ᵀ, which is the same as `[5; 4; 0; 0]`.
+    - Hence, the input matrix `A` would be this (where the first column is [3, 5, 0, 4]ᵀ and the second column is [5, 4, 0, 0]ᵀ):
+      ```matlab
+      [
+        3 5;
+        5 4;
+        0 0;
+        4 0
+      ];
+      ```
+      
