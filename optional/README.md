@@ -465,34 +465,26 @@ For every point `(a,b)` in `A`, we add all points `(c,d)` from `B` to generate t
   - Example: Generating Subsets Using Dilation
   
   Consider a set  
-  \( A = \{a, b, c\} \).  
+  **A = {a, b, c}**  
   Normally, we could generate subsets by toggling bits (e.g., using binary representation), but instead, we use the **dilation operator** (\(\oplus\)):
   
-  - Step 1: Start with the Base Set  
-  \[
-  S_0 = \{\{0,0\}\}
-  \]
-  This represents the empty set as a starting point.
+    - Step 1: Start with the Base Set  
+      S₀ = {{0,0}}  
+    This represents the empty set as a starting point.
+    
+    - Step 2: Apply Dilation with Each Element  
+    
+      - First dilation with \( a \):  
+      S₁ = S₀ ⊕ {a} = {{0,0}, {a}}  
+    
+      - Second dilation with \( b \):  
+      S₂ = S₁ ⊕ {b} = {{0,0}, {a}, {b}, {a,b}}
+    
+      - Third dilation with \( c \):  
+      S₃ = S₂ ⊕ {c} = {{0,0}, {a}, {b}, {c}, {a,b}, {a,c}, {b,c}, {a,b,c}}
   
-  - Step 2: Apply Dilation with Each Element  
-  
-    - First dilation with \( a \):  
-  \[
-  S_1 = S_0 \oplus \{a\} = \{\{0,0\}, \{a\}\}
-  \]
-  
-    - Second dilation with \( b \):  
-  \[
-  S_2 = S_1 \oplus \{b\} = \{\{0,0\}, \{a\}, \{b\}, \{a,b\}\}
-  \]
-  
-    - Third dilation with \( c \):  
-  \[
-  S_3 = S_2 \oplus \{c\} = \{\{0,0\}, \{a\}, \{b\}, \{c\}, \{a,b\}, \{a,c\}, \{b,c\}, \{a,b,c\}\}
-  \]
-
-- **Resulting Set:**  
-After three dilations, we have generated all possible subsets of \( A \), mimicking how binary toggling would work.  
+    - **Resulting Set:**  
+    After three dilations, we have generated all possible subsets of \( A \), mimicking how binary toggling would work.  
 
 - Effects: This **reduces computation time** from `O(2^(|A|))` (where `|A|` is the length of set A or the number of `1`s of matrix A) in the set-based approach to `O((|A|)⁴)` for the `matrixDecomposition` function that transforms the input matrices.
 - Recommendation:
