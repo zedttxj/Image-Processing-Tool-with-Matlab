@@ -668,8 +668,8 @@ disp(C);
   P(x, y) = 3x + 5y + 5x² + 4y² + x³ + 4x⁴
   
   The coefficients of **x** and **y** are stored in a matrix form:  
-  - The vector of **x-coefficients**: \([3, 5, 0, 4]^T\) → MATLAB notation: `[3; 5; 1; 4]`
-  - The vector of **y-coefficients**: \([5, 4, 0, 0]^T\) → MATLAB notation: `[5; 4; 0; 0]`
+  - The vector of **x-coefficients**: [3, 5, 0, 4]ᵀ → MATLAB notation: `[3; 5; 1; 4]`
+  - The vector of **y-coefficients**: [5, 4, 0, 0]ᵀ → MATLAB notation: `[5; 4; 0; 0]`
   
   Thus, the **input matrix** `A` is:
   
@@ -681,9 +681,28 @@ disp(C);
     4 0
   ];
   ```
-- Run the code:
+  - Run the code:
+    ```matlab
+    >> 
+       6     0
+      48     0
+    ```
+  This result means that after two derivative operations, the only nonzero entry comes from the x-column, corresponding to the `6x + 48x²` term. The y-column's second derivative is zero, as expected.
+- Another example code:
   ```matlab
-  >> 
-     6     0
-    48     0
+  A = [
+    3 5;
+    5 4;
+    1 1;
+    4 0
+  ];
+  disp(ImageProcessor.Derivative(A,2,2));
   ```
+  - Run the Code:
+    ```
+    >> 
+       3     6
+       5     0
+       1     0
+       4     0
+    ```
