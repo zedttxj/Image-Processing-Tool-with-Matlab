@@ -461,7 +461,40 @@ For every point `(a,b)` in `A`, we add all points `(c,d)` from `B` to generate t
 
 #### Matrix-Based Dilation (Efficient Form):
 - Instead of iterating over sets, **matrix dilation** is efficiently computed using **convolution operations** or **max filtering**, where a **structuring element (kernel)** is applied to the binary image.
-- **MatrixDecomposition as Multiple Dilations**: We can redefine the **MatrixDecomposition** as a series of dilations for each element in the set, where the dilation operator ⊕ applies to each element in the set 𝐴. For each element, we consider the set that contains the coordinate [0,0] (the first coordinate) and the element itself so that ⊕ can be applied. The special function then becomes the **Riemann Dilation sum** of these dilations (like how `+` has **Riemann sum**, ⊕ has **Riemann Dilation sum**). This **reduces computation time** from `O(2^(|A|))` (where `|A|` is the length of set A or the number of `1`s of matrix A) in the set-based approach to `O((|A|)⁴)` for the `matrixDecomposition` function that transforms the input matrices.
+- **MatrixDecomposition as Multiple Dilations**: We can think of the **MatrixDecomposition** as a series of dilations for each element in the set, where the dilation operator ⊕ applies to each element in the set 𝐴. For each element, we consider the set that contains the coordinate [0,0] (the first coordinate) and the element itself so that ⊕ can be applied. The special function then becomes the **Riemann Dilation sum** of these dilations (like how `+` has **Riemann sum**, ⊕ has **Riemann Dilation sum**). Consider this example:
+  - Example: Generating Subsets Using Dilation
+  
+  Consider a set  
+  \( A = \{a, b, c\} \).  
+  Normally, we could generate subsets by toggling bits (e.g., using binary representation), but instead, we use the **dilation operator** (\(\oplus\)):
+  
+  - Step 1: Start with the Base Set  
+  \[
+  S_0 = \{\{0,0\}\}
+  \]
+  This represents the empty set as a starting point.
+  
+  - Step 2: Apply Dilation with Each Element  
+  
+    - First dilation with \( a \):  
+  \[
+  S_1 = S_0 \oplus \{a\} = \{\{0,0\}, \{a\}\}
+  \]
+  
+    - Second dilation with \( b \):  
+  \[
+  S_2 = S_1 \oplus \{b\} = \{\{0,0\}, \{a\}, \{b\}, \{a,b\}\}
+  \]
+  
+    - Third dilation with \( c \):  
+  \[
+  S_3 = S_2 \oplus \{c\} = \{\{0,0\}, \{a\}, \{b\}, \{c\}, \{a,b\}, \{a,c\}, \{b,c\}, \{a,b,c\}\}
+  \]
+
+- **Resulting Set:**  
+After three dilations, we have generated all possible subsets of \( A \), mimicking how binary toggling would work.  
+
+- Effects: This **reduces computation time** from `O(2^(|A|))` (where `|A|` is the length of set A or the number of `1`s of matrix A) in the set-based approach to `O((|A|)⁴)` for the `matrixDecomposition` function that transforms the input matrices.
 - Recommendation:
   - Use Matrix-Based Dilation when `|A|` is large enough (ideally below 676) and `max(rows(A))` or `max(cols(A))` is not too big.
   - Use Set-Based Dilation (introduced in the below section) when `|A|` is small enough (ideally below 36).  
