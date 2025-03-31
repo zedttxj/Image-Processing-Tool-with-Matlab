@@ -648,22 +648,42 @@ disp(C);
 
 ## Derivative(A, d, ind)
 - Input:
-  - `A` (required): a 2D numerical matrix that contains logical, integer, or decimal values.
-  - `d` (required): an integer represents the number of times we find the derivative of the matrix `A`
-  - `ind` (optional): an integer represents the column that you wanna find its derivative. Consequently, the other columns will stay the same. Without this parameter, the functino will calculate the derivatives of all columns.
+  - A (required): A 2D numerical matrix containing logical, integer, or decimal values.  
+  - d (required): An integer representing the number of times the derivative is computed.  
+  - ind (optional): An integer representing the column of A to differentiate. If provided, only that column is differentiated while the others remain unchanged. If omitted, the function differentiates **all** columns.  
 - Output:
-  - Jacobian (a 2D matrix): a Jacobian matrix that represents the derivatives of the matrix `A`.
-- Explanation:
-  - For example, says that we have a polynomials P(x,y) = 3x + 5yx² + 4x⁴y²
-    - The vector of the coefficients of variable x is [3, 5, 0, 4]ᵀ, which is the same as `[3; 5; 0; 4]`.
-    - The vector of the coefficients of variable y is [5, 4, 0, 0]ᵀ, which is the same as `[5; 4; 0; 0]`.
-    - Hence, the input matrix `A` would be this (where the first column is [3, 5, 0, 4]ᵀ and the second column is [5, 4, 0, 0]ᵀ):
-      ```matlab
-      [
-        3 5;
-        5 4;
-        0 0;
-        4 0
-      ];
-      ```
-      
+  - Jacobian (a 2D matrix): A 2D matrix representing the derivatives of `A` after `d` differentiations.
+- Explanation: The `Derivative` function computes the derivative of a matrix **A** a specified number of times (`d`). If an optional column index (`ind`) is provided, only that column is differentiated.
+- Example code:
+  ```matlab
+  A = [
+    3 5;
+    5 4;
+    1 0;
+    4 0
+  ];
+  disp(ImageProcessor.Derivative(A,2));
+  ```
+  Consider the polynomial:
+  P(x, y) = 3x + 5y + 5x² + 4y² + x³ + 4x⁴
+  
+  The coefficients of **x** and **y** are stored in a matrix form:  
+  - The vector of **x-coefficients**: \([3, 5, 0, 4]^T\) → MATLAB notation: `[3; 5; 1; 4]`
+  - The vector of **y-coefficients**: \([5, 4, 0, 0]^T\) → MATLAB notation: `[5; 4; 0; 0]`
+  
+  Thus, the **input matrix** `A` is:
+  
+  ```matlab
+  [
+    3 5;
+    5 4;
+    1 0;
+    4 0
+  ];
+  ```
+- Run the code:
+  ```matlab
+  >> 
+     6     0
+    48     0
+  ```
