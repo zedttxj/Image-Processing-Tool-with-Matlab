@@ -722,3 +722,24 @@ disp(C);
        0     1
     ```
 - **NOTICE:** The input matrix A should not contain any constant values. As a result, the output will also ignore any constant values after differentiation.
+### **PURPOSES**
+The `Derivative` function was developed to observe **patterns in an image after differentiation**. It helps detect edges, contours, and changes in an image by applying a differentiation process. Below is an example of how to use it for **image processing**:
+  ```matlab
+  A = [
+      1 1 0 0 1 1 0 0 1 1 0 0;
+      0 1 0 1 0 1 0 1 0 1 0 1;
+      1 1 0 0 1 1 0 0 1 1 0 0;
+  ];
+  A = ImageProcessor.matrixToCoords(A);
+  A = ImageProcessor.Derivative(A,2);
+  A = ImageProcessor.coordsToMatrix(A);
+  B = [
+      1 1 1 1;
+      1 1 1 1;
+      1 1 1 1;
+      1 1 1 1
+  ];
+  imshow(ImageProcessor.Dilation1(A,B)); % Apply dilation to enhance visualization
+  ```
+- Run the code:  
+  ![{E7832895-9C0F-4F09-B83B-34DB7763B95B}](https://github.com/user-attachments/assets/8258204f-200c-410d-bca8-e967af65f16d)
