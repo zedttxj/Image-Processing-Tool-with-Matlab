@@ -469,19 +469,19 @@ For every point `(a,b)` in `A`, we add all points `(c,d)` from `B` to generate t
     Normally, we could generate subsets by toggling bits (e.g., using binary representation), but instead, we use the **dilation operator** (⊕):
   
     - Step 1: Start with the Base Set  
-      S₀ = {{0,0}}  
+      S₀ = {[0,0]}  
     This represents the empty set as a starting point.
     
     - Step 2: Apply Dilation with Each Element  
     
       - First dilation with element a:  
-      S₁ = S₀ ⊕ {{0,0}, a} = {{0,0}, {a}}  
+      S₁ = S₀ ⊕ {[0,0], a} = {[0,0], a}  
     
       - Second dilation with element b:  
-      S₂ = S₁ ⊕ {{0,0}, b} = {{0,0}, {a}, {b}, {a,b}}
+      S₂ = S₁ ⊕ {[0,0], b} = {[0,0], a, b, a+b}
     
       - Third dilation with element c:  
-      S₃ = S₂ ⊕ {{0,0}, c} = {{0,0}, {a}, {b}, {c}, {a,b}, {a,c}, {b,c}, {a,b,c}}
+      S₃ = S₂ ⊕ {[0,0], c} = {[0,0], a, b, c, a+b, a+c, b+c, a+b+c}
   
     - **Resulting Set:**  
     After three dilations, we have generated all possible subsets of A, mimicking how binary toggling would work.  
