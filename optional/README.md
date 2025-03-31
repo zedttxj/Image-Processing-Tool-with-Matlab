@@ -706,3 +706,4 @@ disp(C);
        1     0
        4     0
     ```
+- **NOTICE:** The input matrix A should not contain any constant values. As a result, the output will also ignore any constant values after differentiation.
