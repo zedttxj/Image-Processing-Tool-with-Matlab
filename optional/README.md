@@ -726,20 +726,16 @@ disp(C);
 The `Derivative` function was developed to observe **patterns in an image after differentiation**. Below is an example of how to use it for **image processing**:
   ```matlab
   A = [
-      1 1 0 0 1 1 0 0 1 1 0 0;
-      0 1 0 1 0 1 0 1 0 1 0 1;
-      1 1 0 0 1 1 0 0 1 1 0 0;
+    1 1 0 0 1 1 0 0 1 1 0 0;
+    0 1 0 1 0 1 0 1 0 1 0 1;
+    1 1 0 0 1 1 0 0 1 1 0 0;
   ];
   A = ImageProcessor.matrixToCoords(A);
   A = ImageProcessor.Derivative(A,2);
   A = ImageProcessor.coordsToMatrix(A);
-  B = [
-      1 1 1 1;
-      1 1 1 1;
-      1 1 1 1;
-      1 1 1 1
-  ];
+  B = ones([8 8]);
   imshow(ImageProcessor.Dilation1(A,B)); % Apply dilation to enhance visualization
   ```
 - Run the code:  
-  ![{E7832895-9C0F-4F09-B83B-34DB7763B95B}](https://github.com/user-attachments/assets/8258204f-200c-410d-bca8-e967af65f16d)
+  ![{5D1EA4CC-6666-452A-83DA-CC33341AC1E8}](https://github.com/user-attachments/assets/89298b3f-6bae-468d-9922-f81ffce2df35)
+
