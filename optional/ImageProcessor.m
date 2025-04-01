@@ -475,7 +475,7 @@ classdef ImageProcessor
             [A2, B2] = ndgrid(A(:,2), B(:,2));
             C = unique([A1(:) + B1(:), A2(:) + B2(:)], 'rows');
         end
-        function comb = Decomposition2(B)
+        function comb = setDecomposition(B)
             t = [0 0; 0 0];
             comb = [0 0];
             if isempty(B)
@@ -492,11 +492,14 @@ classdef ImageProcessor
             end
         end
         function dilatedSet = extraDilationSet(A,B)
-            A = ImageProcessor.Decomposition2(A(:,:));
-            B = ImageProcessor.Decomposition2(B(:,:));
+            t = bitshift(sum([0 0] == (A(1,:) == B(1,:))),-1);
+            A = ImageProcessor.setDecomposition(A(:,:));
+            B = ImageProcessor.setDecomposition(B(:,:));
             dilatedSet = ImageProcessor.dilationSet(A,B);
+            dilatedSet = dilatedSet(t+1:end,:);
         end
         function dilatedImage = extraDilation(A,B)
+            t = 0 == A(1,1) & 0 == B(1,1);
             dilatedImage = [];
             chn = size(A,3);
             dilatedImageCell = cell(1, chn);
@@ -514,6 +517,9 @@ classdef ImageProcessor
             dilatedImage = zeros(maxRows, maxCols, chn);
             for i = 1:chn
                 dilatedImage(:,:,i) = imresize(dilatedImageCell{i}, [maxRows, maxCols]);
+                if t
+                    dilatedImage(1,1,i) = 0;
+                end
             end
         end
         function Jacobian = Derivative(A, d, ind)
