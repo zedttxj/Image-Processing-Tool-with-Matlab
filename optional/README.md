@@ -721,7 +721,7 @@ disp(C);
       48     4
        0     1
     ```
-- **NOTICE:** The input matrix A should not contain any constant values. As a result, the output will also ignore any constant values after differentiation.
+- **NOTICE:** The input matrix A should **not** contain any constant values from the polynomial. As a result, the output will also ignore any constant values after differentiation.
 ### **PURPOSES**
 The `Derivative` function was developed to observe **patterns in an image after differentiation**. Below is an example of how to use it for **image processing**:
   ```matlab
