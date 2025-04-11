@@ -522,19 +522,25 @@ classdef ImageProcessor
                 end
             end
         end
-        function Jacobian = Derivative(A, d, ind)
+        function Jacobian = ASf(A, d, ind)
             n = length(A);
             t = prod((2:d+1).' + (0:n-d-1), 1);
-            if nargin > 2
-                Jacobian = A;
-                Jacobian(1:n-d,ind) = Jacobian(1+d:end,ind) .* t .';
-                Jacobian(n-d+1:end,ind) = 0;
-            else
-                Jacobian = A(1+d:end,:);
-                Jacobian = Jacobian .* t .';
-            end
+            Jacobian = A;
+            Jacobian(1:n-d,ind) = Jacobian(1+d:end,ind) .* t .';
+            Jacobian(n-d+1:end,ind) = 0;
             lastNonZeroRow = find(any(Jacobian ~= 0, 2), 1, 'last');
             Jacobian = Jacobian(1:lastNonZeroRow, :);
+        end
+        function Jacobian = AJF(A, d, ind)
+            n = length(A);
+            t = prod((2:d+1).' + (0:n-d-1), 1);
+            Jacobian = A;
+            if ind == 1
+                Jacobian(1:n-d,:) = Jacobian(1+d:end,:) .* t .';
+            elseif ind == 2
+                Jacobian(1:n-d,[2 1]) = Jacobian(1+d:end,:) .* t .';
+            end
+            Jacobian = Jacobian(1:end-d, :);
         end
     end
     properties (Constant)
