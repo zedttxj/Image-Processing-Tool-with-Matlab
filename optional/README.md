@@ -668,7 +668,7 @@ disp(C);
   P(x, y) = 3x + 5y + 5x² + 4y² + x³ + 4x⁴
   
   The coefficients of **x** and **y** are stored in a matrix form:  
-  - The vector of **x-coefficients**: [3, 5, 0, 4]ᵀ → MATLAB notation: `[3; 5; 1; 4]`
+  - The vector of **x-coefficients**: [3, 5, 1, 4]ᵀ → MATLAB notation: `[3; 5; 1; 4]`
   - The vector of **y-coefficients**: [5, 4, 0, 0]ᵀ → MATLAB notation: `[5; 4; 0; 0]`
   
   Thus, the **input matrix** `A` is:
