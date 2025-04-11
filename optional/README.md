@@ -646,14 +646,14 @@ disp(C);
 - `EXTRA.DILATIONSET` is **not suitable** for RGB images or matrices with multiple channels so you may have to manually separate the channels to calculate it.
 - Both `EXTRA.DILATION` and `EXTRA.DILATIONSET` can be considered **homomorphic** in their operation.
 
-## Derivative(A, d, ind)
+## ASf(A, d, ind)
 - Input:
   - A (required): A 2D numerical matrix containing logical, integer, or decimal values.  
   - d (required): An integer representing the number of times the derivative is computed.  
   - ind (optional): An integer or a list of integers representing the column or the columns of A to differentiate. If provided, only that column is differentiated while the others remain unchanged. If omitted, the function differentiates **all** columns.  
 - Output:
   - Jacobian (a 2D matrix): A 2D matrix representing the derivatives of `A` after `d` differentiations.
-- Explanation: The `Derivative` function computes the derivative of a matrix **A** a specified number of times (`d`). If an optional column index (`ind`) is provided, only that column is differentiated.
+- Explanation: The `ASf` function computes the derivative of a matrix **A** a specified number of times (`d`). If an optional column index (`ind`) is provided, only that column is differentiated.
 - Example code:
   ```matlab
   A = [
@@ -662,7 +662,7 @@ disp(C);
     1 0;
     4 0
   ];
-  disp(ImageProcessor.Derivative(A,2));
+  disp(ImageProcessor.ASf(A,2));
   ```
   Consider the polynomial:
   P(x, y) = 3x + 5y + 5x² + 4y² + x³ + 4x⁴
@@ -696,23 +696,7 @@ disp(C);
     1 1;
     4 0
   ];
-  disp(ImageProcessor.Derivative(A,2,[1 2]));
-  ```
-  - Run the Code:
-    ```
-    >> 
-       6     6
-      48     0
-    ```
-- Another example code:
-  ```matlab
-  A = [
-    3 5;
-    5 4;
-    1 1;
-    4 0
-  ];
-  disp(ImageProcessor.Derivative(A,2,1));
+  disp(ImageProcessor.ASf(A,2,1));
   ```
   - Run the Code:
     ```
@@ -723,7 +707,7 @@ disp(C);
     ```
 - **NOTICE:** The input matrix A should **not** contain any constant values from the polynomial. As a result, the output will also ignore any constant values after differentiation.
 ### **PURPOSES**
-The `Derivative` function was developed to observe **patterns in an image after differentiation**. Below is an example of how to use it for **image processing**:
+The `ASf` function was developed to observe **patterns in an image after differentiation**. Below is an example of how to use it for **image processing**:
   ```matlab
   A = [
     1 1 0 0 1 1 0 0 1 1 0 0;
@@ -731,7 +715,7 @@ The `Derivative` function was developed to observe **patterns in an image after 
     1 1 0 0 1 1 0 0 1 1 0 0;
   ];
   A = ImageProcessor.matrixToCoords(A);
-  A = ImageProcessor.Derivative(A,2);
+  A = ImageProcessor.ASf(A,2);
   A = ImageProcessor.coordsToMatrix(A);
   B = ones([8 8]);
   imshow(ImageProcessor.Dilation1(A,B)); % Apply dilation to enhance visualization
