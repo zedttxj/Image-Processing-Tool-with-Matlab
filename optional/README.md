@@ -650,10 +650,71 @@ disp(C);
 - Input:
   - A (required): A 2D numerical matrix containing logical, integer, or decimal values.  
   - d (required): An integer representing the number of times the derivative is computed.  
-  - ind (optional): An integer or a list of integers representing the column or the columns of A to differentiate. If provided, only that column is differentiated while the others remain unchanged. If omitted, the function differentiates **all** columns.  
+  - ind (required): An integer representing the column or the columns of A to differentiate. Only that column is differentiated while the others remain unchanged.
 - Output:
   - Jacobian (a 2D matrix): A 2D matrix representing the derivatives of `A` after `d` differentiations.
 - Explanation: The `ASf` function computes the derivative of a matrix **A** a specified number of times (`d`). If an optional column index (`ind`) is provided, only that column is differentiated.
+  Consider the polynomial:
+  P(x, y) = 3x + 5y + 5x² + 4y² + x³ + 4x⁴
+  
+  The coefficients of **x** and **y** are stored in a matrix form:  
+  - The vector of **x-coefficients**: [3, 5, 1, 4]ᵀ → MATLAB notation: `[3; 5; 1; 4]`
+  - The vector of **y-coefficients**: [5, 4, 0, 0]ᵀ → MATLAB notation: `[5; 4; 0; 0]`
+  
+  Thus, the **input matrix** `A` is:
+  
+  ```matlab
+  [
+    3 5;
+    5 4;
+    1 0;
+    4 0
+  ];
+  ```
+- Example code:
+  ```matlab
+  A = [
+    3 5;
+    5 4;
+    1 1;
+    4 0
+  ];
+  disp(ImageProcessor.ASf(A,2,1));
+  ```
+  - Run the Code:
+    ```
+    >> 
+       6     5
+      48     4
+       0     1
+    ```
+    This result means that after two derivative operations, the only nonzero entry comes from the x-column, corresponding to the `6x + 48x²` term. The y-column stays the same, as expected.
+- **NOTICE:** The input matrix A should **not** contain any constant values from the polynomial. As a result, the output will also ignore any constant values after differentiation.
+### **PURPOSES**
+The `ASf` function was developed to observe **patterns in an image after differentiation**. Below is an example of how to use it for **image processing**:
+  ```matlab
+  A = [
+    1 1 0 0 1 1 0 0 1 1 0 0;
+    0 1 0 1 0 1 0 1 0 1 0 1;
+    1 1 0 0 1 1 0 0 1 1 0 0;
+  ];
+  A = ImageProcessor.matrixToCoords(A);
+  A = ImageProcessor.ASf(A,2,1);
+  A = ImageProcessor.coordsToMatrix(A);
+  B = ones([3 3]);
+  imshow(ImageProcessor.Dilation1(A,B)); % Apply dilation to enhance visualization
+  ```
+- Run the code:  
+  ![{116ED977-56BE-4C20-801B-6134A69B4FCA}](https://github.com/user-attachments/assets/f3a72409-7f77-4641-a8ed-90bea9ead0af)  
+
+## AJF(A, d, ind)
+- Input:
+  - A (required): A 2D numerical matrix containing logical, integer, or decimal values.  
+  - d (required): An integer representing the number of times the derivative is computed.  
+  - ind (optional): An integer either 1 or 2. If it's `1`, the function differentiates **all** columns. Otherwise (case number `2`), columns are differentiated and their positions are reversed.  
+- Output:
+  - Jacobian (a 2D matrix): A 2D matrix representing the derivatives of `A` after `d` differentiations.
+- Explanation: The `AJF` function computes the derivative of a matrix **A** a specified number of times (`d`). If an optional column index (`ind`) is provided, only that column is differentiated.
 - Example code:
   ```matlab
   A = [
@@ -662,7 +723,7 @@ disp(C);
     1 0;
     4 0
   ];
-  disp(ImageProcessor.ASf(A,2));
+  disp(ImageProcessor.AJF(A,2));
   ```
   Consider the polynomial:
   P(x, y) = 3x + 5y + 5x² + 4y² + x³ + 4x⁴
@@ -696,7 +757,7 @@ disp(C);
     1 1;
     4 0
   ];
-  disp(ImageProcessor.ASf(A,2,1));
+  disp(ImageProcessor.AJF(A,2,1));
   ```
   - Run the Code:
     ```
@@ -707,7 +768,7 @@ disp(C);
     ```
 - **NOTICE:** The input matrix A should **not** contain any constant values from the polynomial. As a result, the output will also ignore any constant values after differentiation.
 ### **PURPOSES**
-The `ASf` function was developed to observe **patterns in an image after differentiation**. Below is an example of how to use it for **image processing**:
+The `AJF` function was developed to observe **patterns in an image after differentiation**. Below is an example of how to use it for **image processing**:
   ```matlab
   A = [
     1 1 0 0 1 1 0 0 1 1 0 0;
@@ -715,11 +776,9 @@ The `ASf` function was developed to observe **patterns in an image after differe
     1 1 0 0 1 1 0 0 1 1 0 0;
   ];
   A = ImageProcessor.matrixToCoords(A);
-  A = ImageProcessor.ASf(A,2);
+  A = ImageProcessor.AJF(A,2);
   A = ImageProcessor.coordsToMatrix(A);
   B = ones([8 8]);
   imshow(ImageProcessor.Dilation1(A,B)); % Apply dilation to enhance visualization
   ```
 - Run the code:  
-  ![{5D1EA4CC-6666-452A-83DA-CC33341AC1E8}](https://github.com/user-attachments/assets/89298b3f-6bae-468d-9922-f81ffce2df35)
-
