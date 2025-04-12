@@ -711,10 +711,10 @@ The `ASf` function was developed to observe **patterns in an image after differe
 - Input:
   - A (required): A 2D numerical matrix containing logical, integer, or decimal values.  
   - d (required): An integer representing the number of times the derivative is computed.  
-  - ind (optional): An integer either 1 or 2. If it's `1`, the function differentiates **all** columns. Otherwise (case number `2`), columns are differentiated and their positions are reversed.  
+  - ind (optional): An integer (either 1 or 2). `1` indicates the function differentiates **all** columns. In the case of number `2`, columns' positions are reversed after the differentiation.
 - Output:
   - Jacobian (a 2D matrix): A 2D matrix representing the derivatives of `A` after `d` differentiations.
-- Explanation: The `AJF` function computes the derivative of a matrix **A** a specified number of times (`d`). If an optional column index (`ind`) is provided, only that column is differentiated.
+- Explanation: The `AJF` function computes the derivative of a matrix **A** a specified number of times (`d`). It has similar inputs like `ASf` function.
 - Example code:
   ```matlab
   A = [
@@ -723,32 +723,14 @@ The `ASf` function was developed to observe **patterns in an image after differe
     1 0;
     4 0
   ];
-  disp(ImageProcessor.AJF(A,2));
+  disp(ImageProcessor.AJF(A,2,1));
   ```
-  Consider the polynomial:
-  P(x, y) = 3x + 5y + 5x² + 4y² + x³ + 4x⁴
-  
-  The coefficients of **x** and **y** are stored in a matrix form:  
-  - The vector of **x-coefficients**: [3, 5, 1, 4]ᵀ → MATLAB notation: `[3; 5; 1; 4]`
-  - The vector of **y-coefficients**: [5, 4, 0, 0]ᵀ → MATLAB notation: `[5; 4; 0; 0]`
-  
-  Thus, the **input matrix** `A` is:
-  
+- Run the code:
   ```matlab
-  [
-    3 5;
-    5 4;
-    1 0;
-    4 0
-  ];
+  >> 
+     6     0
+    48     0
   ```
-  - Run the code:
-    ```matlab
-    >> 
-       6     0
-      48     0
-    ```
-  This result means that after two derivative operations, the only nonzero entry comes from the x-column, corresponding to the `6x + 48x²` term. The y-column's second derivative is zero, as expected.
 - Another example code:
   ```matlab
   A = [
@@ -757,18 +739,17 @@ The `ASf` function was developed to observe **patterns in an image after differe
     1 1;
     4 0
   ];
-  disp(ImageProcessor.AJF(A,2,1));
+  disp(ImageProcessor.AJF(A,2,2));
   ```
-  - Run the Code:
-    ```
-    >> 
-       6     5
-      48     4
-       0     1
-    ```
+- Run the Code:
+  ```
+  >> 
+   6     6
+   0    48
+  ```
 - **NOTICE:** The input matrix A should **not** contain any constant values from the polynomial. As a result, the output will also ignore any constant values after differentiation.
 ### **PURPOSES**
-The `AJF` function was developed to observe **patterns in an image after differentiation**. Below is an example of how to use it for **image processing**:
+- Another example code:
   ```matlab
   A = [
     1 1 0 0 1 1 0 0 1 1 0 0;
@@ -776,9 +757,10 @@ The `AJF` function was developed to observe **patterns in an image after differe
     1 1 0 0 1 1 0 0 1 1 0 0;
   ];
   A = ImageProcessor.matrixToCoords(A);
-  A = ImageProcessor.AJF(A,2);
+  A = ImageProcessor.AJF(A,2,1);
   A = ImageProcessor.coordsToMatrix(A);
   B = ones([8 8]);
   imshow(ImageProcessor.Dilation1(A,B)); % Apply dilation to enhance visualization
   ```
 - Run the code:  
+  ![{5D2EE982-EC81-4320-B977-000EAA144969}](https://github.com/user-attachments/assets/4c27a4cc-fdd5-407e-9135-d58d979c2027)
