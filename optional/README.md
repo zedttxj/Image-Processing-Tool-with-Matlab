@@ -748,7 +748,6 @@ The `ASf` function was developed to observe **patterns in an image after differe
    0    48
   ```
 - **NOTICE:** The input matrix A should **not** contain any constant values from the polynomial. As a result, the output will also ignore any constant values after differentiation.
-### **PURPOSES**
 - Another example code:
   ```matlab
   A = [
