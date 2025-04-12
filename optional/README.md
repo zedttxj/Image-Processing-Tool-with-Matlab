@@ -711,7 +711,7 @@ The `ASf` function was developed to observe **patterns in an image after differe
 - Input:
   - A (required): A 2D numerical matrix containing logical, integer, or decimal values.  
   - d (required): An integer representing the number of times the derivative is computed.  
-  - ind (optional): An integer (either 1 or 2). `1` indicates the function differentiates **all** columns. In the case of number `2`, columns' positions are reversed after the differentiation.
+  - ind (optional): An integer (either 1 or 2). `1` indicates the function keeps **all** columns' positions the same. In the case of number `2`, columns' positions are reversed.
 - Output:
   - Jacobian (a 2D matrix): A 2D matrix representing the derivatives of `A` after `d` differentiations.
 - Explanation: The `AJF` function computes the derivative of a matrix **A** a specified number of times (`d`). It has similar inputs like `ASf` function.
