@@ -538,7 +538,7 @@ classdef ImageProcessor
             if ind == 1
                 Jacobian(1:n-d,:) = Jacobian(1+d:end,:) .* t .';
             elseif ind == 2
-                Jacobian(1:n-d,[2 1]) = Jacobian(1+d:end,:) .* t .';
+                Jacobian(1:n-d,end:-1:1) = Jacobian(1+d:end,:) .* t .';
             end
             Jacobian = Jacobian(1:end-d, :);
         end
