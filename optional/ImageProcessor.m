@@ -542,6 +542,60 @@ classdef ImageProcessor
             end
             Jacobian = Jacobian(1:end-d, :);
         end
+        function matrix = P2M(data)
+            [row, col] = ndgrid(1:length(data), 1:max(data));
+            matrix = col <= data(:);
+        end
+        function partition = M2P(data)
+            partition = sum(data > 0, 2) .';
+        end
+        function dilatedPartition = OPDilation(A,B)
+            dilatedPartition = ImageProcessor.M2P(ImageProcessor.Dilation1(ImageProcessor.P2M(A),ImageProcessor.P2M(B)));
+        end
+        function dilatedPartition = PDilation(A,B)
+            C = flip(A(:) - 1) + (B(:) .');
+            disp(C);
+            if size(C,1) < 2
+                dilatedPartition = C;
+            elseif size(C,2) < 2
+                dilatedPartition = flip(C .');
+            else
+                pos = length(A);
+                dilatedPartition = zeros([1 pos+length(B)-1]);
+                for i = 1-pos:length(B)-1
+                    dilatedPartition(i+pos) = max(diag(C,i));
+                end
+            end
+        end
+        function partitions = reversedPDilation(Cs)
+            partitions = {};
+            m = containers.Map();
+            function PDrecursion(C, A, B)
+                if length(C) > 0
+                    n = C(1)-B(end)+1;
+                    if n > 0 && all((n + B(1:end-1) - 1) <= Cs(length(A)+1:length(A)+length(B)-1))
+                        for i = 1:min(n,A(end))
+                            PDrecursion(C(2:end), [A i], B);
+                        end
+                    end
+                    n = C(1)-A(end)+1;
+                    if n > 0 && all((n + A(1:end-1) - 1) <= Cs(length(B)+1:length(B)+length(A)-1))
+                        for i = 1:min(n,B(end))
+                            PDrecursion(C(2:end), A, [B i]);
+                        end
+                    end
+                elseif ImageProcessor.PDilation(A,B) == Cs
+                    key = jsonencode({A, B});
+                    if ~isKey(m, key)
+                        m(key) = true;
+                        partitions = [partitions; {A, B}];
+                    end
+                end
+            end
+            for i = 1:Cs(1)
+                PDrecursion(Cs(2:end),[i],[Cs(1)-i+1]);
+            end
+        end
     end
     properties (Constant)
         EXTRA = struct('DILATION', @ImageProcessor.extraDilation, 'DILATIONSET', @ImageProcessor.extraDilationSet);
