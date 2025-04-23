@@ -763,3 +763,14 @@ The `ASf` function was developed to observe **patterns in an image after differe
   ```
 - Run the code:  
   ![{5D2EE982-EC81-4320-B977-000EAA144969}](https://github.com/user-attachments/assets/4c27a4cc-fdd5-407e-9135-d58d979c2027)
+
+## PDilation(A, B) & reversedPDilation(Cs)
+### Partition Dilation Concept
+### PDilation(A, B)
+- Input:
+  - partitionA (required): non-increasing 1D integer vector 
+  - partitionB (required): non-increasing 1D integer vector  
+- Output:
+  - dilatedPartition (1D integer vector): A 1D non-increasing 1D integer vector
+- Explanation: The `AJF` function computes the derivative of a matrix **A** a specified number of times (`d`). It has similar inputs like `ASf` function.
+- Example code:
