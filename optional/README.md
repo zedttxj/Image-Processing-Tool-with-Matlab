@@ -808,7 +808,7 @@ Also a yes because of how flipping, addition, and max behave.
 - Input:
   - Cs (required): A non-increasing, one-dimensional vector of non-negative integers  
 - Output:
-  - dilatedPartition (1D integer vector): A 2D cell array containing pairs of partitions, where `size(dilatedPartition)` would be `[<number of partition> 2]`.
+  - dilatedPartition (1D integer vector): A 2D cell array containing pairs of partitions, where `size(dilatedPartition)` would be `[<number of partitions> 2]`.
 - Explanation: `reversedPDilation` generates all possible pairs of partitions such that applying `PDilation` to them results in `Cs`.
 - Example code:
   ```matlab
