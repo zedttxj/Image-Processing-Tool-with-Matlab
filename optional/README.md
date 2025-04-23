@@ -765,7 +765,26 @@ The `ASf` function was developed to observe **patterns in an image after differe
   ![{5D2EE982-EC81-4320-B977-000EAA144969}](https://github.com/user-attachments/assets/4c27a4cc-fdd5-407e-9135-d58d979c2027)
 
 ## PDilation(A, B) & reversedPDilation(Cs)
-### Partition Dilation Concept
+### Summary of PDilation
+This is a custom convolution-like operation on 1D integer arrays A and B, defined as:
+```matlab
+dilatedPartition = ImageProcessor.M2P(ImageProcessor.Dilation1(ImageProcessor.P2M(A),ImageProcessor.P2M(B)));
+```
+Where `M2P` convert matrix into partition and `P2M` performs otherwise.
+The code section of `PDilation` can be re-defined as:
+```matlab
+C = flip(partitionA - 1) + partitionB';
+... % Some exceptions handling
+```
+Then the result dilatedPartition is formed by:
+- Sliding across diagonals of C  
+- Taking the maximum from each diagonal
+This is like a max-plus convolution (like plus-multiplication `conv` from MATLAB), which appears in scheduling theory, image dilation, and mathematical morphology.
+#### Important Properties
+***Commutative?***  
+Yes, because `flip(A - 1) + B'` is symmetric in A and B, up to flipping — and max of diagonals doesn’t depend on which array came first.
+***Associative?***
+Also a yes because of how flipping, addition, and max behave.
 ### PDilation(A, B)
 - Input:
   - partitionA (required): non-increasing 1D integer vector 
