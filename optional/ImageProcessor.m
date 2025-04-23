@@ -549,52 +549,69 @@ classdef ImageProcessor
         function partition = M2P(data)
             partition = sum(data > 0, 2) .';
         end
-        function dilatedPartition = OPDilation(A,B)
-            dilatedPartition = ImageProcessor.M2P(ImageProcessor.Dilation1(ImageProcessor.P2M(A),ImageProcessor.P2M(B)));
-        end
-        function dilatedPartition = PDilation(A,B)
-            C = flip(A(:) - 1) + (B(:) .');
-            disp(C);
+        function dilatedPartition = PDilation(partitionA,partitionB)
+            C = flip(partitionA(:) - 1) + (partitionB(:) .');
             if size(C,1) < 2
                 dilatedPartition = C;
             elseif size(C,2) < 2
                 dilatedPartition = flip(C .');
             else
-                pos = length(A);
-                dilatedPartition = zeros([1 pos+length(B)-1]);
-                for i = 1-pos:length(B)-1
+                pos = length(partitionA);
+                dilatedPartition = zeros([1 pos+length(partitionB)-1]);
+                for i = 1-pos:length(partitionB)-1
                     dilatedPartition(i+pos) = max(diag(C,i));
                 end
             end
         end
         function partitions = reversedPDilation(Cs)
-            partitions = {};
-            m = containers.Map();
+            partitions = [];
             function PDrecursion(C, A, B)
-                if length(C) > 0
-                    n = C(1)-B(end)+1;
-                    if n > 0 && all((n + B(1:end-1) - 1) <= Cs(length(A)+1:length(A)+length(B)-1))
-                        for i = 1:min(n,A(end))
-                            PDrecursion(C(2:end), [A i], B);
-                        end
+                if ~isempty(C)
+                    for i = A(1):min(Cs(end-length(B)-length(A)+1:end-length(A)) - B + 1)
+                        PDrecursion(C(1:end-1), [i A], B);
                     end
-                    n = C(1)-A(end)+1;
-                    if n > 0 && all((n + A(1:end-1) - 1) <= Cs(length(B)+1:length(B)+length(A)-1))
-                        for i = 1:min(n,B(end))
-                            PDrecursion(C(2:end), A, [B i]);
+                    if length(A) > length(B)
+                        for i = B(1):min(Cs(end-length(A)-length(B)+1:end-length(B)) - A + 1)
+                            PDrecursion(C(1:end-1), A, [i B]);
                         end
                     end
                 elseif ImageProcessor.PDilation(A,B) == Cs
-                    key = jsonencode({A, B});
-                    if ~isKey(m, key)
-                        m(key) = true;
-                        partitions = [partitions; {A, B}];
-                    end
+                    partitions = [partitions; [length(A)+1 A B]; [length(B)+1 B A]];
                 end
             end
-            for i = 1:Cs(1)
-                PDrecursion(Cs(2:end),[i],[Cs(1)-i+1]);
+            for i = 1:Cs(end)
+                PDrecursion(Cs(1:end-1),[i],[Cs(end)-i+1]);
             end
+            Cs = unique(partitions,'rows');
+            partitions = arrayfun(@(i) {Cs(i, 2 : Cs(i,1)), Cs(i, Cs(i,1)+1:end)}, 1:size(Cs,1), 'UniformOutput', false);
+            partitions = vertcat(partitions{:});
+        end
+        function partitions = reversedPDilationv2(Cs)
+            partitions = [];
+            function PDrecursion(C, A, B)
+                if ~isempty(C)
+                    n = C(end)-B(1)+1;
+                    if n > 0 && all((n + B(2:end) - 1) <= Cs(end-length(B)-length(A)+2:end-length(A)))
+                        for i = A(1):n
+                            PDrecursion(C(1:end-1), [i A], B);
+                        end
+                    end
+                    n = C(end)-A(1)+1;
+                    if n > 0 && all((n + A(2:end) - 1) <= Cs(end-length(A)-length(B)+2:end-length(B)))
+                        for i = B(1):n
+                            PDrecursion(C(1:end-1), A, [i B]);
+                        end
+                    end
+                elseif ImageProcessor.PDilation(A,B) == Cs
+                    partitions = [partitions; [length(A)+1 A B]; [length(B)+1 B A]];
+                end
+            end
+            for i = 1:Cs(end)
+                PDrecursion(Cs(1:end-1),[i],[Cs(end)-i+1]);
+            end
+            Cs = unique(partitions,'rows');
+            partitions = arrayfun(@(i) {Cs(i, 2 : Cs(i,1)), Cs(i, Cs(i,1)+1:end)}, 1:size(Cs,1), 'UniformOutput', false);
+            partitions = vertcat(partitions{:});
         end
     end
     properties (Constant)
