@@ -777,19 +777,120 @@ C = flip(partitionA - 1) + partitionB';
 ... % Some exceptions handling
 ```
 Then the result dilatedPartition is formed by:
-- Sliding across diagonals of C  
+- Sliding across diagonals of `C`  
 - Taking the maximum from each diagonal
+There will be a separate explanation as why is it (PDilation) defined this way. I would love to explain some theories like why divide-and-conquer isn't applicable in the case of `reversedPDilation` as well as show some test cases.
 This is like a max-plus convolution (like plus-multiplication `conv` from MATLAB), which appears in scheduling theory, image dilation, and mathematical morphology.
 #### Important Properties
 ***Commutative?***  
 Yes, because `flip(A - 1) + B'` is symmetric in A and B, up to flipping — and max of diagonals doesn’t depend on which array came first.
-***Associative?***
+***Associative?***  
 Also a yes because of how flipping, addition, and max behave.
 ### PDilation(A, B)
 - Input:
-  - partitionA (required): non-increasing 1D integer vector 
-  - partitionB (required): non-increasing 1D integer vector  
+  - partitionA (required): non-increasing 1D non-negative integer vector 
+  - partitionB (required): non-increasing 1D non-negative integer vector  
 - Output:
-  - dilatedPartition (1D integer vector): A 1D non-increasing 1D integer vector
-- Explanation: The `AJF` function computes the derivative of a matrix **A** a specified number of times (`d`). It has similar inputs like `ASf` function.
+  - dilatedPartition (1D integer vector): A 1D non-increasing non-negative integer vector
 - Example code:
+  ```matlab
+  A = [5 4 3 2];
+  B = [7 3 1];
+  C = ImageProcessor.PDilation(A,B);
+  disp(C);
+  ```
+- Run the code:
+  ```
+  >> script
+    11    10     9     8     4     2
+  ```
+### reversedPDilation(A, B)
+- Input:
+  - Cs (required): A non-increasing, one-dimensional vector of non-negative integers  
+- Output:
+  - dilatedPartition (1D integer vector): A 2D cell array containing pairs of partitions, where `size(dilatedPartition)` would be `[<number of partition> 2]`.
+- Explanation: `reversedPDilation` generates all possible pairs of partitions such that applying `PDilation` to them results in `Cs`.
+- Example code:
+  ```matlab
+  C = ImageProcessor.reversedPDilationv2([17    16    12     10     8     7     3]);
+  disp(C);
+  disp(size(C));
+  ```
+- Run the code:
+  ```
+  >>
+    {[                1]}    {[17 16 12 10 8 7 3]}
+    {[                2]}    {[ 16 15 11 9 7 6 2]}
+    {[                3]}    {[ 15 14 10 8 6 5 1]}
+    {[              2 1]}    {[   16 12 10 7 7 3]}
+    {[              2 1]}    {[   16 12 10 8 7 3]}
+    {[              3 2]}    {[    15 11 9 6 6 2]}
+    {[              3 2]}    {[    15 11 9 7 6 2]}
+    {[              4 3]}    {[    14 10 8 5 5 1]}
+    {[              4 3]}    {[    14 10 8 6 5 1]}
+    {[              5 1]}    {[    13 12 6 6 4 3]}
+    {[              5 1]}    {[    13 12 7 6 4 3]}
+    {[              5 1]}    {[    13 12 8 6 4 3]}
+    {[              6 2]}    {[    12 11 5 5 3 2]}
+    {[              6 2]}    {[    12 11 6 5 3 2]}
+    {[              6 2]}    {[    12 11 7 5 3 2]}
+    {[              7 3]}    {[    11 10 4 4 2 1]}
+    {[              7 3]}    {[    11 10 5 4 2 1]}
+    {[              7 3]}    {[    11 10 6 4 2 1]}
+    {[            6 5 1]}    {[       12 6 6 3 3]}
+    {[            6 5 1]}    {[       12 6 6 4 3]}
+    {[            6 5 1]}    {[       12 7 6 3 3]}
+    {[            6 5 1]}    {[       12 7 6 4 3]}
+    {[            6 5 1]}    {[       12 8 6 3 3]}
+    {[            6 5 1]}    {[       12 8 6 4 3]}
+    {[            7 6 2]}    {[       11 5 5 2 2]}
+    {[            7 6 2]}    {[       11 5 5 3 2]}
+    {[            7 6 2]}    {[       11 6 5 2 2]}
+    {[            7 6 2]}    {[       11 6 5 3 2]}
+    {[            7 6 2]}    {[       11 7 5 2 2]}
+    {[            7 6 2]}    {[       11 7 5 3 2]}
+    {[            8 7 3]}    {[       10 4 4 1 1]}
+    {[            8 7 3]}    {[       10 4 4 2 1]}
+    {[            8 7 3]}    {[       10 5 4 1 1]}
+    {[            8 7 3]}    {[       10 5 4 2 1]}
+    {[            8 7 3]}    {[       10 6 4 1 1]}
+    {[            8 7 3]}    {[       10 6 4 2 1]}
+    {[       10 4 4 1 1]}    {[            8 7 3]}
+    {[       10 4 4 2 1]}    {[            8 7 3]}
+    {[       10 5 4 1 1]}    {[            8 7 3]}
+    {[       10 5 4 2 1]}    {[            8 7 3]}
+    {[       10 6 4 1 1]}    {[            8 7 3]}
+    {[       10 6 4 2 1]}    {[            8 7 3]}
+    {[       11 5 5 2 2]}    {[            7 6 2]}
+    {[       11 5 5 3 2]}    {[            7 6 2]}
+    {[       11 6 5 2 2]}    {[            7 6 2]}
+    {[       11 6 5 3 2]}    {[            7 6 2]}
+    {[       11 7 5 2 2]}    {[            7 6 2]}
+    {[       11 7 5 3 2]}    {[            7 6 2]}
+    {[       12 6 6 3 3]}    {[            6 5 1]}
+    {[       12 6 6 4 3]}    {[            6 5 1]}
+    {[       12 7 6 3 3]}    {[            6 5 1]}
+    {[       12 7 6 4 3]}    {[            6 5 1]}
+    {[       12 8 6 3 3]}    {[            6 5 1]}
+    {[       12 8 6 4 3]}    {[            6 5 1]}
+    {[    11 10 4 4 2 1]}    {[              7 3]}
+    {[    11 10 5 4 2 1]}    {[              7 3]}
+    {[    11 10 6 4 2 1]}    {[              7 3]}
+    {[    12 11 5 5 3 2]}    {[              6 2]}
+    {[    12 11 6 5 3 2]}    {[              6 2]}
+    {[    12 11 7 5 3 2]}    {[              6 2]}
+    {[    13 12 6 6 4 3]}    {[              5 1]}
+    {[    13 12 7 6 4 3]}    {[              5 1]}
+    {[    13 12 8 6 4 3]}    {[              5 1]}
+    {[    14 10 8 5 5 1]}    {[              4 3]}
+    {[    14 10 8 6 5 1]}    {[              4 3]}
+    {[    15 11 9 6 6 2]}    {[              3 2]}
+    {[    15 11 9 7 6 2]}    {[              3 2]}
+    {[   16 12 10 7 7 3]}    {[              2 1]}
+    {[   16 12 10 8 7 3]}    {[              2 1]}
+    {[ 15 14 10 8 6 5 1]}    {[                3]}
+    {[ 16 15 11 9 7 6 2]}    {[                2]}
+    {[17 16 12 10 8 7 3]}    {[                1]}
+
+    72     2
+  ```
