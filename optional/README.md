@@ -779,8 +779,8 @@ C = flip(partitionA - 1) + partitionB';
 Then the result dilatedPartition is formed by:
 - Sliding across diagonals of `C`  
 - Taking the maximum from each diagonal
+This is like a max-plus convolution (like plus-multiplication `conv` from MATLAB), which appears in scheduling theory, image dilation, and mathematical morphology.  
 There will be a separate explanation as why is it (PDilation) defined this way. I would love to explain some theories like why divide-and-conquer isn't applicable in the case of `reversedPDilation` as well as show some test cases.
-This is like a max-plus convolution (like plus-multiplication `conv` from MATLAB), which appears in scheduling theory, image dilation, and mathematical morphology.
 #### Important Properties
 ***Commutative?***  
 Yes, because `flip(A - 1) + B'` is symmetric in A and B, up to flipping — and max of diagonals doesn’t depend on which array came first.
@@ -812,7 +812,7 @@ Also a yes because of how flipping, addition, and max behave.
 - Explanation: `reversedPDilation` generates all possible pairs of partitions such that applying `PDilation` to them results in `Cs`.
 - Example code:
   ```matlab
-  C = ImageProcessor.reversedPDilationv2([17    16    12     10     8     7     3]);
+  C = ImageProcessor.reversedPDilation([17    16    12     10     8     7     3]);
   disp(C);
   disp(size(C));
   ```
