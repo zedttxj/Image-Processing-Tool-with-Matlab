@@ -244,8 +244,8 @@ We can use tree-based modeling to generate the **full** decomposition of the inp
 graph TD;
     C[3 3 2 1] --> A[1 1];
     C[3 3 2 1] --> B[2 2 1];
-    B[2 2 1] --> D[2 1];
     B[2 2 1] --> E[1 1];
+    B[2 2 1] --> D[2 1];
 ```
 - And, all possible pairs of partitions of `[3 3 2 1]` are these:
 ```matlab
