@@ -1,4 +1,4 @@
-# PDilation is non-injective
+# PDilation is non-injective and non-cancellativite
 Like how Dilation is non-injective, PDilation is also non-injective. Hence, finding all `(A, B)` pairs that lead to a known result `Cs` is a set-inversion problem.
 It's a nonlinear algebraic structure like(A, B) ↦ A ⊕ B  (where ⊕ is PDilation).
 # Redefine PDilation
