@@ -54,8 +54,14 @@ Here, A = `[2 1]`, B = `[9 7 7 3 1]`, and C = `[9 8 7 3 1]`. However, Cs = A ⊕
 You should notice that the length of B (or C) is always larger than 2. The reason is that Cs(1) is always equal to B(1) + C(1) as it's the only value used to calculate Cs(1). The same thing with Cs(end) where C(end) + B(end) is the only value being used to calculate Cs(end). If one of these (B(1), C(1), B(end), and C(end)) changes, the original Cs will be change as well without changing A.  
 ### Fun fact:
 If |A| = 1, B is always equal to C. To avoid making things complicated, through out the input partitions used for analysis, their ending value are always be 1. For partitions that doesn't end with value `1`, we can always and only extract one pair of partitions where one of them has the length of 1 and the other has their ending value is `1`. For example, `[4 4 3]` = `[3]` ⊕ `[2 2 1]`. We will only have to focus on how to decompose `[2 2 1]`.  
-## Case 2: A = D where (A ⊕ B) ⊕ C = D ⊕ (B ⊕ C) and B and C are atomic partitions
-- **atomic partition:** A atomic partition of a partition `C` is a partition `A` such that in every possible **full** (like factorization of a number) decomposition C = B ⊕ ..., A always appears.
+## Case 2: A = D where (A ⊕ B) ⊕ C = D ⊕ (B ⊕ C) and B and C are constant partitions
+- **Atomic partition:** A partition that cannot be written as A ⊕ B for any nontrivial A and B. It's non-decomposable under PDilation operation (⊕). It appears once in all **full** decompositions of the input partition.
+- **Constant partitions:** A partition that always appears in every full decomposition of a certain larger partition. It's not necessarily equal to atomic partitions. You can picture it like prime numbers.
+**A canonical decomposition is:** A standardized or agreed-upon way of breaking down partitions (or anything complex) so there's only one correct version. For example:
+- Always breaking down left-first.
+- Always sorting results lexicographically.
+- Always extracting the largest atomic partition possible.
+With a canonical rule in place, the atomic components of a partition are unique.
 - Example code:
   ```matlab
   disp(ImageProcessor.reversedPDilationv2([17    16    12     10     8     7     3]));
@@ -237,9 +243,9 @@ Let's make things easier. Can we create a non-decomposable partition with 2 non-
   - Mark D as composite (i.e., decomposable)
 
 Still, we have to loop through the table like the normal recursion method do. However, we don’t need to loop through the full length of partition C — we only need to consider up to half of it, similar to how checking for primality of `n` only requires looping up to `√n`. Because if C were decomposable, it must break into smaller valid partitions — and at least one of them must be non-decomposable (i.e., irreducible). If none of these show up as potential components, the original must be atomic too.  
-### Why Non-Decomposable Partitions Help
+### Why Finding Atomic Partitions Help
 How does finding non-decomposable partitions of another partition help?  
-- Consider **2nd fact (A = D where (A ⊕ B) ⊕ C = D ⊕ (B ⊕ C) and B and C are atomic partitions):** We can clearly see that A = D in the case 2. And, thanks again to the associative and commutative properties, we know that these non-decomposable partitions are atomic partitions, meaning it always exist in a **full** decomposition of that partition.  
+- Consider **2nd fact (A = D where (A ⊕ B) ⊕ C = D ⊕ (B ⊕ C) and B and C are constant partitions):** We can clearly see that A = D in the case 2. And, thanks again to the associative and commutative properties, we know that these non-decomposable partitions are atomic partitions, meaning they exist once in all **full** decompositions of the input partition.  
 - Applying the **1st fact** (A ⊕ B = A ⊕ C where B ≠ C) and the fact that we don't have to worry about whether A exists in a **full** decomposition, we can just focusing on decomposing B and C instead.
 
 The first step is to generate a *partition sieve* table to find all possible atomic partitions that may help construct the input partition. In the next step, we find all possible partitions B and C where A ⊕ B = A ⊕ C, A is a atomic partition, and B ≠ C. In fact, it may have more than just B and C or just one possible partition.
