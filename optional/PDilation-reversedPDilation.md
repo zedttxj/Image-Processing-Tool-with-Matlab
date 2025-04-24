@@ -52,6 +52,7 @@ For testing, I will use `reversedPDilationv2` for faster testing process. Howeve
 Here, A = `[2 1]`, B = `[9 7 7 3 1]`, and C = `[9 8 7 3 1]`. However, Cs = A ⊕ B = A ⊕ C = `[11    10     9     8     4     2]`.
 **1st fact:** You should notice that the length of B (or C) is always larger than 2. The reason is that Cs(1) is always equal to B(1) + C(1) as it's the only value used to calculate Cs(1). The same thing with Cs(end) where C(end) + B(end) is the only value being used to calculate Cs(end). If one of these (B(1), C(1), B(end), and C(end)) changes, the original Cs will be change as well without changing A.
 ## Case 2: A = D where (A ⊕ B) ⊕ C = D ⊕ (B ⊕ C) and B and C are constant partitions
+- Constant partition: A constant partition of a partition `C` is a partition `A` such that in every possible **full** (like factorization of a number) decomposition C = B ⊕ ..., A always appears.
 - Example code:
   ```matlab
   disp(ImageProcessor.reversedPDilationv2([17    16    12     10     8     7     3]));
@@ -230,3 +231,5 @@ Let's make things easier. Can we create a non-decomposable partition with 2 non-
 - Then for each known "prime" partition A and B, try:
   - Compute A ⊕ B = C where |C| > l
   - Mark C as composite (i.e., decomposable)
+Still, we have to loop through the table like the normal recursion method do. However, we don’t need to loop through the full length of partition C — we only need to consider up to half of it, similar to how checking for primality of `n` only requires looping up to `√n`. Because if C were decomposable, it must break into smaller valid partitions — and at least one of them must be non-decomposable (i.e., irreducible). If none of these show up as potential components, the original must be atomic too.
+And, how does finding non-decomposable partitions of another partition help? Consider **2nd fact (A = D where (A ⊕ B) ⊕ C = D ⊕ (B ⊕ C) and B and C are constant partitions):** We can clearly see that A = D in the case 2. And, thanks again to the associative and commutative properties, we know that these non-decomposable partitions are constant partitions, meaning it always exist in a **full** decomposition of that partition. Applying the **1st fact** (A ⊕ B = A ⊕ C where B ≠ C) and the fact that we don't have to worry about whether B or C exists in a **full* decomposition, we can just focusing on decomposing A instead.
