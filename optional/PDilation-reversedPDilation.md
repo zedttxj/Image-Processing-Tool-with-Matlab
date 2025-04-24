@@ -10,10 +10,10 @@ This is exactly max-plus convolution, which is:
 - Associative
 - Commonly used in morphological image processing and tropical algebra.
 From here, we can infer that Cs(1) is always equal to A(1) + B(1) as it's the only value used to calculate Cs(1). The same thing with Cs(end) where A(end) + B(end) is the only value being used to calculate Cs(end).
-# divide-and-conquer method isn't applicable in the case of reversedPDilation
+# divide-and-conquer method may not be applicable in the case of reversedPDilation
 The original problem is this:
 Given D, find all (A, B) such that A ⊕ B = D.  
-Whis is exactly like convolution inversion but under max-plus algebra. Because PDilation is non-injective (considering some special cases below), divide-and-conquer method isn't applicable.
+Whis is exactly like convolution inversion but under max-plus algebra. Because PDilation is non-injective (considering some special cases below), the normal divide-and-conquer method may not be applicable. However, considering the associative and commutative properties, we may be able to apply this method.
 # Some special cases:
 For testing, I will use `reversedPDilationv2` for faster testing process. However, `reversedPDilationv2` is still under testing and may not work as intended.
 ## Case 1: A ⊕ B = A ⊕ C where B ≠ C
