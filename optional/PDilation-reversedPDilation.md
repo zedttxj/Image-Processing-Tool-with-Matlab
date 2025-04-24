@@ -211,3 +211,16 @@ As we see below, B is in the right side, giving all possible As in the left side
 - Backtracking search for all valid decompositions.
 - Memoization to avoid redundant recomputation.
 - Potential pruning strategies based on boundary constraints (e.g., Cs(1) = A(1) + B(1))
+## Case 3: A can't be decomposed if |A| < 3 where A is a partition
+If a partition C is able to be decomposed, there must exist a pair A & B (A ⊕ B = C) where |A| > 1 and |B| > 1.
+- Example code:
+  ```matlab
+  disp(ImageProcessor.reversedPDilationv2([4 2 1]));
+  ```
+- Run the code:
+  ```matlab
+  >>
+    {[    1]}    {[4 2 1]}
+    {[4 2 1]}    {[    1]}
+  ```
+In this case, `[4 2 1]` can't be decomposed any further. Nevertheless, instead of trial-and-error, how can we know if it's decomposible using mathematics principle?
