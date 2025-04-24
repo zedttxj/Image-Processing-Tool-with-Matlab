@@ -41,7 +41,7 @@ For testing, I will use `reversedPDilationv2` for faster testing process. Howeve
     {[11 10 9 8 4 2]}    {[            1]}
   ```
 Here, A = `[2 1]`, B = `[9 7 7 3 1]`, and C = `[9 8 7 3 1]`. However, A ⊕ B = A ⊕ C = `[11    10     9     8     4     2]`.
-## Case 2: A ⊕ B ⊕ C = D ⊕ (B ⊕ C) where A ≠ D and B and C are constant partitions
+## Case 2: A = D where (A ⊕ B) ⊕ C = D ⊕ (B ⊕ C) and B and C are constant partitions
 - Example code:
   ```matlab
   disp(ImageProcessor.reversedPDilationv2([17    16    12     10     8     7     3]));
@@ -131,7 +131,7 @@ B ⊕ C = `[6 5 1]`. As we see below, B ⊕ C is in the right side, giving all p
     {[       12 8 6 3 3]}    {[            6 5 1]}
     {[       12 8 6 4 3]}    {[            6 5 1]}
 ```
-Let's pick the pairs `{[   16 12 10 8 7 3]}    {[              2 1]}`. Here, C is in the right side. In the left side, A ⊕ B = `[16 12 10 8 7 3]`. Let's decompose this into pairs of partitions using `reversedPDilation`:
+Let's pick the pair `{[   16 12 10 8 7 3]}    {[              2 1]}` (there's two pairs that satisfy this). Here, C is in the right side. In the left side, A ⊕ B = `[16 12 10 8 7 3]`. Let's decompose this into pairs of partitions using `reversedPDilation`:
 ```matlab
     {[             1]}    {[16 12 10 8 7 3]}
     {[             2]}    {[ 15 11 9 7 6 2]}
@@ -164,4 +164,37 @@ As we see below, B is in the right side, giving all possible As in the left side
     {[    12 7 6 4 3]}    {[           5 1]}
     {[    12 8 6 4 3]}    {[           5 1]}
 ```
-We can clearly see that D includes A but A doesn't include D. This shows that divide-and-conquer is not applicable.
+Let's pick the pair `{[   16 12 10 7 7 3]}    {[              2 1]}`, the only pair left to be tested, instead of `{[   16 12 10 8 7 3]}    {[              2 1]}`:
+```matlab
+    {[             1]}    {[16 12 10 7 7 3]}
+    {[             2]}    {[ 15 11 9 6 6 2]}
+    {[             3]}    {[ 14 10 8 5 5 1]}
+    {[           5 1]}    {[    12 6 6 3 3]}
+    {[           5 1]}    {[    12 7 6 3 3]}
+    {[           5 1]}    {[    12 8 6 3 3]}
+    {[           6 2]}    {[    11 5 5 2 2]}
+    {[           6 2]}    {[    11 6 5 2 2]}
+    {[           6 2]}    {[    11 7 5 2 2]}
+    {[           7 3]}    {[    10 4 4 1 1]}
+    {[           7 3]}    {[    10 5 4 1 1]}
+    {[           7 3]}    {[    10 6 4 1 1]}
+    {[    10 4 4 1 1]}    {[           7 3]}
+    {[    10 5 4 1 1]}    {[           7 3]}
+    {[    10 6 4 1 1]}    {[           7 3]}
+    {[    11 5 5 2 2]}    {[           6 2]}
+    {[    11 6 5 2 2]}    {[           6 2]}
+    {[    11 7 5 2 2]}    {[           6 2]}
+    {[    12 6 6 3 3]}    {[           5 1]}
+    {[    12 7 6 3 3]}    {[           5 1]}
+    {[    12 8 6 3 3]}    {[           5 1]}
+    {[ 14 10 8 5 5 1]}    {[             3]}
+    {[ 15 11 9 6 6 2]}    {[             2]}
+    {[16 12 10 7 7 3]}    {[             1]}
+```
+As we see below, B is in the right side, giving all possible As in the left side (which is the same as the case where A ⊕ B = `[16 12 10 7 7 3]`):
+```matlab
+    {[    12 6 6 3 3]}    {[           5 1]}
+    {[    12 7 6 3 3]}    {[           5 1]}
+    {[    12 8 6 3 3]}    {[           5 1]}
+```
+We can clearly see that A = D. This may suggest that divide-and-conquer is applicable. However, we are still not sure.
