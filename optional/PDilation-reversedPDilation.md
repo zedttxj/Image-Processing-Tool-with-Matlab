@@ -262,18 +262,20 @@ graph TD;
 
     C[11 10 6 4 2 1]
 
-    subgraph Group1["Left"]
-        A[2 1]
-    end
+
 
     subgraph Group2["Right"]
         D[10 6 4 1 1]
         E[10 6 4 2 1]
     end
 
+    subgraph Group1["Left"]
+        A[2 1]
+    end
+
+    C --> A
     C --> D
     C --> E
-    C --> A
 ```
 - And, all possible pairs of partitions of `[11 10 6 4 2 1]` are these:
 ```matlab
