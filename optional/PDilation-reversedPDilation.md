@@ -240,4 +240,11 @@ How does finding non-decomposable partitions of another partition help?
 
 The first step is to generate a *partition sieve* table to find all possible constant partitions that may help construct the input partition. In the next step, we find all possible partitions B and C where A ⊕ B = A ⊕ C, A is a constant partition, and B ≠ C. In fact, it may have more than just B and C or just one possible partition.
 We can use tree-based modeling to generate the **full** decomposition of the input partition.
-<Graph indexType="custom" height="400" width="400" nodes={[{label:"C",center:{x:194,y:296}},{label:"A",center:{x:134.7,y:195.8}},{label:"2",center:{x:255.5,y:191.1}},{label:"B",center:{x:312.4,y:293.8}},{label:"P",center:{x:193.5,y:91.3}}]} edges={[{source:2,target:3},{source:2,target:0},{source:4,target:1},{source:4,target:2}]} />
+```mermaid
+graph TD;
+    C[4 2 1] --> A[1];
+    C[4 2 1] --> B[3 2 1];
+    C[4 2 1] --> P[1];
+    P --> A[1];
+    P --> B[3 2 1];
+```
