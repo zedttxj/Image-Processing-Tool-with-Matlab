@@ -211,7 +211,8 @@ As we see below, B is in the right side, giving all possible As in the left side
     {[    12 7 6 3 3]}    {[           5 1]}
     {[    12 8 6 3 3]}    {[           5 1]}
 ```
-**2nd fact:** We can clearly see that A = D. Combining with the 1st fact, this may suggest that divide-and-conquer is applicable. Potentially, a tree-based modeling may be used to:
+### 2nd fact:
+We can clearly see that A = D. Combining with the 1st fact, this may suggest that divide-and-conquer is applicable. Potentially, a tree-based modeling may be used to:
 - Backtracking search for all valid decompositions.
 - Memoization to avoid redundant recomputation.
 - Potential pruning strategies based on boundary constraints (e.g., Cs(1) = A(1) + B(1))
