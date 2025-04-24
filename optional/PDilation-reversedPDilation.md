@@ -223,7 +223,7 @@ We can clearly see that A = D. Combining with the 1st fact, this may suggest tha
 - Memoization to avoid redundant recomputation.
 - Potential pruning strategies based on boundary constraints (e.g., Cs(1) = A(1) + B(1))
 ## Case 3: A can't be decomposed if |A| < 3 where A is a partition
-If a partition C is able to be decomposed, there must exist a pair A & B (A ⊕ B = C) where |A| > 1 and |B| > 1.
+- **Definition:** If a partition C is able to be decomposed, there must exist a pair A & B (A ⊕ B = C) where |A| > 1 and |B| > 1.
 - Example code:
   ```matlab
   disp(ImageProcessor.reversedPDilationv2([4 2 1]));
