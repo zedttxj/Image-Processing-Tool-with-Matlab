@@ -239,11 +239,37 @@ How does finding non-decomposable partitions of another partition help?
 - Applying the **1st fact** (A ⊕ B = A ⊕ C where B ≠ C) and the fact that we don't have to worry about whether A exists in a **full** decomposition, we can just focusing on decomposing B and C instead.
 
 The first step is to generate a *partition sieve* table to find all possible constant partitions that may help construct the input partition. In the next step, we find all possible partitions B and C where A ⊕ B = A ⊕ C, A is a constant partition, and B ≠ C. In fact, it may have more than just B and C or just one possible partition.
-We can use tree-based modeling to generate the **full** decomposition of the input partition.
+We can use tree-based modeling to generate the **full** decomposition of the input partition. Let's consider a simple case first:
 ```mermaid
 graph TD;
     C[3 3 2 1] --> A[1 1];
     C[3 3 2 1] --> B[2 2 1];
     B[2 2 1] --> D[2 1];
     B[2 2 1] --> E[1 1];
+```
+And, all possible pairs of partitions of `[3 3 2 1]` are these:
+```matlab
+    {[      1]}    {[3 3 2 1]}
+    {[    1 1]}    {[  3 2 1]}
+    {[    2 1]}    {[  2 2 1]}
+    {[  2 2 1]}    {[    2 1]}
+    {[  3 2 1]}    {[    1 1]}
+    {[3 3 2 1]}    {[      1]}
+```
+- A more complex case:
+```mermaid
+graph TD;
+    C[11 10 6 4 2 1] --> A[2 1];
+    C[11 10 6 4 2 1] --> B;
+    B --> D[10 6 4 1 1];
+    B --> E[10 6 4 1 1];
+```
+And, all possible pairs of partitions of `[11 10 6 4 2 1]` are these:
+```matlab
+    {[            1]}    {[11 10 6 4 2 1]}
+    {[          2 1]}    {[   10 6 4 1 1]}
+    {[          2 1]}    {[   10 6 4 2 1]}
+    {[   10 6 4 1 1]}    {[          2 1]}
+    {[   10 6 4 2 1]}    {[          2 1]}
+    {[11 10 6 4 2 1]}    {[            1]}
 ```
