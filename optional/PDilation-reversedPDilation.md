@@ -15,7 +15,6 @@ The original problem is this:
 Given D, find all (A, B) such that A ⊕ B = D.  
 Whis is exactly like convolution inversion but under max-plus algebra. Because PDilation is non-injective (considering some special cases below), the normal divide-and-conquer method may not be applicable. However, considering the associative and commutative properties, we may be able to apply this method.
 # Some special cases:
-For testing, I will use `reversedPDilationv2` for faster testing process. However, `reversedPDilationv2` is still under testing and may not work as intended.
 ## Case 1: A ⊕ B = A ⊕ C where B ≠ C
 - Example code:
   ```matlab
@@ -259,6 +258,7 @@ graph TD;
     {[  2 2 1]}    {[    2 1]}
     {[  3 2 1]}    {[    1 1]}
     {[3 3 2 1]}    {[      1]}
+    Size: 6
 ```
 - A more complex case:
 ```mermaid
@@ -289,6 +289,7 @@ graph TD;
     {[   10 6 4 1 1]}    {[          2 1]}
     {[   10 6 4 2 1]}    {[          2 1]}
     {[11 10 6 4 2 1]}    {[            1]}
+    Size: 6
 ```
 - An even more complex case:
 ```mermaid
@@ -359,4 +360,5 @@ graph TD;
     {[   14 10 8 5 5 1]}    {[             2 1]}
     {[   14 10 8 6 5 1]}    {[             2 1]}
     {[15 14 10 8 6 5 1]}    {[               1]}
+    Size: 24
 ```
