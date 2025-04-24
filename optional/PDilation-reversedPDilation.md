@@ -1,6 +1,10 @@
 # PDilation is non-injective
 Like how Dilation is non-injective, PDilation is also non-injective. Hence, finding all `(A, B)` pairs that lead to a known result `Cs` is a set-inversion problem.
 It's a nonlinear algebraic structure like(A, B) ↦ A ⊕ B  (where ⊕ is PDilation).
+# Redefine PDilation
+Assume that A ⊕ B = Cs. We can define PDilation as follow:
+Cs(k) = max( A(i) + B(j) ) for all possible i + j = k - 1
+From here, we can infer that Cs(1) is always equal to A(1) + B(1) as it's the only value used to calculate Cs(1). The same thing with Cs(end) where A(end) + B(end) is the only value being used to calculate Cs(end).
 # divide-and-conquer method isn't applicable in the case of reversedPDilation
 The original problem is this:
 Given D, find all (A, B) such that A ⊕ B = D.  
@@ -40,7 +44,8 @@ For testing, I will use `reversedPDilationv2` for faster testing process. Howeve
     {[ 10 9 8 7 3 1]}    {[            2]}
     {[11 10 9 8 4 2]}    {[            1]}
   ```
-Here, A = `[2 1]`, B = `[9 7 7 3 1]`, and C = `[9 8 7 3 1]`. However, A ⊕ B = A ⊕ C = `[11    10     9     8     4     2]`.
+Here, A = `[2 1]`, B = `[9 7 7 3 1]`, and C = `[9 8 7 3 1]`. However, Cs = A ⊕ B = A ⊕ C = `[11    10     9     8     4     2]`.
+**1st fact:** You should notice that the length of B (or C) is always larger than 2. The reason is that Cs(1) is always equal to B(1) + C(1) as it's the only value used to calculate Cs(1). The same thing with Cs(end) where C(end) + B(end) is the only value being used to calculate Cs(end). If one of these (B(1), C(1), B(end), and C(end)) changes, the original Cs will be change as well without changing A.
 ## Case 2: A = D where (A ⊕ B) ⊕ C = D ⊕ (B ⊕ C) and B and C are constant partitions
 - Example code:
   ```matlab
@@ -197,4 +202,4 @@ As we see below, B is in the right side, giving all possible As in the left side
     {[    12 7 6 3 3]}    {[           5 1]}
     {[    12 8 6 3 3]}    {[           5 1]}
 ```
-We can clearly see that A = D. This may suggest that divide-and-conquer is applicable. However, we are still not sure.
+**2nd fact:** We can clearly see that A = D. Combining with the 1st fact, this may suggest that divide-and-conquer is applicable. However, we are still not sure.
