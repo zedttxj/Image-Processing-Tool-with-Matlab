@@ -9,6 +9,7 @@ This is exactly max-plus convolution, which is:
 - Non-injective (i.e., multiple inputs can map to the same output)
 - Associative
 - Commonly used in morphological image processing and tropical algebra.
+
 From here, we can infer that Cs(1) is always equal to A(1) + B(1) as it's the only value used to calculate Cs(1). The same thing with Cs(end) where A(end) + B(end) is the only value being used to calculate Cs(end).
 # divide-and-conquer method may not be applicable in the case of reversedPDilation
 The original problem is this:
