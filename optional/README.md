@@ -778,7 +778,8 @@ C = flip(partitionA - 1) + partitionB';
 ```
 Then the result dilatedPartition is formed by:
 - Sliding across diagonals of `C`  
-- Taking the maximum from each diagonal  
+- Taking the maximum from each diagonal
+
 This is like a max-plus convolution (like plus-multiplication `conv` from MATLAB), which appears in scheduling theory, image dilation, and mathematical morphology.  
 There will be a separate [explanation](https://github.com/zedttxj/Image-Processing-Tool-with-Matlab/blob/main/optional/PDilation-reversedPDilation.md) as why is it (PDilation) defined this way. I would love to explain some theories like why divide-and-conquer may not be applicable in the case of `reversedPDilation` as well as show some properties.
 #### Important Properties
