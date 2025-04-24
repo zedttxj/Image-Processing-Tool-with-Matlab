@@ -53,7 +53,7 @@ Here, A = `[2 1]`, B = `[9 7 7 3 1]`, and C = `[9 8 7 3 1]`. However, Cs = A ⊕
 ### 1st fact:
 You should notice that the length of B (or C) is always larger than 2. The reason is that Cs(1) is always equal to B(1) + C(1) as it's the only value used to calculate Cs(1). The same thing with Cs(end) where C(end) + B(end) is the only value being used to calculate Cs(end). If one of these (B(1), C(1), B(end), and C(end)) changes, the original Cs will be change as well without changing A.  
 ### Fun fact:
-Ff |A| = 1, B is always equal to C. To avoid making things complicated, through out the input partitions used for analysis, their ending value are always be 1. For partitions that doesn't end with value `1`, we can always always and only extract one pair of partitions where one of them has the length of 1 and the other has their ending value is `1`. For example, `[4 4 3]` = `[3]` ⊕ `[2 2 1]`. We will only have to focus on how to decompose `[2 2 1]`.  
+If |A| = 1, B is always equal to C. To avoid making things complicated, through out the input partitions used for analysis, their ending value are always be 1. For partitions that doesn't end with value `1`, we can always always and only extract one pair of partitions where one of them has the length of 1 and the other has their ending value is `1`. For example, `[4 4 3]` = `[3]` ⊕ `[2 2 1]`. We will only have to focus on how to decompose `[2 2 1]`.  
 ## Case 2: A = D where (A ⊕ B) ⊕ C = D ⊕ (B ⊕ C) and B and C are constant partitions
 - **Constant partition:** A constant partition of a partition `C` is a partition `A` such that in every possible **full** (like factorization of a number) decomposition C = B ⊕ ..., A always appears.
 - Example code:
