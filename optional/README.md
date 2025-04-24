@@ -783,7 +783,7 @@ This is like a max-plus convolution (like plus-multiplication `conv` from MATLAB
 There will be a separate explanation as why is it (PDilation) defined this way. I would love to explain some theories like why divide-and-conquer isn't applicable in the case of `reversedPDilation` as well as show some test cases.
 #### Important Properties
 ***Commutative?***  
-Yes, because `flip(A - 1) + B'` is symmetric in A and B, up to flipping — and max of diagonals doesn’t depend on which array came first.
+Yes, because `flip(A - 1) + B'` is symmetric in A and B, up to flipping; and, max of diagonals doesn’t depend on which array came first.
 ***Associative?***  
 Also a yes because of how flipping, addition, and max behave.
 ### PDilation(A, B)
