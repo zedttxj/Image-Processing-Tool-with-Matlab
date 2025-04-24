@@ -242,9 +242,8 @@ The first step is to generate a *partition sieve* table to find all possible con
 We can use tree-based modeling to generate the **full** decomposition of the input partition.
 ```mermaid
 graph TD;
-    C[4 2 1] --> A[1];
-    C[4 2 1] --> B[3 2 1];
-    C[4 2 1] --> P[1];
-    P --> A[1];
-    P --> B[3 2 1];
+    C[3 3 2 1] --> A[1 1];
+    C[3 3 2 1] --> B[2 2 1];
+    B[2 2 1] --> D[2 1];
+    B[2 2 1] --> E[1 1];
 ```
