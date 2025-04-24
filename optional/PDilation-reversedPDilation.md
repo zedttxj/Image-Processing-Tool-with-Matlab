@@ -223,4 +223,4 @@ If a partition C is able to be decomposed, there must exist a pair A & B (A ⊕ 
     {[    1]}    {[4 2 1]}
     {[4 2 1]}    {[    1]}
   ```
-In this case, `[4 2 1]` can't be decomposed any further. Nevertheless, instead of trial-and-error, how can we know if it's decomposible using mathematics principle?
+In this case, `[4 2 1]` can't be decomposed any further. Nevertheless, instead of trial-and-error, how can we know if it's decomposable using mathematics principle?
