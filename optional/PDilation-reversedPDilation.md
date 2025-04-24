@@ -178,7 +178,7 @@ As we see below, B is in the right side, giving all possible As in the left side
     {[    12 7 6 4 3]}    {[           5 1]}
     {[    12 8 6 4 3]}    {[           5 1]}
 ```
-Let's pick the pair `{[   16 12 10 7 7 3]}    {[              2 1]}`, the only pair left to be tested, instead of `{[   16 12 10 8 7 3]}    {[              2 1]}`:
+Let's pick the pair `{[   16 12 10 7 7 3]}    {[              2 1]}`, the only pair left to be tested, instead of `{[   16 12 10 8 7 3]}    {[              2 1]}` where C is in the right side and A ⊕ B is in the left side. Let's decompose A ⊕ B:
 ```matlab
     {[             1]}    {[16 12 10 7 7 3]}
     {[             2]}    {[ 15 11 9 6 6 2]}
