@@ -229,7 +229,7 @@ If a partition C is able to be decomposed, there must exist a pair A & B (A ⊕ 
     {[4 2 1]}    {[    1]}
   ```
 In this case, `[4 2 1]` can't be decomposed any further. Nevertheless, instead of trial-and-error, how can we know if it's decomposable using mathematics principle?
-Let's make things easier. Can we create a non-decomposable partition with 2 non-decomposable partition? This reminds me of prime sieve algorithm. We can picture decomposing a partition like factorizing a number. Although `PDilation` is non-injective, it's associative and commutative. Hence, it's possible to generate a *partition sieve* table for **full** decomposition of C:
+Let's make things easier. Can we create a non-decomposable partition with 2 non-decomposable partition? This reminds me of [prime sieve](https://en.wikipedia.org/wiki/Sieve_of_Eratosthenes) algorithm. We can picture decomposing a partition like factorizing a number. Although `PDilation` is non-injective, it's associative and commutative. Hence, it's possible to generate a *partition sieve* table for **full** decomposition of C:
 - Generate all integer partitions up to some n with the same length `l`
 - Initialize all as "possibly prime" (indecomposable)
 - Then for each known partition A and B where |A| < `l+1` and |B| < `l+1`, try:
