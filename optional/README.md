@@ -802,7 +802,7 @@ Also a yes because of how flipping, addition, and max behave.
   ```
 - Run the code:
   ```
-  >> script
+  >> 
     11    10     9     8     4     2
   ```
 ### reversedPDilation(A, B)
