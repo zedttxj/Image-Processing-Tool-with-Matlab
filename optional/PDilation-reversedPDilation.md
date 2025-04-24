@@ -225,12 +225,19 @@ If a partition C is able to be decomposed, there must exist a pair A & B (A ⊕ 
     {[4 2 1]}    {[    1]}
   ```
 In this case, `[4 2 1]` can't be decomposed any further. Nevertheless, instead of trial-and-error, how can we know if it's decomposable using mathematics principle?
-Let's make things easier. Can we create a non-decomposable partition with 2 non-decomposable partition? This reminds me of prime sieve algorithm. We can picture decomposing a partition like factorizing a number. Although `PDilation` is non-injective, it's associative and commutative. Hence, it's possible to generate a *partition sieve* table:
+Let's make things easier. Can we create a non-decomposable partition with 2 non-decomposable partition? This reminds me of prime sieve algorithm. We can picture decomposing a partition like factorizing a number. Although `PDilation` is non-injective, it's associative and commutative. Hence, it's possible to generate a *partition sieve* table for **full** decomposition of C:
 - Generate all integer partitions up to some n with the same length l
 - Initialize all as "possibly prime" (indecomposable)
-- Then for each known "prime" partition A and B, try:
-  - Compute A ⊕ B = C where |C| > l
-  - Mark C as composite (i.e., decomposable)
+- Then for each known partition A and B where |A| < l+1 and |B| < l+1, try:
+  - Compute A ⊕ B = D where |D| < |C| + 1
+  - Mark D as composite (i.e., decomposable)
 
 Still, we have to loop through the table like the normal recursion method do. However, we don’t need to loop through the full length of partition C — we only need to consider up to half of it, similar to how checking for primality of `n` only requires looping up to `√n`. Because if C were decomposable, it must break into smaller valid partitions — and at least one of them must be non-decomposable (i.e., irreducible). If none of these show up as potential components, the original must be atomic too.  
-How does finding non-decomposable partitions of another partition help? Consider **2nd fact (A = D where (A ⊕ B) ⊕ C = D ⊕ (B ⊕ C) and B and C are constant partitions):** We can clearly see that A = D in the case 2. And, thanks again to the associative and commutative properties, we know that these non-decomposable partitions are constant partitions, meaning it always exist in a **full** decomposition of that partition. Applying the **1st fact** (A ⊕ B = A ⊕ C where B ≠ C) and the fact that we don't have to worry about whether B or C exists in a **full* decomposition, we can just focusing on decomposing A instead.
+### Why Non-Decomposable Partitions Help
+How does finding non-decomposable partitions of another partition help?  
+- Consider **2nd fact (A = D where (A ⊕ B) ⊕ C = D ⊕ (B ⊕ C) and B and C are constant partitions):** We can clearly see that A = D in the case 2. And, thanks again to the associative and commutative properties, we know that these non-decomposable partitions are constant partitions, meaning it always exist in a **full** decomposition of that partition.  
+- Applying the **1st fact** (A ⊕ B = A ⊕ C where B ≠ C) and the fact that we don't have to worry about whether A exists in a **full** decomposition, we can just focusing on decomposing B and C instead.
+
+The first step is to generate a *partition sieve* table to find all possible constant partitions that may help construct the input partition. In the next step, we find all possible partitions B and C where A ⊕ B = A ⊕ C, A is a constant partition, and B ≠ C. In fact, it may have more than just B and C or just one possible partition.
+We can use tree-based modeling to generate the **full** decomposition of the input partition.
+<Graph indexType="custom" height="400" width="400" nodes={[{label:"C",center:{x:194,y:296}},{label:"A",center:{x:134.7,y:195.8}},{label:"2",center:{x:255.5,y:191.1}},{label:"B",center:{x:312.4,y:293.8}},{label:"P",center:{x:193.5,y:91.3}}]} edges={[{source:2,target:3},{source:2,target:0},{source:4,target:1},{source:4,target:2}]} />
