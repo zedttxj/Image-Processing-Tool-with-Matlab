@@ -259,10 +259,21 @@ And, all possible pairs of partitions of `[3 3 2 1]` are these:
 - A more complex case:
 ```mermaid
 graph TD;
-    C[11 10 6 4 2 1] --> A[2 1];
-    C[11 10 6 4 2 1] --> B;
-    B --> D[10 6 4 1 1];
-    B --> E[10 6 4 1 1];
+
+    C[11 10 6 4 2 1]
+
+    subgraph Group1["Group 1 (Left)"]
+        A[2 1]
+    end
+
+    subgraph Group2["Group 2 (Right)"]
+        D[10 6 4 1 1]
+        E[10 6 4 2 1]
+    end
+
+    C --> A
+    C --> D
+    C --> E
 ```
 And, all possible pairs of partitions of `[11 10 6 4 2 1]` are these:
 ```matlab
