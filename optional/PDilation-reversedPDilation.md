@@ -290,3 +290,46 @@ graph TD;
     {[   10 6 4 2 1]}    {[          2 1]}
     {[11 10 6 4 2 1]}    {[            1]}
 ```
+- An even more complex case:
+```mermaid
+graph TD;
+
+    C[15 14 10 8 6 5 1]
+
+
+
+    subgraph Group2["Right"]
+        D[14 10 8 5 5 1]
+        E[14 10 8 6 5 1]
+    end
+
+    subgraph Group1["Left"]
+        A[2 1]
+    end
+
+    subgraph Group4["Right"]
+        G[10 4 4 1 1]
+        H[10 5 4 1 1]
+        I[10 6 4 1 1]
+    end
+    subgraph Group5["Right"]
+        J[10 4 4 2 1]
+        K[10 5 4 2 1]
+        L[10 6 4 2 1]
+    end
+
+    subgraph Group3["Left"]
+      B[5 1]
+    end
+    D --> B
+    D --> G
+    D --> H
+    D --> I
+    E --> B
+    E --> J
+    E --> K
+    E --> L
+    C --> A
+    C --> D
+    C --> E
+```
