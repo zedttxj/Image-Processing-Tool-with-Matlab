@@ -247,7 +247,7 @@ graph TD;
     B[2 2 1] --> D[2 1];
     B[2 2 1] --> E[1 1];
 ```
-And, all possible pairs of partitions of `[3 3 2 1]` are these:
+- And, all possible pairs of partitions of `[3 3 2 1]` are these:
 ```matlab
     {[      1]}    {[3 3 2 1]}
     {[    1 1]}    {[  3 2 1]}
@@ -275,7 +275,7 @@ graph TD;
     C --> D
     C --> E
 ```
-And, all possible pairs of partitions of `[11 10 6 4 2 1]` are these:
+- And, all possible pairs of partitions of `[11 10 6 4 2 1]` are these:
 ```matlab
     {[            1]}    {[11 10 6 4 2 1]}
     {[          2 1]}    {[   10 6 4 1 1]}
