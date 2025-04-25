@@ -1,6 +1,6 @@
 # PDilation is non-injective and non-cancellativite
 Like how Dilation is non-injective, PDilation is also non-injective. Hence, finding all `(A, B)` pairs that lead to a known result `Cs` is a set-inversion problem.
-It's a nonlinear algebraic structure like(A, B) ↦ A ⊕ B  (where ⊕ is PDilation).
+It's a nonlinear algebraic structure like (A, B) ↦ A ⊕ B  (where ⊕ is PDilation).
 # Redefine PDilation
 Assume that A ⊕ B = Cs. We can define PDilation as follow:
 Cs(k) = max( A(i) + B(j) ) for all possible i + j = k - 1
