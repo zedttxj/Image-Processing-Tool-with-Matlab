@@ -62,6 +62,7 @@ If |A| = 1, B is always equal to C. To avoid making things complicated, through 
 - Always breaking down left-first.
 - Always sorting results lexicographically.
 - Always extracting the largest atomic partition possible.
+
 With a canonical rule in place, the atomic components of a partition are unique.
 - Example code:
   ```matlab
