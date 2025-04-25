@@ -57,6 +57,7 @@ If |A| = 1, B is always equal to C. To avoid making things complicated, through 
 ## Case 2: A = D where (A ⊕ B) ⊕ C = D ⊕ (B ⊕ C) and B and C are constant partitions
 - **Atomic partition:** A partition that cannot be written as A ⊕ B for any nontrivial A and B. It's non-decomposable under PDilation operation (⊕). It appears once in all **full** decompositions of the input partition.
 - **Constant partitions:** A partition that always appears in every full decomposition of a certain larger partition. It's not necessarily equal to atomic partitions. You can picture it like prime numbers.
+
 **A canonical decomposition is:** A standardized or agreed-upon way of breaking down partitions (or anything complex) so there's only one correct version. For example:
 - Always breaking down left-first.
 - Always sorting results lexicographically.
