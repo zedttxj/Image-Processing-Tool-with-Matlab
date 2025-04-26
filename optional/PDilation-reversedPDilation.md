@@ -74,7 +74,7 @@ In higher dimensions, we can extend the convolution-like operation to work with 
 ```python3
 C[k][t] = ⊕(A[i][m] ∘ B[j][n])
 ```
-           where i + j - 1 = k and m + n - 1 = t
+where i + j - 1 = k and m + n - 1 = t
 Here:  
 - ∘ is the combining operation and ⊕ is the accumulation operation.
 - i, j are the indices for the first dimension of A and B.  
@@ -88,14 +88,14 @@ In MATLAB, `conv2` is used to perform 2D convolution between two matrices. This 
 ```python3
 C[k][t] = Σ (A[i][m] * B[j][n])
 ```
-           where i + j - 1 = k and m + n - 1 = t
+where i + j - 1 = k and m + n - 1 = t
 
 ### Example 2: Dilation (Accumulation: Max)
 In the traditional dilation operation defined in many books operation, we can define it as the combination of two arrays A[i][m] and B[j][n] with a multiplication combining operation and max accumulation operation. The result C[k][t] is computed as:  
 ```python3
 C[k][t] = max(A[i][m] * B[j][n])
 ```
-           where i + j - 1 = k and m + n - 1 = t
+where i + j - 1 = k and m + n - 1 = t
 
 # divide-and-conquer method may not be applicable in the case of reversedPDilation
 The original problem is this:
