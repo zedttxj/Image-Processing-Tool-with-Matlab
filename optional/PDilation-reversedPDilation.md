@@ -2,7 +2,7 @@
 Before diving into the details, here are important points to understand:
 - **Definitions:**
   - A partition is a sequence of positive integers ( 𝑎₁ , 𝑎₂ , . . . , 𝑎ₙ ).
-  - We assume all partitions end with value `1` for easier analysis. (If a partition does not end with `1`, it can be decomposed into two partitions: one ending with 1 and one of length 1.) It will be explained further in the **fun fact** section.
+  - We assume all partitions end with value `1` for easier analysis. (If a partition does not end with `1`, it can always be decomposed into two partitions: one ending with 1 and one of length 1.) It will be explained further in the **fun fact** section.
 - **Non-injectivity:** PDilation is a nonlinear, non-injective operation, similar to Dilation. That means multiple (A, B) pairs can produce the same result Cs. Therefore, solving for all possible (A, B) given Cs is a set inversion problem. It's a nonlinear algebraic structure like (A, B) ↦ A ⊕ B  (where ⊕ is PDilation).
 - **Non-cancellativity:** PDilation does not satisfy cancellative properties. That is, knowing A ⊕ B = A ⊕ C does not imply B = C. A counterexample is shown later (Case 1).
 - **Operator:**
