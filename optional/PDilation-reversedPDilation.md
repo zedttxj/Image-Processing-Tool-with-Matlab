@@ -26,8 +26,6 @@ This operation assumes:
 
 But we can generalize this using any two associative and commutative operations.
 
----
-
 ## Example 1: Multiplication-Plus Convolution
 
 Let `A = [a₁, a₂, ..., aₙ]` and `B = [b₁, b₂, ..., bₘ]`.
@@ -36,8 +34,6 @@ We define the output `C[k]` at position `k` (starting from 1) as:
 C[k] = Σ (A[i] * B[j])
 where i + j - 1 = k
 This is equivalent to the **classic convolution** or the **coefficient-wise product of two polynomials**.
-
----
 
 ## Example 2: Addition-Max Convolution
 
@@ -48,7 +44,6 @@ In this example:
 So we define:
 C[k] = max(A[i] + B[j])
 satisfy i + j - 1 = k
-
 
 ### Example
 
@@ -63,9 +58,32 @@ We compute:
 - C[4] = A[3] + B[2] = 2 + 1 = **3**
 
 So the result is:  
-`C = [5, 7, 6, 3]`
+C = [5, 7, 6, 3]
 
 This is similar to our **PDilation** operation (⊕) except that we subtract 1 either before or after the maximum: C[k] = max(A[i] + B[j] - 1) or C[k] = max(A[i] + B[j]) - 1.
+
+## Higher-Dimensional Convolution Operation
+
+In higher dimensions, we can extend the convolution-like operation to work with more indices per array. Given two 2D arrays A[i][m] and B[j][n], the operation can be defined as:  
+C[k][t] = ⊕(A[i][m] ∘ B[j][n])
+           where i + j - 1 = k and m + n - 1 = t
+Here:  
+- ∘ is the combining operation and ⊕ is the accumulation operation.
+- i, j are the indices for the first dimension of A and B.  
+- m, n are the indices for the second dimension of A and B.  
+- k, t are the resulting indices for C.
+
+This operation can be viewed as a convolution-like process with two indices in each dimension, where the relation between the indices is defined as i + j - 1 = k and m + n - 1 = t. The same concept apply for 3D arrays and so on.
+
+### Example 1: conv2 from MATLAB (2D Convolution)
+In MATLAB, `conv2` is used to perform 2D convolution between two matrices. This operation computes the sum of the element-wise products between the input matrices A[i][m] and B[j][n], with the result stored in C[k][t]. For `conv2`, the formula would be:  
+C[k][t] = Σ (A[i][m] * B[j][n])  
+           where i + j - 1 = k and m + n - 1 = t
+
+### Example 2: Dilation (Accumulation: Max)
+In the traditional dilation operation defined in many books operation, we can define it as the combination of two arrays A[i][m] and B[j][n] with a multiplication combining operation and max accumulation operation. The result C[k][t] is computed as:  
+C[k][t] = max(A[i][m] * B[j][n])  
+           where i + j - 1 = k and m + n - 1 = t
 # divide-and-conquer method may not be applicable in the case of reversedPDilation
 The original problem is this:
 Given D, find all (A, B) such that A ⊕ B = D.  
