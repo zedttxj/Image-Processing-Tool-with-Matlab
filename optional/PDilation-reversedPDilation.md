@@ -74,7 +74,7 @@ In higher dimensions, we can extend the convolution-like operation to work with 
 ```python3
 C[k][t] = ⊕(A[i][m] ∘ B[j][n])
 ```
-where i + j - 1 = k and m + n - 1 = t
+where i + j - 1 = k and m + n - 1 = t.
 Here:  
 - ∘ is the combining operation and ⊕ is the accumulation operation.
 - i, j are the indices for the first dimension of A and B.  
