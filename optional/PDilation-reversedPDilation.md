@@ -8,7 +8,7 @@ Before diving into the details, here are important points to understand:
   - PDilation does not satisfy cancellative properties. That is, knowing A ⊕ B = A ⊕ C does not imply B = C.
   - A counterexample is shown later (Case 1).
 - **Operator:**
-  - Convolution-like operator: We define a custom (∘,⊕)-convolution operator using **∘** as the combining operation and **⊕** as the accumulation operation.  
+  - Convolution-like operator: We define a custom (∘,⊕)-convolution operator using **∘** as the combining operation and **⊕** as the accumulation operation. It's explained furthur in the below section.  
   - Higher dimensions: The convolution-like operator extends to 2D, 3D arrays, etc., following similar index rules.
   - PDilation: PDilation is a 1D convolution-like operator.
 - **Endpoints:** Cs(1) and Cs(end) are special because only one pair of elements (A(1), B(1)) and (A(end), B(end)) are involved in their computation.
