@@ -15,8 +15,8 @@ Before diving into the details, here are important points to understand:
 
 # Redefine PDilation
 Assume that A ⊕ B = Cs. We can define PDilation as follow:  
-Cs(k) = max( A(i) + B(j) ) for all possible i + j = k - 1  
-This is exactly max-plus convolution, which is:
+Cs(k) = max( A(i) + B(j) - 1) for all possible i + j = k - 1  
+This is exactly addition-max convolution, which is:
 - Nonlinear
 - Non-injective (i.e., multiple inputs can map to the same output)
 - Associative
