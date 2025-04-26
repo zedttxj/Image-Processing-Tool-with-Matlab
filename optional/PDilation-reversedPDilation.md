@@ -48,7 +48,7 @@ In this example:
 So we define:
 ```python3
 C[k] = max(A[i] + B[j])
-```python3
+```
 satisfy i + j - 1 = k
 
 ### Example
