@@ -17,8 +17,10 @@ We define a custom (∘,⊕)-convolution operator using **∘** as the combining
 Let:
 - `A = [a₁, a₂, ..., aₙ]`  
 - `B = [b₁, b₂, ..., bₘ]`  
-Then the result `C` is defined as:  
-Cₖ = ⊕ (aᵢ ∘ bⱼ), for all i, j such that i + j - 1 = k  
+Then the result `C` is defined as:
+```python3
+Cₖ = ⊕ (aᵢ ∘ bⱼ), for all i, j such that i + j - 1 = k
+```
 In other words, for each position `k`, you sum all products `aᵢ ∘ bⱼ` where the indices satisfy `i + j - 1 = k`.  
 This operation assumes:
 - **Commutativity** of the operators: `a ∘ b = b ∘ a` and `a ⊕ b = b ⊕ a`
@@ -31,7 +33,9 @@ But we can generalize this using any two associative and commutative operations.
 Let `A = [a₁, a₂, ..., aₙ]` and `B = [b₁, b₂, ..., bₘ]`.
 
 We define the output `C[k]` at position `k` (starting from 1) as:
+```python3
 C[k] = Σ (A[i] * B[j])
+```
 where i + j - 1 = k
 This is equivalent to the **classic convolution** or the **coefficient-wise product of two polynomials**.
 
@@ -42,7 +46,9 @@ In this example:
 - The accumulation operation is maximum (`max`)
 
 So we define:
+```python3
 C[k] = max(A[i] + B[j])
+```python3
 satisfy i + j - 1 = k
 
 ### Example
@@ -65,7 +71,9 @@ This is similar to our **PDilation** operation (⊕) except that we subtract 1 e
 ## Higher-Dimensional Convolution Operation
 
 In higher dimensions, we can extend the convolution-like operation to work with more indices per array. Given two 2D arrays A[i][m] and B[j][n], the operation can be defined as:  
+```python3
 C[k][t] = ⊕(A[i][m] ∘ B[j][n])
+```
            where i + j - 1 = k and m + n - 1 = t
 Here:  
 - ∘ is the combining operation and ⊕ is the accumulation operation.
@@ -77,13 +85,18 @@ This operation can be viewed as a convolution-like process with two indices in e
 
 ### Example 1: conv2 from MATLAB (2D Convolution)
 In MATLAB, `conv2` is used to perform 2D convolution between two matrices. This operation computes the sum of the element-wise products between the input matrices A[i][m] and B[j][n], with the result stored in C[k][t]. For `conv2`, the formula would be:  
-C[k][t] = Σ (A[i][m] * B[j][n])  
+```python3
+C[k][t] = Σ (A[i][m] * B[j][n])
+```
            where i + j - 1 = k and m + n - 1 = t
 
 ### Example 2: Dilation (Accumulation: Max)
 In the traditional dilation operation defined in many books operation, we can define it as the combination of two arrays A[i][m] and B[j][n] with a multiplication combining operation and max accumulation operation. The result C[k][t] is computed as:  
-C[k][t] = max(A[i][m] * B[j][n])  
+```python3
+C[k][t] = max(A[i][m] * B[j][n])
+```
            where i + j - 1 = k and m + n - 1 = t
+
 # divide-and-conquer method may not be applicable in the case of reversedPDilation
 The original problem is this:
 Given D, find all (A, B) such that A ⊕ B = D.  
