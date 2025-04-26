@@ -12,6 +12,8 @@ This is exactly max-plus convolution, which is:
 - Commonly used in morphological image processing and tropical algebra.
 
 From here, we can infer that Cs(1) is always equal to A(1) + B(1) as it's the only value used to calculate Cs(1). The same thing with Cs(end) where A(end) + B(end) is the only value being used to calculate Cs(end).
+# Convolution-like operator
+<pre lang="markdown"> ```latex Let A = [a₁, a₂, ..., aₙ] and B = [b₁, b₂, ..., bₘ]. Define a convolution-like operator ⊗ such that: Cₖ = ∑_{i + j - 1 = k} (aᵢ * bⱼ) This operator uses multiplication (*) as the inner operation and addition (+) as the accumulation (like standard convolution). It satisfies: - Commutativity of the inner operation: aᵢ * bⱼ = bⱼ * aᵢ - Associativity of the accumulation: (x + y) + z = x + (y + z) ``` </pre>
 # divide-and-conquer method may not be applicable in the case of reversedPDilation
 The original problem is this:
 Given D, find all (A, B) such that A ⊕ B = D.  
