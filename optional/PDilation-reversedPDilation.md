@@ -91,7 +91,7 @@ C[k][t] = Σ (A[i][m] * B[j][n])
 where i + j - 1 = k and m + n - 1 = t
 
 ### Example 2: Dilation (Accumulation: Max)
-In the traditional dilation operation defined in many books operation, we can define it as the combination of two arrays A[i][m] and B[j][n] with a multiplication combining operation and max accumulation operation. The result C[k][t] is computed as:  
+In the traditional dilation operation defined in many books, we can define it as the combination of two arrays A[i][m] and B[j][n] with a multiplication combining operation and max accumulation operation. The result C[k][t] is computed as:  
 ```python3
 C[k][t] = max(A[i][m] * B[j][n])
 ```
