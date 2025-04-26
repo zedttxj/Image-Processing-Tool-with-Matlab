@@ -13,7 +13,59 @@ This is exactly max-plus convolution, which is:
 
 From here, we can infer that Cs(1) is always equal to A(1) + B(1) as it's the only value used to calculate Cs(1). The same thing with Cs(end) where A(end) + B(end) is the only value being used to calculate Cs(end).
 # Convolution-like operator
-<pre lang="markdown"> ```latex Let A = [a₁, a₂, ..., aₙ] and B = [b₁, b₂, ..., bₘ]. Define a convolution-like operator ⊗ such that: Cₖ = ∑_{i + j - 1 = k} (aᵢ * bⱼ) This operator uses multiplication (*) as the inner operation and addition (+) as the accumulation (like standard convolution). It satisfies: - Commutativity of the inner operation: aᵢ * bⱼ = bⱼ * aᵢ - Associativity of the accumulation: (x + y) + z = x + (y + z) ``` </pre>
+We define a custom (∘,⊕)-convolution operator using **∘** as the combining operation and **⊕** as the accumulation operation.  
+Let:
+- `A = [a₁, a₂, ..., aₙ]`  
+- `B = [b₁, b₂, ..., bₘ]`  
+Then the result `C` is defined as:  
+Cₖ = ⊕ (aᵢ ∘ bⱼ), for all i, j such that i + j - 1 = k  
+In other words, for each position `k`, you sum all products `aᵢ ∘ bⱼ` where the indices satisfy `i + j - 1 = k`.  
+This operation assumes:
+- **Commutativity** of the operators: `a ∘ b = b ∘ a` and `a ⊕ b = b ⊕ a`
+- **Associativity** of operators: `(x ∘ y) ∘ z = x ∘ (y ∘ z)` and `(x ⊕ y) ⊕ z = x ⊕ (y ⊕ z)`
+
+But we can generalize this using any two associative and commutative operations.
+
+---
+
+## Example 1: Multiplication-Plus Convolution
+
+Let `A = [a₁, a₂, ..., aₙ]` and `B = [b₁, b₂, ..., bₘ]`.
+
+We define the output `C[k]` at position `k` (starting from 1) as:
+C[k] = Σ (A[i] * B[j])
+where i + j - 1 = k
+This is equivalent to the **classic convolution** or the **coefficient-wise product of two polynomials**.
+
+---
+
+## Example 2: Addition-Max Convolution
+
+In this example:
+- The combining operation is addition (`+`)
+- The accumulation operation is maximum (`max`)
+
+So we define:
+C[k] = max(A[i] + B[j])
+satisfy i + j - 1 = k
+
+
+### Example
+
+Let:
+A = [1, 3, 2] B = [4, 1]  
+
+We compute:
+
+- C[1] = A[1] + B[1] = 1 + 4 = **5**
+- C[2] = max(A[1] + B[2], A[2] + B[1]) = max(1 + 1, 3 + 4) = **7**
+- C[3] = max(A[2] + B[2], A[3] + B[1]) = max(3 + 1, 2 + 4) = **6**
+- C[4] = A[3] + B[2] = 2 + 1 = **3**
+
+So the result is:  
+`C = [5, 7, 6, 3]`
+
+This is similar to our **PDilation** operation (⊕) except that we subtract 1 either before or after the maximum: C[k] = max(A[i] + B[j] - 1) or C[k] = max(A[i] + B[j]) - 1.
 # divide-and-conquer method may not be applicable in the case of reversedPDilation
 The original problem is this:
 Given D, find all (A, B) such that A ⊕ B = D.  
