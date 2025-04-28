@@ -110,7 +110,7 @@ where i + j - 1 = k and m + n - 1 = t
 # divide-and-conquer method may not be applicable in the case of reversedPDilation
 The original problem is this:
 Given D, find all (A, B) such that A ⊕ B = D.  
-Whis is exactly like convolution inversion but under max-plus algebra. Because PDilation is non-injective (considering some special cases below), the normal divide-and-conquer method may not be applicable. However, considering the associative and commutative properties, we may be able to apply this method.
+This is exactly like convolution inversion but under max-plus algebra. Because PDilation is non-injective (considering some special cases below), the normal divide-and-conquer method may not be applicable. However, considering the associative and commutative properties, we may be able to apply this method.
 # Some special cases:
 ## Case 1: A ⊕ B = A ⊕ C where B ≠ C
 - Example code:
