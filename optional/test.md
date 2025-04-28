@@ -8,7 +8,9 @@ This document presents the **PDilation** operator—an index‑shifted, max–pl
 
 - **Partition**: A non‑increasing sequence of positive integers
   We require trailing 1’s: any partition not ending in 1 can be written as
+  ```math
   $\oplus \(1\).
+  ```
 
 - **PDilation ($\oplus$)**: For two partitions
   \(A=(a_1,\dots,a_m)\) and \(B=(b_1,\dots,b_n)\),
