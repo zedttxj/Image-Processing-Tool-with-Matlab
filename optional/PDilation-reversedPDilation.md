@@ -152,7 +152,7 @@ You should notice that the length of B (or C) is always larger than 2. The reaso
 If |A| = 1, B is always equal to C. To avoid making things complicated, throughout the input partitions used for analysis, their ending value are always be 1. For partitions that doesn't end with value `1`, we can always and only extract (cancel out) one pair of partitions where one of them has the length of 1 and the other has their ending value is `1`. For example, `[4 4 3]` = `[3]` ⊕ `[2 2 1]`. We will only have to focus on how to decompose `[2 2 1]`.  
 ## Case 2: A = D where (A ⊕ B) ⊕ C = D ⊕ (B ⊕ C) and B and C are constant partitions (not yet proved)
 - **Atomic partition:** A partition that cannot be written as A ⊕ B for any nontrivial A and B. It's non-decomposable under PDilation operation (⊕). It appears once in all **full** decompositions of the input partition.Atomic partition isn't necessarily equal to constant partition.
-- **Constant partitions:** A partition that always appears in every full decomposition of a certain larger partition. You can picture it like prime numbers. A partition is constant depends on the input partition; with different input partition, it might become atomic partition instead.
+- **Constant partitions:** A partition that always appears in every full decomposition of a certain larger partition. You can picture it like prime numbers. A partition is constant depends on the input partition; a partition that is constant partition for this input might be just an atomic partition for different input.
 
 **A canonical decomposition is:** A standardized or agreed-upon way of breaking down partitions (or anything complex) so there's only one correct version. For example:
 - Always breaking down left-first.
