@@ -12,7 +12,11 @@ Before diving into the details, here are important points to understand (explain
   - Higher dimensions: The convolution-like operator extends to 2D, 3D arrays, etc., following similar index rules.
   - PDilation: PDilation is a 1D convolution-like operator.
 - **Endpoints:** Cs(1) and Cs(end) are special because only one pair of elements (A(1), B(1)) and (A(end), B(end)) are involved in their computation.
-
+```tex
+\lambda = (\lambda_1,\dots,\lambda_\ell) 
+  \quad\Longrightarrow\quad
+\text{PDilation}(A,B)_k = \max_{i+j=k+1}\bigl(A_i + B_j - 1\bigr).
+```
 # Redefine PDilation
 Assume that A ⊕ B = Cs. We can define PDilation as follow:  
 Cs(k) = max( A(i) + B(j) - 1) for all possible i + j = k - 1  
