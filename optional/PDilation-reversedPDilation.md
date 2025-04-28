@@ -110,7 +110,7 @@ where i + j - 1 = k and m + n - 1 = t
 # divide-and-conquer method may not be applicable in the case of reversedPDilation
 The original problem is this:
 Given D, find all (A, B) such that A ⊕ B = D.  
-This is exactly like convolution inversion but under max-plus algebra. Because PDilation is non-injective (considering some special cases below), the normal divide-and-conquer method may not be applicable. However, considering the associative and commutative properties, we may be able to apply this method.
+This is exactly like convolution inversion but under max-plus algebra. Because PDilation is non-injective (considering some special cases below), the normal divide-and-conquer method may not be applicable. Consider **4th fact** below.
 # Some special cases:
 ## Case 1: A ⊕ B = A ⊕ C where B ≠ C
 - Example code:
@@ -467,3 +467,20 @@ graph TD;
     {[15 14 10 8 6 5 1]}    {[               1]}
     Size: 24
 ```
+## Case 4: Decrease one entry in each input, yet the PDilation stays exactly the same
+Here's a test where you decrease one entry in each input, yet the PDilation stays exactly the same.
+```matlab
+% Original pair
+A1 = [4 3 2 1];
+B1 = [4 3 2 1];
+D1 = ImageProcessor.PDilation(A1, B1);
+% D1 == [7 6 5 4 3 2 1]
+
+% Altered pair (both decreased)
+A2 = [4 2 2 1];   % second part 3→2
+B2 = [4 3 1 1];   % third part 2→1
+D2 = ImageProcessor.PDilation(A2, B2);
+% D2 == [7 6 5 4 3 2 1]  ← same result
+```
+### 4th fact:
+This confirms that divide-and-conquer method doesn't work.
