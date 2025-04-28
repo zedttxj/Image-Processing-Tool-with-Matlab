@@ -1,82 +1,82 @@
 # Introduction
-Before diving into the details, here are important points to understand (explained further in the below sections):
-- **Definitions:**
-  - A partition is a sequence of positive integers ( 𝑎₁ , 𝑎₂ , . . . , 𝑎ₙ ).
-  - We assume all partitions end with value `1` for easier analysis. (If a partition does not end with `1`, it can always be decomposed into two partitions: one ending with 1 and one of length 1.) It will be explained further in the **fun fact** section.
-- **Non-injectivity:** PDilation is a nonlinear, non-injective operation, similar to Dilation. That means multiple (A, B) pairs can produce the same result Cs. Therefore, solving for all possible (A, B) given Cs is a set inversion problem. It's a nonlinear algebraic structure like (A, B) ↦ A ⊕ B  (where ⊕ is PDilation).
-- **Non-cancellativity:**
-  - PDilation does not satisfy cancellative properties. That is, knowing A ⊕ B = A ⊕ C does not imply B = C.
-  - A counterexample is shown later (Case 1).
-- **Operator:**
+Before diving into the details, here are important points to understand (explained further in the below sections):  
+- **Definitions:**  
+  - A partition is a sequence of positive integers ( 𝑎₁ , 𝑎₂ , . . . , 𝑎ₙ ).  
+  - We assume all partitions end with value `1` for easier analysis. (If a partition does not end with `1`, it can always be decomposed into two partitions: one ending with 1 and one of length 1.) It will be explained further in the **fun fact** section.  
+- **Non-injectivity:** PDilation is a nonlinear, non-injective operation, similar to Dilation. That means multiple (A, B) pairs can produce the same result Cs. Therefore, solving for all possible (A, B) given Cs is a set inversion problem. It's a nonlinear algebraic structure like (A, B) ↦ A ⊕ B  (where ⊕ is PDilation).  
+- **Non-cancellativity:**  
+  - PDilation does not satisfy cancellative properties. That is, knowing A ⊕ B = A ⊕ C does not imply B = C.  
+  - A counterexample is shown later (Case 1).  
+- **Operator:**  
   - Convolution-like operator: We define a custom (∘,⊕)-convolution operator using **∘** as the combining operation and **⊕** as the accumulation operation.  
-  - Higher dimensions: The convolution-like operator extends to 2D, 3D arrays, etc., following similar index rules.
-  - PDilation: PDilation is a 1D convolution-like operator.
-- **Endpoints:** Cs(1) and Cs(end) are special because only one pair of elements (A(1), B(1)) and (A(end), B(end)) are involved in their computation.
-# Redefine PDilation
+  - Higher dimensions: The convolution-like operator extends to 2D, 3D arrays, etc., following similar index rules.  
+  - PDilation: PDilation is a 1D convolution-like operator.  
+- **Endpoints:** Cs(1) and Cs(end) are special because only one pair of elements (A(1), B(1)) and (A(end), B(end)) are involved in their computation.  
+# Redefine PDilation  
 Assume that A ⊕ B = Cs. We can define PDilation as follow:  
-Cs(k) = max( A(i) + B(j) - 1) for all possible i + j = k - 1  
-This is exactly addition-max convolution, which is:
-- Nonlinear
-- Non-injective (i.e., multiple inputs can map to the same output)
-- Associative
-- Commonly used in morphological image processing and tropical algebra.
+Cs(k) = max( A(i) + B(j) - 1) for all possible i + j = k - 1   
+This is exactly addition-max convolution, which is:  
+- Nonlinear  
+- Non-injective (i.e., multiple inputs can map to the same output)  
+- Associative  
+- Commonly used in morphological image processing and tropical algebra.  
 
-From here, we can infer that Cs(1) is always equal to A(1) + B(1) as it's the only value used to calculate Cs(1). The same thing with Cs(end) where A(end) + B(end) is the only value being used to calculate Cs(end).
-# Convolution-like operator
+From here, we can infer that Cs(1) is always equal to A(1) + B(1) as it's the only value used to calculate Cs(1). The same thing with Cs(end) where A(end) + B(end) is the only value being used to calculate Cs(end).  
+# Convolution-like operator  
 We define a custom (∘,⊕)-convolution operator using **∘** as the combining operation and **⊕** as the accumulation operation.  
 Let:
 - `A = [a₁, a₂, ..., aₙ]`  
 - `B = [b₁, b₂, ..., bₘ]`  
-Then the result `C` is defined as:
+Then the result `C` is defined as:  
 ```python3
 Cₖ = ⊕ (aᵢ ∘ bⱼ), for all i, j such that i + j - 1 = k
 ```
-In other words, for each position `k`, you sum all products `aᵢ ∘ bⱼ` where the indices satisfy `i + j - 1 = k`.  
-This operation assumes:
-- **Commutativity** of the operators: `a ∘ b = b ∘ a` and `a ⊕ b = b ⊕ a`
-- **Associativity** of operators: `(x ∘ y) ∘ z = x ∘ (y ∘ z)` and `(x ⊕ y) ⊕ z = x ⊕ (y ⊕ z)`
+In other words, for each position `k`, you sum all products `aᵢ ∘ bⱼ` where the indices satisfy `i + j - 1 = k`.   
+This operation assumes:  
+- **Commutativity** of the operators: `a ∘ b = b ∘ a` and `a ⊕ b = b ⊕ a`  
+- **Associativity** of operators: `(x ∘ y) ∘ z = x ∘ (y ∘ z)` and `(x ⊕ y) ⊕ z = x ⊕ (y ⊕ z)`  
 
-But we can generalize this using any two associative and commutative operations.
+But we can generalize this using any two associative and commutative operations.  
 
-## Example 1: Multiplication-Plus Convolution
+## Example 1: Multiplication-Plus Convolution  
 
-Let `A = [a₁, a₂, ..., aₙ]` and `B = [b₁, b₂, ..., bₘ]`.
+Let `A = [a₁, a₂, ..., aₙ]` and `B = [b₁, b₂, ..., bₘ]`.  
 
-We define the output `C[k]` at position `k` (starting from 1) as:
+We define the output `C[k]` at position `k` (starting from 1) as:  
 ```python3
 C[k] = Σ (A[i] * B[j])
 ```
-where i + j - 1 = k
-This is equivalent to the **classic convolution** or the **coefficient-wise product of two polynomials**.
+where i + j - 1 = k  
+This is equivalent to the **classic convolution** or the **coefficient-wise product of two polynomials**.  
 
-## Example 2: Addition-Max Convolution
+## Example 2: Addition-Max Convolution  
 
-In this example:
-- The combining operation is addition (`+`)
-- The accumulation operation is maximum (`max`)
+In this example:  
+- The combining operation is addition (`+`).  
+- The accumulation operation is maximum (`max`).  
 
 So we define:
 ```python3
 C[k] = max(A[i] + B[j])
 ```
-satisfy i + j - 1 = k
+satisfy i + j - 1 = k  
 
 ### Example
 
 Let:
 A = [1, 3, 2] B = [4, 1]  
 
-We compute:
+We compute:  
 
-- C[1] = A[1] + B[1] = 1 + 4 = **5**
-- C[2] = max(A[1] + B[2], A[2] + B[1]) = max(1 + 1, 3 + 4) = **7**
-- C[3] = max(A[2] + B[2], A[3] + B[1]) = max(3 + 1, 2 + 4) = **6**
-- C[4] = A[3] + B[2] = 2 + 1 = **3**
+- C[1] = A[1] + B[1] = 1 + 4 = **5**  
+- C[2] = max(A[1] + B[2], A[2] + B[1]) = max(1 + 1, 3 + 4) = **7**  
+- C[3] = max(A[2] + B[2], A[3] + B[1]) = max(3 + 1, 2 + 4) = **6**  
+- C[4] = A[3] + B[2] = 2 + 1 = **3**  
 
 So the result is:  
-C = [5, 7, 6, 3]
+C = [5, 7, 6, 3]  
 
-This is similar to our **PDilation** operation (⊕) except that we subtract 1 either before or after the maximum: C[k] = max(A[i] + B[j] - 1) or C[k] = max(A[i] + B[j]) - 1.
+This is similar to our **PDilation** operation (⊕) except that we subtract 1 either before or after the maximum: C[k] = max(A[i] + B[j] - 1) or C[k] = max(A[i] + B[j]) - 1.  
 
 ## Higher-Dimensional Convolution Operation
 
@@ -84,28 +84,28 @@ In higher dimensions, we can extend the convolution-like operation to work with 
 ```python3
 C[k][t] = ⊕(A[i][m] ∘ B[j][n])
 ```
-where i + j - 1 = k and m + n - 1 = t.
+where i + j - 1 = k and m + n - 1 = t.  
 Here:  
-- ∘ is the combining operation and ⊕ is the accumulation operation.
+- ∘ is the combining operation and ⊕ is the accumulation operation.  
 - i, j are the indices for the first dimension of A and B.  
 - m, n are the indices for the second dimension of A and B.  
-- k, t are the resulting indices for C.
+- k, t are the resulting indices for C.  
 
-This operation can be viewed as a convolution-like process with two indices in each dimension, where the relation between the indices is defined as i + j - 1 = k and m + n - 1 = t. The same concept apply for 3D arrays and so on.
+This operation can be viewed as a convolution-like process with two indices in each dimension, where the relation between the indices is defined as i + j - 1 = k and m + n - 1 = t. The same concept apply for 3D arrays and so on.  
 
-### Example 1: conv2 from MATLAB (2D Convolution)
+### Example 1: conv2 from MATLAB (2D Convolution)  
 In MATLAB, `conv2` is used to perform 2D convolution between two matrices. This operation computes the sum of the element-wise products between the input matrices A[i][m] and B[j][n], with the result stored in C[k][t]. For `conv2`, the formula would be:  
 ```python3
 C[k][t] = Σ (A[i][m] * B[j][n])
 ```
-where i + j - 1 = k and m + n - 1 = t
+where i + j - 1 = k and m + n - 1 = t  
 
-### Example 2: Dilation (Accumulation: Max)
-In the traditional dilation operation defined in many books, we can define it as the combination of two arrays A[i][m] and B[j][n] with a multiplication combining operation and max accumulation operation. The result C[k][t] is computed as:  
+### Example 2: Dilation (Accumulation: Max)  
+In the traditional dilation operation defined in many books, we can define it as the combination of two arrays A[i][m] and B[j][n] with a multiplication combining operation and max accumulation operation. The result C[k][t] is computed as:   
 ```python3
 C[k][t] = max(A[i][m] * B[j][n])
 ```
-where i + j - 1 = k and m + n - 1 = t
+where i + j - 1 = k and m + n - 1 = t  
 
 # divide-and-conquer method may not be applicable in the case of reversedPDilation
 The original problem is this:
