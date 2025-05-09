@@ -13,7 +13,7 @@ Before diving into the details, here are important points to understand (explain
   - PDilation: PDilation is a 1D convolution-like operator.  
 - **Endpoints:** Cs(1) and Cs(end) are special because only one pair of elements (A(1), B(1)) and (A(end), B(end)) are involved in their computation.
 # Warning
-`reversedPDilationv2` is only used for testing. It runs 2 times faster than `reversedPDilation` but it occasionally misses some output pairs. One example is `[7 7 7 6 5 4 3 1 1]`.  
+`reversedPDilationv2` is only used for testing. It runs 2 times faster than `reversedPDilation`, but it occasionally misses some output pairs. One example is `[7 7 7 6 5 4 3 1 1]`.  
 ![{9613FA0E-1D01-4148-810A-204F4095B7DC}](https://github.com/user-attachments/assets/f995d781-3977-41ff-9aca-8d55a1e61fe7)  
 # Redefine PDilation  
 Assume that A ⊕ B = Cs. We can define PDilation as follow:  
