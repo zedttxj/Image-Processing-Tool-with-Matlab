@@ -565,6 +565,8 @@ classdef ImageProcessor
         end
         function partitions = reversedPDilation(Cs)
             partitions = [];
+            ch = Cs(end)-1;
+            Cs = Cs-ch;
             function PDrecursion(C, A, B)
                 if ~isempty(C)
                     for i = A(1):min(Cs(end-length(B)-length(A)+1:end-length(A)) - B + 1)
@@ -579,15 +581,22 @@ classdef ImageProcessor
                     partitions = [partitions; [length(A)+1 A B]; [length(B)+1 B A]];
                 end
             end
-            for i = 1:Cs(end)
-                PDrecursion(Cs(1:end-1),[i],[Cs(end)-i+1]);
-            end
+            PDrecursion(Cs(1:end-1),[1],[1]);
             Cs = unique(partitions,'rows');
+            result = [];
+            t = Cs(:,1)-1;
+            t = cat(2, ImageProcessor.P2M(t), zeros([size(t)]));
+            for i = 0:ch
+                result = [result; cat(2, Cs(:,1), (Cs(:,2:end) + (t * i) + (1 - t) * (ch-i)))];
+            end
+            Cs = unique(result,'rows');
             partitions = arrayfun(@(i) {Cs(i, 2 : Cs(i,1)), Cs(i, Cs(i,1)+1:end)}, 1:size(Cs,1), 'UniformOutput', false);
             partitions = vertcat(partitions{:});
         end
         function partitions = reversedPDilationv2(Cs)
             partitions = [];
+            ch = Cs(end)-1;
+            Cs = Cs-ch;
             function PDrecursion(C, A, B)
                 if ~isempty(C)
                     n = C(end)-B(1)+1;
@@ -606,10 +615,15 @@ classdef ImageProcessor
                     partitions = [partitions; [length(A)+1 A B]; [length(B)+1 B A]];
                 end
             end
-            for i = 1:Cs(end)
-                PDrecursion(Cs(1:end-1),[i],[Cs(end)-i+1]);
-            end
+            PDrecursion(Cs(1:end-1),[1],[1]);
             Cs = unique(partitions,'rows');
+            result = [];
+            t = Cs(:,1)-1;
+            t = cat(2, ImageProcessor.P2M(t), zeros([size(t)]));
+            for i = 0:ch
+                result = [result; cat(2, Cs(:,1), (Cs(:,2:end) + (t * i) + (1 - t) * (ch-i)))];
+            end
+            Cs = unique(result,'rows');
             partitions = arrayfun(@(i) {Cs(i, 2 : Cs(i,1)), Cs(i, Cs(i,1)+1:end)}, 1:size(Cs,1), 'UniformOutput', false);
             partitions = vertcat(partitions{:});
         end
