@@ -11,7 +11,9 @@ Before diving into the details, here are important points to understand (explain
   - Convolution-like operator: We define a custom (∘,⊕)-convolution operator using **∘** as the combining operation and **⊕** as the accumulation operation.  
   - Higher dimensions: The convolution-like operator extends to 2D, 3D arrays, etc., following similar index rules.  
   - PDilation: PDilation is a 1D convolution-like operator.  
-- **Endpoints:** Cs(1) and Cs(end) are special because only one pair of elements (A(1), B(1)) and (A(end), B(end)) are involved in their computation.  
+- **Endpoints:** Cs(1) and Cs(end) are special because only one pair of elements (A(1), B(1)) and (A(end), B(end)) are involved in their computation.
+# Warning
+`reversedPDilationv2` is only used for testing. It runs 2 times faster than `reversedPDilation` but it occasionally misses some output pairs. One example is `[7 7 7 6 5 4 3 1 1]`.
 # Redefine PDilation  
 Assume that A ⊕ B = Cs. We can define PDilation as follow:  
 Cs(k) = max( A(i) + B(j) - 1) for all possible i + j = k - 1   
