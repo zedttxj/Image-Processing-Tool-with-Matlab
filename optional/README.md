@@ -871,9 +871,6 @@ Let:
 
 Then:  
 - PDilation(λ, λ′) = (11, 10, 9, 8, 4, 2)
-
-So:  
 - f_(7,4,3,2) ⊙ f_(5,3,1) = f_(12,11,10,9,5,3)
 
-This exactly matches:  
-- f_λ ⊙ f_λ′ = f_PDilation(λ, λ′) + 1  
+We can conclude that f_λ ⊙ f_λ′ = f_PDilation(λ, λ′) + 1  
