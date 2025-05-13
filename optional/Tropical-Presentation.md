@@ -74,7 +74,7 @@ max(max(μ₁+𝜈₁)+0x, max(μ₂+𝜈₁,μ₁+𝜈₂)+1x, max(μ₃+𝜈�
 
 ---
 
-## Utility Functions (not related)
+## Utility Functions (not directly related)
 
 `A` is a 1D array of integers. These functions convert `A` into symbolic subscript notation, attaching each entry with `c`:
 - `arr2maxstr(A, c, op)` → Cell array like `{ 'μ₁', 'μ₂', ... }`
