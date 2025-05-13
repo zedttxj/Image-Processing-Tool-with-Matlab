@@ -866,11 +866,11 @@ f(x) ⊙ g(x) = max(max(μ₁+𝜈₁)+0x,max(μ₂+𝜈₁,μ₁+𝜈₂)+1x,ma
 **Notice** that the PDilation has all of its values substracted by 1. PDilation is not exactly tropical multiplication of the raw polynomial terms:
 #### Example:
 Let:  
-    λ = (7, 4, 3, 2)  
-    λ′ = (5, 3, 1)  
+- λ = (7, 4, 3, 2)  
+- λ′ = (5, 3, 1)  
 Then:  
-    PDilation(λ, λ′) = (11, 10, 9, 8, 4, 2)  
+- PDilation(λ, λ′) = (11, 10, 9, 8, 4, 2)  
 So:  
-    f_(7,4,3,2) · f_(5,3,1) = f_(12,11,10,9,5,3)  
+- f_(7,4,3,2) · f_(5,3,1) = f_(12,11,10,9,5,3)  
 This exactly matches:  
-    f_λ · f_λ′ = f_PDilation(λ, λ′) + 1  
+- f_λ · f_λ′ = f_PDilation(λ, λ′) + 1  
