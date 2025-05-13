@@ -853,41 +853,17 @@ Tropical Polynomial Multiplication
 
 Given two tropical polynomials:
 
-\[
-f(x) = \min(a_0 + 0x,\, a_1 + 1x,\, a_2 + 2x,\, \ldots)
-\]
-\[
-g(x) = \min(b_0 + 0x,\, b_1 + 1x,\, b_2 + 2x,\, \ldots)
-\]
+f(x) = μ₁⨂x⁰⊕μ₂⨂x¹⊕μ₃⨂x²⊕μ₄⨂x³
+g(x) = 𝜈₁⨂x⁰⊕𝜈₂⨂x¹⊕𝜈₃⨂x²
 
 Their tropical product is defined as:
 
-\[
-(f \odot g)(x) = \min_{i,j}(a_i + b_j + (i + j)x)
-\]
+f(x) ⊙ g(x) = (μ₁⨂𝜈₁)⨂x⁰⊕(μ₂⨂𝜈₁⊕μ₁⨂𝜈₂)⨂x¹⊕(μ₃⨂𝜈₁⊕μ₂⨂𝜈₂⊕μ₁⨂𝜈₃)⨂x²⊕(μ₃⨂𝜈₂⊕μ₂⨂𝜈₃⊕μ₁⨂𝜈₄)⨂x³⊕(μ₃⨂𝜈₃⊕μ₂⨂𝜈₄)⨂x⁴⊕(μ₃⨂𝜈₄)⨂x⁵ '
 
-This is equivalent to a **min-plus convolution**, where we combine all possible degree combinations of terms from `f` and `g`.
+or
 
-#### Switching to Max-Plus Algebra
+f(x) ⊙ g(x) = max(max(μ₁+𝜈₁)+0x,max(μ₂+𝜈₁,μ₁+𝜈₂)+1x,max(μ₃+𝜈₁,μ₂+𝜈₂,μ₁+𝜈₃)+2x,max(μ₃+𝜈₂,μ₂+𝜈₃,μ₁+𝜈₄)+3x,max(μ₃+𝜈₃,μ₂+𝜈₄)+4x,max(μ₃+𝜈₄)+5x)
 
-In **scheduling theory** or **mathematical morphology**, we often switch to the **max-plus semiring**:
+This is equivalent to a **max-plus convolution** or **min-plus convolution**, where we combine all possible degree combinations of terms from `f` and `g`. However, **notice** that the PDilation has all of its values substracted by 1.
 
-- Replace `min` with `max`
-- Replace `+` with `+` (remains unchanged)
 
-Then the operation becomes:
-
-\[
-(f \otimes g)(x) = \max_{i,j}(a_i + b_j + (i + j)x)
-\]
-
-This max-plus convolution forms the basis for **PDilation**, where we convolve two sequences (partitions) using max and addition, and track values along matrix diagonals.
-
-#### Insight
-
-- **Tropical polynomial product** in max-plus form is directly analogous to the **PDilation** mechanism:
-  - Flip, shift, and sum partitions → matrix
-  - Aggregate along diagonals → max
-- Both operations reflect **combinatorial geometry**:
-  - Tropical: Minkowski sums, Newton polygons
-  - PDilation: Partition diagrams, morphological dilation
