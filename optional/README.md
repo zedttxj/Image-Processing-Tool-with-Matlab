@@ -167,7 +167,7 @@ Think of this function as a derivation of `BP(A)`. The parameters `lambda` and `
   ImageProcessor.showImage(output);
   ```
 - Run the code:  
-  ![{5B9BA0E2-804D-4AFF-AB8D-40B4D9BB4452}](https://github.com/user-attachments/assets/9c8cec0a-c268-4b13-9d48-12963bd0b8bf)  
+  ![{5B9BA0E2-804D-4AFF-AB8D-40B4D9BB4452}](https://github-production-user-asset-6210df.s3.amazonaws.com/179333283/423690629-9c8cec0a-c268-4b13-9d48-12963bd0b8bf.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAVCODYLSA53PQK4ZA%2F20250513%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20250513T033003Z&X-Amz-Expires=300&X-Amz-Signature=dc5f7c658a9f40a607b869ac265fb06735edf59c1bed0f3096316bbf8c5c586c&X-Amz-SignedHeaders=host)  
 - Explanation: Think of this like an enhanced version of `IC1` that works for 3D instead of 2D. It keeps all 3 channels as it swapping the values. Let's say the `image` can be represented like this:
   ```matlab
   [
@@ -230,7 +230,7 @@ Think of this function as a derivation of `BP(A)`. The parameters `lambda` and `
   ImageProcessor.showImage(output);
   ```
 - Run the code:  
-  ![{E5F123A2-BC6C-4F87-A5CE-7EEE3BFFEB3A}](https://github.com/user-attachments/assets/40ad3e33-cc9c-4050-83f4-1c618831bf7b)
+  ![{E5F123A2-BC6C-4F87-A5CE-7EEE3BFFEB3A}](https://github-production-user-asset-6210df.s3.amazonaws.com/179333283/423701430-40ad3e33-cc9c-4050-83f4-1c618831bf7b.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAVCODYLSA53PQK4ZA%2F20250513%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20250513T033020Z&X-Amz-Expires=300&X-Amz-Signature=7233ca3d88f493a057129637bdf2cf36fcaaacb295aeae2b2f06d3d1f7c21b32&X-Amz-SignedHeaders=host)
 
 ## Bayer2(image, G, order)
 - Input (3D):
@@ -265,7 +265,7 @@ Think of this function as a derivation of `BP(A)`. The parameters `lambda` and `
   imshow(ImageProcessor.Bayer2(image,"RBG",order));
   ```
 - Run the code:  
-  ![{E00ACA93-416A-401F-8015-4878DB7E3892}](https://github.com/user-attachments/assets/c996b159-844a-4963-8bc1-1c3a887a1707)  
+  ![{E00ACA93-416A-401F-8015-4878DB7E3892}](https://github-production-user-asset-6210df.s3.amazonaws.com/179333283/424498976-c996b159-844a-4963-8bc1-1c3a887a1707.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAVCODYLSA53PQK4ZA%2F20250513%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20250513T033030Z&X-Amz-Expires=300&X-Amz-Signature=bf76455d0edc8f772ebc9d610271dd270ab31807cdf65b3c6ebdd03f18509879&X-Amz-SignedHeaders=host)  
 
 ## Dilation1, Erosion1, Opening1, Closing1 (binaryMatrix1, binaryMatrix2)
 - Notes: Some books have different definition of erosion function though most of their functions of dilation are commutative. I keep the traditional erosion and dilation functions as many book described in `Erosion1` and `Dilation1`, respectively. Hence, only `Dilation1` is commutative.
@@ -284,33 +284,33 @@ Think of this function as a derivation of `BP(A)`. The parameters `lambda` and `
   image2 = image2 > 100;
   ```
   - I used `imshow(uint8(image) * 255);` to show the image:  
-  ![{7ABCE2D5-D49C-4DA8-9E40-2E58CACD13D0}](https://github.com/user-attachments/assets/b87f9b0e-588d-4ee9-8a11-7252f3622684)  
+  ![{7ABCE2D5-D49C-4DA8-9E40-2E58CACD13D0}](https://github-production-user-asset-6210df.s3.amazonaws.com/179333283/423710265-b87f9b0e-588d-4ee9-8a11-7252f3622684.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAVCODYLSA53PQK4ZA%2F20250513%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20250513T033040Z&X-Amz-Expires=300&X-Amz-Signature=2eab97d94782db9a7762ab69c2512f5a2a9d8ec400c1ef7e2ad2ebe2e4c41dab&X-Amz-SignedHeaders=host)  
   - Same thing goes for image2:  
-  ![{15C73C8D-005E-463D-9FD2-E8C506C2BD8B}](https://github.com/user-attachments/assets/17ccaf34-ae27-4ecf-8c7e-f0763ce9cca7)  
+  ![{15C73C8D-005E-463D-9FD2-E8C506C2BD8B}](https://github-production-user-asset-6210df.s3.amazonaws.com/179333283/423710672-17ccaf34-ae27-4ecf-8c7e-f0763ce9cca7.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAVCODYLSA53PQK4ZA%2F20250513%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20250513T033049Z&X-Amz-Expires=300&X-Amz-Signature=96ffc400b4ebc98d61ad9e0aee529e4c233c5525ed83c6cd8ec513c84582191c&X-Amz-SignedHeaders=host)  
   - I only extract 5x5 grid of the image2 in this example (which explains why it appears to be small). Now, I apply `Erosion1`:
     ```matlab
     output = ImageProcessor.Erosion1(image,image2);
     imshow(output);
     ```  
   - The output is like this:  
-    ![{67D74618-8800-4307-9F3F-DC83350AC4E1}](https://github.com/user-attachments/assets/57a8d9c2-77ab-47d0-9b0d-039b913ed7c6)  
+    ![{67D74618-8800-4307-9F3F-DC83350AC4E1}](https://github-production-user-asset-6210df.s3.amazonaws.com/179333283/423711411-57a8d9c2-77ab-47d0-9b0d-039b913ed7c6.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAVCODYLSA53PQK4ZA%2F20250513%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20250513T033059Z&X-Amz-Expires=300&X-Amz-Signature=5a9e6b4ea081ed606c3714dd0cdeb610ba7ffb9e3928e9beeef1c47fd85e5a79&X-Amz-SignedHeaders=host)  
   - I tried with Dilation1, Opening1, and Closing1 respectively:  
-    ![{B99D868B-E78F-4281-8C07-93736746A745}](https://github.com/user-attachments/assets/ba115749-bdfb-4307-bd36-f49e63da4f50)  
-    ![{541CA048-BFAB-43B4-A79A-C3A40FD97550}](https://github.com/user-attachments/assets/1e381d0a-ccd0-48bb-8f20-f270ff430b69)  
-    ![{5E195FDB-AD2B-4068-B312-1E8912D7B8C0}](https://github.com/user-attachments/assets/db1c5a0c-4d35-4f0e-8e78-cc498a9a7368)  
+    ![{B99D868B-E78F-4281-8C07-93736746A745}](https://github-production-user-asset-6210df.s3.amazonaws.com/179333283/423711697-ba115749-bdfb-4307-bd36-f49e63da4f50.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAVCODYLSA53PQK4ZA%2F20250513%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20250513T033110Z&X-Amz-Expires=300&X-Amz-Signature=9adf37e32beb655e6ec207f59469229096b851fd3544b78104163ec8e4b83292&X-Amz-SignedHeaders=host)  
+    ![{541CA048-BFAB-43B4-A79A-C3A40FD97550}](https://github-production-user-asset-6210df.s3.amazonaws.com/179333283/423711846-1e381d0a-ccd0-48bb-8f20-f270ff430b69.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAVCODYLSA53PQK4ZA%2F20250513%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20250513T033120Z&X-Amz-Expires=300&X-Amz-Signature=c936176f63d9c06cba747da2d15fb18a5b851624940f3bcc0e76a7c961b9cc84&X-Amz-SignedHeaders=host)  
+    ![{5E195FDB-AD2B-4068-B312-1E8912D7B8C0}](https://github-production-user-asset-6210df.s3.amazonaws.com/179333283/423712005-db1c5a0c-4d35-4f0e-8e78-cc498a9a7368.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAVCODYLSA53PQK4ZA%2F20250513%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20250513T033129Z&X-Amz-Expires=300&X-Amz-Signature=d825d2d3dee083b91ca06bb547a7b04bf74d041b50f6bc2ef558fa9183440f09&X-Amz-SignedHeaders=host)  
     - It's recommend to have smaller size of `image2` (ideally 5 to 35). Swapping the input position results in the same output image (only for dilation function):    
-      ![{C40E3C47-5960-47BB-A05F-01140E2E3C30}](https://github.com/user-attachments/assets/16518dae-74f4-4d3f-95a5-17b880a633df)  
-      ![{3CB73E92-8936-4F7C-98CB-FE8F9FC5E521}](https://github.com/user-attachments/assets/c44ec77c-894c-4382-8956-0cac16e04cc5)  
-      ![{83643EB6-3FA3-4DFE-8193-664B6521D73D}](https://github.com/user-attachments/assets/e910e18f-ae29-4f8c-a3b8-7f0c233d004e)  
-      ![{60B3C1E7-CEC7-469C-B71E-069EB4F7E830}](https://github.com/user-attachments/assets/800b2c12-a578-4b40-8a6c-9a9d8897a32d)  
+      ![{C40E3C47-5960-47BB-A05F-01140E2E3C30}](https://github-production-user-asset-6210df.s3.amazonaws.com/179333283/423779956-16518dae-74f4-4d3f-95a5-17b880a633df.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAVCODYLSA53PQK4ZA%2F20250513%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20250513T033139Z&X-Amz-Expires=300&X-Amz-Signature=ebeb221e87deaa458c1439e3cac7035e2b6d2a52d99ed7b4d1e8879986a0f6eb&X-Amz-SignedHeaders=host)  
+      ![{3CB73E92-8936-4F7C-98CB-FE8F9FC5E521}](https://github-production-user-asset-6210df.s3.amazonaws.com/179333283/423780116-c44ec77c-894c-4382-8956-0cac16e04cc5.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAVCODYLSA53PQK4ZA%2F20250513%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20250513T033150Z&X-Amz-Expires=300&X-Amz-Signature=23b4d813dd6be4aa2d4874e4a6b1868bd66fc736c3e341cf3116677b0e445e7c&X-Amz-SignedHeaders=host)  
+      ![{83643EB6-3FA3-4DFE-8193-664B6521D73D}](https://github-production-user-asset-6210df.s3.amazonaws.com/179333283/423781112-e910e18f-ae29-4f8c-a3b8-7f0c233d004e.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAVCODYLSA53PQK4ZA%2F20250513%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20250513T033159Z&X-Amz-Expires=300&X-Amz-Signature=f012ec4bbd3fe405b64c43572b8a553a9967d28cbb835843077427b7477ed8bb&X-Amz-SignedHeaders=host)  
+      ![{60B3C1E7-CEC7-469C-B71E-069EB4F7E830}](https://github-production-user-asset-6210df.s3.amazonaws.com/179333283/423782393-800b2c12-a578-4b40-8a6c-9a9d8897a32d.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAVCODYLSA53PQK4ZA%2F20250513%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20250513T033211Z&X-Amz-Expires=300&X-Amz-Signature=aba18733b310b0314515f0c67bad0c1166f7f13d66002674dc20da9baf0faf3e&X-Amz-SignedHeaders=host)  
   
   - An example of applying 2D binary matrices as inputs:  
     - `image` =  
-  ![{45231E59-FDB2-4AAA-B240-A97CBB56902E}](https://github.com/user-attachments/assets/4f476b09-2cf9-4002-b99b-6d74636e7bb6)  
+  ![{45231E59-FDB2-4AAA-B240-A97CBB56902E}](https://github-production-user-asset-6210df.s3.amazonaws.com/179333283/423716186-4f476b09-2cf9-4002-b99b-6d74636e7bb6.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAVCODYLSA53PQK4ZA%2F20250513%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20250513T033220Z&X-Amz-Expires=300&X-Amz-Signature=924d3fd1ea6f62f3535ccd298744149052d9fabe078a7720ae0fa6e1d016a720&X-Amz-SignedHeaders=host)  
     - `image2` =  
-  ![{742CCC11-EEF9-4A5F-A291-EF20376FECE0}](https://github.com/user-attachments/assets/dc8d838e-d6f9-403d-aeb0-d82a6b40b773)  
+  ![{742CCC11-EEF9-4A5F-A291-EF20376FECE0}](https://github-production-user-asset-6210df.s3.amazonaws.com/179333283/423716316-dc8d838e-d6f9-403d-aeb0-d82a6b40b773.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAVCODYLSA53PQK4ZA%2F20250513%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20250513T033229Z&X-Amz-Expires=300&X-Amz-Signature=69f5aad3634bad3cbc56b71082a6909a6d2f8624c4ed5c605262d9d8b60ec941&X-Amz-SignedHeaders=host)  
     - `output` =  
-  ![{670A86FF-918B-4EF0-9E8F-5D0D659B15D7}](https://github.com/user-attachments/assets/aad91a6f-780f-44cf-85aa-cbdb3c197f23)
+  ![{670A86FF-918B-4EF0-9E8F-5D0D659B15D7}](https://github-production-user-asset-6210df.s3.amazonaws.com/179333283/423716428-aad91a6f-780f-44cf-85aa-cbdb3c197f23.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAVCODYLSA53PQK4ZA%2F20250513%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20250513T033238Z&X-Amz-Expires=300&X-Amz-Signature=10b049ed2203bd496a1ba757a43046d232f89a66f264576b425502cbe2aa8199&X-Amz-SignedHeaders=host)
   
 ## Dilation2, Erosion2, Opening2, Closing2 (binaryMatrix1, binaryMatrix2)
 - Input:
@@ -326,30 +326,30 @@ Think of this function as a derivation of `BP(A)`. The parameters `lambda` and `
   image2 = image2(230:235,230:235,:);
   ```
   - I used `imshow(image);` to show the image:  
-  ![{5334DE9F-F56B-461A-8A9F-60EB776444AE}](https://github.com/user-attachments/assets/79579b7e-c97b-4cd6-bc30-34acd2153da3)  
+  ![{5334DE9F-F56B-461A-8A9F-60EB776444AE}](https://github-production-user-asset-6210df.s3.amazonaws.com/179333283/423716785-79579b7e-c97b-4cd6-bc30-34acd2153da3.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAVCODYLSA53PQK4ZA%2F20250513%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20250513T033247Z&X-Amz-Expires=300&X-Amz-Signature=1cb0260501fa6e4508537b99573f5faeb17ad22acf7aed686bd477946662c399&X-Amz-SignedHeaders=host)  
   - Same thing goes for image2:  
-  ![{9C13C4B2-ACD4-4D8B-9944-18DAB2370919}](https://github.com/user-attachments/assets/8d931f6b-08c9-4fc5-9d21-b96644b64084)  
+  ![{9C13C4B2-ACD4-4D8B-9944-18DAB2370919}](https://github-production-user-asset-6210df.s3.amazonaws.com/179333283/423716857-8d931f6b-08c9-4fc5-9d21-b96644b64084.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAVCODYLSA53PQK4ZA%2F20250513%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20250513T033255Z&X-Amz-Expires=300&X-Amz-Signature=4566cd00abdd540d59bd2fd8c55bc872b3d3ed4036366454f55963c282d40058&X-Amz-SignedHeaders=host)  
   - I only extract 5x5 grid of the image2 in this example (which explains why it appears to be small). Now, I apply `Erosion2`:
     ```matlab
     output = ImageProcessor.Erosion2(image,image2);
     imshow(output);
     ```  
   - The output is like this:  
-  ![{1ED3106D-9CF6-4EED-80AC-3CC55BBD884D}](https://github.com/user-attachments/assets/059abf02-e842-40fe-b5a2-17afcb41df2a)  
+  ![{1ED3106D-9CF6-4EED-80AC-3CC55BBD884D}](https://github-production-user-asset-6210df.s3.amazonaws.com/179333283/423716942-059abf02-e842-40fe-b5a2-17afcb41df2a.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAVCODYLSA53PQK4ZA%2F20250513%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20250513T033304Z&X-Amz-Expires=300&X-Amz-Signature=b1e27f9a5908e731e86a402e36e935c2e6a37245c300c8d8f3619d8c8a095471&X-Amz-SignedHeaders=host)  
   - I tried with Dilation2, Opening2, and Closing2 respectively:  
-  ![{DD04683F-FD41-4A38-90A1-19F021958589}](https://github.com/user-attachments/assets/fc85a739-e66d-47d7-9422-c388a18e05c3)  
-  ![{66DA5B83-6D0B-4E07-A60B-35A41044C6FC}](https://github.com/user-attachments/assets/6fa8f52b-8b8e-459b-a7b3-f23356babb29)  
-  ![{21F5E61E-380C-41DF-A713-EE63BE25A0FE}](https://github.com/user-attachments/assets/d16940a8-70b9-4204-b2fc-3674788a0aea)  
+  ![{DD04683F-FD41-4A38-90A1-19F021958589}](https://github-production-user-asset-6210df.s3.amazonaws.com/179333283/423717073-fc85a739-e66d-47d7-9422-c388a18e05c3.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAVCODYLSA53PQK4ZA%2F20250513%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20250513T033314Z&X-Amz-Expires=300&X-Amz-Signature=4c46440f77493e9100f51ccba4951a2a478f73a7f871ba53db942723b0a5e8fc&X-Amz-SignedHeaders=host)  
+  ![{66DA5B83-6D0B-4E07-A60B-35A41044C6FC}](https://github-production-user-asset-6210df.s3.amazonaws.com/179333283/423717174-6fa8f52b-8b8e-459b-a7b3-f23356babb29.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAVCODYLSA53PQK4ZA%2F20250513%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20250513T033323Z&X-Amz-Expires=300&X-Amz-Signature=4f7680dd2c2dff3372185a78329ad49a71c87b8a55dfebc7a0084becc0f6c0b0&X-Amz-SignedHeaders=host)  
+  ![{21F5E61E-380C-41DF-A713-EE63BE25A0FE}](https://github-production-user-asset-6210df.s3.amazonaws.com/179333283/423717304-d16940a8-70b9-4204-b2fc-3674788a0aea.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAVCODYLSA53PQK4ZA%2F20250513%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20250513T033332Z&X-Amz-Expires=300&X-Amz-Signature=733f79ff8e1052401980754fedb56ff131fe3456173ce39c43a9a80abb76705d&X-Amz-SignedHeaders=host)  
     - If I swap the input position of `image` and `image2` (`image` becoming 2nd parameter and `image2` becoming 1st parameter), the program stucks forever due to the larger mask being applied in the calculation. It's recommend to have smaller size of `image2` (ideally 5 to 35). Swapping the input position doesn't results in the output image being flipped up-side-down, left-to-right, or identical image compared to the original output. However (fun fact), applying Bayer filter seems to make the outputs very identical. In fact, if you flip the image up-side-down and left-to-right, it looks almost the same:  
-    ![{10A3ED5F-C358-4CF9-ABC4-987CC81FF38F}](https://github.com/user-attachments/assets/99e9b567-5603-460b-b313-25e06f7d3613)  
-    ![{F3449905-059C-43AF-B5A1-648F653C771B}](https://github.com/user-attachments/assets/a5522c27-722a-46e6-9093-b746ee7436aa)  
+    ![{10A3ED5F-C358-4CF9-ABC4-987CC81FF38F}](https://github-production-user-asset-6210df.s3.amazonaws.com/179333283/423720710-99e9b567-5603-460b-b313-25e06f7d3613.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAVCODYLSA53PQK4ZA%2F20250513%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20250513T033342Z&X-Amz-Expires=300&X-Amz-Signature=8ca53ef59c8cc927d371a64547ef888ce350aec71f2e279b47855557b766c056&X-Amz-SignedHeaders=host)  
+    ![{F3449905-059C-43AF-B5A1-648F653C771B}](https://github-production-user-asset-6210df.s3.amazonaws.com/179333283/423720801-a5522c27-722a-46e6-9093-b746ee7436aa.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAVCODYLSA53PQK4ZA%2F20250513%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20250513T033351Z&X-Amz-Expires=300&X-Amz-Signature=7e80bef08cd6b3282b74c471f16e415844bfc0705885ea2dceddaaed24a6672a&X-Amz-SignedHeaders=host)  
   - An example of applying 2D binary matrices as inputs:  
     - `image` =  
-  ![{3BC14EFE-9688-499C-A05F-D0EDA888D444}](https://github.com/user-attachments/assets/1b1d0a09-582a-4859-867b-96bdedfe6679)  
+  ![{3BC14EFE-9688-499C-A05F-D0EDA888D444}](https://github-production-user-asset-6210df.s3.amazonaws.com/179333283/423718818-1b1d0a09-582a-4859-867b-96bdedfe6679.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAVCODYLSA53PQK4ZA%2F20250513%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20250513T033359Z&X-Amz-Expires=300&X-Amz-Signature=be88719fb75ce9859f49f8ea8cd506dc011e85c21de85de9cab55e98110a8dae&X-Amz-SignedHeaders=host)  
     - `image2` =  
-  ![{BE12C0BB-22E1-4B8D-92AD-998610501BB6}](https://github.com/user-attachments/assets/62345f1f-0fa3-47e9-89eb-3e4b3b02c301)  
+  ![{BE12C0BB-22E1-4B8D-92AD-998610501BB6}](https://github-production-user-asset-6210df.s3.amazonaws.com/179333283/423718980-62345f1f-0fa3-47e9-89eb-3e4b3b02c301.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAVCODYLSA53PQK4ZA%2F20250513%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20250513T033408Z&X-Amz-Expires=300&X-Amz-Signature=f820e9b748aee4625f90e354e062dc60f8450dd71f0c539535e77037cb4cbdcc&X-Amz-SignedHeaders=host)  
     - `output` =  
-  ![{5EAF7C85-D2C5-4FBD-9F65-0341703D94C7}](https://github.com/user-attachments/assets/4d37f91f-75d1-4534-a60f-3ef5b8fb28d6)
+  ![{5EAF7C85-D2C5-4FBD-9F65-0341703D94C7}](https://github-production-user-asset-6210df.s3.amazonaws.com/179333283/423719087-4d37f91f-75d1-4534-a60f-3ef5b8fb28d6.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAVCODYLSA53PQK4ZA%2F20250513%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20250513T033418Z&X-Amz-Expires=300&X-Amz-Signature=0d4ae77d9b1b17a3bffe122f36baa110051c7ae9cd48f4ceff03a19224dbb26d&X-Amz-SignedHeaders=host)
 
 ## PPP1(partition1, partition2)
 - Input:
@@ -504,7 +504,7 @@ For every point `(a,b)` in `A`, we add all points `(c,d)` from `B` to generate t
   disp("Size of input image: " + strjoin(arrayfun(@num2str, size(B), 'UniformOutput', false), ' '));
   disp("Size of output image: " + strjoin(arrayfun(@num2str, size(t), 'UniformOutput', false), ' '));
   ```
-- Run the code: ![{E86B4DFF-EDAC-4652-B698-685318D7A79E}](https://github.com/user-attachments/assets/fe38f19a-ce1f-4588-90ef-1d8a075f718f)  
+- Run the code: ![{E86B4DFF-EDAC-4652-B698-685318D7A79E}](https://github-production-user-asset-6210df.s3.amazonaws.com/179333283/425777926-fe38f19a-ce1f-4588-90ef-1d8a075f718f.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAVCODYLSA53PQK4ZA%2F20250513%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20250513T033426Z&X-Amz-Expires=300&X-Amz-Signature=a618b3d252d11c929e52c739a06de65501ac8a94bc3672b7838f4d715905ba55&X-Amz-SignedHeaders=host)  
 - Another example code:
   ```matlab
   tic;
@@ -518,13 +518,13 @@ For every point `(a,b)` in `A`, we add all points `(c,d)` from `B` to generate t
   disp("Size of input image: " + strjoin(arrayfun(@num2str, size(B), 'UniformOutput', false), ' '));
   disp("Size of output image: " + strjoin(arrayfun(@num2str, size(t), 'UniformOutput', false), ' '));
   ```
-- Run the code: ![{BD9875CA-0779-4290-B6A4-7C20D8919CC0}](https://github.com/user-attachments/assets/5d52c232-d2de-45c4-9a12-3e75d0dd332a)  
+- Run the code: ![{BD9875CA-0779-4290-B6A4-7C20D8919CC0}](https://github-production-user-asset-6210df.s3.amazonaws.com/179333283/425777760-5d52c232-d2de-45c4-9a12-3e75d0dd332a.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAVCODYLSA53PQK4ZA%2F20250513%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20250513T033435Z&X-Amz-Expires=300&X-Amz-Signature=43fca030e969a9649db77adead2e3e787e009228e05dc657e8c8ad00aaf71ce0&X-Amz-SignedHeaders=host)  
 - **Fun fact**: No matter how you twist your input image, if it has enough entries that have value `1`, it will turn into the oval-like form with two pointed ends.
   - Note: I used `matrixDecomposition` here for demonstration. `EXTRA.DILATION` also works with 2D binary matrices.
   - Example:  
-    ![{69B45C5E-510D-4A13-B104-0F8992509B0F}](https://github.com/user-attachments/assets/c5d59428-4abd-4c9a-a3aa-ecb5f28570af)  
+    ![{69B45C5E-510D-4A13-B104-0F8992509B0F}](https://github-production-user-asset-6210df.s3.amazonaws.com/179333283/425776632-c5d59428-4abd-4c9a-a3aa-ecb5f28570af.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAVCODYLSA53PQK4ZA%2F20250513%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20250513T033443Z&X-Amz-Expires=300&X-Amz-Signature=e4ff981ee36bf4e852389d0830571a0aa364da3f5cdab292eafc7b5d5608bc8f&X-Amz-SignedHeaders=host)  
     As I increase the number of ones:  
-    ![{74BE45FD-6BC5-4A01-A617-D92FBEF43327}](https://github.com/user-attachments/assets/1a524198-4f0f-43c1-82cc-7a9b0d87921f)
+    ![{74BE45FD-6BC5-4A01-A617-D92FBEF43327}](https://github-production-user-asset-6210df.s3.amazonaws.com/179333283/425776727-1a524198-4f0f-43c1-82cc-7a9b0d87921f.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAVCODYLSA53PQK4ZA%2F20250513%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20250513T033451Z&X-Amz-Expires=300&X-Amz-Signature=ff2c27ce410a4b60bd2062cc67509aac9787924a598db00c7f44f6ec4418ef52&X-Amz-SignedHeaders=host)
 
 ## EXTRA.DILATIONSET and dilationSet Functions with Added Customized Functions
 
@@ -705,7 +705,7 @@ The `ASf` function was developed to observe **patterns in an image after differe
   imshow(ImageProcessor.Dilation1(A,B)); % Apply dilation to enhance visualization
   ```
 - Run the code:  
-  ![{116ED977-56BE-4C20-801B-6134A69B4FCA}](https://github.com/user-attachments/assets/f3a72409-7f77-4641-a8ed-90bea9ead0af)  
+  ![{116ED977-56BE-4C20-801B-6134A69B4FCA}](https://github-production-user-asset-6210df.s3.amazonaws.com/179333283/432958143-f3a72409-7f77-4641-a8ed-90bea9ead0af.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAVCODYLSA53PQK4ZA%2F20250513%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20250513T033500Z&X-Amz-Expires=300&X-Amz-Signature=09b1827ae9ca67801cb4edf698fe752fe062f49024ce7818c6754f8e9cd048ad&X-Amz-SignedHeaders=host)  
 
 ## AJF(A, d, ind)
 - Input:
@@ -762,7 +762,7 @@ The `ASf` function was developed to observe **patterns in an image after differe
   imshow(ImageProcessor.Dilation1(A,B)); % Apply dilation to enhance visualization
   ```
 - Run the code:  
-  ![{5D2EE982-EC81-4320-B977-000EAA144969}](https://github.com/user-attachments/assets/4c27a4cc-fdd5-407e-9135-d58d979c2027)
+  ![{5D2EE982-EC81-4320-B977-000EAA144969}](https://github-production-user-asset-6210df.s3.amazonaws.com/179333283/432995845-4c27a4cc-fdd5-407e-9135-d58d979c2027.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAVCODYLSA53PQK4ZA%2F20250513%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20250513T033508Z&X-Amz-Expires=300&X-Amz-Signature=044ec5db88d3b0d801106dd4bcbfc8fc81eac30b4b8b13e21d32c3e78510c218&X-Amz-SignedHeaders=host)
 
 ## PDilation(A, B) & reversedPDilation(Cs)
 ### Summary of PDilation
