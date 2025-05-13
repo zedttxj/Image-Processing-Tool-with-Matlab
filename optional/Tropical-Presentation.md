@@ -40,6 +40,11 @@ ImageProcessor.PDilation2str2(A, B)
 
 Uses:
 ```matlab
+ImageProcessor.PDilation2str1(A, B)
+```
+
+Defined as:
+```matlab
 PDilation2str(A, B, 'μ', '𝜈', '⨂', {'⊕', '()'}, true)
 ```
 
@@ -54,6 +59,11 @@ Output:
 
 Uses:
 ```matlab
+ImageProcessor.PDilation2str2(A, B)
+```
+
+Defined as:
+```matlab
 PDilation2str(A, B, 'μ', '𝜈', '+', {',', 'max()'}, false)
 ```
 
@@ -66,18 +76,10 @@ max(max(μ₁+𝜈₁)+0x, max(μ₂+𝜈₁,μ₁+𝜈₂)+1x, max(μ₃+𝜈�
 
 ## Utility Functions (not related)
 
+`A` is a 1D array of integers. These functions convert `A` into symbolic subscript notation, attaching each entry with `c`:
 - `arr2maxstr(A, c, op)` → Cell array like `{ 'μ₁', 'μ₂', ... }`
 - `arr2maxstr1(A, c)` → String like `'μ₁⊕μ₂⊕μ₃'`
 - `arr2maxstr2(A, c)` → String like `'max(μ₁,μ₂,μ₃)'`
-
----
-
-## Applications
-
-- Symbolic formatting for tropical polynomials
-- Teaching or explaining max-plus algebra visually
-- Preparing LaTeX-like symbolic strings in MATLAB
-- Export-ready expressions for GitHub, slides, or papers
 
 ---
 
