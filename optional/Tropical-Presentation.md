@@ -88,3 +88,21 @@ max(max(μ₁+𝜈₁)+0x, max(μ₂+𝜈₁,μ₁+𝜈₂)+1x, max(μ₃+𝜈�
 To switch to LaTeX-style formatting (e.g., `\mu_{i}` instead of `μᵢ`), extend the formatter logic to return LaTeX strings and wrap with `$...$`. I made a website that automatically do this: [Tropical Presentation](https://zedttxj.github.io/Tropical-Geometry-Converter/)  
 Example:  
 ![{84F9B1F8-D5EE-47C7-ACFC-7DF8ED4E8F49}](https://github.com/user-attachments/assets/dbef457f-ae9b-4996-8b2b-ea63b5512daf)
+
+# 📝 GitHub Markdown to LaTeX Converter
+
+This [tool](https://zedttxj.github.io//MD-To-LaTex/) lets you fetch any public Markdown file from GitHub (via raw URL) and convert it automatically to LaTeX using [pandoc-wasm](https://github.com/niklasmh/pandoc-wasm).
+
+## 🚀 Features
+
+- Convert `.md` files to LaTeX on the fly
+- Paste any **raw GitHub Markdown URL**
+- One-click **download as `.tex`**
+- All works **in your browser** — no installation required
+
+## 🛠️ How to Use
+
+1. Open the converter in your browser.
+2. Paste a **raw GitHub Markdown URL** like:
+![{F653269D-63ED-4590-9A68-2D771E072F05}](https://github.com/user-attachments/assets/5f0f8804-6ffd-48d4-8785-751ef1f98a51)
+
