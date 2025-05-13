@@ -30,7 +30,7 @@ ImageProcessor.PDilation2str2(A, B)
 | `'μ'`, `'𝜈'`        | Symbols for indexing entries of A and B (`μ₁`, `𝜈₂`, etc.)                  |
 | `'⨂'`               | Operator between symbols (`μᵢ⨂𝜈ⱼ`)                                         |
 | `{'⊕', '()'}`       | Formatting: join terms with `'⊕'`, wrap with `'(' ')'`                      |
-| `true`              | Use **Unicode superscript** (e.g., `x⁰`) instead of plain `x0`              |
+| `true`              | Use **Unicode superscript** (e.g., `x⁰`) instead of plain `0x`              |
 
 ---
 
