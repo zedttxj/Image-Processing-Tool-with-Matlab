@@ -847,3 +847,47 @@ Also a yes because of how flipping, addition, and max behave.
 
     24     2
   ```
+
+### Relation to Tropical Polynomial Product
+Tropical Polynomial Multiplication
+
+Given two tropical polynomials:
+
+\[
+f(x) = \min(a_0 + 0x,\, a_1 + 1x,\, a_2 + 2x,\, \ldots)
+\]
+\[
+g(x) = \min(b_0 + 0x,\, b_1 + 1x,\, b_2 + 2x,\, \ldots)
+\]
+
+Their tropical product is defined as:
+
+\[
+(f \odot g)(x) = \min_{i,j}(a_i + b_j + (i + j)x)
+\]
+
+This is equivalent to a **min-plus convolution**, where we combine all possible degree combinations of terms from `f` and `g`.
+
+#### Switching to Max-Plus Algebra
+
+In **scheduling theory** or **mathematical morphology**, we often switch to the **max-plus semiring**:
+
+- Replace `min` with `max`
+- Replace `+` with `+` (remains unchanged)
+
+Then the operation becomes:
+
+\[
+(f \otimes g)(x) = \max_{i,j}(a_i + b_j + (i + j)x)
+\]
+
+This max-plus convolution forms the basis for **PDilation**, where we convolve two sequences (partitions) using max and addition, and track values along matrix diagonals.
+
+#### Insight
+
+- **Tropical polynomial product** in max-plus form is directly analogous to the **PDilation** mechanism:
+  - Flip, shift, and sum partitions → matrix
+  - Aggregate along diagonals → max
+- Both operations reflect **combinatorial geometry**:
+  - Tropical: Minkowski sums, Newton polygons
+  - PDilation: Partition diagrams, morphological dilation
