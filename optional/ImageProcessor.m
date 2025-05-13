@@ -549,6 +549,52 @@ classdef ImageProcessor
         function partition = M2P(data)
             partition = sum(data > 0, 2) .';
         end
+        function str = arr2maxstr(A, c, op)
+            subs = ['₀','₁','₂','₃','₄','₅','₆','₇','₈','₉'];
+            str = cellfun(@(i) [c arrayfun(@(x) subs(x-'0'+1), i)], arrayfun(@(i) int2str(i), A, 'UniformOutput', false), 'UniformOutput', false);
+        end
+        function str = arr2maxstr1(A, c)
+            subs = ['₀','₁','₂','₃','₄','₅','₆','₇','₈','₉'];
+            str = strjoin(cellfun(@(i) [c arrayfun(@(x) subs(x-'0'+1), i)], arrayfun(@(i) int2str(i), A, 'UniformOutput', false), 'UniformOutput', false), '⊕');
+        end
+        function str = arr2maxstr2(A, c)
+            subs = ['₀','₁','₂','₃','₄','₅','₆','₇','₈','₉'];
+            str = ['max(' strjoin(cellfun(@(i) [c arrayfun(@(x) subs(x-'0'+1), i)], arrayfun(@(i) int2str(i), A, 'UniformOutput', false), 'UniformOutput', false), ',') ')'];
+        end
+        function t = custom_diag(a, i)
+            if size(a,2) < 2
+                t = a(i+length(a));
+            elseif size(a,1) < 2
+                t = a(i+1);
+            else
+                t = diag(a, i);
+            end
+        end
+        function pos = PDilation2str(partitionA,partitionB, mu, nu, oper1, oper2, superscript)
+            [rows, cols] = ndgrid(length(partitionA):-1:1, 1:length(partitionB));
+            pos = cell(1, length(partitionA) + length(partitionB) - 1);  % preallocate
+            k = 1;
+            x = arrayfun(@num2str, 0:length(partitionA) + length(partitionB) - 2, 'UniformOutput', false);
+            for i = 1 - length(partitionA) : length(partitionB) - 1
+                pos{k} = [oper2{end}(1:end-1) strjoin(cellfun(@(a,b, xx) [a oper1 b], ImageProcessor.arr2maxstr(ImageProcessor.custom_diag(rows, i), mu), ImageProcessor.arr2maxstr(ImageProcessor.custom_diag(cols, i), nu), 'UniformOutput', false), oper2{1}) oper2{end}(end)];
+                k = k + 1;
+            end
+            supers = ['⁰','¹','²','³','⁴','⁵','⁶','⁷','⁸','⁹'];
+            if length(oper2{end}) == 2
+                oper2{end} = ' ';
+            end
+            if superscript
+                pos = [oper2{end}(1:end-1) strjoin(cellfun(@(i, j) [i oper1 'x' supers(j-'0'+1)], pos, x, 'UniformOutput', false), oper2{1}) oper2{end}(end)];
+            else
+                pos = [oper2{end}(1:end-1) strjoin(cellfun(@(i, j) [i oper1 j 'x'], pos, x, 'UniformOutput', false), oper2{1}) oper2{end}(end)];
+            end
+        end
+        function pos = PDilation2str1(A,B)
+            pos = ImageProcessor.PDilation2str(A,B,'μ','𝜈','⨂', {'⊕' '()'}, true);
+        end
+        function pos = PDilation2str2(A,B)
+            pos = ImageProcessor.PDilation2str(A,B,'μ','𝜈','+', {',' 'max()'}, false);
+        end
         function dilatedPartition = PDilation(partitionA,partitionB)
             C = flip(partitionA(:) - 1) + (partitionB(:) .');
             if size(C,1) < 2
@@ -593,6 +639,23 @@ classdef ImageProcessor
             partitions = arrayfun(@(i) {Cs(i, 2 : Cs(i,1)), Cs(i, Cs(i,1)+1:end)}, 1:size(Cs,1), 'UniformOutput', false);
             partitions = vertcat(partitions{:});
         end
+        function partitions = primePartitions(Cs)
+            partitions = {};
+            ch = Cs(end)-1;
+            Cs = Cs-ch;
+            Cs = Cs(floor((size(Cs,1)+1)/2):end);
+            function PDrecursion(C, A)
+                if ~isempty(C)
+                    for i = A(1):C(end)
+                        partitions = [partitions; [i A]];
+                    end
+                    for i = A(1):C(end)
+                        PDrecursion(C(1:end-1), [i A]);
+                    end
+                end
+            end
+            PDrecursion(Cs(1:end-1),[1]);
+        end
         function partitions = reversedPDilationv2(Cs)
             partitions = [];
             ch = Cs(end)-1;
@@ -626,6 +689,15 @@ classdef ImageProcessor
             Cs = unique(result,'rows');
             partitions = arrayfun(@(i) {Cs(i, 2 : Cs(i,1)), Cs(i, Cs(i,1)+1:end)}, 1:size(Cs,1), 'UniformOutput', false);
             partitions = vertcat(partitions{:});
+        end
+        function erodedPartition = PErosion(A, B)
+            erodedPartition = ImageProcessor.M2P(ImageProcessor.Erosion1(ImageProcessor.P2M(A),ImageProcessor.P2M(B)));
+        end
+        function closedPartition = PClosing(A, B)
+            closedPartition = ImageProcessor.M2P(ImageProcessor.Closing1(ImageProcessor.P2M(A),ImageProcessor.P2M(B)));
+        end
+        function openedPartition = POpening(A, B)
+            openedPartition = ImageProcessor.M2P(ImageProcessor.Opening1(ImageProcessor.P2M(A),ImageProcessor.P2M(B)));
         end
     end
     properties (Constant)
