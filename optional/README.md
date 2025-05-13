@@ -781,12 +781,12 @@ Then the result dilatedPartition is formed by:
 - Taking the maximum from each diagonal
 
 This is like a max-plus convolution (like plus-multiplication `conv` from MATLAB), which appears in scheduling theory, image dilation, and mathematical morphology.  
-There will be a separate [explanation](https://github.com/zedttxj/Image-Processing-Tool-with-Matlab/blob/main/optional/PDilation-reversedPDilation.md) as why is it (PDilation) defined this way. I would love to explain some theories like why divide-and-conquer may not be applicable in the case of `reversedPDilation` as well as show some properties.
+There will be a separate [explanation](https://github.com/zedttxj/Image-Processing-Tool-with-Matlab/blob/main/optional/PDilation-reversedPDilation.md) as why is it (PDilation) defined this way. I would love to explain some theories like why divide-and-conquer may not be applicable in the case of `reversedPDilation` as well as show some properties.  
 #### Important Properties
 ***Commutative?***  
 Yes, because `flip(A - 1) + B'` is symmetric in A and B, up to flipping; and, max of diagonals doesn’t depend on which array came first.  
 ***Associative?***  
-Also a yes because of how flipping, addition, and max behave.
+Also a yes because of how flipping, addition, and max behave.  
 ### PDilation(A, B)
 - Input:
   - partitionA (required): non-increasing 1D non-negative integer vector 
@@ -805,6 +805,7 @@ Also a yes because of how flipping, addition, and max behave.
   >> 
     11    10     9     8     4     2
   ```
+
 ### reversedPDilation(A, B)
 - Input:
   - Cs (required): A non-increasing, one-dimensional vector of non-negative integers  
@@ -863,7 +864,7 @@ Or:
 
 `f(x) ⊙ g(x) = max(max(μ₁+𝜈₁)+0x,max(μ₂+𝜈₁,μ₁+𝜈₂)+1x,max(μ₃+𝜈₁,μ₂+𝜈₂,μ₁+𝜈₃)+2x,max(μ₃+𝜈₂,μ₂+𝜈₃,μ₁+𝜈₄)+3x,max(μ₃+𝜈₃,μ₂+𝜈₄)+4x,max(μ₃+𝜈₄)+5x)`
 
-**Notice** that the PDilation has all of its values substracted by 1. PDilation is not exactly tropical multiplication of the raw polynomial terms:
+**Notice** that the PDilation has all of its values substracted by 1. PDilation is not exactly tropical multiplication of the raw polynomial terms:  
 #### Example:
 Let:  
 - λ = (7, 4, 3, 2)  
