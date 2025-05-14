@@ -104,13 +104,13 @@ Or:
 
 **Notice** that the PDilation has all of its values substracted by 1. PDilation is not exactly tropical multiplication of the raw polynomial terms:  
 
-#### Example:
+#### Example: (`PD` stands for `PDilation`)
 Let:  
 - λ = (7, 4, 3, 2)  
 - λ′ = (5, 3, 1)
 
 Then:  
-- `PDilation(λ, λ′) = (11, 10, 9, 8, 4, 2)`
+- `PD(λ, λ′) = (11, 10, 9, 8, 4, 2)`  
 - `f₍₇,₄,₃,₂₎ ⊙ f₍₅,₃,₁₎ = f₍₁₂,₁₁,₁₀,₉,₅,₃₎`
 
 We can conclude that `f_{λ} ⊙ f_{λ′} = f_{PDilation(λ, λ′) + 1}`
