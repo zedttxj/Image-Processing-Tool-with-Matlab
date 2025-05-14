@@ -113,4 +113,4 @@ Then:
 - `PD(λ, λ′) = (11, 10, 9, 8, 4, 2)`  
 - `f₍₇,₄,₃,₂₎ ⊙ f₍₅,₃,₁₎ = f₍₁₂,₁₁,₁₀,₉,₅,₃₎`
 
-We can conclude that `f_{λ} ⊙ f_{λ′} = f_{PDilation(λ, λ′) + 1}`
+We can conclude that `f_{λ} ⊙ f_{λ′} = f_{PD(λ, λ′) + 1}`
