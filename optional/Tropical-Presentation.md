@@ -95,20 +95,11 @@ This [tool](https://zedttxj.github.io//MD-To-LaTex/) lets you fetch any public M
 
 ## Features
 
-- Convert `.md` files to LaTeX on the fly
+- Convert `.md` files to LaTeX through web browser
 - Paste any **raw GitHub Markdown URL**
-- One-click **download as `.tex`**
-- All works **in your browser** — no installation required
-- ZIP Packaging: Bundles the LaTeX file and all associated images into a downloadable ZIP archive using JSZip.
-
-### Problems with Render.com's Free Tier Behavior
-Render.com's free tier has specific behaviors that affect the performance of your CORS proxy:
-
-- Idle Spin-Down: If the proxy service receives no traffic for 15 minutes, it will spin down to conserve resources.
-
-- Cold Start Delay: Upon receiving a new request after spinning down, the service can take up to 60 seconds to spin back up and handle the request.
-
-- This delay is due to the time required to allocate resources and start the service from an idle state.
+- One-click **download as .tex**
+- No installation required
+- ZIP Packaging
 
 ## How to Use
 
