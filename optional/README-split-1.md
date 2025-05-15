@@ -9,7 +9,7 @@
   - Jacobian (a 2D matrix): A 2D matrix representing the derivatives of `A` after `d` differentiations.
 - Explanation: The `ASf` function computes the derivative of a matrix `A` a specified number of times (`d`). If an optional column index (`ind`) is provided, only that column is differentiated.
   Consider the polynomial:
-  P(x, y) = 3x + 5y + 5x² + 4y² + x³ + 4x⁴
+  P(x,y)=3x+5y+5x²+4y²+x³+4x⁴
   
   The coefficients of **x** and **y** are stored in a matrix form:  
   - The vector of **x-coefficients**: [3, 5, 1, 4]ᵀ → MATLAB notation: `[3; 5; 1; 4]`
