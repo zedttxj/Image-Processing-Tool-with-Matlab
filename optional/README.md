@@ -590,17 +590,17 @@ For every point `(a,b)` in `A`, we add all points `(c,d)` from `B` to generate t
      2     3
      ```  
 
-### `EXTRA.DILATIONSET` Function and its Comparison to `EXTRA.DILATION`
+### EXTRA.DILATIONSET Function and its Comparison to EXTRA.DILATION
 
 The function `EXTRA.DILATIONSET` operates in a way that is conceptually similar to the function `EXTRA.DILATION`. Both of these functions can be considered **homomorphic** (set that has negative coordinates can't be converted into matrix), meaning they perform a similar dilation operation, but on different data structures. The same concept applies to the relationship between `dilationSet` and the **standard dilation on matrices**.
 
-- **Important Note**: Unlike `EXTRA.DILATION`, which is designed to handle dilation on matrices of various dimensions, **EXTRA.DILATIONSET** is specifically optimized for working with 2D logical matrices in the **set form** (where elements are either `0` or `1` in matrix form are converted into set of coordinates).  
+- **Important Note**: Unlike `EXTRA.DILATION`, which is designed to handle dilation on matrices of various dimensions, `EXTRA.DILATIONSET` is specifically optimized for working with 2D logical matrices in the **set form** (where elements are either `0` or `1` in matrix form are converted into set of coordinates).  
 
 ### Test Flow
 
 This process ensures that the dilation operation is applied correctly, and the final result is returned as a matrix. The output is a new logical matrix that represents the dilation of the specially transformed input sets.
 
-1. **Define the sets `A` and `B`** as matrices.
+1. **Define the sets A and B** as matrices.
 2. **Convert the matrices into coordinates** using `matrixToCoords`.
 3. **Perform the dilation operation** between `A` and `B` using `EXTRA.DILATIONSET`.
 4. **Convert the result back into a matrix** using `coordsToMatrix` and display it.
@@ -653,7 +653,7 @@ disp(C);
   - ind (required): An integer representing the column or the columns of A to differentiate. Only that column is differentiated while the others remain unchanged.
 - Output:
   - Jacobian (a 2D matrix): A 2D matrix representing the derivatives of `A` after `d` differentiations.
-- Explanation: The `ASf` function computes the derivative of a matrix **A** a specified number of times (`d`). If an optional column index (`ind`) is provided, only that column is differentiated.
+- Explanation: The `ASf` function computes the derivative of a matrix `A` a specified number of times (`d`). If an optional column index (`ind`) is provided, only that column is differentiated.
   Consider the polynomial:
   P(x, y) = 3x + 5y + 5x² + 4y² + x³ + 4x⁴
   
@@ -691,7 +691,7 @@ disp(C);
     This result means that after two derivative operations, the only nonzero entry comes from the x-column, corresponding to the `6x + 48x²` term. The y-column stays the same, as expected.
 - **NOTICE:** The input matrix A should **not** contain any constant values from the polynomial. As a result, the output will also ignore any constant values after differentiation.  
 
-### **PURPOSES**
+### PURPOSES
 The `ASf` function was developed to observe **patterns in an image after differentiation**. Below is an example of how to use it for **image processing**:
   ```matlab
   A = [
