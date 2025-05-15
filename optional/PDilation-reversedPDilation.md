@@ -1,22 +1,31 @@
 # Introduction
 Before diving into the details, here are important points to understand (explained further in the below sections):  
 - **Definitions:**  
-  - A partition is a sequence of positive integers ( 𝑎₁ , 𝑎₂ , . . . , 𝑎ₙ ).  
-  - We assume all partitions end with value `1` for easier analysis. (If a partition does not end with `1`, it can always be decomposed into two partitions: one ending with 1 and one of length 1.) It will be explained further in the **fun fact** section.  
-- **Non-injectivity:** PDilation is a nonlinear, non-injective operation, similar to Dilation. That means multiple (A, B) pairs can produce the same result Cs. Therefore, solving for all possible (A, B) given Cs is a set inversion problem. It's a nonlinear algebraic structure like (A, B) ↦ A ⊕ B  (where ⊕ is PDilation).  
+  - A partition is a sequence of positive integers `( 𝑎₁ , 𝑎₂ , ... , 𝑎ₙ )`.  
+  - We assume all partitions end with value `1` for easier analysis. (If a partition does not end with `1`, it can always be decomposed into two partitions: one ending with 1 and one of length 1.) It will be explained further in the **fun fact** section.
+
+- **Non-injectivity:** PDilation is a nonlinear, non-injective operation, similar to Dilation. That means multiple (A, B) pairs can produce the same result Cs. Therefore, solving for all possible (A, B) given Cs is a set inversion problem. It's a nonlinear algebraic structure like `(A, B) ↦ A ⊕ B`  (where `⊕` is PDilation).
+
 - **Non-cancellativity:**  
-  - PDilation does not satisfy cancellative properties. That is, knowing A ⊕ B = A ⊕ C does not imply B = C.  
-  - A counterexample is shown later (Case 1).  
+  - PDilation does not satisfy cancellative properties. That is, knowing `A ⊕ B = A ⊕ C` does not imply `B = C`.  
+  - A counterexample is shown later (Case 1).
+
 - **Operator:**  
-  - Convolution-like operator: We define a custom (∘,⊕)-convolution operator using **∘** as the combining operation and **⊕** as the accumulation operation.  
+  - Convolution-like operator: We define a custom `(∘,⊕)`-convolution operator using **∘** as the combining operation and **⊕** as the accumulation operation.  
   - Higher dimensions: The convolution-like operator extends to 2D, 3D arrays, etc., following similar index rules.  
-  - PDilation: PDilation is a 1D convolution-like operator.  
+  - PDilation: PDilation is a 1D convolution-like operator.
+
 - **Endpoints:** Cs(1) and Cs(end) are special because only one pair of elements (A(1), B(1)) and (A(end), B(end)) are involved in their computation.
-# Warning
+
+# Warning  
+
 `reversedPDilationv2` is only used for testing. It runs 2 times faster than `reversedPDilation`, but it occasionally misses some output pairs. One example is `[7 7 7 6 5 4 3 1 1]`.  
 ![{9613FA0E-1D01-4148-810A-204F4095B7DC}](https://github.com/user-attachments/assets/f995d781-3977-41ff-9aca-8d55a1e61fe7)  
+
 # Redefine PDilation  
-Assume that A ⊕ B = Cs. We can define PDilation as follow:  
+
+Assume that `A ⊕ B = Cs`. We can define PDilation as follow:  
+
 Cs(k) = max( A(i) + B(j) - 1) for all possible i + j = k - 1   
 This is exactly addition-max convolution, which is:  
 - Nonlinear  
@@ -27,15 +36,21 @@ This is exactly addition-max convolution, which is:
 From here, we can infer that Cs(1) is always equal to A(1) + B(1) as it's the only value used to calculate Cs(1). The same thing with Cs(end) where A(end) + B(end) is the only value being used to calculate Cs(end).  
 # Convolution-like operator  
 We define a custom (∘,⊕)-convolution operator using **∘** as the combining operation and **⊕** as the accumulation operation.  
-Let:
+
+Let:  
+
 - `A = [a₁, a₂, ..., aₙ]`  
-- `B = [b₁, b₂, ..., bₘ]`  
+- `B = [b₁, b₂, ..., bₘ]`
+
 Then the result `C` is defined as:  
+
 ```python3
 Cₖ = ⊕ (aᵢ ∘ bⱼ), for all i, j such that i + j - 1 = k
 ```
+
 In other words, for each position `k`, you sum all products `aᵢ ∘ bⱼ` where the indices satisfy `i + j - 1 = k`.   
 This operation assumes:  
+
 - **Commutativity** of the operators: `a ∘ b = b ∘ a` and `a ⊕ b = b ⊕ a`  
 - **Associativity** of operators: `(x ∘ y) ∘ z = x ∘ (y ∘ z)` and `(x ⊕ y) ⊕ z = x ⊕ (y ⊕ z)`  
 
@@ -49,7 +64,8 @@ We define the output `C[k]` at position `k` (starting from 1) as:
 ```python3
 C[k] = Σ (A[i] * B[j])
 ```
-where i + j - 1 = k  
+where `i+j-1 = k`  
+
 This is equivalent to the **classic convolution** or the **coefficient-wise product of two polynomials**.  
 
 ## Example 2: Addition-Max Convolution  
@@ -67,7 +83,9 @@ satisfy i + j - 1 = k
 ### Example
 
 Let:
-A = [1, 3, 2] B = [4, 1]  
+
+- `A = [1, 3, 2]`
+- `B = [4, 1]`
 
 We compute:  
 
@@ -79,7 +97,7 @@ We compute:
 So the result is:  
 C = [5, 7, 6, 3]  
 
-This is similar to our **PDilation** operation (⊕) except that we subtract 1 either before or after the maximum: C[k] = max(A[i] + B[j] - 1) or C[k] = max(A[i] + B[j]) - 1.  
+This is similar to our **PDilation** operation (`⊕`) except that we subtract 1 either before or after the maximum: `C[k] = max(A[i] + B[j] - 1) or C[k] = max(A[i] + B[j]) - 1`.  
 
 ## Higher-Dimensional Convolution Operation
 
