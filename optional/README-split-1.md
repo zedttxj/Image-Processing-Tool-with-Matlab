@@ -10,7 +10,7 @@
 - Explanation: The `ASf` function computes the derivative of a matrix `A` a specified number of times (`d`). If an optional column index (`ind`) is provided, only that column is differentiated.
   Consider the polynomial:
   
-  𝑃(𝑥,𝑦) = 3𝑥 + 5𝑦 + 5𝑥² + 4𝑦² + 𝑥³ + 4𝑥⁴  
+  𝑃(𝑥,𝑦)=3𝑥+5𝑦+5𝑥²+4𝑦²+𝑥³+4𝑥⁴  
   
   The coefficients of **x** and **y** are stored in a matrix form:  
   - The vector of **x-coefficients**: [3, 5, 1, 4]ᵀ → MATLAB notation: `[3; 5; 1; 4]`
