@@ -872,7 +872,7 @@ Or:
 
 **Notice** that the PDilation has all of its values substracted by 1. PDilation is not exactly tropical multiplication of the raw polynomial terms:  
 
-#### Example: (𝑃𝐷 stands for `PDilation`)
+#### Example: (`𝑃𝐷` stands for `PDilation`)
 Let:  
 
 - λ = (7, 4, 3, 2)  
