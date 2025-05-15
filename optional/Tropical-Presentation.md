@@ -110,9 +110,9 @@ Render.com's free tier has specific behaviors that affect the performance of you
 
 - This delay is due to the time required to allocate resources and start the service from an idle state.
 
-## 🛠How to Use
+## How to Use
 
-1. Open the [converter](https://zedttxj.github.io//MD-To-LaTex/) in your browser.
-2. Paste a **raw GitHub Markdown URL** like:
-![{F653269D-63ED-4590-9A68-2D771E072F05}](https://github.com/user-attachments/assets/5f0f8804-6ffd-48d4-8785-751ef1f98a51)
-
+1. Open the [converter](https://zedttxj.github.io//MD-To-LaTex/) in your browser.  
+2. Paste a **raw GitHub Markdown URL** like:  
+![{C4E717A7-5FBC-45D6-86B3-314A4A3DB10A}](https://github.com/user-attachments/assets/c3304791-0779-41ef-8ed0-894ee3818e48)  
+3. Wait for it to convert.  
