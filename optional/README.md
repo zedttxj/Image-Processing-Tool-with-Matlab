@@ -811,18 +811,18 @@ Also a yes because of how flipping, addition, and max behave.
   ```  
 
 ### reversedPDilation(A, B)
-- Input:
+- Input:  
   - Cs (required): A non-increasing, one-dimensional vector of non-negative integers  
-- Output:
-  - dilatedPartition (1D integer vector): A 2D cell array containing pairs of partitions, where `size(dilatedPartition)` would be `[<number of partitions> 2]`.
-- Explanation: `reversedPDilation` generates all possible pairs of partitions such that applying `PDilation` to them results in `Cs`.
-- Example code:
+- Output:  
+  - dilatedPartition (1D integer vector): A 2D cell array containing pairs of partitions, where `size(dilatedPartition)` would be `[<number of partitions> 2]`.  
+- Explanation: `reversedPDilation` generates all possible pairs of partitions such that applying `PDilation` to them results in `Cs`.  
+- Example code:  
   ```matlab
   C = ImageProcessor.reversedPDilation([11    10     9     8     4     2]);
   disp(C);
   disp(size(C));
-  ```
-- Run the code:
+  ```  
+- Run the code:  
   ```
   >>
     {[            1]}    {[11 10 9 8 4 2]}
@@ -864,7 +864,7 @@ Their tropical product is defined as:
 
 `f(x) ⊙ g(x) = (μ₁⨂𝜈₁)⨂x⁰⊕(μ₂⨂𝜈₁⊕μ₁⨂𝜈₂)⨂x¹⊕(μ₃⨂𝜈₁⊕μ₂⨂𝜈₂⊕μ₁⨂𝜈₃)⨂x²⊕(μ₃⨂𝜈₂⊕μ₂⨂𝜈₃⊕μ₁⨂𝜈₄)⨂x³⊕(μ₃⨂𝜈₃⊕μ₂⨂𝜈₄)⨂x⁴⊕(μ₃⨂𝜈₄)⨂x⁵`  
 
-Or:
+Or:  
 
 `f(x) ⊙ g(x) = max(max(μ₁+𝜈₁)+0x,max(μ₂+𝜈₁,μ₁+𝜈₂)+1x,max(μ₃+𝜈₁,μ₂+𝜈₂,μ₁+𝜈₃)+2x,max(μ₃+𝜈₂,μ₂+𝜈₃,μ₁+𝜈₄)+3x,max(μ₃+𝜈₃,μ₂+𝜈₄)+4x,max(μ₃+𝜈₄)+5x)`  
 
@@ -872,10 +872,12 @@ Or:
 
 #### Example: (`PD` stands for `PDilation`)
 Let:  
+
 - λ = (7, 4, 3, 2)  
 - λ′ = (5, 3, 1)
 
 Then:  
+
 - `PD(λ, λ′) = (11, 10, 9, 8, 4, 2)`  
 - `f₍₇,₄,₃,₂₎ ⊙ f₍₅,₃,₁₎ = f₍₁₂,₁₁,₁₀,₉,₅,₃₎`
 
