@@ -447,7 +447,7 @@ MatrixDecomposition works as follows (the actual code has different workflow tha
      The extracted set of coordinates is `{[0,0], [0,1], [1,1], [1,3]}`.
 
 2. **Compute a new transformed set** satisfying:  
-{(a,b) + (c,d) + ... | (a,b), (c,d), ... ∈ A and (a,b) ≠ (c,d) ≠ ...}
+`{(a,b)+(c,d)+... | (a,b),(c,d),... ∈ A and (a,b) ≠ (c,d) ≠ ...}`
 where `...` can be empty or multiple elements of `A`.
 
 3. **Convert this transformed set back into a matrix** representation.
