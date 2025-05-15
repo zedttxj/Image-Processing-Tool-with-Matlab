@@ -486,9 +486,9 @@ For every point `(a,b)` in `A`, we add all points `(c,d)` from `B` to generate t
     - **Resulting Set:**  
     After three dilations, we have generated all possible subsets of A, mimicking how binary toggling would work.  
 
-- Effects: This **reduces computation time** from `O(2^(|A|))` (where `|A|` is the length of set A or the number of `1`s of matrix A) in the set-based approach to `O((max(rows(A)) × max(cols(A)))⁴)` for the `matrixDecomposition` function that transforms the input matrices.
+- Effects: This **reduces computation time** from `O(2^(|A|))` (where `|A|` is the length of set A or the number of `1`s of matrix A) in the set-based approach to `O((max(row(A)) × max(col(A)))⁴)` for the `matrixDecomposition` function that transforms the input matrices.
 - Recommendation:
-  - Use Matrix-Based Dilation when `|A|` is large enough (ideally below 676) and `max(rows(A))` or `max(cols(A))` is not too big.
+  - Use Matrix-Based Dilation when `|A|` is large enough (ideally below 676) and `max(row(A))` or `max(col(A))` is not too big.
   - Use Set-Based Dilation (introduced in the below section) when `|A|` is small enough (ideally below 36).  
 
 - Example code:
