@@ -166,7 +166,7 @@ You should notice that the length of B (or C) is always larger than 2. The reaso
 ### Fun fact:
 If `|A| = 1`, `B` is always equal to `C`. To avoid making things complicated, throughout the input partitions used for analysis, their ending value are always be 1. For partitions that doesn't end with value `1`, we can always and only extract (cancel out) one pair of partitions where one of them has the length of 1 and the other has their ending value is `1`. For example, `[4 4 3]` = `[3]` ⊕ `[2 2 1]`. We will only have to focus on how to decompose `[2 2 1]`.  
 
-## Case 2: A = D where (A ⊕ B) ⊕ C = D ⊕ (B ⊕ C) and B and C are constant partitions (not yet proved)  
+## Case 2: `A = D` where `(A ⊕ B) ⊕ C = D ⊕ (B ⊕ C)` and B and C are constant partitions (not yet proved)  
 
 - **Atomic partition:** A partition that cannot be written as A ⊕ B for any nontrivial A and B. It's non-decomposable under PDilation operation (`⊕`). It appears once in all **full** decompositions of the input partition.Atomic partition isn't necessarily equal to constant partition.
 - **Constant partitions:** A partition that always appears in every full decomposition of a certain larger partition. You can picture it like prime numbers. A partition is constant depends on the input partition; a partition that is constant partition for this input might be just an atomic partition for different input.
@@ -494,8 +494,8 @@ D1 = ImageProcessor.PDilation(A1, B1);
 % D1 = [7 6 5 4 3 2 1]
 
 % Altered pair (both decreased)
-A2 = [4 2 2 1];   % second part 3→2
-B2 = [4 3 1 1];   % third part 2→1
+A2 = [4 2 2 1];   % second part (3 becomes 2)
+B2 = [4 3 1 1];   % third part (2 becomes 1)
 D2 = ImageProcessor.PDilation(A2, B2);
 % D2 = [7 6 5 4 3 2 1]  (same result)
 ```
