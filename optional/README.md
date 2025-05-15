@@ -484,12 +484,12 @@ For every point `(a,b)` in `A`, we add all points `(c,d)` from `B` to generate t
       𝑆₃=𝑆₂⊕{[0,0],c}={[0,0],a,b,c,a+b,a+c,b+c,a+b+c}
   
     - **Resulting Set:**  
-    After three dilations, we have generated all possible subsets of 𝐴, mimicking how binary toggling would work.  
+    After three dilations, we have generated all possible subsets of A, mimicking how binary toggling would work.  
 
-- Effects: This **reduces computation time** from `O(2^(|𝐴|))` (where `|𝐴|` is the length of set 𝐴 or the number of `1`s of matrix 𝐴) in the set-based approach to `O((max(rows(𝐴)) x max(cols(𝐴)))⁴)` for the `matrixDecomposition` function that transforms the input matrices.
+- Effects: This **reduces computation time** from `O(2^(|A|))` (where `|A|` is the length of set A or the number of `1`s of matrix A) in the set-based approach to `O((max(rows(A)) x max(cols(A)))⁴)` for the `matrixDecomposition` function that transforms the input matrices.
 - Recommendation:
-  - Use Matrix-Based Dilation when `|𝐴|` is large enough (ideally below 676) and `max(rows(𝐴))` or `max(cols(𝐴))` is not too big.
-  - Use Set-Based Dilation (introduced in the below section) when `|𝐴|` is small enough (ideally below 36).  
+  - Use Matrix-Based Dilation when `|A|` is large enough (ideally below 676) and `max(rows(A))` or `max(cols(A))` is not too big.
+  - Use Set-Based Dilation (introduced in the below section) when `|A|` is small enough (ideally below 36).  
 
 - Example code:
   ```matlab
