@@ -45,9 +45,7 @@ Let:
 
 Then the result `C` is defined as:  
 
-```python3
-`Cₖ = ⊕ (aᵢ ∘ bⱼ), for all i, j` such that `i + j - 1 = k`
-```
+`Cₖ = ⊕ (aᵢ ∘ bⱼ), for all i, j` such that `i + j - 1 = k`  
 
 In other words, for each position `k`, you sum all products `aᵢ ∘ bⱼ` where the indices satisfy `i + j - 1 = k`.   
 This operation assumes:  
