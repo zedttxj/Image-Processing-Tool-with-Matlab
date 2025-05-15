@@ -872,7 +872,7 @@ Or:
 
 **Notice** that the PDilation has all of its values substracted by 1. PDilation is not exactly tropical multiplication of the raw polynomial terms:  
 
-#### Example: (`PD` stands for `PDilation`)
+#### Example: (`𝑃𝐷` stands for `PDilation`)
 Let:  
 
 - λ = (7, 4, 3, 2)  
@@ -880,7 +880,7 @@ Let:
 
 Then:  
 
-- `PD(λ, λ′) = (11, 10, 9, 8, 4, 2)`  
+- `𝑃𝐷(λ, λ′) = (11, 10, 9, 8, 4, 2)`  
 - `f₍₇,₄,₃,₂₎ ⊙ f₍₅,₃,₁₎ = f₍₁₂,₁₁,₁₀,₉,₅,₃₎`
 
 We can conclude that `ƒ_{λ} ⊙ ƒ_{λ′} = ƒ_{PD(λ, λ′) + 1}`
