@@ -1,4 +1,4 @@
-# FUNCTION2.pdf
+# FUNCTION-CODES2.pdf
 ## EXTRA.DILATION(binaryMatrix1, binaryMatrix2)
 
 ### Input:
