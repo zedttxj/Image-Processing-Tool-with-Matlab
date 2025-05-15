@@ -391,7 +391,7 @@ Think of this function as a derivation of `BP(A)`. The parameters `lambda` and `
   - A **sorted 1D array** representing the **merged** partition of `partition1` and `partition2` using the special operation **⊔**.  
 
 - Explanation of the **⊔** Operation:
-  - The **⊔ operation** constructs a new partition by taking the **multiset union** of the elements from `partition1` and `partition2`. After merging, the resulting partition is **reordered** in **weakly decreasing** order.
+  - The **⊔** operation constructs a new partition by taking the **multiset union** of the elements from `partition1` and `partition2`. After merging, the resulting partition is **reordered** in **weakly decreasing** order.
   - Example:  
     Given **μ = (3,3,2,1)** and **ν = (4,1,1)**, the resulting partition is:  **μ ⊔ ν = (4,3,3,2,1,1,1)**  
 - Example code:
