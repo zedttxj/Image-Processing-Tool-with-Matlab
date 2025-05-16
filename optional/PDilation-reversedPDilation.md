@@ -26,7 +26,7 @@ Before diving into the details, here are important points to understand (explain
 
 Assume that `A ⊕ B = Cs`. We can define PDilation as follow:  
 
-`Csₖ = max(Aᵢ+Bⱼ-1)` for all possible `i+j=k-1`  
+`Cs(k) = max(A[i]+B[j]-1)` for all possible `i+j=k-1`  
 
 This is exactly addition-max convolution, which is:  
 - Nonlinear  
@@ -45,9 +45,9 @@ Let:
 
 Then the result `C` is defined as:  
 
-`Cₖ = ⊕ (aᵢ ∘ bⱼ), for all i, j` such that `i + j - 1 = k`  
+`C[k] = ⊕ (A[i] ∘ B[j]), for all i, j` such that `i + j - 1 = k`  
 
-In other words, for each position `k`, you sum all products `aᵢ ∘ bⱼ` where the indices satisfy `i + j - 1 = k`.   
+In other words, for each position `k`, you sum all products `A[i] ∘ B[j]` where the indices satisfy `i + j - 1 = k`.   
 This operation assumes:  
 
 - **Commutativity** of the operators: `a ∘ b = b ∘ a` and `a ⊕ b = b ⊕ a`  
@@ -61,7 +61,7 @@ Let `A = [a₁, a₂, ..., aₙ]` and `B = [b₁, b₂, ..., bₘ]`.
 
 We define the output `C[k]` at position `k` (starting from 1) as:  
 
-`Cₖ = Σ (Aᵢ × Bⱼ)` where `i + j - 1 = k`  
+`C[k] = Σ (A[i] × B[j])` where `i + j - 1 = k`  
 
 This is equivalent to the **classic convolution** or the **coefficient-wise product of two polynomials**.  
 
@@ -73,7 +73,7 @@ In this example:
 
 So we define:  
 
-`Cₖ = max(Aᵢ + Bⱼ)` satisfy `i + j - 1 = k`  
+`C[k] = max(A[i] + B[j])` satisfy `i + j - 1 = k`  
 
 ### Example
 
@@ -93,13 +93,13 @@ So the result is:
 
 `C = [5, 7, 6, 3]`  
 
-This is similar to our **PDilation** operation (`⊕`) except that we subtract 1 either before or after the maximum: `Cₖ = max(Aᵢ + Bⱼ - 1)` or `Cₖ = max(Aᵢ + Bⱼ) - 1`.  
+This is similar to our **PDilation** operation (`⊕`) except that we subtract 1 either before or after the maximum: `C[k] = max(A[i] + B[j] - 1)` or `C[k] = max(A[i] + B[j]) - 1`.  
 
 ## Higher-Dimensional Convolution Operation
 
 In higher dimensions, we can extend the convolution-like operation to work with more indices per array. Given two 2D arrays A[i][m] and B[j][n], the operation can be defined as:  
 
-`Cₖₜ = ⊕(Aᵢₘ ∘ Bⱼₙ)` where `i + j - 1 = k` and `m + n - 1 = t`.  
+`C[k][t] = ⊕(A[i][m] ∘ B[j][n])` where `i + j - 1 = k` and `m + n - 1 = t`.  
 Here:  
 - `∘` is the combining operation and `⊕` is the accumulation operation.  
 - `i`, `j` are the indices for the first dimension of `A` and `B`.  
@@ -110,15 +110,15 @@ This operation can be viewed as a convolution-like process with two indices in e
 
 ### Example 1: conv2 from MATLAB (2D Convolution)  
 
-In MATLAB, `conv2` is used to perform 2D convolution between two matrices. This operation computes the sum of the element-wise products between the input matrice elements `Aᵢₘ` and `Bⱼₙ`, with the result stored in `Cₖₜ`. For `conv2`, the formula would be:  
+In MATLAB, `conv2` is used to perform 2D convolution between two matrices. This operation computes the sum of the element-wise products between the input matrice elements `A[i][m]` and `B[j][n]`, with the result stored in `C[k][t]`. For `conv2`, the formula would be:  
 
-`Cₖₜ = Σ (Aᵢₘ × Bⱼₙ)` where `i + j - 1 = k` and `m + n - 1 = t`  
+`C[k][t] = Σ (A[i][m] × B[j][n])` where `i + j - 1 = k` and `m + n - 1 = t`  
 
 ### Example 2: Dilation (Accumulation: Max)  
 
-In the traditional dilation operation defined in many books, we can define it as the combination of two arrays `Aᵢₘ` and `Bⱼₙ` with a multiplication combining operation and max accumulation operation. The result `Cₖₜ` is computed as:  
+In the traditional dilation operation defined in many books, we can define it as the combination of two arrays `A[i][m]` and `B[j][n]` with a multiplication combining operation and max accumulation operation. The result `C[k][t]` is computed as:  
 
-`Cₖₜ = max(Aᵢₘ × Bⱼₙ)` where `i + j - 1 = k` and `m + n - 1 = t`  
+`C[k][t] = max(A[i][m] × B[j][n])` where `i + j - 1 = k` and `m + n - 1 = t`  
 
 # divide-and-conquer method may not be applicable in the case of reversedPDilation  
 
@@ -165,11 +165,11 @@ This is exactly like convolution inversion but under max-plus algebra. Because P
     {[11 10 9 8 4 2]}    {[            1]}
   ```
 
-Here, A = `[2 1]`, B = `[9 7 7 3 1]`, and C = `[9 8 7 3 1]`. However, Cs = A ⊕ B = A ⊕ C = `[11    10     9     8     4     2]`.  
+Here, A = `[2 1]`, B = `[9 7 7 3 1]`, and C = `[9 8 7 3 1]`. However, `Cs = A ⊕ B = A ⊕ C = [11    10     9     8     4     2]`.  
 
 ### 1st fact:  
 
-You should notice that the length of B (or C) is always larger than 2. The reason is that Cs(1) is always equal to B(1) + C(1) as it's the only value used to calculate Cs(1). The same thing with Cs(end) where `C(end) + B(end)` is the only value being used to calculate `Cs(end)`. If one of these (`B(1)`, `C(1)`, `B(end)`, and `C(end)`) changes, the original Cs will be change as well without changing A.  
+You should notice that the length of B (or C) is always larger than 2. The reason is that Cs(1) is always equal to `B(1) + C(1)` as it's the only value used to calculate Cs(1). The same thing with Cs(end) where `C(end) + B(end)` is the only value being used to calculate `Cs(end)`. If one of these (`B(1)`, `C(1)`, `B(end)`, and `C(end)`) changes, the original Cs will be change as well without changing A.  
 
 ### Fun fact:  
 
