@@ -4,7 +4,7 @@ Before diving into the details, here are important points to understand (explain
   - A partition is a sequence of positive integers `( 𝑎₁ , 𝑎₂ , ... , 𝑎ₙ )`.  
   - We assume all partitions end with value `1` for easier analysis. (If a partition does not end with `1`, it can always be decomposed into two partitions: one ending with 1 and one of length 1.) It will be explained further in the **fun fact** section.
 
-- **Non-injectivity:** PDilation is a nonlinear, non-injective operation, similar to Dilation. That means multiple (A, B) pairs can produce the same result Cs. Therefore, solving for all possible (A, B) given Cs is a set inversion problem. It's a nonlinear algebraic structure like `(A, B) ↦ A ⊕ B`  (where `⊕` is PDilation).
+- **Non-injectivity:** PDilation is a nonlinear, non-injective operation, similar to Dilation. That means multiple (A, B) pairs can produce the same result Cs. Therefore, solving for all possible (A, B) given Cs is a set inversion problem. It's a nonlinear algebraic structure like `(A, B) ↦ A ⊕ B` (where `⊕` is PDilation).
 
 - **Non-cancellativity:**  
   - PDilation does not satisfy cancellative properties. That is, knowing `A ⊕ B = A ⊕ C` does not imply `B = C`.  
@@ -33,9 +33,10 @@ This is exactly addition-max convolution, which is:
 - Associative  
 - Commonly used in morphological image processing and tropical algebra.  
 
-From here, we can infer that Cs(1) is always equal to A(1) + B(1) as it's the only value used to calculate Cs(1). The same thing with Cs(end) where A(end) + B(end) is the only value being used to calculate Cs(end).  
+From here, we can infer that Cs(1) is always equal to A(1) + B(1) as it's the only value used to calculate Cs(1). The same thing with Cs(end) where A(end) + B(end) is the only value being used to calculate Cs(end).
+  
 # Convolution-like operator  
-We define a custom (∘,⊕)-convolution operator using **∘** as the combining operation and **⊕** as the accumulation operation.  
+We define a custom `(∘,⊕)-`convolution operator using **∘** as the combining operation and **⊕** as the accumulation operation.  
 
 Let:  
 
@@ -44,11 +45,9 @@ Let:
 
 Then the result `C` is defined as:  
 
-```python3
-Cₖ = ⊕ (aᵢ ∘ bⱼ), for all i, j such that i + j - 1 = k
-```
+`Cₖ = ⊕ (Aᵢ ∘ Bⱼ)`, for all i, j such that `i + j - 1 = k`
 
-In other words, for each position `k`, you sum all products `aᵢ ∘ bⱼ` where the indices satisfy `i + j - 1 = k`.   
+In other words, for each position `k`, you sum all products `Aᵢ ∘ Bⱼ` where the indices satisfy `i + j - 1 = k`.   
 This operation assumes:  
 
 - **Commutativity** of the operators: `a ∘ b = b ∘ a` and `a ⊕ b = b ⊕ a`  
@@ -60,11 +59,9 @@ But we can generalize this using any two associative and commutative operations.
 
 Let `A = [a₁, a₂, ..., aₙ]` and `B = [b₁, b₂, ..., bₘ]`.  
 
-We define the output `C[k]` at position `k` (starting from 1) as:  
-```python3
-C[k] = Σ (A[i] * B[j])
-```
-where `i+j-1 = k`  
+We define the output `Cₖ` at position `k` (starting from 1) as:  
+
+`Cₖ = Σ (Aᵢ × Bⱼ)` where `i + j - 1 = k`  
 
 This is equivalent to the **classic convolution** or the **coefficient-wise product of two polynomials**.  
 
@@ -75,10 +72,7 @@ In this example:
 - The accumulation operation is maximum (`max`).  
 
 So we define:
-```python3
-C[k] = max(A[i] + B[j])
-```
-satisfy i + j - 1 = k  
+`Cₖ = max(Aᵢ + Bⱼ)` satisfying i + j - 1 = k  
 
 ### Example
 
@@ -97,17 +91,16 @@ We compute:
 So the result is:  
 C = [5, 7, 6, 3]  
 
-This is similar to our **PDilation** operation (`⊕`) except that we subtract 1 either before or after the maximum: `C[k] = max(A[i] + B[j] - 1) or C[k] = max(A[i] + B[j]) - 1`.  
+This is similar to our **PDilation** operation (`⊕`) except that we subtract 1 either before or after the maximum: `Cₖ = max(Aᵢ + Bⱼ - 1) or Cₖ = max(Aᵢ + Bⱼ) - 1`.  
 
 ## Higher-Dimensional Convolution Operation
 
-In higher dimensions, we can extend the convolution-like operation to work with more indices per array. Given two 2D arrays A[i][m] and B[j][n], the operation can be defined as:  
-```python3
-C[k][t] = ⊕(A[i][m] ∘ B[j][n])
-```
-where i + j - 1 = k and m + n - 1 = t.  
+In higher dimensions, we can extend the convolution-like operation to work with more indices per array. Given two 2D arrays `Aᵢₘ` and `Bⱼₙ`, the operation can be defined as:  
+
+`Cₖₜ = ⊕(Aᵢₘ ∘ Bⱼₙ)` where i + j - 1 = k and m + n - 1 = t.  
+
 Here:  
-- ∘ is the combining operation and ⊕ is the accumulation operation.  
+- `∘` is the combining operation and `⊕` is the accumulation operation.  
 - i, j are the indices for the first dimension of A and B.  
 - m, n are the indices for the second dimension of A and B.  
 - k, t are the resulting indices for C.  
@@ -115,25 +108,22 @@ Here:
 This operation can be viewed as a convolution-like process with two indices in each dimension, where the relation between the indices is defined as i + j - 1 = k and m + n - 1 = t. The same concept apply for 3D arrays and so on.  
 
 ### Example 1: conv2 from MATLAB (2D Convolution)  
-In MATLAB, `conv2` is used to perform 2D convolution between two matrices. This operation computes the sum of the element-wise products between the input matrices A[i][m] and B[j][n], with the result stored in C[k][t]. For `conv2`, the formula would be:  
-```python3
-C[k][t] = Σ (A[i][m] * B[j][n])
-```
-where i + j - 1 = k and m + n - 1 = t  
+
+In MATLAB, `conv2` is used to perform 2D convolution between two matrices. This operation computes the sum of the element-wise products between the input matrices `Aᵢₘ` and `Bⱼₙ`, with the result stored in Cₖₜ. For `conv2`, the formula would be:  
+`Cₖₜ = Σ (Aᵢₘ × Bⱼₙ)` where i + j - 1 = k and m + n - 1 = t  
 
 ### Example 2: Dilation (Accumulation: Max)  
-In the traditional dilation operation defined in many books, we can define it as the combination of two arrays A[i][m] and B[j][n] with a multiplication combining operation and max accumulation operation. The result C[k][t] is computed as:   
-```python3
-C[k][t] = max(A[i][m] * B[j][n])
-```
-where i + j - 1 = k and m + n - 1 = t  
+
+In the traditional dilation operation defined in many books, we can define it as the combination of two arrays `Aᵢₘ` and `Bⱼₙ` with a multiplication combining operation and max accumulation operation. The result Cₖₜ is computed as:   
+
+`Cₖₜ = max(Aᵢₘ × Bⱼₙ)` where i + j - 1 = k and m + n - 1 = t  
 
 # divide-and-conquer method may not be applicable in the case of reversedPDilation
 The original problem is this:
-Given D, find all (A, B) such that A ⊕ B = D.  
+Given D, find all `(A, B)` such that `A ⊕ B = D`.  
 This is exactly like convolution inversion but under max-plus algebra. Because PDilation is non-injective (considering some special cases below), the normal divide-and-conquer method may not be applicable. Consider **4th fact** below.
 # Some special cases:
-## Case 1: A ⊕ B = A ⊕ C where B ≠ C
+## Case 1: `A ⊕ B = A ⊕ C` where `B ≠ C`
 - Example code:
   ```matlab
   disp(ImageProcessor.reversedPDilationv2([11    10     9     8     4     2]));
@@ -171,8 +161,8 @@ Here, A = `[2 1]`, B = `[9 7 7 3 1]`, and C = `[9 8 7 3 1]`. However, Cs = A ⊕
 You should notice that the length of B (or C) is always larger than 2. The reason is that Cs(1) is always equal to B(1) + C(1) as it's the only value used to calculate Cs(1). The same thing with Cs(end) where C(end) + B(end) is the only value being used to calculate Cs(end). If one of these (B(1), C(1), B(end), and C(end)) changes, the original Cs will be change as well without changing A.  
 ### Fun fact:
 If |A| = 1, B is always equal to C. To avoid making things complicated, throughout the input partitions used for analysis, their ending value are always be 1. For partitions that doesn't end with value `1`, we can always and only extract (cancel out) one pair of partitions where one of them has the length of 1 and the other has their ending value is `1`. For example, `[4 4 3]` = `[3]` ⊕ `[2 2 1]`. We will only have to focus on how to decompose `[2 2 1]`.  
-## Case 2: A = D where (A ⊕ B) ⊕ C = D ⊕ (B ⊕ C) and B and C are constant partitions (not yet proved)
-- **Atomic partition:** A partition that cannot be written as A ⊕ B for any nontrivial A and B. It's non-decomposable under PDilation operation (⊕). It appears once in all **full** decompositions of the input partition.Atomic partition isn't necessarily equal to constant partition.
+## Case 2: `A = D` where `(A ⊕ B) ⊕ C = D ⊕ (B ⊕ C)` and B and C are constant partitions (not yet proved)
+- **Atomic partition:** A partition that cannot be written as `A ⊕ B` for any nontrivial A and B. It's non-decomposable under PDilation operation (`⊕`). It appears once in all **full** decompositions of the input partition.Atomic partition isn't necessarily equal to constant partition.
 - **Constant partitions:** A partition that always appears in every full decomposition of a certain larger partition. You can picture it like prime numbers. A partition is constant depends on the input partition; a partition that is constant partition for this input might be just an atomic partition for different input.
 
 **A canonical decomposition is:** A standardized or agreed-upon way of breaking down partitions (or anything complex) so there's only one correct version. For example:
@@ -303,7 +293,7 @@ As we see below, B is in the right side, giving all possible As in the left side
     {[    12 7 6 4 3]}    {[           5 1]}
     {[    12 8 6 4 3]}    {[           5 1]}
 ```
-Let's pick the pair `{[   16 12 10 7 7 3]}    {[              2 1]}`, the only pair left to be tested, instead of `{[   16 12 10 8 7 3]}    {[              2 1]}` where C is in the right side and A ⊕ B is in the left side. Let's decompose A ⊕ B:
+Let's pick the pair `{[   16 12 10 7 7 3]}    {[              2 1]}`, the only pair left to be tested, instead of `{[   16 12 10 8 7 3]}    {[              2 1]}` where C is in the right side and `A ⊕ B` is in the left side. Let's decompose A ⊕ B:
 ```matlab
     {[             1]}    {[16 12 10 7 7 3]}
     {[             2]}    {[ 15 11 9 6 6 2]}
@@ -361,13 +351,13 @@ Let's make things easier. Can we create a non-decomposable partition with 2 non-
   - Compute A ⊕ B = D where |D| < |C| + 1
   - Mark D as composite (i.e., decomposable)
 
-Still, we have to loop through the table like the normal recursion method do. However, we don’t need to loop through the full length of partition C — we only need to consider up to half of it, similar to how checking for primality of `n` only requires looping up to `√n`. Because if C were decomposable, it must break into smaller valid partitions — and at least one of them must be non-decomposable (i.e., irreducible). If none of these show up as potential components, the original must be atomic too.  
+Still, we have to loop through the table like the normal recursion method do. However, we don’t need to loop through the full length of partition C — we only need to consider up to half of it, similar to how checking for primality of `n` only requires looping up to `√(n)`. Because if C were decomposable, it must break into smaller valid partitions — and at least one of them must be non-decomposable (i.e., irreducible). If none of these show up as potential components, the original must be atomic too.  
 ### Why Finding Atomic Partitions Help
 How does finding non-decomposable partitions of another partition help?  
-- Consider **2nd fact (A = D where (A ⊕ B) ⊕ C = D ⊕ (B ⊕ C) and B and C are constant partitions):** We can clearly see that A = D in the case 2. And, thanks again to the associative and commutative properties, we know that these non-decomposable partitions are atomic partitions, meaning they exist once in all **full** decompositions of the input partition.  
-- Applying the **1st fact** (A ⊕ B = A ⊕ C where B ≠ C) and the fact that we don't have to worry about whether A exists in a **full** decomposition, we can just focusing on decomposing B and C instead.
+- Consider **2nd fact (`A = D` where `(A ⊕ B) ⊕ C = D ⊕ (B ⊕ C)` and B and C are constant partitions):** We can clearly see that A = D in the case 2. And, thanks again to the associative and commutative properties, we know that these non-decomposable partitions are atomic partitions, meaning they exist once in all **full** decompositions of the input partition.  
+- Applying the **1st fact** (`A ⊕ B = A ⊕ C` where `B ≠ C`) and the fact that we don't have to worry about whether A exists in a **full** decomposition, we can just focusing on decomposing B and C instead.
 
-The first step is to generate a *partition sieve* table to find all possible atomic partitions that may help construct the input partition. In the next step, we find all possible partitions B and C where A ⊕ B = A ⊕ C, A is a atomic partition, and B ≠ C. In fact, it may have more than just B and C or just one possible partition.
+The first step is to generate a *partition sieve* table to find all possible atomic partitions that may help construct the input partition. In the next step, we find all possible partitions B and C where `A ⊕ B = A ⊕ C`, A is a atomic partition, and `B ≠ C`. In fact, it may have more than just B and C or just one possible partition.
 We can use tree-based modeling to generate the **full** decomposition of the input partition. In the below demonstration, the "Left" groups are guaranteed atomic partitions and only have 1 partitions. The "Right" groups may contain multiple partitions. Let's consider a simple case first:
 ```mermaid
 graph TD;
