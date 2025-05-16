@@ -1,5 +1,4 @@
-- `B = [b₁, b₂, ..., bₘ]`
-where `i+j-1 = k`  
-- `A = [1, 3, 2]`
-- `B = [4, 1]`
-This is similar to our **PDilation** operation (`⊕`) except that we subtract 1 either before or after the maximum: `C[k] = max(A[i] + B[j] - 1) or C[k] = max(A[i] + B[j]) - 1`. 
+  - PDilation does not satisfy cancellative properties. That is, knowing `A ⊕ B = A ⊕ C` does not imply `B = C`.  
+  - A counterexample is shown later (Case 1).
+  - Convolution-like operator: We define a custom `(∘,⊕)`-convolution operator using **∘** as the combining operation and **⊕** as the accumulation operation. 
+Assume that `A ⊕ B = Cs`. We can define PDilation as follow:  
