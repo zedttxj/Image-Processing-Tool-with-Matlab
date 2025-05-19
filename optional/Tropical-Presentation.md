@@ -333,7 +333,11 @@ disp(size(result));
     15     2
 ```
 
-## Additional: Table conversion for MD and LaTeX formats
+## Additional: Exporting Vector Paths as Tables (Markdown & LaTeX)
+
+After generating the set of coordinates like above, you can export the `result` into formatted tables:  
+- **Markdown format** for GitHub and web documentation  
+- **LaTeX format** for academic papers and reports  
 
 You can combine with your MATLAB script to create the table in MD format like this:  
 
