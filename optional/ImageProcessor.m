@@ -611,6 +611,38 @@ classdef ImageProcessor
                 end
             end
         end
+        function table_format_latex(path, result, col1, col2)
+            fid = fopen(path, "w");
+
+            % Begin LaTeX table
+            fprintf(fid, "\\begin{tabular}{|l|l|}\n");
+            fprintf(fid, "\\hline\n");
+            fprintf(fid, "\\textbf{" + col1 + "} & \\textbf{" + col2 + "} \\\\\n");
+            fprintf(fid, "\\hline\n");
+
+            % Escape LaTeX special characters and write each row
+            for i = 1:size(result, 1)
+                idx = result{i,1};
+                path = result{i,2};
+
+                % Escape underscores and braces for LaTeX
+                idx = strrep(idx, "_", "\\_");
+                idx = strrep(idx, "{", "\{");
+                idx = strrep(idx, "}", "\}");
+                path = strrep(path, "_", "\\_");
+                path = strrep(path, "{", "\{");
+                path = strrep(path, "}", "\}");
+
+                fprintf(fid, "%s & %s \\\\\n", idx, path);
+                fprintf(fid, "\\hline\n");
+            end
+
+            % End LaTeX table
+            fprintf(fid, "\\end{tabular}\n");
+
+            % Close file
+            fclose(fid);
+        end
         function t = custom_diag(a, i)
             if size(a,2) < 2
                 t = a(i+length(a));
