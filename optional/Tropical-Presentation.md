@@ -385,7 +385,6 @@ A = [
   4 0
 ];
 result = ImageProcessor.Ainotation(length(A), "symbol");
-result = ImageProcessor.Ainotation(A, "number");
 ImageProcessor.table_format_latex("vector_path_table.tex", result, "I", "A of I");
 ```
 - Run the code and open the table from `vector_path_table.tex`:  
