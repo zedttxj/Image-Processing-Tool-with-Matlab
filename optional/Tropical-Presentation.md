@@ -333,7 +333,7 @@ disp(size(result));
     15     2
 ```
 
-## Additional: Table format conversion
+## Additional: Table conversion for MD and LaTeX formats
 
 You can combine with the script like this to create the table in MD format like this:  
 
@@ -366,3 +366,22 @@ for i = 1:size(result, 1)
     fprintf(fid, "| `%s` | `%s` |\n", result{i,1}, result{i,2});
 end
 ```
+- Run the code and open the table from `vector_path_table.md`:  
+![{C07D0671-4D9B-4539-97B4-4FB891B9C8FB}](https://github.com/user-attachments/assets/bcc0767e-be5c-4d41-88b5-54706f3afb44)
+
+
+- Example code for creating a table in LaTex format where you can find the table in the file `vector_path_table.md`:
+```matlab
+A = [
+  3 5;
+  5 4;
+  1 1;
+  4 0
+];
+result = ImageProcessor.Ainotation(length(A), "symbol");
+result = ImageProcessor.Ainotation(A, "number");
+ImageProcessor.table_format_latex("vector_path_table.tex", result, "I", "A of I");
+```
+- Run the code and open the table from `vector_path_table.tex`:  
+![{FFF9DEF0-4410-4B5A-9A22-6B10B1E5C566}](https://github.com/user-attachments/assets/04b5df6f-09ec-4ffe-b88d-bee073627948)  
+![{FE80C2ED-9BF0-4B60-A617-115D9B0D0B2A}](https://github.com/user-attachments/assets/4e882d69-c1f7-4606-a07c-4d9c29e33f97)  
