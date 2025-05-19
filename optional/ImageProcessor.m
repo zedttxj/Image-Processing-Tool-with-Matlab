@@ -336,8 +336,8 @@ classdef ImageProcessor
             filteredImage = ImageProcessor.convertBayer2RGB(image, order, show, [true true true], size(order), 2, "rc", custom_order);
         end
         function erodedImage = erosionWithConv2(A, B)
-            B = double(B); 
-            convResult = conv2(double(A), B, 'full');
+            B = rot90(double(B),2); 
+            convResult = conv2(double(A), B, 'valid');
             threshold = sum(B(:));
             erodedImage = (convResult == threshold);
         end
