@@ -106,7 +106,7 @@ This [tool](https://zedttxj.github.io//MD-To-LaTex/) lets you fetch any public M
 
 1. Open the [converter](https://zedttxj.github.io//MD-To-LaTex/) in your browser.  
 2. Paste a **raw GitHub Markdown URL** like:  
-![{C4E717A7-5FBC-45D6-86B3-314A4A3DB10A}](https://github.com/user-attachments/assets/c3304791-0779-41ef-8ed0-894ee3818e48)  
+![{AEB978D4-279C-4E9A-8342-DD203291566D}](https://github.com/user-attachments/assets/84ebe709-bd23-47b8-8259-ebb171a2ebd5)  
 3. Wait for it to convert.
 
 ## Example of Visual Testing in PDF Format
