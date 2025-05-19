@@ -485,10 +485,15 @@ classdef ImageProcessor
                 startIndex = 2;
             else
                 startIndex = 1;
-            end;
-            for i = startIndex:length(B)
-                t(2,:) = B(i,:);
-                comb = ImageProcessor.dilationSet(comb(:,:), t(:,:));
+            end
+            if size(B) == [1 2]
+                comb = [0 0; B];
+            else
+                for i = startIndex:length(B)
+                    t(2,:) = B(i,:);
+                    comb = ImageProcessor.dilationSet(comb(:,:), t(:,:));
+                    comb = unique(comb, 'rows');
+                end
             end
         end
         function dilatedSet = extraDilationSet(A,B)
@@ -562,6 +567,49 @@ classdef ImageProcessor
         function str = arr2maxstr2(A, c)
             subs = ['₀','₁','₂','₃','₄','₅','₆','₇','₈','₉'];
             str = ['max(' strjoin(cellfun(@(i) [c arrayfun(@(x) subs(x-'0'+1), i)], arrayfun(@(i) int2str(i), A, 'UniformOutput', false), 'UniformOutput', false), ',') ')'];
+        end
+        function strarray = Ainotation(A, rq)
+            rq = char(rq);
+            function out = toSubscript(n)
+                subs = ['₀','₁','₂','₃','₄','₅','₆','₇','₈','₉'];
+                digits = num2str(n) - '0';  % convert to array of digits
+                out = join(subs(digits), "");  % concatenate subscript chars
+            end
+            if rq == 'symbol'
+                strarray = [];
+                m = A;
+                A = 1:m;
+                for i = 1:m
+                    t = nchoosek(A,i);
+                    for j = 1:size(t,1)
+                        tmp = t(j,:);
+                        txt = [];
+                        for k = 1:size(tmp,2)
+                            ind = nchoosek(tmp,k);
+                            for kk = 1:size(ind,1)
+                                txt = [txt "," strjoin(arrayfun(@(ii) ['(' 'r' toSubscript(ii+1) ',' 's' toSubscript(ii+1) ')'], ind(kk,:), 'UniformOutput', false), '+')];
+                            end
+                        end
+                        tmp = "{" + strjoin(compose('%d', tmp), ',') + "}";
+                        txt = "{(0,0)" + strjoin(txt, "") + "}";
+                        strarray = [strarray; tmp txt];
+                    end
+                end
+            elseif rq == 'number'
+                strarray = [];
+                subs = ['₀','₁','₂','₃','₄','₅','₆','₇','₈','₉'];
+                m = size(A,1);
+                A2 = 1:m;
+                for i = 1:m
+                    t = nchoosek(A2,i);
+                    for j = 1:size(t,1)
+                        tmp = t(j,:);
+                        txt = "{" + strjoin(compose('(%d,%d)', ImageProcessor.setDecomposition(A(tmp,:))), ',') + "}";
+                        tmp = "{" + strjoin(compose('%d', tmp), ',') + "}";
+                        strarray = [strarray; tmp txt];
+                    end
+                end
+            end
         end
         function t = custom_diag(a, i)
             if size(a,2) < 2
