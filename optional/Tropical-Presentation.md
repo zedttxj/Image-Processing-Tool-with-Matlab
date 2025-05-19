@@ -355,7 +355,7 @@ You can combine with your MATLAB script to create the table in MD format like th
 | `{2,3,4}` | `{(0,0),(1,1),(4,0),(5,1),(5,4),(6,5),(9,4),(10,5)}` |
 | `{1,2,3,4}` | `{(0,0),(1,1),(3,5),(4,0),(4,6),(5,1),(5,4),(6,5),(7,5),(8,6),(8,9),(9,4),(9,10),(10,5),(12,9),(13,10)}` |
 
-## Example Code for Creating a Table in LaTex Format
+### Example Code for Creating a Table in LaTex Format
 
 You can find the table in the file `vector_path_table.tex`:
 ```matlab
@@ -373,7 +373,7 @@ ImageProcessor.table_format_latex("vector_path_table.tex", result, "I", "A of I"
 ![{FFF9DEF0-4410-4B5A-9A22-6B10B1E5C566}](https://github.com/user-attachments/assets/04b5df6f-09ec-4ffe-b88d-bee073627948)  
 ![{FE80C2ED-9BF0-4B60-A617-115D9B0D0B2A}](https://github.com/user-attachments/assets/4e882d69-c1f7-4606-a07c-4d9c29e33f97)  
 
-## Example Code for Creating a Table in MD Format
+### Example Code for Creating a Table in MD Format
 
 You can find the table in the file `vector_path_table.md`:
 ```matlab
