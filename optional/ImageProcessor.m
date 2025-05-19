@@ -629,9 +629,15 @@ classdef ImageProcessor
                 idx = strrep(idx, "_", "\\_");
                 idx = strrep(idx, "{", "\{");
                 idx = strrep(idx, "}", "\}");
-                path = strrep(path, "_", "\\_");
+                pattern = '[₀₁₂₃₄₅₆₇₈₉ₕₖₗₘₙₚₜₛᵢₐⱼ₍₎]+';
                 path = strrep(path, "{", "\{");
                 path = strrep(path, "}", "\}");
+                path = regexprep(path, pattern, '${sprintf(''_{%s}'', $0)}');
+                subs = '₀₁₂₃₄₅₆₇₈₉';
+                digits = '0123456789';
+                for j = 1:length(subs)
+                    path = strrep(path, subs(j), digits(j));
+                end
 
                 fprintf(fid, "%s & %s \\\\\n", idx, path);
                 fprintf(fid, "\\hline\n");
