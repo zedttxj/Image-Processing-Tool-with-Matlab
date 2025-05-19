@@ -681,7 +681,13 @@ disp(C);
 
 - `EXTRA.DILATIONSET` = Works similarly to `EXTRA.DILATION`.
 - `EXTRA.DILATIONSET` is **not suitable** for RGB images or matrices with multiple channels so you may have to manually separate the channels to calculate it.
-- Both `EXTRA.DILATION` and `EXTRA.DILATIONSET` can be considered **homomorphic** in their operation.  
+- Both `EXTRA.DILATION` and `EXTRA.DILATIONSET` can be considered **homomorphic** in their operation.
+
+### Additionally:
+
+- `EXTRA.EROSIONSET` = Works similarly to `EXTRA.EROSION`.
+- `EXTRA.EROSIONSET` is **not suitable** for RGB images or matrices with multiple channels so you may have to manually separate the channels to calculate it.
+- Both `EXTRA.EROSION` and `EXTRA.EROSIONSET` can be considered **homomorphic** in their operation.
 
 ## ASf(A, d, ind)
 - Input:
