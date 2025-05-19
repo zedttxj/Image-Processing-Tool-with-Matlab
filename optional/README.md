@@ -293,16 +293,12 @@ Think of this function as a derivation of `BP(A)`. The parameters `lambda` and `
     imshow(output);
     ```  
   - The output is like this:  
-    ![{67D74618-8800-4307-9F3F-DC83350AC4E1}](https://github.com/user-attachments/assets/57a8d9c2-77ab-47d0-9b0d-039b913ed7c6)  
+    ![{A443E44E-B85E-433E-9B47-EA056B9BB1EF}](https://github.com/user-attachments/assets/cfda9906-2d75-48e1-b2f4-b9c71bbd2c8b)  
   - I tried with Dilation1, Opening1, and Closing1 respectively:  
-    ![{B99D868B-E78F-4281-8C07-93736746A745}](https://github.com/user-attachments/assets/ba115749-bdfb-4307-bd36-f49e63da4f50)  
-    ![{541CA048-BFAB-43B4-A79A-C3A40FD97550}](https://github.com/user-attachments/assets/1e381d0a-ccd0-48bb-8f20-f270ff430b69)  
-    ![{5E195FDB-AD2B-4068-B312-1E8912D7B8C0}](https://github.com/user-attachments/assets/db1c5a0c-4d35-4f0e-8e78-cc498a9a7368)  
-    - It's recommend to have smaller size of `image2` (ideally 5 to 35). Swapping the input position results in the same output image (only for dilation function):    
-      ![{C40E3C47-5960-47BB-A05F-01140E2E3C30}](https://github.com/user-attachments/assets/16518dae-74f4-4d3f-95a5-17b880a633df)  
-      ![{3CB73E92-8936-4F7C-98CB-FE8F9FC5E521}](https://github.com/user-attachments/assets/c44ec77c-894c-4382-8956-0cac16e04cc5)  
-      ![{83643EB6-3FA3-4DFE-8193-664B6521D73D}](https://github.com/user-attachments/assets/e910e18f-ae29-4f8c-a3b8-7f0c233d004e)  
-      ![{60B3C1E7-CEC7-469C-B71E-069EB4F7E830}](https://github.com/user-attachments/assets/800b2c12-a578-4b40-8a6c-9a9d8897a32d)  
+    ![{B1E3F47E-0A99-49DB-A9EC-1541E33EF0EB}](https://github.com/user-attachments/assets/943e1fa0-135c-4bb0-98cc-e19b21f1763d)  
+    ![{77A873A5-E969-458B-8A4C-9DD4F88EAC6E}](https://github.com/user-attachments/assets/c5f533b0-672f-4dc6-8e9f-95e382b9993d)  
+    ![{97A44743-FC25-47FF-A172-7055058C4306}](https://github.com/user-attachments/assets/34a30c89-cad4-469a-9c38-01e6f89d3335)  
+    - It's recommend to have smaller size of `image2` (ideally 5 to 35). Swapping the input position results in the same output image (only for dilation function)  
   
   - An example of applying 2D binary matrices as inputs:  
     - `image` =  
