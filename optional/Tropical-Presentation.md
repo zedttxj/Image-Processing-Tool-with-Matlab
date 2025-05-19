@@ -408,12 +408,13 @@ end
 ![{826EC57D-1150-4D5E-B0B6-2816E1AACA5C}](https://github.com/user-attachments/assets/0c2c1766-f7e9-4414-8d4e-d58d27ce021b)  
 
 ### Optional: Convert Markdown Tables to LaTeX
-If writing long tables in LaTeX feels tedious, you can first write them in Markdown, then use this converter to turn them into LaTeX automatically:
-
-  [MD-to-LaTeX Converter (Sandbox Version)](https://zedttxj.github.io/MD-To-LaTex-Sandbox/)
+If writing long tables in LaTeX feels tedious, you can first write them in Markdown, then use this converter to turn them into LaTeX automatically: [MD-to-LaTeX Converter (Sandbox Version)](https://zedttxj.github.io/MD-To-LaTex-Sandbox/)  
 
 - Example output preview:  
-  ![MD Table Preview](https://github.com/user-attachments/assets/e912aefe-06ba-4c7b-8496-45f28e387306)
+  ![MD Table Preview](https://github.com/user-attachments/assets/e912aefe-06ba-4c7b-8496-45f28e387306)  
+
+- Export it into .pdf to test:  
+  ![{0FFF1C3F-E279-4B91-874E-EC1938D7E7B2}](https://github.com/user-attachments/assets/9e4617c3-e59c-4522-bc12-84beab7017d6)  
 
 - Be sure to import these **required packages** in your LaTeX preamble if you're using `longtable`:
   ```latex
