@@ -540,7 +540,7 @@ For every point `(a,b)` in `A`, we add all points `(c,d)` from `B` to generate t
   ```
 
 - Run the code:
-![{3ABD9EFB-D8A7-4B66-B942-78F4E251BB5A}](https://github.com/user-attachments/assets/fd2bfa08-7e89-415f-b103-a0868b62fb2e)  
+![{C0D3C166-1553-4270-A46B-42CB1F4B6530}](https://github.com/user-attachments/assets/0d3458d9-502c-4e8c-8505-ffedf0bd2640)  
 
 - Another example code:
 ```matlab
@@ -557,7 +557,7 @@ disp("Size of output image: " + strjoin(arrayfun(@num2str, size(t), 'UniformOutp
 ```
 
 - Run the code:
-![{F95D476F-75C1-402E-ABF8-6CA51E0A43D7}](https://github.com/user-attachments/assets/265d7b84-e356-47f3-bbb6-03a40602eaf6)  
+![{1228EA46-9CB7-4B05-B47A-B6E683F19E53}](https://github.com/user-attachments/assets/6289414b-da2e-404e-9657-4abd9d01e382)  
 
 ## EXTRA.DILATIONSET and dilationSet Functions with Added Customized Functions  
 
