@@ -335,6 +335,8 @@ disp(size(result));
 
 ## Additional:
 
+You can combine with the script like this to create the table in MD format like this:  
+
 | Index Set | Path Sum Sequence |
 |-----------|-------------------|
 | `{1}` | `{(0,0),(3,5)}` |
@@ -352,3 +354,15 @@ disp(size(result));
 | `{1,3,4}` | `{(0,0),(1,1),(3,5),(4,0),(4,6),(5,1),(7,5),(8,6)}` |
 | `{2,3,4}` | `{(0,0),(1,1),(4,0),(5,1),(5,4),(6,5),(9,4),(10,5)}` |
 | `{1,2,3,4}` | `{(0,0),(1,1),(3,5),(4,0),(4,6),(5,1),(5,4),(6,5),(7,5),(8,6),(8,9),(9,4),(9,10),(10,5),(12,9),(13,10)}` |
+
+- Example code for creating a table in MD format where you can find the table in the file `vector_path_table.md`:
+```matlab
+fid = fopen("vector_path_table.md", "w");
+
+fprintf(fid, "| Index Set | Path Sum Sequence |\n");
+fprintf(fid, "|-----------|-------------------|\n");
+
+for i = 1:size(result, 1)
+    fprintf(fid, "| `%s` | `%s` |\n", result{i,1}, result{i,2});
+end
+```
