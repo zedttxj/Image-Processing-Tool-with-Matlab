@@ -306,7 +306,7 @@ Think of this function as a derivation of `BP(A)`. The parameters `lambda` and `
     - `image2` =  
   ![{742CCC11-EEF9-4A5F-A291-EF20376FECE0}](https://github.com/user-attachments/assets/dc8d838e-d6f9-403d-aeb0-d82a6b40b773)  
     - `output` =  
-  ![{670A86FF-918B-4EF0-9E8F-5D0D659B15D7}](https://github.com/user-attachments/assets/aad91a6f-780f-44cf-85aa-cbdb3c197f23)
+  ![{9EC6401C-701E-4429-B4DD-01BFE769DAAE}](https://github.com/user-attachments/assets/ac3ca2ef-b307-4d97-8cda-ee862e7f008d)
   
 ## Dilation2, Erosion2, Opening2, Closing2 (binaryMatrix1, binaryMatrix2)
 - Input:
