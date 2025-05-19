@@ -463,17 +463,28 @@ classdef ImageProcessor
             B = [rows, cols] - 1;
         end
         function A = coordsToMatrix(B)
-            B = B + 1;
-            sz = max(B, [], 1);
-            A = zeros(sz);
-            A(sub2ind(sz, B(:,1), B(:,2))) = 1;
+            if isempty(B)
+                A = [];
+            else
+                B = B + 1;
+                sz = max(B, [], 1);
+                A = zeros(sz);
+                A(sub2ind(sz, B(:,1), B(:,2))) = 1;
+            end
         end
         function C = dilationSet(A, B)
-            numA = size(A, 1);
-            numB = size(B, 1);
             [A1, B1] = ndgrid(A(:,1), B(:,1));
             [A2, B2] = ndgrid(A(:,2), B(:,2));
             C = unique([A1(:) + B1(:), A2(:) + B2(:)], 'rows');
+        end
+        function C = erosionSet(A, B)
+            [A1, B1] = ndgrid(A(:,1), B(:,1));
+            [A2, B2] = ndgrid(A(:,2), B(:,2));
+            C = [A1(:) - B1(:), A2(:) - B2(:)];
+            [uniquePoints, ~, idx] = unique(C, 'rows');
+            counts = accumarray(idx, 1);
+            valid = counts == size(B,1);
+            C = uniquePoints(valid, :);
         end
         function comb = setDecomposition(B)
             t = [0 0; 0 0];
@@ -524,6 +535,37 @@ classdef ImageProcessor
                 dilatedImage(:,:,i) = imresize(dilatedImageCell{i}, [maxRows, maxCols]);
                 if t
                     dilatedImage(1,1,i) = 0;
+                end
+            end
+        end
+        function erodedSet = extraErosionSet(A,B)
+            t = bitshift(sum([0 0] == (A(1,:) == B(1,:))),-1);
+            A = ImageProcessor.setDecomposition(A(:,:));
+            B = ImageProcessor.setDecomposition(B(:,:));
+            erodedSet = ImageProcessor.erosionSet(A,B);
+            erodedSet = erodedSet(t+1:end,:);
+        end
+        function erodedImage = extraErosion(A,B)
+            t = 0 == A(1,1) & 0 == B(1,1);
+            erodedImage = [];
+            chn = size(A,3);
+            erodedImageCell = cell(1, chn);
+            if (prod(size(B))<prod(size(A)))
+                for i = 1:chn
+                    erodedImageCell{i} = cat(3,erodedImage,ImageProcessor.erosionWithConv2(ImageProcessor.matrixDecomposition(A(:,:,i)),ImageProcessor.matrixDecomposition(B(:,:,i))));
+                end
+            else
+                for i = 1:chn
+                    erodedImageCell{i} = cat(3,erodedImage,ImageProcessor.erosionWithConv2(ImageProcessor.matrixDecomposition(B(:,:,i)),ImageProcessor.matrixDecomposition(A(:,:,i))));
+                end
+            end
+            maxRows = max(cellfun(@(x) size(x, 1), erodedImageCell));
+            maxCols = max(cellfun(@(x) size(x, 2), erodedImageCell));
+            erodedImage = zeros(maxRows, maxCols, chn);
+            for i = 1:chn
+                erodedImage(:,:,i) = imresize(erodedImageCell{i}, [maxRows, maxCols]);
+                if t
+                    erodedImage(1,1,i) = 0;
                 end
             end
         end
@@ -789,6 +831,6 @@ classdef ImageProcessor
         end
     end
     properties (Constant)
-        EXTRA = struct('DILATION', @ImageProcessor.extraDilation, 'DILATIONSET', @ImageProcessor.extraDilationSet);
+        EXTRA = struct('DILATION', @ImageProcessor.extraDilation, 'DILATIONSET', @ImageProcessor.extraDilationSet, 'EROSION', @ImageProcessor.extraErosion, 'EROSIONSET', @ImageProcessor.extraErosionSet);
     end
 end
