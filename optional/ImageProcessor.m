@@ -639,7 +639,7 @@ classdef ImageProcessor
                 end
             elseif rq == 'number'
                 strarray = [];
-                subs = ['₀','₁','₂','₃','₄','₅','₆','₇','₈','₉'];
+                A = unique(A, 'rows');
                 m = size(A,1);
                 A2 = 1:m;
                 for i = 1:m
