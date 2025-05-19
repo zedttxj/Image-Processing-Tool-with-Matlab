@@ -544,7 +544,24 @@ For every point `(a,b)` in `A`, we add all points `(c,d)` from `B` to generate t
   ```
 
 - Run the code:
-![{3ABD9EFB-D8A7-4B66-B942-78F4E251BB5A}](https://github.com/user-attachments/assets/fd2bfa08-7e89-415f-b103-a0868b62fb2e)
+![{3ABD9EFB-D8A7-4B66-B942-78F4E251BB5A}](https://github.com/user-attachments/assets/fd2bfa08-7e89-415f-b103-a0868b62fb2e)  
+
+- Another example code:
+```matlab
+tic;
+B = ImageProcessor.readImage('test.png');
+A = B(200:210,200:210,:) > 160;
+B = B(200:215,200:215,:) > 160;
+t = ImageProcessor.EXTRA.EROSION(B,A);
+imshow(t);
+elapsedTime = toc;
+disp(elapsedTime);
+disp("Size of input image: " + strjoin(arrayfun(@num2str, size(B), 'UniformOutput', false), ' '));
+disp("Size of output image: " + strjoin(arrayfun(@num2str, size(t), 'UniformOutput', false), ' '));
+```
+
+- Run the code:
+![{F95D476F-75C1-402E-ABF8-6CA51E0A43D7}](https://github.com/user-attachments/assets/265d7b84-e356-47f3-bbb6-03a40602eaf6)  
 
 ## EXTRA.DILATIONSET and dilationSet Functions with Added Customized Functions  
 
