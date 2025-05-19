@@ -524,6 +524,7 @@ classdef ImageProcessor
         end
         function Jacobian = ASf(A, d, ind)
             n = length(A);
+            A = unique(A,'rows');
             t = prod((2:d+1).' + (0:n-d-1), 1);
             Jacobian = A;
             Jacobian(1:n-d,ind) = Jacobian(1+d:end,ind) .* t .';
@@ -533,6 +534,7 @@ classdef ImageProcessor
         end
         function Jacobian = AJF(A, d, ind)
             n = length(A);
+            A = unique(A,'rows');
             t = prod((2:d+1).' + (0:n-d-1), 1);
             Jacobian = A;
             if ind == 1
