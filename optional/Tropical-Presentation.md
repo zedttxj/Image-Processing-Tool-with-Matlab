@@ -407,21 +407,32 @@ end
 - Run the code and open the table from `vector_path_table.md`:  
 ![{826EC57D-1150-4D5E-B0B6-2816E1AACA5C}](https://github.com/user-attachments/assets/0c2c1766-f7e9-4414-8d4e-d58d27ce021b)  
 
-### Optional: Convert Markdown Tables to LaTeX  
+### Optional: Convert Markdown Tables to LaTeX
 
-Sometimes equations are too long to fit in regular LaTeX tables, so you use Markdown to write them more comfortably, then convert to LaTeX with longtable support. For that reason, it's recommended to use MD table, then use this converter to turn them into LaTeX automatically: [MD-to-LaTeX Converter (Sandbox Version)](https://zedttxj.github.io/MD-To-LaTex-Sandbox/)  
+If your equations or symbolic terms are too long or messy to manage directly in LaTeX tables, a cleaner approach is to:
 
-- Example output preview:  
-  ![MD Table Preview](https://github.com/user-attachments/assets/e912aefe-06ba-4c7b-8496-45f28e387306)  
+1. Write your table in **Markdown** for readability
+2. Use the converter below to turn it into a **LaTeX longtable**
+3. Copy it into your `.tex` file for export or publication
 
-- Export it into .pdf to test:  
-  ![{0FFF1C3F-E279-4B91-874E-EC1938D7E7B2}](https://github.com/user-attachments/assets/9e4617c3-e59c-4522-bc12-84beab7017d6)  
+👉 [MD-to-LaTeX Converter (Sandbox Version)](https://zedttxj.github.io/MD-To-LaTex-Sandbox/)
 
-- Be sure to import these **required packages** in your LaTeX preamble if you're using `longtable`:
-  ```latex
-  \usepackage{longtable}
-  \usepackage{array}
-  \usepackage{booktabs}
-  \usepackage[margin=1in]{geometry}
-  \usepackage{courier}
-  ```
+- Example Markdown table output:  
+  ![MD Table Preview](https://github.com/user-attachments/assets/e912aefe-06ba-4c7b-8496-45f28e387306)
+
+- Example PDF export after LaTeX compilation:  
+  ![PDF Output](https://github.com/user-attachments/assets/9e4617c3-e59c-4522-bc12-84beab7017d6)
+
+#### Required LaTeX Packages
+
+Make sure your LaTeX document includes these in the preamble to support `longtable` formatting:
+
+```latex
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage[margin=1in]{geometry}
+\usepackage{courier}
+```
+
+> This workflow is especially helpful when working with long symbolic expressions, cumulative path results, or anything that’s tedious to typeset directly in LaTeX.
