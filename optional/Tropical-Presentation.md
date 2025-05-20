@@ -403,9 +403,23 @@ fprintf(fid, "|-----------|-------------------|\n");
 for i = 1:size(result, 1)
     fprintf(fid, "| `%s` | `%s` |\n", result{i,1}, result{i,2});
 end
-```
+```  
+
+Or, you can run `ImageProcessor.table_format_md` if it has exactly just 2 columns.
+
+- Example code:
+  ```matlab
+  A = [
+    3 5;
+    5 4;
+    1 1;
+    4 0
+  ];
+  result = ImageProcessor.Ainotation(length(A), "symbol");
+  ImageProcessor.table_format_md("vector_path_table.md", result, "I", "A of I");
+  ```
 - Run the code and open the table from `vector_path_table.md`:  
-![{826EC57D-1150-4D5E-B0B6-2816E1AACA5C}](https://github.com/user-attachments/assets/0c2c1766-f7e9-4414-8d4e-d58d27ce021b)  
+![{8F4CB1BE-9143-434A-827B-1E6D977A5D3E}](https://github.com/user-attachments/assets/e534014f-8342-44ba-9594-d005e89a772a)  
 
 ### Optional: Convert Markdown Tables to LaTeX
 
