@@ -407,8 +407,9 @@ end
 - Run the code and open the table from `vector_path_table.md`:  
 ![{826EC57D-1150-4D5E-B0B6-2816E1AACA5C}](https://github.com/user-attachments/assets/0c2c1766-f7e9-4414-8d4e-d58d27ce021b)  
 
-### Optional: Convert Markdown Tables to LaTeX
-If writing long tables in LaTeX feels tedious, you can first write them in Markdown, then use this converter to turn them into LaTeX automatically: [MD-to-LaTeX Converter (Sandbox Version)](https://zedttxj.github.io/MD-To-LaTex-Sandbox/)  
+### Optional: Convert Markdown Tables to LaTeX  
+
+Sometimes equations are too long to fit in regular LaTeX tables, so you use Markdown to write them more comfortably, then convert to LaTeX with longtable support. For that reason, it's recommended to use MD table, then use this converter to turn them into LaTeX automatically: [MD-to-LaTeX Converter (Sandbox Version)](https://zedttxj.github.io/MD-To-LaTex-Sandbox/)  
 
 - Example output preview:  
   ![MD Table Preview](https://github.com/user-attachments/assets/e912aefe-06ba-4c7b-8496-45f28e387306)  
