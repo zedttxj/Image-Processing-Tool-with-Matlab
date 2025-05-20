@@ -429,7 +429,7 @@ If your equations or symbolic terms are too long or messy to manage directly in 
 2. Use the converter below to turn it into a **LaTeX longtable**
 3. Copy it into your `.tex` file for export or publication
 
-👉 [MD-to-LaTeX Converter (Sandbox Version)](https://zedttxj.github.io/MD-To-LaTex-Sandbox/)
+[MD-to-LaTeX Converter (Sandbox Version)](https://zedttxj.github.io/MD-To-LaTex-Sandbox/)
 
 - Example Markdown table output:  
   ![MD Table Preview](https://github.com/user-attachments/assets/e912aefe-06ba-4c7b-8496-45f28e387306)
