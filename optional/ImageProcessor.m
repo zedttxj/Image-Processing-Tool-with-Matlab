@@ -691,6 +691,18 @@ classdef ImageProcessor
             % Close file
             fclose(fid);
         end
+        function table_format_md(path, result, col1, col2)
+            fid = fopen(path, "w");
+
+            fid = fopen("vector_path_table.md", "w");
+
+            fprintf(fid, "| " + col1 + " | " + col2 + " |\n");
+            fprintf(fid, "|-----------|-------------------|\n");
+
+            for i = 1:size(result, 1)
+                fprintf(fid, "| `%s` | `%s` |\n", result{i,1}, result{i,2});
+            end
+        end
         function t = custom_diag(a, i)
             if size(a,2) < 2
                 t = a(i+length(a));
