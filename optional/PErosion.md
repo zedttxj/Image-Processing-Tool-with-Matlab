@@ -6,7 +6,7 @@
 
 Let B = B₁ ∪ B₂, where B₁ and B₂ are sets (e.g., lines, shapes, structuring elements). Then:
 
-    A ⊖ B = min(A ⊖ B₁, A ⊖ B₂)
+    A ⊖ B = min{A ⊖ B₁, A ⊖ B₂}
 
 This reflects the distributive property of erosion over union: the erosion of A by a union of sets is the **pointwise minimum** of erosions by the individual sets.
 
@@ -14,7 +14,7 @@ This reflects the distributive property of erosion over union: the erosion of A 
 
 Let B = B₁ ∩ B₂, where B₁ and B₂ are sets (e.g., lines, shapes, structuring elements). Then:
 
-    A ⊖ B = max(A ⊖ B₁, A ⊖ B₂)
+    A ⊖ B = max{A ⊖ B₁, A ⊖ B₂}
 
 This makes sense because erosion is anti-extensive and order-reversing: the smaller the structuring element, the larger the eroded result.
 
@@ -24,7 +24,7 @@ This makes sense because erosion is anti-extensive and order-reversing: the smal
 
 For a 2D structuring element B, define each Bᵢ as the matrix that contains only the i-th row of B (all other rows are zero), lifted into 2D space. Then:
 
-    A ⊖ B = max(min { A ⊖ Bᵢ | Bᵢ ⊆ B}, 0)
+    A ⊖ B = max{min { A ⊖ Bᵢ | Bᵢ ⊆ B}, 0}
 
 This models erosion as a **row-wise operation**, where each row independently contributes to the final result through a minimum operation. `max(...,0)` appears as non-positive coordinates don't exist.
 
@@ -98,7 +98,7 @@ Then the erosion becomes a **partition subtraction** with a +1 shift:
 
 The final erosion P(A ⊖ B) is then:
 
-    P(A ⊖ B)ⱼ₋ᵢ₊₁ = max(min { aⱼ - bᵢ + 1 }, 0)
+    P(A ⊖ B)ⱼ₋ᵢ₊₁ = max{min { aⱼ - bᵢ + 1 }, 0}
 
 ## Important Note on Matrix Shape During Erosion
 
