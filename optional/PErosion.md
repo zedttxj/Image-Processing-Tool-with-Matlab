@@ -76,11 +76,11 @@ There are 3 valid positions where B can "fit" into A during erosion.
 ### 1st fact:
 From the row-wise erosion:
 
-    A ⊖ B = min { A ⊖ Bᵢ | for all i Bᵢ is the i-th row lifted from B}  
+    A ⊖ B = min { A ⊖ Bᵢ | for all i, where Bᵢ is the i-th row lifted from B}  
     
 which is also equivalent to this:  
 
-P(A ⊖ B) = min { P(A ⊖ Bᵢ) | for all i Bᵢ is the i-th row lifted from B}
+P(A ⊖ B) = min { P(A ⊖ Bᵢ) | for all i, where Bᵢ is the i-th row lifted from B}
 
 ### 2nd fact:
 If:
