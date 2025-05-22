@@ -16,6 +16,8 @@ Let B = B₁ ∩ B₂, where B₁ and B₂ are sets (e.g., lines, shapes, struct
 
     A ⊖ B = max(A ⊖ B₁, A ⊖ B₂)
 
+This makes sense because erosion is anti-extensive and order-reversing: the smaller the structuring element, the larger the eroded result.
+
 ---
 
 ## Row-wise Erosion
@@ -24,7 +26,7 @@ For a 2D structuring element B, define each Bᵢ as the matrix that contains onl
 
     A ⊖ B = max(min { A ⊖ Bᵢ | Bᵢ ⊆ B}, 0)
 
-This models erosion as a **row-wise operation**, where each row independently contributes to the final result through a minimum operation. `max(...,0)` appears due to **intersection rule** described above.
+This models erosion as a **row-wise operation**, where each row independently contributes to the final result through a minimum operation. `max(...,0)` appears as non-positive coordinates don't exist.
 
 ---
 
