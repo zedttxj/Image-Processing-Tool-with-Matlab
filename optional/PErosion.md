@@ -184,32 +184,19 @@ Our version has a +1 and clamping 0:
 
     Cⱼ₊ᵢ₋₁ = max(min(aⱼ + bᵢ + 1), 0)
 
-We can conclude that in the realm of positive integers, `A PErosion B' = A ⊗ B - 1`
-
-### Warning: Output Index Range
-
-Originally, for regular PErosion (non-flipped):
-
-    C has indices from 1 to |A| - |B| + 1
-
-But when we calculate `A PErosion B'` where B' is the **flipped + negated** version of B, the output index range from `1 - (|B| - 1)` to `|A| - 2*(|B| - 1)`. Additionally, notice that the length of the output produced by `PErosion` is only `|A| - |B| + 1` whereas `tropical min-plus convolution` produces `|A| + |B| + 1`. For that reason, `PErosion` can only compute limited entries for `tropical min-plus convolution` whereas `tropical min-plus convolution` compute excessive entries for `PErosion`.
-
-This range reflects the **symmetric spread** introduced by reversing and expanding support. Even though B' is no longer a valid partition (due to reversal or negation), partition A and the resulting partion still forms a valid partition — i.e., a non-increasing, positive sequence.
-
-### Relation between PErosion and Min-Plus Convolution
+However, we cannot directly conclude that `A PErosion B' = A ⊗ B - 1` in the realm of positive integer partitions, for the following reasons:
+    **1. Index Range Mismatch**
+    When we calculate `A PErosion B'` where B' is the **flipped + negated** version of B, the output index range from `1 - (|B| - 1)` to `|A| - 2*(|B| - 1)` as `i` (index of `B'`) ranges from `2 - |B|` to `1`. To fix this, we shift the entries of `B'` to the left so that the resulting PErosion output starts at index 1.
+    **2. B' has negative entries**
+    To make `B'`'s entries no longer negative, we can consider the fact that `PErosion(A,B) = PErosion(A+scalar,B+scalar)`.
+    **3. Output length of PErosion and tropical min-plus convolution don't match**
+    Notice that the length of the output produced by `PErosion` is only `|A| - |B| + 1` whereas `tropical min-plus convolution` produces `|A| + |B| + 1`. Hence, PErosion only computes a subset of the entries from the full convolution. To match the full convolution support, we must pad A appropriately (not B'), ensuring A is long enough to allow convolution-style overlap. Additionally, if the padding values are too small, they can incorrectly reduce the minimum values in the result.
+    > Padding B' instead would cause more entries to be clipped, due to further narrowing the overlapping window.
 
 There exist infinitely many ways to **twist** both A and B such that:
 
 - Both twisted versions of A and B are **valid partitions** (i.e., non-increasing and positive),
 - And the resulting **PErosion produces the same output** as a min-plus convolution.
-
-Thus, even though PErosion might involve arbitrary sequences, we can always **transform A and B** into partition-compatible forms, preserving:
-
-- Output shape,
-- Output values,
-- And the tropical interpretation.
-
-This connection establishes **PErosion** as a partition-constrained tropical convolution that preserves algebraic structure while remaining interpretable in morphological and combinatorial terms.
 
 #### Example: Matching PErosion to Tropical Min-Plus Convolution
 
@@ -231,6 +218,4 @@ function erodedPartition = tropical_min_multiplication(A, B)
 end
 ```
 
-Why?  
-
-In the section [Dual-Twisted PErosion as Tropical Convolution](https://github.com/zedttxj/Image-Processing-Tool-with-Matlab/blob/main/optional/PErosion.md#dual-twisted-perosion-as-tropical-convolution), we conclude that `A PErosion B' = A ⊗ B - 1`. However, we can't represent `B'` as a valid partition as it has negative index and negative entries. For that reason, we will have to twist B' more (and A if necessary). To make B' no longer negative, we can consider the fact that `PErosion(A,B) = PErosion(A+scalar,B+scalar)`. After that, as we shift the indices of B to the left, indices of C also shifted accordingly to the left. That resolves the indices and both partition B' and output partition now start at 1 when we compute `PErosion`. However, the main concern is that `PErosion` can only compute limited entries for `tropical min-plus convolution` (as mentioned above).
+In this example, we can conclude that in the realm of positive integers, `A_twisted PErosion B_twisted = A ⊗ B - 1`
