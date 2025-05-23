@@ -746,7 +746,28 @@ The `ASf` function was developed to observe **patterns in an image after differe
   imshow(ImageProcessor.Dilation1(A,B)); % Apply dilation to enhance visualization
   ```
 - Run the code:  
-  ![{116ED977-56BE-4C20-801B-6134A69B4FCA}](https://github.com/user-attachments/assets/f3a72409-7f77-4641-a8ed-90bea9ead0af)  
+  ![{116ED977-56BE-4C20-801B-6134A69B4FCA}](https://github.com/user-attachments/assets/f3a72409-7f77-4641-a8ed-90bea9ead0af)
+
+- Another example code (calculating `ASf(A, 2, 1)⊕ASf(A, 2, 2)`):
+```matlab
+A = [
+  3 5;
+  4 8;
+  1 0;
+  2 1;
+  2 4
+];
+
+B = ImageProcessor.dilationSet(ImageProcessor.ASf(A,2,1),ImageProcessor.ASf(A,2,2));
+B = ImageProcessor.coordsToMatrix(B);
+A = ImageProcessor.coordsToMatrix(A);
+```
+
+- Run the code:
+  - Image of A:
+    ![{31DF0FA4-0166-4127-B7E0-8B432B67D9A2}](https://github.com/user-attachments/assets/1712ef23-deed-4c4f-beee-fdb5a5e5b91a)  
+  - Image of B:
+    ![{B8E7C152-B85F-4B86-8A52-4E15D0499B97}](https://github.com/user-attachments/assets/e356644e-e852-41c5-81c9-18997c442186)  
 
 ## AJF(A, d, ind)
 - Input:
