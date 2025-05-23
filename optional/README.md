@@ -765,8 +765,10 @@ A = ImageProcessor.coordsToMatrix(A);
 
 - Run the code:
   - Image of A:
+
     ![{31DF0FA4-0166-4127-B7E0-8B432B67D9A2}](https://github.com/user-attachments/assets/1712ef23-deed-4c4f-beee-fdb5a5e5b91a)  
   - Image of B:
+
     ![{B8E7C152-B85F-4B86-8A52-4E15D0499B97}](https://github.com/user-attachments/assets/e356644e-e852-41c5-81c9-18997c442186)  
 
 ## AJF(A, d, ind)
