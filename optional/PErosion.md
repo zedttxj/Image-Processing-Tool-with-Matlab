@@ -192,7 +192,7 @@ Originally, for regular PErosion (non-flipped):
 
     C has indices from 1 to |A| - |B| + 1
 
-But when we calculate `A PErosion B'` where B' is the **flipped + negated** version of B, the output index range from `1 - (|B| - 1)` to `|A| - 2*(|B| - 1)`.
+But when we calculate `A PErosion B'` where B' is the **flipped + negated** version of B, the output index range from `1 - (|B| - 1)` to `|A| - 2*(|B| - 1)`. Additionally, notice that the length of the output produced by `PErosion` is only `|A| - |B| + 1` whereas `tropical min-plus convolution` produces `|A| + |B| + 1`. For that reason, `PErosion` can only compute limited entries for `tropical min-plus convolution` whereas `tropical min-plus convolution` compute excessive entries for `PErosion`.
 
 This range reflects the **symmetric spread** introduced by reversing and expanding support. Even though B' is no longer a valid partition (due to reversal or negation), partition A and the resulting partion still forms a valid partition — i.e., a non-increasing, positive sequence.
 
@@ -230,3 +230,7 @@ function erodedPartition = tropical_min_multiplication(A, B)
     erodedPartition = ImageProcessor.PErosion(A_twisted, B_twisted);
 end
 ```
+
+Why?  
+
+In the section [Dual-Twisted PErosion as Tropical Convolution](https://github.com/zedttxj/Image-Processing-Tool-with-Matlab/blob/main/optional/PErosion.md#dual-twisted-perosion-as-tropical-convolution), we conclude that `A PErosion B' = A ⊗ B - 1`. However, we can't represent `B'` as a valid partition as it has negative index and negative entries. For that reason, we will have to twist B' more (and A if necessary). To make B' no longer negative, we can consider the fact that `PErosion(A,B) = PErosion(A+scalar,B+scalar)`. After that, as we shift the indices of B to the left, indices of C also shifted accordingly to the left. That resolves the indices and both partition B' and output partition now start at 1 when we compute `PErosion`. However, the main concern is that `PErosion` can only compute limited entries for `tropical min-plus convolution` (as mentioned above).
