@@ -184,12 +184,18 @@ Our version has a +1 and clamping 0:
 
     Cⱼ₊ᵢ₋₁ = max(min(aⱼ + bᵢ + 1), 0)
 
-However, we cannot directly conclude that `A PErosion B' = A ⊗ B - 1` in the realm of positive integer partitions, for the following reasons:
-    **1. Index Range Mismatch**
-    When we calculate `A PErosion B'` where B' is the **flipped + negated** version of B, the output index range from `1 - (|B| - 1)` to `|A| - 2*(|B| - 1)` as `i` (index of `B'`) ranges from `2 - |B|` to `1`. To fix this, we shift the entries of `B'` to the left so that the resulting PErosion output starts at index 1.
-    **2. B' has negative entries**
-    To make `B'`'s entries no longer negative, we can consider the fact that `PErosion(A,B) = PErosion(A+scalar,B+scalar)`.
-    **3. Output length of PErosion and tropical min-plus convolution don't match**
+However, we cannot directly conclude that `A PErosion B' = A ⊗ B - 1` in the realm of positive integer partitions, for the following reasons:  
+
+    **1. Index Range Mismatch**  
+    
+    When we calculate `A PErosion B'` where B' is the **flipped + negated** version of B, the output index range from `1 - (|B| - 1)` to `|A| - 2*(|B| - 1)` as `i` (index of `B'`) ranges from `2 - |B|` to `1`. To fix this, we shift the entries of `B'` to the left so that the resulting PErosion output starts at index 1.  
+    
+    **2. B' has negative entries**  
+    
+    To make `B'`'s entries no longer negative, we can consider the fact that `PErosion(A,B) = PErosion(A+scalar,B+scalar)`.  
+    
+    **3. Output length of PErosion and tropical min-plus convolution don't match**  
+    
     Notice that the length of the output produced by `PErosion` is only `|A| - |B| + 1` whereas `tropical min-plus convolution` produces `|A| + |B| + 1`. Hence, PErosion only computes a subset of the entries from the full convolution. To match the full convolution support, we must pad A appropriately (not B'), ensuring A is long enough to allow convolution-style overlap. Additionally, if the padding values are too small, they can incorrectly reduce the minimum values in the result.
     > Padding B' instead would cause more entries to be clipped, due to further narrowing the overlapping window.
 
