@@ -78,27 +78,27 @@ There are 3 valid positions where B can "fit" into A during erosion.
 ### 1st fact:
 From the row-wise erosion:
 
-    A ⊖ B = min { A ⊖ Bᵢ | for all i, where Bᵢ is the i-th row lifted from B}  
+    `A ⊖ B = min { A ⊖ Bᵢ | for all i, where Bᵢ is the i-th row lifted from B}`  
     
 which is also equivalent to this:  
 
-    P(A ⊖ B) = min { P(A ⊖ Bᵢ) | for all i, where Bᵢ is the i-th row lifted from B}
+    `P(A ⊖ B) = min { P(A ⊖ Bᵢ) | for all i, where Bᵢ is the i-th row lifted from B}`
 
 ### 2nd fact:
 If:
 
-    P(A) = [a₁, a₂, ..., aₘ]  (partition of A)
-    P(Bᵢ) = [0, 0, ..., bᵢ] with (i - 1) zeros before bᵢ
+    `P(A) = [a₁, a₂, ..., aₘ]`  (partition of A)
+    `P(Bᵢ) = [0, 0, ..., bᵢ]` with (i - 1) zeros before `bᵢ`
 
-Then the erosion becomes a **partition subtraction** with a +1 shift:
+Then the erosion becomes a **partition subtraction** with a `+1` shift:
 
-    P(A ⊖ Bᵢ)ⱼ₋ᵢ₊₁ = max{min { aⱼ - bᵢ + 1 }, 0}
+    `P(A ⊖ Bᵢ)ⱼ₋ᵢ₊₁ = max{min { aⱼ - bᵢ + 1 }, 0}`
 
 ### final fact:
 
-Combining the **1st fact** and the **2nd fact**, the final erosion P(A ⊖ B) is then:
+Combining the **1st fact** and the **2nd fact**, the final erosion `P(A ⊖ B)` is then:
 
-    P(A ⊖ B)ⱼ₋ᵢ₊₁ = max{min { aⱼ - bᵢ + 1 }, 0}
+    `P(A ⊖ B)ⱼ₋ᵢ₊₁ = max{min { aⱼ - bᵢ + 1 }, 0}`
 
 ## Important Note on Matrix Shape During Erosion
 
@@ -107,12 +107,12 @@ Although the binary matrix A is initially structured like a **Young tableau** (i
 During the calculation:
 
 - A is treated as a general binary matrix.
-- The intermediate results of erosion (especially row-wise erosion using Bᵢ) may **not** maintain the Young tableau form.
+- The intermediate results of erosion (especially row-wise erosion using `Bᵢ`) may **not** maintain the Young tableau form.
 
 However:
 
 - **Before** erosion, P(A) and P(B) are valid partitions (non-increasing sequence).
-- **After** erosion, P(A ⊖ B) is also a valid partition.
+- **After** erosion, `P(A ⊖ B)` is also a valid partition.
 
 # Redefine PErosion
 
@@ -152,7 +152,7 @@ If we reverse B while keeping its head at index 1, the index mapping changes:
 
 - Suppose original B has indices: 3 2 1 (head on the left)
 - After flipping: 1 0 -1 (head still aligned at the left)
-- In general, B'[2-i] = B[i]
+- In general, `B'[2-i] = B[i]`
 
 As a result, if we perform `A PErosion B'`:
 
@@ -174,30 +174,30 @@ If we apply both:
 
 Then `A PErosion B'` becomes:
 
-    Cⱼ₊ᵢ₋₁ = max(min(aⱼ + bᵢ + 1), 0)
+    `Cⱼ₊ᵢ₋₁ = max(min(aⱼ + bᵢ + 1), 0)`
 
 This version resembles **tropical min-plus convolution**, often used in tropical polynomial products:
 
-    (A ⊗ B)ₖ = min { aⱼ + bᵢ | j + i - 1 = k }
+    `(A ⊗ B)ₖ = min { aⱼ + bᵢ | j + i - 1 = k }`
 
 Our version has a +1 and clamping 0:
 
-    Cⱼ₊ᵢ₋₁ = max(min(aⱼ + bᵢ + 1), 0)
+    `Cⱼ₊ᵢ₋₁ = max(min(aⱼ + bᵢ + 1), 0)`
 
 However, we cannot directly conclude that `A PErosion B' = A ⊗ B - 1` in the realm of positive integer partitions, for the following reasons:  
 
-    **1. Index Range Mismatch**  
+**1. Index Range Mismatch**  
     
-    When we calculate `A PErosion B'` where B' is the **flipped + negated** version of B, the output index range from `1 - (|B| - 1)` to `|A| - 2*(|B| - 1)` as `i` (index of `B'`) ranges from `2 - |B|` to `1`. To fix this, we shift the entries of `B'` to the left so that the resulting PErosion output starts at index 1.  
+When we calculate `A PErosion B'` where B' is the **flipped + negated** version of B, the output index range from `1 - (|B| - 1)` to `|A| - 2*(|B| - 1)` as `i` (index of `B'`) ranges from `2 - |B|` to `1`. To fix this, we shift the entries of `B'` to the left so that the resulting PErosion output starts at index 1.  
     
-    **2. B' has negative entries**  
+**2. B' has negative entries**  
     
-    To make `B'`'s entries no longer negative, we can consider the fact that `PErosion(A,B) = PErosion(A+scalar,B+scalar)`.  
+To make `B'`'s entries no longer negative, we can consider the fact that `PErosion(A,B) = PErosion(A+scalar,B+scalar)`.  
     
-    **3. Output length of PErosion and tropical min-plus convolution don't match**  
+**3. Output length of PErosion and tropical min-plus convolution don't match**  
     
-    Notice that the length of the output produced by `PErosion` is only `|A| - |B| + 1` whereas `tropical min-plus convolution` produces `|A| + |B| + 1`. Hence, PErosion only computes a subset of the entries from the full convolution. To match the full convolution support, we must pad A appropriately (not B'), ensuring A is long enough to allow convolution-style overlap. Additionally, if the padding values are too small, they can incorrectly reduce the minimum values in the result.
-    > Padding B' instead would cause more entries to be clipped, due to further narrowing the overlapping window.
+Notice that the length of the output produced by `PErosion` is only `|A| - |B| + 1` whereas `tropical min-plus convolution` produces `|A| + |B| + 1`. Hence, PErosion only computes a subset of the entries from the full convolution. To match the full convolution support, we must pad A appropriately (not B'), ensuring A is long enough to allow convolution-style overlap. Additionally, if the padding values are too small, they can incorrectly reduce the minimum values in the result.
+> Padding B' instead would cause more entries to be clipped, due to further narrowing the overlapping window.
 
 There exist infinitely many ways to **twist** both A and B such that:
 
