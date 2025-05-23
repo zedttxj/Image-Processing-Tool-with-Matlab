@@ -82,7 +82,7 @@ From the row-wise erosion:
     
 which is also equivalent to this:  
 
-P(A ⊖ B) = min { P(A ⊖ Bᵢ) | for all i, where Bᵢ is the i-th row lifted from B}
+    P(A ⊖ B) = min { P(A ⊖ Bᵢ) | for all i, where Bᵢ is the i-th row lifted from B}
 
 ### 2nd fact:
 If:
@@ -96,7 +96,7 @@ Then the erosion becomes a **partition subtraction** with a +1 shift:
 
 ### final fact:
 
-The final erosion P(A ⊖ B) is then:
+Combining the **1st fact** and the **2nd fact**, the final erosion P(A ⊖ B) is then:
 
     P(A ⊖ B)ⱼ₋ᵢ₊₁ = max{min { aⱼ - bᵢ + 1 }, 0}
 
@@ -152,8 +152,13 @@ If we reverse B while keeping its head at index 1, the index mapping changes:
 
 - Suppose original B has indices: 3 2 1 (head on the left)
 - After flipping: 1 0 -1 (head still aligned at the left)
+- In general, B'[2-i] = B[i]
 
-Then the PErosion shifts accordingly:
+As a result, if we perform A PErosion B':
+
+    Cⱼ₋ᵢ₊₁ = max(min(aⱼ - b'ᵢ + 1), 0)
+
+which is equivalent to this (index shifts accordingly):
 
     Cⱼ₊ᵢ₋₁ = max(min(aⱼ - bᵢ + 1), 0)
 
@@ -164,16 +169,16 @@ This change of index reflects the **convolution symmetry** where flipping one op
 ## Dual-Twisted PErosion as Tropical Convolution
 
 If we apply both:
-- **Negation**: Bᵢ → -Bᵢ
+- **Negation**: B'ᵢ = -Bᵢ
 - **Flipping**: reverse index so head of B aligns with tail of A
 
-Then PErosion becomes:
+Then A PErosion B' becomes:
 
     Cⱼ₊ᵢ₋₁ = max(min(aⱼ + bᵢ + 1), 0)
 
 This version resembles **tropical min-plus convolution**, often used in tropical polynomial products:
 
-    (A ⊗ B)[k] = min { aⱼ + bᵢ | j + i - 1 = k }
+    (A ⊗ B)ₖ = min { aⱼ + bᵢ | j + i - 1 = k }
 
 Our version has a +1 and clamping 0:
 
@@ -185,15 +190,11 @@ Originally, for regular PErosion (non-flipped):
 
     C has indices from 1 to |A| - |B| + 1
 
-But under the **flipped + negated** version, the output index range becomes:
+But when we calculate A PErosion B' where B' is the **flipped + negated** version of B, the output index range becomes:
 
     C has indices from 1 - (|B| - 1) to |A| - 2*(|B| - 1)
 
-This range reflects the **symmetric spread** introduced by reversing and expanding support.
-
-### Partition Preservation
-
-Even though B is no longer a valid partition (due to reversal or negation), partition A and the resulting partion still forms a valid partition — i.e., a non-increasing, positive sequence.
+This range reflects the **symmetric spread** introduced by reversing and expanding support. Even though B' is no longer a valid partition (due to reversal or negation), partition A and the resulting partion still forms a valid partition — i.e., a non-increasing, positive sequence.
 
 Why?
 
@@ -204,7 +205,7 @@ Why?
 
 There exist infinitely many ways to **twist** both A and B such that:
 
-- Both twisted versions of A and B are **valid partitions** (i.e., non-increasing and non-negative),
+- Both twisted versions of A and B are **valid partitions** (i.e., non-increasing and positive),
 - And the resulting **PErosion produces the same output** as a min-plus convolution.
 
 Thus, even though PErosion might involve arbitrary sequences, we can always **transform A and B** into partition-compatible forms, preserving:
