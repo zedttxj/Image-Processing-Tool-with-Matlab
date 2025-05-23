@@ -184,22 +184,17 @@ Our version has a +1 and clamping 0:
 
     Cⱼ₊ᵢ₋₁ = max(min(aⱼ + bᵢ + 1), 0)
 
+We can conclude that in the realm of positive integers, `A PErosion B' = A ⊗ B - 1`
+
 ### Warning: Output Index Range
 
 Originally, for regular PErosion (non-flipped):
 
     C has indices from 1 to |A| - |B| + 1
 
-But when we calculate A PErosion B' where B' is the **flipped + negated** version of B, the output index range becomes:
-
-    C has indices from 1 - (|B| - 1) to |A| - 2*(|B| - 1)
+But when we calculate `A PErosion B'` where B' is the **flipped + negated** version of B, the output index range from `1 - (|B| - 1)` to `|A| - 2*(|B| - 1)`.
 
 This range reflects the **symmetric spread** introduced by reversing and expanding support. Even though B' is no longer a valid partition (due to reversal or negation), partition A and the resulting partion still forms a valid partition — i.e., a non-increasing, positive sequence.
-
-Why?
-
-- Because PErosion's structure ensures the minimum over a consistent shift of A’s decreasing values.
-- The `max(..., 0)` clamps the output at 0, maintaining non-negativity. Plus, we still remove 0s at the end of the resulting partition.
 
 ### Relation between PErosion and Min-Plus Convolution
 
