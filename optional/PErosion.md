@@ -152,15 +152,19 @@ If we flip B, the index mapping changes:
 
 - Suppose original B has indices: 3 2 1 (head on the left)
 - After flipping: 1 2 3 (head still aligned at the left)
-- In general, `B'[1-i+|B|] = B[i]`
+- In general, `B'[1-i+|B|] = B[i] ⟺ B'[i] = B[1-i+|B|]`
 
 As a result, if we perform `A PErosion B'`:
 
-    `Cⱼ₋ᵢ₊₁ = max(min(aⱼ - b'ᵢ + 1), 0)`
+`C[j-i+1] = max(min(a[j] - b'[i] + 1), 0)`
 
 which is equivalent to this (index shifts accordingly):
 
-    `Cⱼ₊ᵢ₋₁ = max(min(aⱼ - bᵢ + 1), 0)`
+`C[j-(1-i+|B|)+1] = max(min(a[j] - b[i] + 1), 0)`
+
+Then:  
+
+`C[j+i-|B|] = max(min(a[j] - b[i] + 1), 0)`
 
 This change of index reflects the **convolution symmetry** where flipping one operand shifts the alignment from `j - i + 1` to `j + i - 1`.
 
@@ -174,15 +178,15 @@ If we apply both:
 
 Then `A PErosion B'` becomes:
 
-    `Cⱼ₊ᵢ₋₁ = max(min(aⱼ + bᵢ + 1), 0)`
+`Cⱼ₊ᵢ₋₁ = max(min(aⱼ + bᵢ + 1), 0)`
 
 This version resembles **tropical min-plus convolution**, often used in tropical polynomial products:
 
-    `(A ⊗ B)ₖ = min { aⱼ + bᵢ | j + i - 1 = k }`
+`(A ⊗ B)ₖ = min { aⱼ + bᵢ | j + i - 1 = k }`
 
 Our version has a +1 and clamping 0:
 
-    `Cⱼ₊ᵢ₋₁ = max(min(aⱼ + bᵢ + 1), 0)`
+`Cⱼ₊ᵢ₋₁ = max(min(aⱼ + bᵢ + 1), 0)`
 
 However, we cannot directly conclude that `A PErosion B' = A ⊗ B - 1` in the realm of positive integer partitions, for the following reasons:  
 
@@ -202,7 +206,7 @@ We have `A = a₁, a₂, ..., aₘ` and `B = b₁, b₂, ..., bₙ`.
 Let `B'` becomes the **flipped + negated** version of B. Notice that B' is already non-increasing.  
 
 1. `PErosion(A + bₙ, B' + bₙ)ⱼ₋ᵢ₊₁ = max(min((aⱼ + bₙ) - (b'ᵢ + bₙ) + 1), 0) = max(min(aⱼ - b'ᵢ + 1), 0) = PErosion(A,B')ⱼ₋ᵢ₊₁`. We can choose `bₙ` (the last value of B) so that both `A + bₙ` and `B' + bₙ` are positive partitions. Now our `PErosion(A,B')` becomes `PErosion(A', B'')` where `A' = A + bₙ and B'' = B' + bₙ`
-2. Currently, we have `PErosion(A', B'')[j-i+1] = max(min(A[j] - B'[i] + 1), 0)`. Notice that we have `B'[1-i+|B|] = B[i] ⟺ B'[i] = B[1-i+|B|]`. Hence, `PErosion(A', B'')[j-(1-i+|B|)+1] = max(min(a[j] - b[i] + 1), 0) ⟺ PErosion(A', B'')[j+i-|B|] = max(min(a[j] - b[i] + 1), 0)`. For this reason, we need to pad `A'` `|B|-1` times after `A[end]` (called `A''` from now on) so that `PErosion(A', B'')[j+i-|B|] = PErosion(A'', B'')[j+i-1]`. Now we have `PErosion(A'', B'')[j+i-1] = max(min(a[j] - b[i] + 1), 0)`. Importantly, we have to pad `|B|-1` more before `A[1]` to match the length of `A ⊗ B`.  
+2. Currently, we have `PErosion(A', B'') = PErosion(A, B')[j+i-|B|] = max(min(a[j] - b[i] + 1), 0)`. For this reason, we need to pad `A'` `|B|-1` times after `A[end]` (called `A''` from now on) so that `PErosion(A', B'')[j+i-|B|] = PErosion(A'', B'')[j+i-1]`. Now we have `PErosion(A'', B'')[j+i-1] = max(min(a[j] - b[i] + 1), 0)`. Importantly, we have to pad `|B|-1` more before `A[1]` to match the length of `A ⊗ B`.  
 > Cautious: The padding values must be large enough to avoid corrupting the min() results in PErosion. Padding with values that are too small may lower the output incorrectly.
 
 There exist infinitely many ways to **twist** both A and B such that:
