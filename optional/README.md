@@ -748,7 +748,7 @@ The `ASf` function was developed to observe **patterns in an image after differe
 - Run the code:  
   ![{116ED977-56BE-4C20-801B-6134A69B4FCA}](https://github.com/user-attachments/assets/f3a72409-7f77-4641-a8ed-90bea9ead0af)
 
-- Another example code (calculating `ASf(A, 2, 1)⊕ASf(A, 2, 2)`):
+- Another example code (calculating `ASf(A, 2, 1) ⊕ ASf(A, 2, 2)`):
 ```matlab
 A = [
   3 5;
@@ -766,7 +766,13 @@ A = ImageProcessor.coordsToMatrix(A);
 - Run the code:
   - Image of A:
 
-    ![{31DF0FA4-0166-4127-B7E0-8B432B67D9A2}](https://github.com/user-attachments/assets/1712ef23-deed-4c4f-beee-fdb5a5e5b91a)  
+    ![{31DF0FA4-0166-4127-B7E0-8B432B67D9A2}](https://github.com/user-attachments/assets/1712ef23-deed-4c4f-beee-fdb5a5e5b91a)
+  - Image of `ImageProcessor.ASf(A,2,1)`:  
+ 
+    ![{BE68F33B-104C-4F71-98D1-715809C9DF7E}](https://github.com/user-attachments/assets/63ae0a52-a8ca-43fe-89ed-64b1fc405481)  
+  - Image of `ImageProcessor.ASf(A,2,2)`:
+ 
+    ![{5F765D05-3D78-40BB-AA2A-44908A7FBFF5}](https://github.com/user-attachments/assets/39af5f20-bd43-446d-841f-9731ee7d9d03)  
   - Image of B:
 
     ![{B8E7C152-B85F-4B86-8A52-4E15D0499B97}](https://github.com/user-attachments/assets/e356644e-e852-41c5-81c9-18997c442186)  
