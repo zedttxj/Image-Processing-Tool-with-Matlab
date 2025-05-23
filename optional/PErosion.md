@@ -124,11 +124,11 @@ Let:
 
 We define the PErosion of A by B as a new sequence C such that:
 
-    Cⱼ₋ᵢ₊₁ = max(min(aⱼ - bᵢ + 1), 0)
+    `Cⱼ₋ᵢ₊₁ = max(min(aⱼ - bᵢ + 1), 0)`
 
 This operation is called:
 
-    C = A PErosion B
+    `C = A PErosion B`
 
 It reflects the erosion of A by **lifting** each element of B row-wise and aligning it with corresponding elements in A, followed by a tropical-style subtraction and clamping at 0. Additionally, `|C| ≤ |A| - |B| + 1`. For that reason, we only keep the values from index 1 to index `|A| - |B| + 1`. Finally, we removes all of the 0s at the end of the partition.
 
@@ -138,11 +138,11 @@ It reflects the erosion of A by **lifting** each element of B row-wise and align
 
 If we negate B element-wise (i.e., flip the signs), we define:
 
-    Bᵢ → -Bᵢ
+    `B'ᵢ = -Bᵢ`
 
-Then the formula becomes:
+Then the formula (`A PErosion B'`) becomes:
 
-    Cⱼ₋ᵢ₊₁ = max(min(aⱼ + bᵢ + 1), 0)
+    `Cⱼ₋ᵢ₊₁ = max(min(aⱼ + bᵢ + 1), 0)`
 
 ---
 
@@ -154,13 +154,13 @@ If we reverse B while keeping its head at index 1, the index mapping changes:
 - After flipping: 1 0 -1 (head still aligned at the left)
 - In general, B'[2-i] = B[i]
 
-As a result, if we perform A PErosion B':
+As a result, if we perform `A PErosion B'`:
 
-    Cⱼ₋ᵢ₊₁ = max(min(aⱼ - b'ᵢ + 1), 0)
+    `Cⱼ₋ᵢ₊₁ = max(min(aⱼ - b'ᵢ + 1), 0)`
 
 which is equivalent to this (index shifts accordingly):
 
-    Cⱼ₊ᵢ₋₁ = max(min(aⱼ - bᵢ + 1), 0)
+    `Cⱼ₊ᵢ₋₁ = max(min(aⱼ - bᵢ + 1), 0)`
 
 This change of index reflects the **convolution symmetry** where flipping one operand shifts the alignment from `j - i + 1` to `j + i - 1`.
 
@@ -169,10 +169,10 @@ This change of index reflects the **convolution symmetry** where flipping one op
 ## Dual-Twisted PErosion as Tropical Convolution
 
 If we apply both:
-- **Negation**: B'ᵢ = -Bᵢ
+- **Negation**: `B'ᵢ = -Bᵢ`
 - **Flipping**: reverse index so head of B aligns with tail of A
 
-Then A PErosion B' becomes:
+Then `A PErosion B'` becomes:
 
     Cⱼ₊ᵢ₋₁ = max(min(aⱼ + bᵢ + 1), 0)
 
