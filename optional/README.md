@@ -758,9 +758,34 @@ A = [
   2 4
 ];
 
+% A after sorting should be like this:
+% 
+%      1     0
+%      2     1
+%      2     4
+%      3     5
+%      4     8
+
 B = ImageProcessor.dilationSet(ImageProcessor.ASf(A,2,1),ImageProcessor.ASf(A,2,2));
 B = ImageProcessor.coordsToMatrix(B);
 A = ImageProcessor.coordsToMatrix(A);
+
+% ImageProcessor.ASf(A,2,1) should be like this:
+% 
+%     12     0
+%     36     1
+%     80     4
+%      0     5
+%      0     8
+
+% ImageProcessor.ASf(A,2,2) should be like this:
+% 
+%      1    24
+%      2    60
+%      2   160
+%      3     0
+%      4     0
+
 ```
 
 - Run the code:
