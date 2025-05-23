@@ -170,7 +170,7 @@ This change of index reflects the **convolution symmetry** where flipping one op
 
 If we apply both:
 - **Negation**: `B'ᵢ = -Bᵢ`
-- **Flipping**: reverse index so head of B aligns with tail of A
+- **Flipping**: reverse index so head of B aligns with tail of B'. Same thing otherwise.
 
 Then `A PErosion B'` becomes:
 
