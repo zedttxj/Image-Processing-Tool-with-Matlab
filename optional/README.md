@@ -692,7 +692,7 @@ disp(C);
   - ind (required): An integer representing the column or the columns of A to differentiate. Only that column is differentiated while the others remain unchanged.
 - Output:
   - Jacobian (a 2D matrix): A 2D matrix representing the derivatives of `A` after `d` differentiations.
-- Explanation: The `ASf` function computes the derivative of a matrix `A` a specified number of times (`d`). If an optional column index (`ind`) is provided, only that column is differentiated.
+- Explanation: The `ASf` function computes the derivative of a matrix `A` a specified number of times (`d`). If an optional column index (`ind`) is provided, only that column is differentiated. But first, the elements have to be sorted first in the 'rows' order (can be achieved by using command `unique(A, 'rows')`).
   Consider the polynomial:
   
   𝑃(𝑥,𝑦) = 3𝑥 + 5𝑦 + 5𝑥² + 4𝑦² + 𝑥³ + 4𝑥⁴  
@@ -711,6 +711,9 @@ disp(C);
     4 0
   ];
   ```
+
+  **NOTICE:** The matrix A will be **sorted internally** during computation, typically in ascending order by the x-column (always). Hence, the actual polynomial being differentiated is not `3𝑥 + 5𝑦 + 5𝑥² + 4𝑦² + 𝑥³ + 4𝑥⁴`, but instead: `1𝑥 + 3𝑥² + 5𝑦² + 4𝑥³ + 5𝑥⁴ + 4𝑦⁴`
+  
 - Example code:
   ```matlab
   A = [
@@ -724,9 +727,10 @@ disp(C);
   - Run the Code:
     ```
     >> 
-       6     5
-      48     4
-       0     1
+      24     1
+      60     5
+       0     0
+       0     4
     ```
     This result means that after two derivative operations, the only nonzero entry comes from the x-column, corresponding to the `6x + 48x²` term. The y-column stays the same, as expected.
 - **NOTICE:** The input matrix A should **not** contain any constant values from the polynomial. As a result, the output will also ignore any constant values after differentiation.  
@@ -832,6 +836,42 @@ A = ImageProcessor.coordsToMatrix(A);
         
             "Size of ASf(A, 2, 1) ⊕ ASf(A, 2, 2):"    "84"    "168"
       ```
+
+## ASg(A, d, ind)
+- Input:  
+  - A (required): A 2D numerical matrix containing logical, integer, or floating-point values.
+  - d (required): A non-negative integer specifying the number of times the derivative is computed.
+  - ind (required): An integer indicating the column of A to differentiate. Only this column is modified; the other columns remain unchanged.
+- Output:
+  - FlippedJacobian (2D matrix): The output of ASf(A, d, ind) with all coordinate pairs flipped (i.e., [x y] → [y x]). In the matrix form, this function does not modify the values of the matrix, only the order of columns (coordinate axes) in the result.
+- Example code:
+  ```matlab
+    A = [
+      3 5;
+      5 4;
+      1 1;
+      4 0
+    ];
+    
+    B = ImageProcessor.ASg(A, 2, 1);
+    disp(B);
+  ```
+- If ASf(A, 2, 1) yields:
+```matlab
+>> 
+    24     1
+    60     5
+     0     0
+     0     4
+```
+- Then ASg(A, 2, 1) will return:
+```matlab
+>> 
+     1    24
+     5    60
+     0     0
+     4     0
+```
 
 ## AJF(A, d, ind)
 - Input:
