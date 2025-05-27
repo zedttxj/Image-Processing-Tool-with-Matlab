@@ -1,4 +1,4 @@
-classdef ImageProcessor
+ classdef ImageProcessor
     methods(Static)
         function img = readImage(filename, log)
             if nargin < 2
@@ -579,6 +579,16 @@ classdef ImageProcessor
             lastNonZeroRow = find(any(Jacobian ~= 0, 2), 1, 'last');
             Jacobian = Jacobian(1:lastNonZeroRow, :);
         end
+        function FlippedJacobian = ASg(A, d, ind)
+            n = length(A);
+            A = unique(A,'rows');
+            t = prod((2:d+1).' + (0:n-d-1), 1);
+            FlippedJacobian = A;
+            FlippedJacobian(1:n-d,ind) = FlippedJacobian(1+d:end,ind) .* t .';
+            FlippedJacobian(n-d+1:end,ind) = 0;
+            lastNonZeroRow = find(any(FlippedJacobian ~= 0, 2), 1, 'last');
+            FlippedJacobian = FlippedJacobian(1:lastNonZeroRow, [2 1]);
+        end
         function Jacobian = AJF(A, d, ind)
             n = length(A);
             A = unique(A,'rows');
@@ -751,6 +761,43 @@ classdef ImageProcessor
                 end
             end
         end
+        function dilatedPartition = PDilation2(A,B) % same as PDilation but slower
+            B = flip(B);
+            lA = length(A);
+            lB = length(B);
+            if lB < 2
+                dilatedPartition = A + B - 1;
+                return;
+            end
+            idx = min(max(bsxfun(@plus, 0:(lB-1), (2-lB:lA)'), 1), lA);
+            A = A(idx);
+            idx = min(max(bsxfun(@plus, 0:(lB-1), ones([1 lA+lB-1])'), (lB:-1:-lA+2)'), (lA+lB-1:-1:1)');
+            B = B(idx);
+            dilatedPartition = max(A + B - 1, [], 2).';
+        end
+        function erodedPartition = PErosion(partitionA,partitionB)
+            C = flip(partitionA(:) + 1) - (flip(partitionB(:)) .');
+            if size(C,1) < 2
+                erodedPartition = C;
+            elseif size(C,2) < 2
+                erodedPartition = flip(C .');
+            else
+                lB = size(partitionB,2);
+                pos = size(partitionA,2);
+                erodedPartition = zeros([1 pos-lB+1]);
+                for i = 0-pos+lB:0
+                    erodedPartition(i+pos-lB+1) = min(diag(C,i));
+                end
+            end
+        end
+        function erodedPartition = PErosion2(A,B) % same as PErosion but slower
+            lB = length(B);
+            if lB < 2
+                erodedPartition = A - B + 1;
+            else
+                erodedPartition = min(A((0:(lB-1)) + (1:length(A) - lB + 1)') - B + 1, [], 2).';
+            end
+        end
         function partitions = reversedPDilation(Cs)
             partitions = [];
             ch = Cs(end)-1;
@@ -832,14 +879,50 @@ classdef ImageProcessor
             partitions = arrayfun(@(i) {Cs(i, 2 : Cs(i,1)), Cs(i, Cs(i,1)+1:end)}, 1:size(Cs,1), 'UniformOutput', false);
             partitions = vertcat(partitions{:});
         end
-        function erodedPartition = PErosion(A, B)
-            erodedPartition = ImageProcessor.M2P(ImageProcessor.Erosion1(ImageProcessor.P2M(A),ImageProcessor.P2M(B)));
-        end
         function closedPartition = PClosing(A, B)
-            closedPartition = ImageProcessor.M2P(ImageProcessor.Closing1(ImageProcessor.P2M(A),ImageProcessor.P2M(B)));
+            closedPartition = ImageProcessor.PErosion(ImageProcessor.PDilation(A,B), B);
         end
         function openedPartition = POpening(A, B)
-            openedPartition = ImageProcessor.M2P(ImageProcessor.Opening1(ImageProcessor.P2M(A),ImageProcessor.P2M(B)));
+            openedPartition = ImageProcessor.PDilation(ImageProcessor.PErosion(A,B), B);
+        end
+        function erodedPartition = tropical_min_multiplication(partitionA, partitionB)
+            C = flip(partitionA(:)) + (partitionB(:) .');
+            if size(C,1) < 2
+                erodedPartition = C;
+            elseif size(C,2) < 2
+                erodedPartition = flip(C .');
+            else
+                pos = length(partitionA);
+                erodedPartition = zeros([1 pos+length(partitionB)-1]);
+                for i = 1-pos:length(partitionB)-1
+                    erodedPartition(i+pos) = min(diag(C,i));
+                end
+            end
+        end
+        function erodedPartition = tropical_min_multiplication2(A, B) % similar to tropical_min_multiplication but slower
+            A = [B(1:end-1)-B(end)+A(1) A B(2:end)-B(1)+A(end)] + B(1);
+            B = -flip(B - 1) + B(1);
+            disp(compose("1st partition: [%s]", num2str(A)));
+            disp(compose("2nd partition: [%s]", num2str(B)));
+            erodedPartition = ImageProcessor.PErosion(A,B);
+        end
+        function product = sum_operator(A, B)
+            A = unique(A, 'rows');
+            B = unique(B, 'rows');
+            if size(A,1) < size(B,1)
+                product = B;
+                product(1:size(A,1),:) = product(1:size(A,1),:) + A;
+            else
+                product = A;
+                product(1:size(B,1),:) = product(1:size(B,1),:) + B;
+            end
+        end
+        
+        function product = product_operator(A, B)
+            A = unique(A, 'rows');
+            B = unique(B, 'rows');
+            product(:,1) = conv(A(:,1), B(:,1));
+            product(:,2) = conv(A(:,2), B(:,2));
         end
     end
     properties (Constant)
