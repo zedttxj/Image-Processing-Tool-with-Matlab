@@ -293,7 +293,7 @@ disp(["Size of AJF(A, 2, 1) ⊕ AJF(A, 2, 2):" max(B)]);
 
     ![{AFB6CD6F-77AA-40D2-A172-08DE26A30876}](https://github.com/user-attachments/assets/73b0e657-1505-4e1f-bf4d-c6b589fcf7b3)
 
-## 2. B is called a Poisson set of type II if there exists a set `A ⊆ E²` such that `B = A⁽²⁾(S(Fᴀ), R₁)⊕A⁽²⁾(J(Fᴀ), R₂)`
+## 2. B is called a Poisson set of type II if there exists a set `A ⊆ E²` such that `B = A⁽²⁾(S(Fᴀ), R₁)⊕A⁽²⁾(S(Fᴀ), R₂)`
 - Example code:
 ```matlab
 ASf_1 = ImageProcessor.ASf(A,2,1); % 2nd derivative along column 1
