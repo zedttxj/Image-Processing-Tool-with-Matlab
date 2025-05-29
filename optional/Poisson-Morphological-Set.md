@@ -244,12 +244,12 @@ A = ImageProcessor.coordsToMatrix(A);
 - Run the code:  
   ![{5D2EE982-EC81-4320-B977-000EAA144969}](https://github.com/user-attachments/assets/4c27a4cc-fdd5-407e-9135-d58d979c2027)
 
-## `ImageProcessor.sum_operator(A, B)` (⊛)
+## `ImageProcessor.sum_operator(A, B)` (`⊛`)
 
 ### Purpose:
 This function implements a simple coordinate-wise addition of two sets A and B (each represented as a 2D matrix of coordinates), after sorting and removing duplicates. It is used to define the custom operation `⊛` in Poisson set.
 
-### Mathematical Definition of ⊛  
+### Mathematical Definition of `⊛`  
 
 Given:
 - `A = [a₁; a₂; ...; aₙ],`
@@ -257,6 +257,34 @@ Given:
 with each `aᵢ = [xᵢ yᵢ]`, and likewise for `bᵢ`, the operation is: `A ⊛ B = C`, where `Cᵢ = aᵢ + bᵢ = [xᵢ + xᵢ′, yᵢ + yᵢ′]` for each row i up to min(n, k) and the remaining rows are copied from the longer matrix.  
 
 Both A and B are sorted and deduplicated beforehand using unique(..., 'rows').
+
+## `ImageProcessor.product_operator(A, B)` (`⊙`)
+
+### Purpose:
+Performs a convolution-based combination of two sets of coordinates A and B. This operator is useful for detecting joint patterns or shared structures across two derivative sets.
+
+### Definition of `⊙`
+
+Given: `A = [a₁; a₂; ...], B = [b₁; b₂; ...]` with `aᵢ = [xᵢ yᵢ], bᵢ = [xᵢ′ yᵢ′]`. We define: `A ⊙ B = conv(xₐ, x_b) × conv(yₐ, y_b)`, where `conv(·,·)` is the 1D convolution of coordinate components.
+
+This means:  
+- The first column (x) of the result is `conv(A(:,1), B(:,1))`
+- The second column (y) is `conv(A(:,2), B(:,2))`
+
+### Polynomial Interpretation
+
+Let:  
+- `A(:,1)` represent coefficients of a polynomial in x, and  
+- `A(:,2)` represent coefficients in y (same for B)  
+
+Then:  `A ⊙ B = [conv(xₐ, x_b), conv(yₐ, y_b)]`, which gives the coordinate-wise convolution (i.e., multiplication) of the two polynomials.
+
+This is equivalent to:  
+- Multiplying the x-polynomials of A and B
+- Multiplying the y-polynomials of A and B
+
+### 2D Convolution Insight  
+If you compute `conv2(A, B)`, then the left and right columns of the result are exactly `product_operator(A, B)`
 
 # Poisson Sets  
 
