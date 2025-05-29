@@ -331,8 +331,8 @@ disp(["Size of ASf(A, 2, 1) ⊕ ASf(A, 2, 2):" max(B)]);
 ## 3. B is called a Poisson set of type III if there exists a set `A ⊆ E²` such that `B = A⁽²⁾(S(Gᴀ), R₁)⊕A⁽²⁾(S(Gᴀ), R₂)`
 - Example code:
 ```matlab
-ASg_1 = ImageProcessor.ASg(A,2,1); % 2nd derivative along column 1
-ASg_2 = ImageProcessor.ASg(A,2,2); % 2nd derivative along column 2
+ASg_1 = ImageProcessor.ASg(A,2,1); % 2nd derivative along column 1 with column-swapped of A
+ASg_2 = ImageProcessor.ASg(A,2,2); % 2nd derivative along column 2 with column-swapped of A
 B = ImageProcessor.dilationSet(ASg_1, ASg_2); % ASg(A,2,1) ⊕ ASg(A,2,2)
 disp("Size is heigh-width:");
 disp(["Size of ImageProcessor.ASg(A,2,1):" max(ASg_1)]);
@@ -344,21 +344,21 @@ disp(["Size of ASg(A, 2, 1) ⊕ ASg(A, 2, 2):" max(B)]);
     ```matlab
     >> 
     Size is heigh-width:
-        "Size of ImageProcessor.ASg(A,2,1)"    "80"    "8"
+        "Size of ImageProcessor.ASg(A,2,1)"    "8"    "80"
     
-        "Size of ImageProcessor.ASg(A,2,2)"    "4"    "160"
+        "Size of ImageProcessor.ASg(A,2,2)"    "160"    "4"
     
-        "Size of ASg(A, 2, 1) ⊕ ASg(A, 2, 2)"    "84"    "168"
+        "Size of ASg(A, 2, 1) ⊕ ASg(A, 2, 2)"    "168"    "84"
     ```
   - Image of A:
 
     ![{D466457A-C043-4898-B22B-C7FC1DB0E7F2}](https://github.com/user-attachments/assets/03a61517-3e51-452c-8353-e97fa6054955)  
   - Image of `ImageProcessor.ASg(A,2,1)`:  
  
-    ![{99D30CC3-09FE-4393-9D42-0FE82F5D487A}](https://github.com/user-attachments/assets/4295ced2-aa7a-4c03-babf-d14980902165)  
+    ![{68672B17-46E6-4DBB-BBB3-367BE9173637}](https://github.com/user-attachments/assets/e2ddf59e-cec8-48b9-bb8f-4d17446a118d)    
   - Image of `ImageProcessor.ASg(A,2,2)`:
  
-    ![{3CE1C96B-8CA5-4162-A99B-3ADA280025A5}](https://github.com/user-attachments/assets/215efe8e-4d82-43c7-8f97-33ff06b7a9ec)  
+    ![{FD993303-C721-4E30-82FE-73468254E1B9}](https://github.com/user-attachments/assets/8121e1b9-06a5-497e-82a0-7a9f6c3a79e8)    
   - Image of `ASg(A, 2, 1) ⊕ ASg(A, 2, 2)`:
 
-    ![{B7A7A00E-B892-48DB-BDD0-15E3A2B04287}](https://github.com/user-attachments/assets/3dc47d68-b45e-4d35-bb9c-d00230647dea)  
+    ![{77BFE00A-B653-4DF8-AD35-AA691D2E5852}](https://github.com/user-attachments/assets/37c32e40-e4a8-43cd-8302-ea1735910c23)    
