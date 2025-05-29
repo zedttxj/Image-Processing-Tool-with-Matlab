@@ -244,26 +244,25 @@ A = ImageProcessor.coordsToMatrix(A);
 - Run the code:  
   ![{5D2EE982-EC81-4320-B977-000EAA144969}](https://github.com/user-attachments/assets/4c27a4cc-fdd5-407e-9135-d58d979c2027)
 
-## `ImageProcessor.sum_operator(A, B)` (`⊛`)
-
+## `ImageProcessor.sum_operator(A, B)` (`sum_operator`)
+**Symbol:** `⊛`
 ### Purpose:
 This function implements a simple coordinate-wise addition of two sets A and B (each represented as a 2D matrix of coordinates), after sorting and removing duplicates. It is used to define the custom operation `⊛` in Poisson set.
 
-### Mathematical Definition of `⊛`  
-
+### Mathematical Definition of `sum_operator`  
 Given:
-- `A = [a₁; a₂; ...; aₙ],`
-- `B = [b₁; b₂; ...; bₖ],`
+- `A = [a₁; a₂; ...; aₙ]`,
+- `B = [b₁; b₂; ...; bₖ]`,
 with each `aᵢ = [xᵢ yᵢ]`, and likewise for `bᵢ`, the operation is: `A ⊛ B = C`, where `Cᵢ = aᵢ + bᵢ = [xᵢ + xᵢ′, yᵢ + yᵢ′]` for each row i up to min(n, k) and the remaining rows are copied from the longer matrix.  
 
 Both A and B are sorted and deduplicated beforehand using unique(..., 'rows').
 
-## `ImageProcessor.product_operator(A, B)` (`⊙`)
-
+## `ImageProcessor.product_operator(A, B)` (`product_operator`)
+**Symbol:** `⊙`
 ### Purpose:
 Performs a convolution-based combination of two sets of coordinates A and B. This operator is useful for detecting joint patterns or shared structures across two derivative sets.
 
-### Definition of `⊙`
+### Definition of `product_operator`
 
 Given: `A = [a₁; a₂; ...], B = [b₁; b₂; ...]` with `aᵢ = [xᵢ yᵢ], bᵢ = [xᵢ′ yᵢ′]`. We define: `A ⊙ B = conv(xₐ, x_b) × conv(yₐ, y_b)`, where `conv(·,·)` is the 1D convolution of coordinate components.
 
@@ -300,7 +299,8 @@ A = [
 ```  
 Additionally, I will use `imshow(ImageProcessor.coordsToMatrix(<set>))` to show the image of the set.
 
-## 1. B is called a Poisson set of type I if there exists a set `A ⊆ E²` such that `B = A⁽²⁾(J(θᴀ), R₁)⊕A⁽²⁾(J(θᴀ), R₂)`
+## 1. Poisson set of type I
+**Definition:** B is called a Poisson set of type I if there exists a set `A ⊆ E²` such that `B = A⁽²⁾(J(θᴀ), R₁)⊕A⁽²⁾(J(θᴀ), R₂)`
 - Example code:
 ```matlab
 AJF_1 = ImageProcessor.AJF(A,2,1); % 2nd derivative over all columns
@@ -335,7 +335,8 @@ disp(["Size of AJF(A, 2, 1) ⊕ AJF(A, 2, 2):" max(B)]);
 
     ![{AFB6CD6F-77AA-40D2-A172-08DE26A30876}](https://github.com/user-attachments/assets/73b0e657-1505-4e1f-bf4d-c6b589fcf7b3)  
 
-## 2. B is called a Poisson set of type II if there exists a set `A ⊆ E²` such that `B = A⁽²⁾(S(Fᴀ), R₁)⊕A⁽²⁾(S(Fᴀ), R₂)`
+## 2. Poisson set of type II
+**Definition:** B is called a Poisson set of type II if there exists a set `A ⊆ E²` such that `B = A⁽²⁾(S(Fᴀ), R₁)⊕A⁽²⁾(S(Fᴀ), R₂)`
 - Example code:
 ```matlab
 ASf_1 = ImageProcessor.ASf(A,2,1); % 2nd derivative along column 1
@@ -370,7 +371,8 @@ disp(["Size of ASf(A, 2, 1) ⊕ ASf(A, 2, 2):" max(B)]);
 
     ![{B7A7A00E-B892-48DB-BDD0-15E3A2B04287}](https://github.com/user-attachments/assets/3dc47d68-b45e-4d35-bb9c-d00230647dea)  
 
-## 3. B is called a Poisson set of type III if there exists a set `A ⊆ E²` such that `B = A⁽²⁾(S(Gᴀ), R₁)⊕A⁽²⁾(S(Gᴀ), R₂)`
+## 3. Poisson set of type III
+**Definition:** B is called a Poisson set of type III if there exists a set `A ⊆ E²` such that `B = A⁽²⁾(S(Gᴀ), R₁)⊕A⁽²⁾(S(Gᴀ), R₂)`
 - Example code:
 ```matlab
 ASg_1 = ImageProcessor.ASg(A,2,1); % 2nd derivative along column 1 with column-swapped of A
@@ -405,7 +407,8 @@ disp(["Size of ASg(A, 2, 1) ⊕ ASg(A, 2, 2):" max(B)]);
 
     ![{77BFE00A-B653-4DF8-AD35-AA691D2E5852}](https://github.com/user-attachments/assets/37c32e40-e4a8-43cd-8302-ea1735910c23)    
 
-## 6. B is called a Poisson set of type VI if there exists a set `A ⊆ E²` such that `B = A⁽²⁾(S(Fᴀ), R₁)⊕A⁽²⁾(S(Gᴀ), R₂)`
+## 6. Poisson set of type VI
+**Definition:** B is called a Poisson set of type VI if there exists a set `A ⊆ E²` such that `B = A⁽²⁾(S(Fᴀ), R₁)⊕A⁽²⁾(S(Gᴀ), R₂)`
 - Example code:
 ```matlab
 ASf_1 = ImageProcessor.ASf(A,2,1); % 2nd derivative along column 1
@@ -440,7 +443,8 @@ disp(["Size of ASf(A, 2, 1) ⊕ ASg(A, 2, 2):" max(B)]);
 
     ![{86F0D556-1170-48DC-A21B-335BA897D211}](https://github.com/user-attachments/assets/e4a853e5-8af2-45bb-ad95-c0dc4b78740b)  
     
-## 7. B is called a Poisson set of type VII if there exists a set `A ⊆ E²` such that `B = A⁽²⁾(S(Gᴀ), R₁)⊕A⁽²⁾(S(Fᴀ), R₂)`
+## 7. Poisson set of type VII
+**Definition:** B is called a Poisson set of type VII if there exists a set `A ⊆ E²` such that `B = A⁽²⁾(S(Gᴀ), R₁)⊕A⁽²⁾(S(Fᴀ), R₂)`
 - Example code:
 ```matlab
 ASg_1 = ImageProcessor.ASg(A,2,1); % 2nd derivative along column 1 with column-swapped of A
@@ -475,7 +479,8 @@ disp(["Size of ASg(A, 2, 1) ⊕ ASf(A, 2, 2):" max(B)]);
 
     ![{145A0788-1129-4481-AAFC-47814412DCC9}](https://github.com/user-attachments/assets/5f188961-640c-4ae1-a86f-a246d1f0a643)  
 
-## 8. B is called a Poisson set of type VIII if there exists a set `A ⊆ E²` such that `B = A⁽²⁾(J(θᴀ), R₁)⊛A⁽²⁾(J(θᴀ), R₂)`
+## 8. Poisson set of type VIII
+**Definition:** B is called a Poisson set of type VIII if there exists a set `A ⊆ E²` such that `B = A⁽²⁾(J(θᴀ), R₁)⊛A⁽²⁾(J(θᴀ), R₂)`
 - Example code:
 ```matlab
 AJF_1 = ImageProcessor.AJF(A,2,1); % 2nd derivative over all columns
@@ -510,7 +515,8 @@ disp(["Size of AJF(A, 2, 1) ⊛ AJF(A, 2, 2):" max(B)]);
 
     ![{913B6A1E-2943-4D9E-A472-DCAE8A5E4154}](https://github.com/user-attachments/assets/b656c61d-9e43-44c9-a059-1877e4ad1e89)
 
-## 9. B is called a Poisson set of type IX if there exists a set `A ⊆ E²` such that `B = A⁽²⁾(S(Fᴀ), R₁)⊛A⁽²⁾(S(Fᴀ), R₂)`
+## 9. Poisson set of type IX
+**Definition:** B is called a Poisson set of type IX if there exists a set `A ⊆ E²` such that `B = A⁽²⁾(S(Fᴀ), R₁)⊛A⁽²⁾(S(Fᴀ), R₂)`
 - Example code:
 ```matlab
 ASf_1 = ImageProcessor.ASf(A,2,1); % 2nd derivative along column 1
@@ -545,7 +551,8 @@ disp(["Size of ASf(A, 2, 1) ⊛ ASf(A, 2, 2):" max(B)]);
 
     ![{F07AEF0A-8E5C-466F-B81B-A70D97AA1B59}](https://github.com/user-attachments/assets/0926c934-65ff-459f-a9b3-9017708b7c5a)
 
-## 10. B is called a Poisson set of type X if there exists a set `A ⊆ E²` such that `B = A⁽²⁾(S(Gᴀ), R₁)⊛A⁽²⁾(S(Gᴀ), R₂)`
+## 10. Poisson set of type X
+**Definition:** B is called a Poisson set of type X if there exists a set `A ⊆ E²` such that `B = A⁽²⁾(S(Gᴀ), R₁)⊛A⁽²⁾(S(Gᴀ), R₂)`
 - Example code:
 ```matlab
 ASg_1 = ImageProcessor.ASg(A,2,1); % 2nd derivative along column 1 with column-swapped of A
@@ -580,7 +587,8 @@ disp(["Size of ASg(A, 2, 1) ⊛ ASg(A, 2, 2):" max(B)]);
 
     ![{EDCAF0AB-38B4-47ED-969A-643DE0389728}](https://github.com/user-attachments/assets/c77c5b2e-4bbf-4f53-9a11-2829dd954250)    
 
-## 13. B is called a Poisson set of type XIII if there exists a set `A ⊆ E²` such that `B = A⁽²⁾(S(Fᴀ), R₁)⊛A⁽²⁾(S(Gᴀ), R₂)`
+## 13. Poisson set of type XIII
+**Definition:** B is called a Poisson set of type XIII if there exists a set `A ⊆ E²` such that `B = A⁽²⁾(S(Fᴀ), R₁)⊛A⁽²⁾(S(Gᴀ), R₂)`
 - Example code:
 ```matlab
 ASf_1 = ImageProcessor.ASf(A,2,1); % 2nd derivative along column 1
@@ -615,7 +623,8 @@ disp(["Size of ASf(A, 2, 1) ⊛ ASg(A, 2, 2):" max(B)]);
 
     ![{8E02C979-DC0E-4C09-A01B-9ECC522BE2D2}](https://github.com/user-attachments/assets/4cf7942b-e51d-4225-87be-265699089c48)    
     
-## 14. B is called a Poisson set of type XIV if there exists a set `A ⊆ E²` such that `B = A⁽²⁾(S(Gᴀ), R₁)⊛A⁽²⁾(S(Fᴀ), R₂)`
+## 14. Poisson set of type XIV
+**Definition:** B is called a Poisson set of type XIV if there exists a set `A ⊆ E²` such that `B = A⁽²⁾(S(Gᴀ), R₁)⊛A⁽²⁾(S(Fᴀ), R₂)`
 - Example code:
 ```matlab
 ASg_1 = ImageProcessor.ASg(A,2,1); % 2nd derivative along column 1 with column-swapped of A
@@ -650,7 +659,8 @@ disp(["Size of ASg(A, 2, 1) ⊛ ASf(A, 2, 2):" max(B)]);
 
     ![{CFB1C63F-95A9-4F6A-A6E7-636F35CDE7CC}](https://github.com/user-attachments/assets/9021c01a-19bf-4a38-99b8-587935f4be87)  
 
-## 15. B is called a Poisson set of type XV if there exists a set `A ⊆ E²` such that `B = A⁽²⁾(J(θᴀ), R₁)⊙A⁽²⁾(J(θᴀ), R₂)`
+## 15. Poisson set of type XV
+**Definition:** B is called a Poisson set of type XV if there exists a set `A ⊆ E²` such that `B = A⁽²⁾(J(θᴀ), R₁)⊙A⁽²⁾(J(θᴀ), R₂)`
 - Example code:
 ```matlab
 AJF_1 = ImageProcessor.AJF(A,2,1); % 2nd derivative over all columns
@@ -685,7 +695,8 @@ disp(["Size of AJF(A, 2, 1) ⊙ AJF(A, 2, 2):" max(B)]);
 
     ![{25D08689-6C1F-4684-8DD0-DFBA6E9845B0}](https://github.com/user-attachments/assets/55c619d6-bba7-4038-815d-63922bb9faf6)  
 
-## 16. B is called a Poisson set of type XVI if there exists a set `A ⊆ E²` such that `B = A⁽²⁾(S(Fᴀ), R₁)⊙A⁽²⁾(S(Fᴀ), R₂)`
+## 16. Poisson set of type XVI
+**Definition:** B is called a Poisson set of type XVI if there exists a set `A ⊆ E²` such that `B = A⁽²⁾(S(Fᴀ), R₁)⊙A⁽²⁾(S(Fᴀ), R₂)`
 - Example code:
 ```matlab
 ASf_1 = ImageProcessor.ASf(A,2,1); % 2nd derivative along column 1
@@ -720,7 +731,8 @@ disp(["Size of ASf(A, 2, 1) ⊙ ASf(A, 2, 2):" max(B)]);
 
     ![{86F419AC-9383-4F4F-8C28-63F1530B7A41}](https://github.com/user-attachments/assets/8a28aec3-4d62-4092-aefd-21aacf8b1859)
       
-## 17. B is called a Poisson set of type XVII if there exists a set `A ⊆ E²` such that `B = A⁽²⁾(S(Gᴀ), R₁)⊙A⁽²⁾(S(Gᴀ), R₂)`
+## 17. Poisson set of type XVII
+**Definition:** B is called a Poisson set of type XVII if there exists a set `A ⊆ E²` such that `B = A⁽²⁾(S(Gᴀ), R₁)⊙A⁽²⁾(S(Gᴀ), R₂)`
 - Example code:
 ```matlab
 ASg_1 = ImageProcessor.ASg(A,2,1); % 2nd derivative along column 1 with column-swapped of A
@@ -755,7 +767,8 @@ disp(["Size of ASg(A, 2, 1) ⊙ ASg(A, 2, 2):" max(B)]);
 
     ![{54A2F44F-6C88-42C6-B9F9-27FB7086BA76}](https://github.com/user-attachments/assets/c33d3e43-86d1-4c61-b0cc-13049657069b)    
 
-## 20. B is called a Poisson set of type XVIII if there exists a set `A ⊆ E²` such that `B = A⁽²⁾(S(Fᴀ), R₁)⊙A⁽²⁾(S(Gᴀ), R₂)`
+## 20. Poisson set of type XVIII
+**Definition:** B is called a Poisson set of type XVIII if there exists a set `A ⊆ E²` such that `B = A⁽²⁾(S(Fᴀ), R₁)⊙A⁽²⁾(S(Gᴀ), R₂)`
 - Example code:
 ```matlab
 ASf_1 = ImageProcessor.ASf(A,2,1); % 2nd derivative along column 1
@@ -790,7 +803,8 @@ disp(["Size of ASf(A, 2, 1) ⊙ ASg(A, 2, 2):" max(B)]);
 
     ![{AD2668CC-649C-4A4B-9A49-2CC41F8A705E}](https://github.com/user-attachments/assets/47e052f6-801f-4134-8f30-a061508b1588)      
     
-## 21. B is called a Poisson set of type XIX if there exists a set `A ⊆ E²` such that `B = A⁽²⁾(S(Gᴀ), R₁)⊙A⁽²⁾(S(Fᴀ), R₂)`
+## 21. Poisson set of type XIX
+**Definition:** B is called a Poisson set of type XIX if there exists a set `A ⊆ E²` such that `B = A⁽²⁾(S(Gᴀ), R₁)⊙A⁽²⁾(S(Fᴀ), R₂)`
 - Example code:
 ```matlab
 ASg_1 = ImageProcessor.ASg(A,2,1); % 2nd derivative along column 1 with column-swapped of A
