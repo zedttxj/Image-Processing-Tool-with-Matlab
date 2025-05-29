@@ -261,8 +261,8 @@ Additionally, I will use `imshow(ImageProcessor.coordsToMatrix(<set>))` to show 
 ## 1. B is called a Poisson set of type I if there exists a set `A ⊆ E²` such that `B = A⁽²⁾(J(θᴀ), R₁)⊕A⁽²⁾(J(θᴀ), R₂)`
 - Example code:
 ```matlab
-AJF_1 = ImageProcessor.AJF(A,2,1); % 2nd derivative along column 1
-AJF_2 = ImageProcessor.AJF(A,2,2); % 2nd derivative along column 2
+AJF_1 = ImageProcessor.AJF(A,2,1); % 2nd derivative over all columns
+AJF_2 = ImageProcessor.AJF(A,2,2); % 2nd derivative over all columns with column-swapped version of A
 B = ImageProcessor.dilationSet(AJF_1, AJF_2); % AJF(A,2,1) ⊕ AJF(A,2,2)
 disp("Size is heigh-width:");
 disp(["Size of ImageProcessor.AJF(A,2,1):" max(AJF_1)]);
@@ -282,7 +282,7 @@ disp(["Size of AJF(A, 2, 1) ⊕ AJF(A, 2, 2):" max(B)]);
     ```
   - Image of A:
 
-    ![{8ED83D54-058F-4C4A-BC90-3539A6FEFB19}](https://github.com/user-attachments/assets/0c90ae94-79f4-4e58-bcb0-5e1bfd4e6b5e)  
+    ![{D466457A-C043-4898-B22B-C7FC1DB0E7F2}](https://github.com/user-attachments/assets/03a61517-3e51-452c-8353-e97fa6054955)  
   - Image of `ImageProcessor.AJF(A,2,1)`:  
  
     ![{52DFB07C-6519-4B9C-A9C9-66031A778574}](https://github.com/user-attachments/assets/58eb87c4-c5eb-4000-8a08-6dcac22084d6)  
@@ -325,5 +325,40 @@ disp(["Size of ASf(A, 2, 1) ⊕ ASf(A, 2, 2):" max(B)]);
  
     ![{3CE1C96B-8CA5-4162-A99B-3ADA280025A5}](https://github.com/user-attachments/assets/215efe8e-4d82-43c7-8f97-33ff06b7a9ec)  
   - Image of `ASf(A, 2, 1) ⊕ ASf(A, 2, 2)`:
+
+    ![{B7A7A00E-B892-48DB-BDD0-15E3A2B04287}](https://github.com/user-attachments/assets/3dc47d68-b45e-4d35-bb9c-d00230647dea)
+
+## 3. B is called a Poisson set of type III if there exists a set `A ⊆ E²` such that `B = A⁽²⁾(S(Gᴀ), R₁)⊕A⁽²⁾(S(Gᴀ), R₂)`
+- Example code:
+```matlab
+ASg_1 = ImageProcessor.ASg(A,2,1); % 2nd derivative along column 1
+ASg_2 = ImageProcessor.ASg(A,2,2); % 2nd derivative along column 2
+B = ImageProcessor.dilationSet(ASg_1, ASg_2); % ASg(A,2,1) ⊕ ASg(A,2,2)
+disp("Size is heigh-width:");
+disp(["Size of ImageProcessor.ASg(A,2,1):" max(ASg_1)]);
+disp(["Size of ImageProcessor.ASg(A,2,2):" max(ASg_2)]);
+disp(["Size of ASg(A, 2, 1) ⊕ ASg(A, 2, 2):" max(B)]);
+```
+- Visual Output:
+  - **Image Size Inspection:**
+    ```matlab
+    >> 
+    Size is heigh-width:
+        "Size of ImageProcessor.ASg(A,2,1)"    "80"    "8"
+    
+        "Size of ImageProcessor.ASg(A,2,2)"    "4"    "160"
+    
+        "Size of ASg(A, 2, 1) ⊕ ASg(A, 2, 2)"    "84"    "168"
+    ```
+  - Image of A:
+
+    ![{D466457A-C043-4898-B22B-C7FC1DB0E7F2}](https://github.com/user-attachments/assets/03a61517-3e51-452c-8353-e97fa6054955)  
+  - Image of `ImageProcessor.ASg(A,2,1)`:  
+ 
+    ![{99D30CC3-09FE-4393-9D42-0FE82F5D487A}](https://github.com/user-attachments/assets/4295ced2-aa7a-4c03-babf-d14980902165)  
+  - Image of `ImageProcessor.ASg(A,2,2)`:
+ 
+    ![{3CE1C96B-8CA5-4162-A99B-3ADA280025A5}](https://github.com/user-attachments/assets/215efe8e-4d82-43c7-8f97-33ff06b7a9ec)  
+  - Image of `ASg(A, 2, 1) ⊕ ASg(A, 2, 2)`:
 
     ![{B7A7A00E-B892-48DB-BDD0-15E3A2B04287}](https://github.com/user-attachments/assets/3dc47d68-b45e-4d35-bb9c-d00230647dea)  
