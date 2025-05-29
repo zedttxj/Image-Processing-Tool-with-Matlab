@@ -244,6 +244,20 @@ A = ImageProcessor.coordsToMatrix(A);
 - Run the code:  
   ![{5D2EE982-EC81-4320-B977-000EAA144969}](https://github.com/user-attachments/assets/4c27a4cc-fdd5-407e-9135-d58d979c2027)
 
+## `ImageProcessor.sum_operator(A, B)` (⊛)
+
+### Purpose:
+This function implements a simple coordinate-wise addition of two sets A and B (each represented as a 2D matrix of coordinates), after sorting and removing duplicates. It is used to define the custom operation `⊛` in Poisson set.
+
+### Mathematical Definition of ⊛  
+
+Given:
+- `A = [a₁; a₂; ...; aₙ],`
+- `B = [b₁; b₂; ...; bₖ],`
+with each `aᵢ = [xᵢ yᵢ]`, and likewise for `bᵢ`, the operation is: `A ⊛ B = C`, where `Cᵢ = aᵢ + bᵢ = [xᵢ + xᵢ′, yᵢ + yᵢ′]` for each row i up to min(n, k) and the remaining rows are copied from the longer matrix.  
+
+Both A and B are sorted and deduplicated beforehand using unique(..., 'rows').
+
 # Poisson Sets  
 
 **Definition:** `Let B ⊆ E²`. I will use `A = {(1,0),(2,1),(2,4),(3,5),(4,8)}` throughout these examples:
@@ -464,7 +478,7 @@ disp(["Size of AJF(A, 2, 1) ⊛ AJF(A, 2, 2):" max(B)]);
   - Image of `ImageProcessor.AJF(A,2,2)`:
  
     ![{553DB7D2-949D-4C42-B062-4CDDDC2A9BB6}](https://github.com/user-attachments/assets/09508fc7-c411-48e2-b76c-14112e21e8f4)  
-  - Image of `AJF(A, 2, 1) ⊛ AJF(A, 2, 2)`:
+  - Image of `AJF(A, 2, 1) ⊛ AJF(A, 2, 2)` (the coordinates are symmetric, where `xᵢ=yᵢ`):
 
     ![{913B6A1E-2943-4D9E-A472-DCAE8A5E4154}](https://github.com/user-attachments/assets/b656c61d-9e43-44c9-a059-1877e4ad1e89)
 
@@ -484,11 +498,11 @@ disp(["Size of ASf(A, 2, 1) ⊛ ASf(A, 2, 2):" max(B)]);
     ```matlab
     >> 
     Size is heigh-width:
-        "Size of ImageProcessor.ASf(A,2,1)"    "80"    "8"
+        "Size of ImageProcessor.ASf(A,2,…"    "80"    "8"
     
-        "Size of ImageProcessor.ASf(A,2,2)"    "4"    "160"
+        "Size of ImageProcessor.ASf(A,2,…"    "4"    "160"
     
-        "Size of ASf(A, 2, 1) ⊛ ASf(A, 2, 2)"    "84"    "168"
+        "Size of ASf(A, 2, 1) ⊛ ASf(A, 2…"    "84"    "160"
     ```
   - Image of A:
 
@@ -499,8 +513,42 @@ disp(["Size of ASf(A, 2, 1) ⊛ ASf(A, 2, 2):" max(B)]);
   - Image of `ImageProcessor.ASf(A,2,2)`:
  
     ![{3CE1C96B-8CA5-4162-A99B-3ADA280025A5}](https://github.com/user-attachments/assets/215efe8e-4d82-43c7-8f97-33ff06b7a9ec)  
-  - Image of `ASf(A, 2, 1) ⊛ ASf(A, 2, 2)`:
+  - Image of `ASf(A, 2, 1) ⊛ ASf(A, 2, 2)` (not symmetric as their coordinates are `{(1,29),(2,68),(14,160),(39,1),(84,4)}`:
 
-    ![{74BBA41D-4C8D-4076-89B0-15AF93C728D3}](https://github.com/user-attachments/assets/ffb5361b-4d2f-489c-916e-1f26839bbccb)
+    ![{F07AEF0A-8E5C-466F-B81B-A70D97AA1B59}](https://github.com/user-attachments/assets/0926c934-65ff-459f-a9b3-9017708b7c5a)
 
+## 10. B is called a Poisson set of type X if there exists a set `A ⊆ E²` such that `B = A⁽²⁾(S(Gᴀ), R₁)⊛A⁽²⁾(S(Gᴀ), R₂)`
+- Example code:
+```matlab
+ASg_1 = ImageProcessor.ASg(A,2,1); % 2nd derivative along column 1 with column-swapped of A
+ASg_2 = ImageProcessor.ASg(A,2,2); % 2nd derivative along column 2 with column-swapped of A
+B = ImageProcessor.dilationSet(ASg_1, ASg_2); % ASg(A,2,1) ⊛ ASg(A,2,2)
+disp("Size is heigh-width:");
+disp(["Size of ImageProcessor.ASg(A,2,1):" max(ASg_1)]);
+disp(["Size of ImageProcessor.ASg(A,2,2):" max(ASg_2)]);
+disp(["Size of ASg(A, 2, 1) ⊛ ASg(A, 2, 2):" max(B)]);
+```
+- Visual Output:
+  - **Image Size Inspection:**
+    ```matlab
+    >> 
+    Size is heigh-width:
+        "Size of ImageProcessor.ASg(A,2,1)"    "8"    "80"
+    
+        "Size of ImageProcessor.ASg(A,2,2)"    "160"    "4"
+    
+        "Size of ASg(A, 2, 1) ⊛ ASg(A, 2, 2)"    "168"    "84"
+    ```
+  - Image of A:
+
+    ![{D466457A-C043-4898-B22B-C7FC1DB0E7F2}](https://github.com/user-attachments/assets/03a61517-3e51-452c-8353-e97fa6054955)  
+  - Image of `ImageProcessor.ASg(A,2,1)`:  
+ 
+    ![{68672B17-46E6-4DBB-BBB3-367BE9173637}](https://github.com/user-attachments/assets/e2ddf59e-cec8-48b9-bb8f-4d17446a118d)    
+  - Image of `ImageProcessor.ASg(A,2,2)`:
+ 
+    ![{FD993303-C721-4E30-82FE-73468254E1B9}](https://github.com/user-attachments/assets/8121e1b9-06a5-497e-82a0-7a9f6c3a79e8)    
+  - Image of `ASg(A, 2, 1) ⊛ ASg(A, 2, 2)`:
+
+    ![{B0726B63-2059-4380-AFF6-644AE7066F34}](https://github.com/user-attachments/assets/17d8b1ae-3b68-4766-9e73-0294f7bc896b)
 
