@@ -62,7 +62,7 @@ The `ASf` function was developed to observe **patterns in an image after differe
   imshow(ImageProcessor.Dilation1(A,B)); % Apply dilation to enhance visualization
   ```
 - Run the code:  
-  ![{116ED977-56BE-4C20-801B-6134A69B4FCA}](https://github.com/user-attachments/assets/f3a72409-7f77-4641-a8ed-90bea9ead0af)
+  ![{D6FD22CA-7C9B-4848-B7D6-D0304C04B69E}](https://github.com/user-attachments/assets/ded4dc3f-c057-4419-9a14-34154d55243b)
 
 - Advanced use case (calculating `ASf(A, 2, 1) ⊕ ASf(A, 2, 2)`):
 ```matlab
@@ -199,8 +199,8 @@ A = ImageProcessor.coordsToMatrix(A);
 - Run the code:
   ```matlab
   >> 
-     6     0
-    48     0
+    24     0
+    60    48
   ```
 - Another example code:
   ```matlab
@@ -215,8 +215,8 @@ A = ImageProcessor.coordsToMatrix(A);
 - Run the Code:
   ```
   >> 
-   6     6
-   0    48
+     0    24
+    48    60
   ```
 - **NOTICE:** The input matrix A should **not** contain any constant values from the polynomial. As a result, the output will also ignore any constant values after differentiation.
 - Another example code:
@@ -233,7 +233,7 @@ A = ImageProcessor.coordsToMatrix(A);
   imshow(ImageProcessor.Dilation1(A,B)); % Apply dilation to enhance visualization
   ```
 - Run the code:  
-  ![{5D2EE982-EC81-4320-B977-000EAA144969}](https://github.com/user-attachments/assets/4c27a4cc-fdd5-407e-9135-d58d979c2027)
+  ![{03799FBD-2EA0-4BA5-96C1-0E95BE3B8C68}](https://github.com/user-attachments/assets/575b1aa4-bff6-4035-828d-2ccf0d6b092c)
 
 ## `ImageProcessor.sum_operator(A, B)` (`sum_operator`)
 **Symbol:** `⊛`
