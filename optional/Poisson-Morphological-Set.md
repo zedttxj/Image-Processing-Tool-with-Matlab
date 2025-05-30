@@ -41,10 +41,8 @@
   - Run the Code:
     ```
     >> 
-      24     1
-      60     5
-       0     0
-       0     4
+      24     0
+      60     4
     ```
     This result means that after two derivative operations, the only nonzero entry comes from the x-column, corresponding to the `6x + 48x²` term. The y-column stays the same, as expected.
 - **NOTICE:** The input matrix A should **not** contain any constant values from the polynomial. As a result, the output will also ignore any constant values after differentiation.  
@@ -90,19 +88,15 @@ A = ImageProcessor.coordsToMatrix(A);
 
 % ImageProcessor.ASf(A,2,1) should be like this:
 % 
-%     12     0
-%     36     1
-%     80     4
-%      0     5
-%      0     8
+%     12     4
+%     36     5
+%     80     8
 
 % ImageProcessor.ASf(A,2,2) should be like this:
 % 
-%      1    24
-%      2    60
-%      2   160
-%      3     0
-%      4     0
+%      2    24
+%      3    60
+%      4   160
 
 ```
 
@@ -112,13 +106,13 @@ A = ImageProcessor.coordsToMatrix(A);
     ![{31DF0FA4-0166-4127-B7E0-8B432B67D9A2}](https://github.com/user-attachments/assets/1712ef23-deed-4c4f-beee-fdb5a5e5b91a)
   - Image of `ImageProcessor.ASf(A,2,1)`:  
  
-    ![{BE68F33B-104C-4F71-98D1-715809C9DF7E}](https://github.com/user-attachments/assets/63ae0a52-a8ca-43fe-89ed-64b1fc405481)
+    ![{49898FD2-6BDA-4B83-A413-9BF88A3A5BBC}](https://github.com/user-attachments/assets/36e43e1c-4a78-4f1c-bacb-7e7070123f20)
   - Image of `ImageProcessor.ASf(A,2,2)`:
  
-    ![{5F765D05-3D78-40BB-AA2A-44908A7FBFF5}](https://github.com/user-attachments/assets/39af5f20-bd43-446d-841f-9731ee7d9d03)  
+    ![{8F44935A-7EB0-4490-BC87-11EA7AE58A19}](https://github.com/user-attachments/assets/326ead04-ce56-4c75-a67d-1abb64a70002)  
   - Image of B:
 
-    ![{B8E7C152-B85F-4B86-8A52-4E15D0499B97}](https://github.com/user-attachments/assets/e356644e-e852-41c5-81c9-18997c442186)
+    ![{07B122BB-0E50-4E1A-895A-1DF63F1A2DAF}](https://github.com/user-attachments/assets/140c8e39-7e21-4c0a-8b18-8423fe9c0034)
 
   - **Image Size Inspection:** The output image has smaller pixels as the image is spanning. To check the size of the image based on the set, you can run the command `max(<set>)` to check for the size:  
     - Example code:
@@ -144,11 +138,12 @@ A = ImageProcessor.coordsToMatrix(A);
       ```matlab
         >> 
         Size is the heigh-width of the image:
-            "Size of ImageProcessor.ASf(A,2,1):"    "80"    "8"
+            "Size of ImageProcessor.ASf(A,2,1)"    "80"    "8"
         
-            "Size of ImageProcessor.ASf(A,2,2):"    "4"    "160"
+            "Size of ImageProcessor.ASf(A,2,2)"    "4"    "160"
         
-            "Size of ASf(A, 2, 1) ⊕ ASf(A, 2, 2):"    "84"    "168"
+            "Size of ASf(A, 2, 1) ⊕ ASf(A, 2, 2)"    "84"    "168"
+
       ```
 
 ## ASg(A, d, ind)
@@ -170,21 +165,17 @@ A = ImageProcessor.coordsToMatrix(A);
     B = ImageProcessor.ASg(A, 2, 1);
     disp(B);
   ```
-- If ASf(A, 2, 1) yields:
+- If `ASf(A, 2, 1)` yields:
 ```matlab
 >> 
-    24     1
-    60     5
-     0     0
-     0     4
+    24     0
+    60     4
 ```
-- Then ASg(A, 2, 1) will return:
+- Then `ASg(A, 2, 1)` will return:
 ```matlab
 >> 
-     1    24
-     5    60
-     0     0
-     4     0
+     0    24
+     4    60
 ```
 
 ## AJF(A, d, ind)
@@ -310,6 +301,8 @@ disp("Size is heigh-width:");
 disp(["Size of ImageProcessor.AJF(A,2,1):" max(AJF_1)]);
 disp(["Size of ImageProcessor.AJF(A,2,2):" max(AJF_2)]);
 disp(["Size of AJF(A, 2, 1) ⊕ AJF(A, 2, 2):" max(B)]);
+txt = "{" + strjoin(compose('(%d,%d)', B), ',') + "}";
+disp(txt); % display B in the set form
 ```
 - Visual Output:
   - **Image Size Inspection:**
@@ -321,19 +314,21 @@ disp(["Size of AJF(A, 2, 1) ⊕ AJF(A, 2, 2):" max(B)]);
         "Size of ImageProcessor.AJF(A,2,2)"    "160"    "80"
     
         "Size of AJF(A, 2, 1) ⊕ AJF(A, 2, 2)"    "240"    "240"
+    
+    {(36,36),(60,72),(72,60),(96,96),(104,172),(140,196),(172,104),(196,140),(240,240)}
     ```
   - Image of A:
 
     ![{D466457A-C043-4898-B22B-C7FC1DB0E7F2}](https://github.com/user-attachments/assets/03a61517-3e51-452c-8353-e97fa6054955)  
   - Image of `ImageProcessor.AJF(A,2,1)`:  
  
-    ![{52DFB07C-6519-4B9C-A9C9-66031A778574}](https://github.com/user-attachments/assets/58eb87c4-c5eb-4000-8a08-6dcac22084d6)  
+    ![{45A9AAD4-DDED-4768-AED7-7A2839ED4BE8}](https://github.com/user-attachments/assets/cad05314-2b0b-44c6-ad7b-65f1a5afb914)  
   - Image of `ImageProcessor.AJF(A,2,2)`:
  
-    ![{553DB7D2-949D-4C42-B062-4CDDDC2A9BB6}](https://github.com/user-attachments/assets/09508fc7-c411-48e2-b76c-14112e21e8f4)  
+    ![{69B97356-9714-42AB-9B16-B576AEA2A4CF}](https://github.com/user-attachments/assets/03a7049a-64f6-4949-a203-9c3ba38ef789)  
   - Image of `AJF(A, 2, 1) ⊕ AJF(A, 2, 2)`:
 
-    ![{AFB6CD6F-77AA-40D2-A172-08DE26A30876}](https://github.com/user-attachments/assets/73b0e657-1505-4e1f-bf4d-c6b589fcf7b3)  
+    ![{02983517-6827-4BA5-A4E9-6AD23F668A6B}](https://github.com/user-attachments/assets/949f4cfd-709a-4461-9692-a7ca6bc82cf4)  
 
 ## 2. Poisson set of type II
 **Definition:** B is called a Poisson set of type II if there exists a set `A ⊆ E²` such that `B = A⁽²⁾(S(Fᴀ), R₁)⊕A⁽²⁾(S(Fᴀ), R₂)`
@@ -346,6 +341,8 @@ disp("Size is heigh-width:");
 disp(["Size of ImageProcessor.ASf(A,2,1):" max(ASf_1)]);
 disp(["Size of ImageProcessor.ASf(A,2,2):" max(ASf_2)]);
 disp(["Size of ASf(A, 2, 1) ⊕ ASf(A, 2, 2):" max(B)]);
+txt = "{" + strjoin(compose('(%d,%d)', B), ',') + "}";
+disp(txt); % display ASf(A,2,1) ⊕ ASf(A,2,2) in the set form
 ```
 - Visual Output:
   - **Image Size Inspection:**
@@ -357,19 +354,21 @@ disp(["Size of ASf(A, 2, 1) ⊕ ASf(A, 2, 2):" max(B)]);
         "Size of ImageProcessor.ASf(A,2,2)"    "4"    "160"
     
         "Size of ASf(A, 2, 1) ⊕ ASf(A, 2, 2)"    "84"    "168"
+    
+    {(14,28),(15,64),(16,164),(38,29),(39,65),(40,165),(82,32),(83,68),(84,168)}
     ```
   - Image of A:
 
     ![{D466457A-C043-4898-B22B-C7FC1DB0E7F2}](https://github.com/user-attachments/assets/03a61517-3e51-452c-8353-e97fa6054955)  
   - Image of `ImageProcessor.ASf(A,2,1)`:  
  
-    ![{BE68F33B-104C-4F71-98D1-715809C9DF7E}](https://github.com/user-attachments/assets/63ae0a52-a8ca-43fe-89ed-64b1fc405481)  
+    ![{0BDFEF0F-9942-4D2A-AB7B-1A817474833C}](https://github.com/user-attachments/assets/09536ed2-42ce-4e6c-b34d-f6bb8cda8515)  
   - Image of `ImageProcessor.ASf(A,2,2)`:
  
-    ![{3CE1C96B-8CA5-4162-A99B-3ADA280025A5}](https://github.com/user-attachments/assets/215efe8e-4d82-43c7-8f97-33ff06b7a9ec)  
+    ![{40F5FD43-B9E8-4D56-A2F0-AE84D008F917}](https://github.com/user-attachments/assets/2aae9709-d364-4eaa-9105-23e288531e5f)  
   - Image of `ASf(A, 2, 1) ⊕ ASf(A, 2, 2)`:
 
-    ![{B7A7A00E-B892-48DB-BDD0-15E3A2B04287}](https://github.com/user-attachments/assets/3dc47d68-b45e-4d35-bb9c-d00230647dea)  
+    ![{E898B185-C583-4915-9AAE-E5E3A02E1D77}](https://github.com/user-attachments/assets/3b4523a9-0e3b-479c-81b8-5dca194cd33f)  
 
 ## 3. Poisson set of type III
 **Definition:** B is called a Poisson set of type III if there exists a set `A ⊆ E²` such that `B = A⁽²⁾(S(Gᴀ), R₁)⊕A⁽²⁾(S(Gᴀ), R₂)`
@@ -382,6 +381,8 @@ disp("Size is heigh-width:");
 disp(["Size of ImageProcessor.ASg(A,2,1):" max(ASg_1)]);
 disp(["Size of ImageProcessor.ASg(A,2,2):" max(ASg_2)]);
 disp(["Size of ASg(A, 2, 1) ⊕ ASg(A, 2, 2):" max(B)]);
+txt = "{" + strjoin(compose('(%d,%d)', B), ',') + "}";
+disp(txt); % display ASg(A,2,1) ⊕ ASg(A,2,2) in the set form
 ```
 - Visual Output:
   - **Image Size Inspection:**
@@ -393,19 +394,21 @@ disp(["Size of ASg(A, 2, 1) ⊕ ASg(A, 2, 2):" max(B)]);
         "Size of ImageProcessor.ASg(A,2,2)"    "160"    "4"
     
         "Size of ASg(A, 2, 1) ⊕ ASg(A, 2, 2)"    "168"    "84"
+    
+    {(28,14),(29,38),(32,82),(64,15),(65,39),(68,83),(164,16),(165,40),(168,84)}
     ```
   - Image of A:
 
     ![{D466457A-C043-4898-B22B-C7FC1DB0E7F2}](https://github.com/user-attachments/assets/03a61517-3e51-452c-8353-e97fa6054955)  
   - Image of `ImageProcessor.ASg(A,2,1)`:  
  
-    ![{68672B17-46E6-4DBB-BBB3-367BE9173637}](https://github.com/user-attachments/assets/e2ddf59e-cec8-48b9-bb8f-4d17446a118d)    
+    ![{A6465E01-9C8C-4902-8852-F3A0A5FFF261}](https://github.com/user-attachments/assets/162f15c9-5149-48af-925f-166ac9fbc306)    
   - Image of `ImageProcessor.ASg(A,2,2)`:
  
-    ![{FD993303-C721-4E30-82FE-73468254E1B9}](https://github.com/user-attachments/assets/8121e1b9-06a5-497e-82a0-7a9f6c3a79e8)    
+    ![{4B23FDA0-837D-465E-89BE-E0050D7F8AB0}](https://github.com/user-attachments/assets/a36d1a3a-2db6-4364-99a8-417afce7f7a9)    
   - Image of `ASg(A, 2, 1) ⊕ ASg(A, 2, 2)`:
 
-    ![{77BFE00A-B653-4DF8-AD35-AA691D2E5852}](https://github.com/user-attachments/assets/37c32e40-e4a8-43cd-8302-ea1735910c23)    
+    ![{31CB362C-C3DA-4B50-BFF4-028E14C339D4}](https://github.com/user-attachments/assets/206700ce-ff67-421e-b192-7ce72c96b9d9)    
 
 ## 6. Poisson set of type VI
 **Definition:** B is called a Poisson set of type VI if there exists a set `A ⊆ E²` such that `B = A⁽²⁾(S(Fᴀ), R₁)⊕A⁽²⁾(S(Gᴀ), R₂)`
@@ -418,6 +421,8 @@ disp("Size is heigh-width:");
 disp(["Size of ImageProcessor.ASf(A,2,1):" max(ASf_1)]);
 disp(["Size of ImageProcessor.ASg(A,2,2):" max(ASg_2)]);
 disp(["Size of ASf(A, 2, 1) ⊕ ASg(A, 2, 2):" max(B)]);
+txt = "{" + strjoin(compose('(%d,%d)', B), ',') + "}";
+disp(txt); % display ASf(A,2,1) ⊕ ASg(A,2,2) in the set form
 ```
 - Visual Output:
   - **Image Size Inspection:**
@@ -429,19 +434,21 @@ disp(["Size of ASf(A, 2, 1) ⊕ ASg(A, 2, 2):" max(B)]);
         "Size of ImageProcessor.ASg(A,2,2)"    "160"    "4"
     
         "Size of ASf(A, 2, 1) ⊕ ASg(A, 2, 2)"    "240"    "12"
+
+    {(36,6),(60,7),(72,7),(96,8),(104,10),(140,11),(172,8),(196,9),(240,12)}
     ```
   - Image of A:
 
     ![{D466457A-C043-4898-B22B-C7FC1DB0E7F2}](https://github.com/user-attachments/assets/03a61517-3e51-452c-8353-e97fa6054955)  
   - Image of `ImageProcessor.ASf(A,2,1)`:  
  
-    ![{BE68F33B-104C-4F71-98D1-715809C9DF7E}](https://github.com/user-attachments/assets/63ae0a52-a8ca-43fe-89ed-64b1fc405481)    
+    ![{0BDFEF0F-9942-4D2A-AB7B-1A817474833C}](https://github.com/user-attachments/assets/09536ed2-42ce-4e6c-b34d-f6bb8cda8515)    
   - Image of `ImageProcessor.ASg(A,2,2)`:
  
-    ![{FD993303-C721-4E30-82FE-73468254E1B9}](https://github.com/user-attachments/assets/8121e1b9-06a5-497e-82a0-7a9f6c3a79e8)    
+    ![{4B23FDA0-837D-465E-89BE-E0050D7F8AB0}](https://github.com/user-attachments/assets/a36d1a3a-2db6-4364-99a8-417afce7f7a9)    
   - Image of `ASf(A, 2, 1) ⊕ ASg(A, 2, 2)`:
 
-    ![{86F0D556-1170-48DC-A21B-335BA897D211}](https://github.com/user-attachments/assets/e4a853e5-8af2-45bb-ad95-c0dc4b78740b)  
+    ![{B5569392-3C6F-4CA3-AE6E-49058BC7C658}](https://github.com/user-attachments/assets/b6736e04-1c89-465a-8c8f-53b367164687)  
     
 ## 7. Poisson set of type VII
 **Definition:** B is called a Poisson set of type VII if there exists a set `A ⊆ E²` such that `B = A⁽²⁾(S(Gᴀ), R₁)⊕A⁽²⁾(S(Fᴀ), R₂)`
@@ -454,6 +461,8 @@ disp("Size is heigh-width:");
 disp(["Size of ImageProcessor.ASg(A,2,1):" max(ASg_1)]);
 disp(["Size of ImageProcessor.ASf(A,2,2):" max(ASf_2)]);
 disp(["Size of ASg(A, 2, 1) ⊕ ASf(A, 2, 2):" max(B)]);
+txt = "{" + strjoin(compose('(%d,%d)', B), ',') + "}";
+disp(txt); % display ASg(A,2,1) ⊕ ASf(A,2,2) in the set form
 ```
 - Visual Output:
   - **Image Size Inspection:**
@@ -465,19 +474,21 @@ disp(["Size of ASg(A, 2, 1) ⊕ ASf(A, 2, 2):" max(B)]);
         "Size of ImageProcessor.ASf(A,2,2)"    "4"    "160"
     
         "Size of ASg(A, 2, 1) ⊕ ASf(A, 2, 2)"    "12"    "240"
+    
+    {(6,36),(7,60),(7,72),(8,96),(8,172),(9,196),(10,104),(11,140),(12,240)}
     ```
   - Image of A:
 
     ![{D466457A-C043-4898-B22B-C7FC1DB0E7F2}](https://github.com/user-attachments/assets/03a61517-3e51-452c-8353-e97fa6054955)  
   - Image of `ImageProcessor.ASg(A,2,1)`:  
  
-    ![{68672B17-46E6-4DBB-BBB3-367BE9173637}](https://github.com/user-attachments/assets/e2ddf59e-cec8-48b9-bb8f-4d17446a118d)  
+    ![{A6465E01-9C8C-4902-8852-F3A0A5FFF261}](https://github.com/user-attachments/assets/162f15c9-5149-48af-925f-166ac9fbc306)  
   - Image of `ImageProcessor.ASf(A,2,2)`:
  
-    ![{3CE1C96B-8CA5-4162-A99B-3ADA280025A5}](https://github.com/user-attachments/assets/215efe8e-4d82-43c7-8f97-33ff06b7a9ec)  
+    ![{40F5FD43-B9E8-4D56-A2F0-AE84D008F917}](https://github.com/user-attachments/assets/2aae9709-d364-4eaa-9105-23e288531e5f)  
   - Image of `ASg(A, 2, 1) ⊕ ASf(A, 2, 2)`:
 
-    ![{145A0788-1129-4481-AAFC-47814412DCC9}](https://github.com/user-attachments/assets/5f188961-640c-4ae1-a86f-a246d1f0a643)  
+    ![{1C3D78D0-6BA2-40EF-A88B-6654F63D9308}](https://github.com/user-attachments/assets/dd98e3c2-414b-494b-9245-ac695b0936c2)  
 
 ## 8. Poisson set of type VIII
 **Definition:** B is called a Poisson set of type VIII if there exists a set `A ⊆ E²` such that `B = A⁽²⁾(J(θᴀ), R₁)⊛A⁽²⁾(J(θᴀ), R₂)`
@@ -490,6 +501,8 @@ disp("Size is heigh-width:");
 disp(["Size of ImageProcessor.AJF(A,2,1):" max(AJF_1)]);
 disp(["Size of ImageProcessor.AJF(A,2,2):" max(AJF_2)]);
 disp(["Size of AJF(A, 2, 1) ⊛ AJF(A, 2, 2):" max(B)]);
+txt = "{" + strjoin(compose('(%d,%d)', B), ',') + "}";
+disp(txt); % display B in the set form
 ```
 - Visual Output:
   - **Image Size Inspection:**
@@ -501,19 +514,21 @@ disp(["Size of AJF(A, 2, 1) ⊛ AJF(A, 2, 2):" max(B)]);
         "Size of ImageProcessor.AJF(A,2,2)"    "160"    "80"
     
         "Size of AJF(A, 2, 1) ⊛ AJF(A, 2, 2)"    "240"    "240"
+    
+    {(36,36),(96,96),(240,240)}
     ```
   - Image of A:
 
     ![{D466457A-C043-4898-B22B-C7FC1DB0E7F2}](https://github.com/user-attachments/assets/03a61517-3e51-452c-8353-e97fa6054955)  
   - Image of `ImageProcessor.AJF(A,2,1)`:  
  
-    ![{52DFB07C-6519-4B9C-A9C9-66031A778574}](https://github.com/user-attachments/assets/58eb87c4-c5eb-4000-8a08-6dcac22084d6)  
+    ![{45A9AAD4-DDED-4768-AED7-7A2839ED4BE8}](https://github.com/user-attachments/assets/cad05314-2b0b-44c6-ad7b-65f1a5afb914)  
   - Image of `ImageProcessor.AJF(A,2,2)`:
  
-    ![{553DB7D2-949D-4C42-B062-4CDDDC2A9BB6}](https://github.com/user-attachments/assets/09508fc7-c411-48e2-b76c-14112e21e8f4)  
+    ![{69B97356-9714-42AB-9B16-B576AEA2A4CF}](https://github.com/user-attachments/assets/03a7049a-64f6-4949-a203-9c3ba38ef789)  
   - Image of `AJF(A, 2, 1) ⊛ AJF(A, 2, 2)` (the coordinates are symmetric, where `xᵢ=yᵢ`):
 
-    ![{913B6A1E-2943-4D9E-A472-DCAE8A5E4154}](https://github.com/user-attachments/assets/b656c61d-9e43-44c9-a059-1877e4ad1e89)
+    ![{34E8BB79-90E0-4EAD-A940-E6715E31AB16}](https://github.com/user-attachments/assets/3baaf3c2-64a0-4352-bb7f-8191ffdd0052)
 
 ## 9. Poisson set of type IX
 **Definition:** B is called a Poisson set of type IX if there exists a set `A ⊆ E²` such that `B = A⁽²⁾(S(Fᴀ), R₁)⊛A⁽²⁾(S(Fᴀ), R₂)`
@@ -526,30 +541,34 @@ disp("Size is heigh-width:");
 disp(["Size of ImageProcessor.ASf(A,2,1):" max(ASf_1)]);
 disp(["Size of ImageProcessor.ASf(A,2,2):" max(ASf_2)]);
 disp(["Size of ASf(A, 2, 1) ⊛ ASf(A, 2, 2):" max(B)]);
+txt = "{" + strjoin(compose('(%d,%d)', B), ',') + "}";
+disp(txt); % display B in the set form
 ```
 - Visual Output:
   - **Image Size Inspection:**
     ```matlab
     >> 
     Size is heigh-width:
-        "Size of ImageProcessor.ASf(A,2,…"    "80"    "8"
+        "Size of ImageProcessor.ASf(A,2,1)"    "80"    "8"
     
-        "Size of ImageProcessor.ASf(A,2,…"    "4"    "160"
+        "Size of ImageProcessor.ASf(A,2,2)"    "4"    "160"
     
-        "Size of ASf(A, 2, 1) ⊛ ASf(A, 2…"    "84"    "160"
+        "Size of ASf(A, 2, 1) ⊛ ASf(A, 2, 2)"    "84"    "168"
+    
+    {(14,28),(39,65),(84,168)}
     ```
   - Image of A:
 
     ![{D466457A-C043-4898-B22B-C7FC1DB0E7F2}](https://github.com/user-attachments/assets/03a61517-3e51-452c-8353-e97fa6054955)  
   - Image of `ImageProcessor.ASf(A,2,1)`:  
  
-    ![{BE68F33B-104C-4F71-98D1-715809C9DF7E}](https://github.com/user-attachments/assets/63ae0a52-a8ca-43fe-89ed-64b1fc405481)  
+    ![{0BDFEF0F-9942-4D2A-AB7B-1A817474833C}](https://github.com/user-attachments/assets/09536ed2-42ce-4e6c-b34d-f6bb8cda8515)  
   - Image of `ImageProcessor.ASf(A,2,2)`:
  
-    ![{3CE1C96B-8CA5-4162-A99B-3ADA280025A5}](https://github.com/user-attachments/assets/215efe8e-4d82-43c7-8f97-33ff06b7a9ec)  
+    ![{40F5FD43-B9E8-4D56-A2F0-AE84D008F917}](https://github.com/user-attachments/assets/2aae9709-d364-4eaa-9105-23e288531e5f)  
   - Image of `ASf(A, 2, 1) ⊛ ASf(A, 2, 2)` (not symmetric as their coordinates are `{(1,29),(2,68),(14,160),(39,1),(84,4)}`:
 
-    ![{F07AEF0A-8E5C-466F-B81B-A70D97AA1B59}](https://github.com/user-attachments/assets/0926c934-65ff-459f-a9b3-9017708b7c5a)
+    ![{14064DAE-6202-4BCD-9546-28C7C822E2B3}](https://github.com/user-attachments/assets/0e7e8571-a0e7-414a-b7a6-b53c9d31fb2d)
 
 ## 10. Poisson set of type X
 **Definition:** B is called a Poisson set of type X if there exists a set `A ⊆ E²` such that `B = A⁽²⁾(S(Gᴀ), R₁)⊛A⁽²⁾(S(Gᴀ), R₂)`
@@ -562,6 +581,8 @@ disp("Size is heigh-width:");
 disp(["Size of ImageProcessor.ASg(A,2,1):" max(ASg_1)]);
 disp(["Size of ImageProcessor.ASg(A,2,2):" max(ASg_2)]);
 disp(["Size of ASg(A, 2, 1) ⊛ ASg(A, 2, 2):" max(B)]);
+txt = "{" + strjoin(compose('(%d,%d)', B), ',') + "}";
+disp(txt); % display B in the set form
 ```
 - Visual Output:
   - **Image Size Inspection:**
@@ -572,20 +593,22 @@ disp(["Size of ASg(A, 2, 1) ⊛ ASg(A, 2, 2):" max(B)]);
     
         "Size of ImageProcessor.ASg(A,2,2)"    "160"    "4"
     
-        "Size of ASg(A, 2, 1) ⊛ ASg(A, 2, 2)"    "168"    "81"
+        "Size of ASg(A, 2, 1) ⊛ ASg(A, 2, 2)"    "168"    "84"
+    
+    {(28,14),(65,39),(168,84)}
     ```
   - Image of A:
 
     ![{D466457A-C043-4898-B22B-C7FC1DB0E7F2}](https://github.com/user-attachments/assets/03a61517-3e51-452c-8353-e97fa6054955)  
   - Image of `ImageProcessor.ASg(A,2,1)`:  
  
-    ![{68672B17-46E6-4DBB-BBB3-367BE9173637}](https://github.com/user-attachments/assets/e2ddf59e-cec8-48b9-bb8f-4d17446a118d)    
+    ![{A6465E01-9C8C-4902-8852-F3A0A5FFF261}](https://github.com/user-attachments/assets/162f15c9-5149-48af-925f-166ac9fbc306)    
   - Image of `ImageProcessor.ASg(A,2,2)`:
  
-    ![{FD993303-C721-4E30-82FE-73468254E1B9}](https://github.com/user-attachments/assets/8121e1b9-06a5-497e-82a0-7a9f6c3a79e8)    
+    ![{4B23FDA0-837D-465E-89BE-E0050D7F8AB0}](https://github.com/user-attachments/assets/a36d1a3a-2db6-4364-99a8-417afce7f7a9)    
   - Image of `ASg(A, 2, 1) ⊛ ASg(A, 2, 2)` (has a set `{(0,15),(1,40),(28,81),(65,2),(168,2)}`):
 
-    ![{EDCAF0AB-38B4-47ED-969A-643DE0389728}](https://github.com/user-attachments/assets/c77c5b2e-4bbf-4f53-9a11-2829dd954250)    
+    ![{ACDA7E29-752F-4E4C-B903-A32F32D2AC51}](https://github.com/user-attachments/assets/5248c9a0-4972-42b4-a08b-7535eaa8d605)      
 
 ## 13. Poisson set of type XIII
 **Definition:** B is called a Poisson set of type XIII if there exists a set `A ⊆ E²` such that `B = A⁽²⁾(S(Fᴀ), R₁)⊛A⁽²⁾(S(Gᴀ), R₂)`
@@ -598,6 +621,8 @@ disp("Size is heigh-width:");
 disp(["Size of ImageProcessor.ASf(A,2,1):" max(ASf_1)]);
 disp(["Size of ImageProcessor.ASg(A,2,2):" max(ASg_2)]);
 disp(["Size of ASf(A, 2, 1) ⊛ ASg(A, 2, 2):" max(B)]);
+txt = "{" + strjoin(compose('(%d,%d)', B), ',') + "}";
+disp(txt); % display B in the set form
 ```
 - Visual Output:
   - **Image Size Inspection:**
@@ -609,19 +634,21 @@ disp(["Size of ASf(A, 2, 1) ⊛ ASg(A, 2, 2):" max(B)]);
         "Size of ImageProcessor.ASg(A,2,2)"    "160"    "4"
     
         "Size of ASf(A, 2, 1) ⊛ ASg(A, 2, 2)"    "240"    "12"
+    
+    {(36,6),(96,8),(240,12)}
     ```
   - Image of A:
 
     ![{D466457A-C043-4898-B22B-C7FC1DB0E7F2}](https://github.com/user-attachments/assets/03a61517-3e51-452c-8353-e97fa6054955)  
   - Image of `ImageProcessor.ASf(A,2,1)`:  
  
-    ![{BE68F33B-104C-4F71-98D1-715809C9DF7E}](https://github.com/user-attachments/assets/63ae0a52-a8ca-43fe-89ed-64b1fc405481)    
+    ![{0BDFEF0F-9942-4D2A-AB7B-1A817474833C}](https://github.com/user-attachments/assets/09536ed2-42ce-4e6c-b34d-f6bb8cda8515)    
   - Image of `ImageProcessor.ASg(A,2,2)`:
  
-    ![{FD993303-C721-4E30-82FE-73468254E1B9}](https://github.com/user-attachments/assets/8121e1b9-06a5-497e-82a0-7a9f6c3a79e8)    
+    ![{4B23FDA0-837D-465E-89BE-E0050D7F8AB0}](https://github.com/user-attachments/assets/a36d1a3a-2db6-4364-99a8-417afce7f7a9)    
   - Image of `ASf(A, 2, 1) ⊛ ASg(A, 2, 2)`:
 
-    ![{8E02C979-DC0E-4C09-A01B-9ECC522BE2D2}](https://github.com/user-attachments/assets/4cf7942b-e51d-4225-87be-265699089c48)    
+    ![{A9AD9185-AEC9-4DCC-A277-FBAF10EBBCAE}](https://github.com/user-attachments/assets/7e2eb0b0-dec0-4b6b-93de-898a5cb58a23)    
     
 ## 14. Poisson set of type XIV
 **Definition:** B is called a Poisson set of type XIV if there exists a set `A ⊆ E²` such that `B = A⁽²⁾(S(Gᴀ), R₁)⊛A⁽²⁾(S(Fᴀ), R₂)`
@@ -634,6 +661,8 @@ disp("Size is heigh-width:");
 disp(["Size of ImageProcessor.ASg(A,2,1):" max(ASg_1)]);
 disp(["Size of ImageProcessor.ASf(A,2,2):" max(ASf_2)]);
 disp(["Size of ASg(A, 2, 1) ⊛ ASf(A, 2, 2):" max(B)]);
+txt = "{" + strjoin(compose('(%d,%d)', B), ',') + "}";
+disp(txt); % display B in the set form
 ```
 - Visual Output:
   - **Image Size Inspection:**
@@ -645,19 +674,21 @@ disp(["Size of ASg(A, 2, 1) ⊛ ASf(A, 2, 2):" max(B)]);
         "Size of ImageProcessor.ASf(A,2,2)"    "4"    "160"
     
         "Size of ASg(A, 2, 1) ⊛ ASf(A, 2, 2)"    "12"    "240"
+    
+    {(6,36),(8,96),(12,240)}
     ```
   - Image of A:
 
     ![{D466457A-C043-4898-B22B-C7FC1DB0E7F2}](https://github.com/user-attachments/assets/03a61517-3e51-452c-8353-e97fa6054955)  
   - Image of `ImageProcessor.ASg(A,2,1)`:  
  
-    ![{68672B17-46E6-4DBB-BBB3-367BE9173637}](https://github.com/user-attachments/assets/e2ddf59e-cec8-48b9-bb8f-4d17446a118d)  
+    ![{A6465E01-9C8C-4902-8852-F3A0A5FFF261}](https://github.com/user-attachments/assets/162f15c9-5149-48af-925f-166ac9fbc306)  
   - Image of `ImageProcessor.ASf(A,2,2)`:
  
-    ![{3CE1C96B-8CA5-4162-A99B-3ADA280025A5}](https://github.com/user-attachments/assets/215efe8e-4d82-43c7-8f97-33ff06b7a9ec)  
+    ![{40F5FD43-B9E8-4D56-A2F0-AE84D008F917}](https://github.com/user-attachments/assets/2aae9709-d364-4eaa-9105-23e288531e5f)  
   - Image of `ASg(A, 2, 1) ⊛ ASf(A, 2, 2)`:
 
-    ![{CFB1C63F-95A9-4F6A-A6E7-636F35CDE7CC}](https://github.com/user-attachments/assets/9021c01a-19bf-4a38-99b8-587935f4be87)  
+    ![{EEE0C39C-7608-4A0F-9CFE-31C5CDF70CBB}](https://github.com/user-attachments/assets/b1babd2a-27f9-4c7f-9085-3a3fd4202fa0)  
 
 ## 15. Poisson set of type XV
 **Definition:** B is called a Poisson set of type XV if there exists a set `A ⊆ E²` such that `B = A⁽²⁾(J(θᴀ), R₁)⊙A⁽²⁾(J(θᴀ), R₂)`
@@ -670,6 +701,8 @@ disp("Size is heigh-width:");
 disp(["Size of ImageProcessor.AJF(A,2,1):" max(AJF_1)]);
 disp(["Size of ImageProcessor.AJF(A,2,2):" max(AJF_2)]);
 disp(["Size of AJF(A, 2, 1) ⊙ AJF(A, 2, 2):" max(B)]);
+txt = "{" + strjoin(compose('(%d,%d)', B), ',') + "}";
+disp(txt); % display B in the set form
 ```
 - Visual Output:
   - **Image Size Inspection:**
@@ -681,19 +714,21 @@ disp(["Size of AJF(A, 2, 1) ⊙ AJF(A, 2, 2):" max(B)]);
         "Size of ImageProcessor.AJF(A,2,2)"    "160"    "80"
     
         "Size of AJF(A, 2, 1) ⊙ AJF(A, 2, 2)"    "12800"    "12800"
+    
+    {(288,288),(1584,1584),(6000,6000),(10560,10560),(12800,12800)}
     ```
   - Image of A:
 
     ![{D466457A-C043-4898-B22B-C7FC1DB0E7F2}](https://github.com/user-attachments/assets/03a61517-3e51-452c-8353-e97fa6054955)  
   - Image of `ImageProcessor.AJF(A,2,1)`:  
  
-    ![{52DFB07C-6519-4B9C-A9C9-66031A778574}](https://github.com/user-attachments/assets/58eb87c4-c5eb-4000-8a08-6dcac22084d6)  
+    ![{45A9AAD4-DDED-4768-AED7-7A2839ED4BE8}](https://github.com/user-attachments/assets/cad05314-2b0b-44c6-ad7b-65f1a5afb914)  
   - Image of `ImageProcessor.AJF(A,2,2)`:
  
-    ![{553DB7D2-949D-4C42-B062-4CDDDC2A9BB6}](https://github.com/user-attachments/assets/09508fc7-c411-48e2-b76c-14112e21e8f4)  
-  - The image below has very large size (a set as `{(288,288),(1584,1584),(6000,6000),(10560,10560),(12800,12800)}`). For that reason, I use dilation to enhance visualization (`C = ones([8 8]);imshow(ImageProcessor.Dilation1(ImageProcessor.coordsToMatrix(floor(B)/10),C));`) instead. Image of `AJF(A, 2, 1) ⊙ AJF(A, 2, 2)` (the coordinates are symmetric, where `xᵢ=yᵢ`):
+    ![{69B97356-9714-42AB-9B16-B576AEA2A4CF}](https://github.com/user-attachments/assets/03a7049a-64f6-4949-a203-9c3ba38ef789)  
+  - The image below has very large size. For that reason, I use dilation to enhance visualization (`C = ones([64 64]);imshow(ImageProcessor.Dilation1(ImageProcessor.coordsToMatrix(B),C));`) instead. Image of `AJF(A, 2, 1) ⊙ AJF(A, 2, 2)` (the coordinates are symmetric, where `xᵢ=yᵢ`):
 
-    ![{25D08689-6C1F-4684-8DD0-DFBA6E9845B0}](https://github.com/user-attachments/assets/55c619d6-bba7-4038-815d-63922bb9faf6)  
+    ![{1A26E027-CE56-4D9C-8EBD-6DC70E8B3F11}](https://github.com/user-attachments/assets/bcf0b61a-1ce1-4f20-85ab-20c7b35e959c)  
 
 ## 16. Poisson set of type XVI
 **Definition:** B is called a Poisson set of type XVI if there exists a set `A ⊆ E²` such that `B = A⁽²⁾(S(Fᴀ), R₁)⊙A⁽²⁾(S(Fᴀ), R₂)`
@@ -706,6 +741,8 @@ disp("Size is heigh-width:");
 disp(["Size of ImageProcessor.ASf(A,2,1):" max(ASf_1)]);
 disp(["Size of ImageProcessor.ASf(A,2,2):" max(ASf_2)]);
 disp(["Size of ASf(A, 2, 1) ⊙ ASf(A, 2, 2):" max(B)]);
+txt = "{" + strjoin(compose('(%d,%d)', B), ',') + "}";
+disp(txt); % display B in the set form
 ```
 - Visual Output:
   - **Image Size Inspection:**
@@ -716,20 +753,22 @@ disp(["Size of ASf(A, 2, 1) ⊙ ASf(A, 2, 2):" max(B)]);
     
         "Size of ImageProcessor.ASf(A,2,2)"    "4"    "160"
     
-        "Size of ASf(A, 2, 1) ⊙ ASf(A, 2, 2)"    "384"    "1304"
+        "Size of ASf(A, 2, 1) ⊙ ASf(A, 2, 2)"    "384"    "1280"
+    
+    {(24,96),(108,360),(316,1132),(384,1280),(320,1280)}
     ```
   - Image of A:
 
     ![{D466457A-C043-4898-B22B-C7FC1DB0E7F2}](https://github.com/user-attachments/assets/03a61517-3e51-452c-8353-e97fa6054955)  
   - Image of `ImageProcessor.ASf(A,2,1)`:  
  
-    ![{BE68F33B-104C-4F71-98D1-715809C9DF7E}](https://github.com/user-attachments/assets/63ae0a52-a8ca-43fe-89ed-64b1fc405481)  
+    ![{0BDFEF0F-9942-4D2A-AB7B-1A817474833C}](https://github.com/user-attachments/assets/09536ed2-42ce-4e6c-b34d-f6bb8cda8515)  
   - Image of `ImageProcessor.ASf(A,2,2)`:
  
-    ![{3CE1C96B-8CA5-4162-A99B-3ADA280025A5}](https://github.com/user-attachments/assets/215efe8e-4d82-43c7-8f97-33ff06b7a9ec)  
-  - I also use dilation to enhance visualization of this image (`C = ones([8 8]);imshow(ImageProcessor.Dilation1(ImageProcessor.coordsToMatrix(B),C));`). Image of `ASf(A, 2, 1) ⊙ ASf(A, 2, 2)` (not symmetric as their coordinates are `{(0,120),(0,492),(12,1280),(60,1304),(176,156),(268,400),(316,640),(384,0),(320,0)}`:
+    ![{40F5FD43-B9E8-4D56-A2F0-AE84D008F917}](https://github.com/user-attachments/assets/2aae9709-d364-4eaa-9105-23e288531e5f)  
+  - I also use dilation to enhance visualization of this image (`C = ones([8 8]);imshow(ImageProcessor.Dilation1(ImageProcessor.coordsToMatrix(B),C));`). Image of `ASf(A, 2, 1) ⊙ ASf(A, 2, 2)`:
 
-    ![{86F419AC-9383-4F4F-8C28-63F1530B7A41}](https://github.com/user-attachments/assets/8a28aec3-4d62-4092-aefd-21aacf8b1859)
+    ![{1806B1D8-9598-4D48-9503-B4990851B36C}](https://github.com/user-attachments/assets/6d72e762-68cf-4b86-a13a-cd286247e639)
       
 ## 17. Poisson set of type XVII
 **Definition:** B is called a Poisson set of type XVII if there exists a set `A ⊆ E²` such that `B = A⁽²⁾(S(Gᴀ), R₁)⊙A⁽²⁾(S(Gᴀ), R₂)`
@@ -742,6 +781,8 @@ disp("Size is heigh-width:");
 disp(["Size of ImageProcessor.ASg(A,2,1):" max(ASg_1)]);
 disp(["Size of ImageProcessor.ASg(A,2,2):" max(ASg_2)]);
 disp(["Size of ASg(A, 2, 1) ⊙ ASg(A, 2, 2):" max(B)]);
+txt = "{" + strjoin(compose('(%d,%d)', B), ',') + "}";
+disp(txt); % display B in the set form
 ```
 - Visual Output:
   - **Image Size Inspection:**
@@ -752,20 +793,22 @@ disp(["Size of ASg(A, 2, 1) ⊙ ASg(A, 2, 2):" max(B)]);
     
         "Size of ImageProcessor.ASg(A,2,2)"    "160"    "4"
     
-        "Size of ASg(A, 2, 1) ⊙ ASg(A, 2, 2)"    "1280"    "396"
+        "Size of ASg(A, 2, 1) ⊙ ASg(A, 2, 2)"    "1280"    "384"
+    
+    {(96,24),(360,108),(1132,316),(1280,384),(1280,320)}
     ```
   - Image of A:
 
     ![{D466457A-C043-4898-B22B-C7FC1DB0E7F2}](https://github.com/user-attachments/assets/03a61517-3e51-452c-8353-e97fa6054955)  
   - Image of `ImageProcessor.ASg(A,2,1)`:  
  
-    ![{68672B17-46E6-4DBB-BBB3-367BE9173637}](https://github.com/user-attachments/assets/e2ddf59e-cec8-48b9-bb8f-4d17446a118d)    
+    ![{A6465E01-9C8C-4902-8852-F3A0A5FFF261}](https://github.com/user-attachments/assets/162f15c9-5149-48af-925f-166ac9fbc306)    
   - Image of `ImageProcessor.ASg(A,2,2)`:
  
-    ![{FD993303-C721-4E30-82FE-73468254E1B9}](https://github.com/user-attachments/assets/8121e1b9-06a5-497e-82a0-7a9f6c3a79e8)    
-  - Image of `ASg(A, 2, 1) ⊙ ASg(A, 2, 2)` (has a set `{(0,36),(0,156),(0,396),(24,380),(156,176),(520,232),(1132,160),(1280,0),(1280,0)}`):
+    ![{4B23FDA0-837D-465E-89BE-E0050D7F8AB0}](https://github.com/user-attachments/assets/a36d1a3a-2db6-4364-99a8-417afce7f7a9)    
+  - Image of `ASg(A, 2, 1) ⊙ ASg(A, 2, 2)`:
 
-    ![{54A2F44F-6C88-42C6-B9F9-27FB7086BA76}](https://github.com/user-attachments/assets/c33d3e43-86d1-4c61-b0cc-13049657069b)    
+    ![{69C6E8F1-ADB1-48C8-8DD8-802A66BDE7A3}](https://github.com/user-attachments/assets/7ef72aff-abe9-4291-a9c3-e4e0024c8748)    
 
 ## 20. Poisson set of type XVIII
 **Definition:** B is called a Poisson set of type XVIII if there exists a set `A ⊆ E²` such that `B = A⁽²⁾(S(Fᴀ), R₁)⊙A⁽²⁾(S(Gᴀ), R₂)`
@@ -778,6 +821,8 @@ disp("Size is heigh-width:");
 disp(["Size of ImageProcessor.ASf(A,2,1):" max(ASf_1)]);
 disp(["Size of ImageProcessor.ASg(A,2,2):" max(ASg_2)]);
 disp(["Size of ASf(A, 2, 1) ⊙ ASg(A, 2, 2):" max(B)]);
+txt = "{" + strjoin(compose('(%d,%d)', B), ',') + "}";
+disp(txt); % display B in the set form
 ```
 - Visual Output:
   - **Image Size Inspection:**
@@ -788,20 +833,22 @@ disp(["Size of ASf(A, 2, 1) ⊙ ASg(A, 2, 2):" max(B)]);
     
         "Size of ImageProcessor.ASg(A,2,2)"    "160"    "4"
     
-        "Size of ASf(A, 2, 1) ⊙ ASg(A, 2, 2)"    "12800"    "44"
+        "Size of ASf(A, 2, 1) ⊙ ASg(A, 2, 2)"    "12800"    "47"
+    
+    {(288,8),(1584,22),(6000,47),(10560,44),(12800,32)}
     ```
   - Image of A:
 
     ![{D466457A-C043-4898-B22B-C7FC1DB0E7F2}](https://github.com/user-attachments/assets/03a61517-3e51-452c-8353-e97fa6054955)  
   - Image of `ImageProcessor.ASf(A,2,1)`:  
  
-    ![{BE68F33B-104C-4F71-98D1-715809C9DF7E}](https://github.com/user-attachments/assets/63ae0a52-a8ca-43fe-89ed-64b1fc405481)    
+    ![{0BDFEF0F-9942-4D2A-AB7B-1A817474833C}](https://github.com/user-attachments/assets/09536ed2-42ce-4e6c-b34d-f6bb8cda8515)    
   - Image of `ImageProcessor.ASg(A,2,2)`:
  
-    ![{FD993303-C721-4E30-82FE-73468254E1B9}](https://github.com/user-attachments/assets/8121e1b9-06a5-497e-82a0-7a9f6c3a79e8)    
-  - I use `C = ones([64 64]);imshow(ImageProcessor.Dilation1(ImageProcessor.coordsToMatrix(B),C));` to display the image. This is needed because B has large x-coordinates, making the image too narrow to see clearly. Dilation with a 64×64 kernel makes the points visible as the set `{(0,15),(0,44),(0,37),(0,21),(288,42),(1584,33),(6000,6),(10560,10),(12800,8)}` has long x-coordinate. Image of `ASf(A, 2, 1) ⊙ ASg(A, 2, 2)`:
+    ![{4B23FDA0-837D-465E-89BE-E0050D7F8AB0}](https://github.com/user-attachments/assets/a36d1a3a-2db6-4364-99a8-417afce7f7a9)    
+  - I use `C = ones([64 64]);imshow(ImageProcessor.Dilation1(ImageProcessor.coordsToMatrix(B),C));` to display the image. This is needed because B has large x-coordinates, making the image too narrow to see clearly. Image of `ASf(A, 2, 1) ⊙ ASg(A, 2, 2)`:
 
-    ![{AD2668CC-649C-4A4B-9A49-2CC41F8A705E}](https://github.com/user-attachments/assets/47e052f6-801f-4134-8f30-a061508b1588)      
+    ![{B93B3877-39E4-4B29-86E7-BE791B3D7F60}](https://github.com/user-attachments/assets/65b32d89-6535-4980-8eb2-29dc66e3fb43)      
     
 ## 21. Poisson set of type XIX
 **Definition:** B is called a Poisson set of type XIX if there exists a set `A ⊆ E²` such that `B = A⁽²⁾(S(Gᴀ), R₁)⊙A⁽²⁾(S(Fᴀ), R₂)`
@@ -814,6 +861,8 @@ disp("Size is heigh-width:");
 disp(["Size of ImageProcessor.ASg(A,2,1):" max(ASg_1)]);
 disp(["Size of ImageProcessor.ASf(A,2,2):" max(ASf_2)]);
 disp(["Size of ASg(A, 2, 1) ⊙ ASf(A, 2, 2):" max(B)]);
+txt = "{" + strjoin(compose('(%d,%d)', B), ',') + "}";
+disp(txt); % display B in the set form
 ```
 - Visual Output:
   - **Image Size Inspection:**
@@ -825,16 +874,18 @@ disp(["Size of ASg(A, 2, 1) ⊙ ASf(A, 2, 2):" max(B)]);
         "Size of ImageProcessor.ASf(A,2,2)"    "4"    "160"
     
         "Size of ASg(A, 2, 1) ⊙ ASf(A, 2, 2)"    "47"    "12800"
+    
+    {(8,288),(22,1584),(47,6000),(44,10560),(32,12800)}
     ```
   - Image of A:
 
     ![{D466457A-C043-4898-B22B-C7FC1DB0E7F2}](https://github.com/user-attachments/assets/03a61517-3e51-452c-8353-e97fa6054955)  
   - Image of `ImageProcessor.ASg(A,2,1)`:  
  
-    ![{68672B17-46E6-4DBB-BBB3-367BE9173637}](https://github.com/user-attachments/assets/e2ddf59e-cec8-48b9-bb8f-4d17446a118d)  
+    ![{A6465E01-9C8C-4902-8852-F3A0A5FFF261}](https://github.com/user-attachments/assets/162f15c9-5149-48af-925f-166ac9fbc306)  
   - Image of `ImageProcessor.ASf(A,2,2)`:
  
-    ![{3CE1C96B-8CA5-4162-A99B-3ADA280025A5}](https://github.com/user-attachments/assets/215efe8e-4d82-43c7-8f97-33ff06b7a9ec)  
-  - I use `C = ones([64 64]);imshow(ImageProcessor.Dilation1(ImageProcessor.coordsToMatrix(B),C));` to display the image. This is needed because B has large x-coordinates, making the image too narrow to see clearly. Dilation with a 64×64 kernel makes the points visible as the set `{(0,288),(1,1584),(6,6000),(15,10560),(29,12800),(42,0),(47,0),(44,0),(32,0)}` has long y-coordinate. Image of `ASg(A, 2, 1) ⊙ ASf(A, 2, 2)`:
+    ![{40F5FD43-B9E8-4D56-A2F0-AE84D008F917}](https://github.com/user-attachments/assets/2aae9709-d364-4eaa-9105-23e288531e5f)  
+  - I use `C = ones([64 64]);imshow(ImageProcessor.Dilation1(ImageProcessor.coordsToMatrix(B),C));` to display the image. This is needed because B has large x-coordinates, making the image too narrow to see clearly. Image of `ASg(A, 2, 1) ⊙ ASf(A, 2, 2)`:
 
-    ![{FAB5944F-3183-44F8-AA90-ADD7DC60E65A}](https://github.com/user-attachments/assets/40416bc6-841e-43b4-9945-dc04798bd798)    
+    ![{D1E1E4E6-1B6D-483C-A024-BCA86C551DE7}](https://github.com/user-attachments/assets/e7376a2f-fda5-4f15-8c82-ca8a4f26c778)   
