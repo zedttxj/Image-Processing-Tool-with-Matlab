@@ -573,9 +573,9 @@
             n = length(A);
             A = unique(A,'rows');
             t = prod((2:d+1).' + (0:n-d-1), 1);
-            Jacobian = A;
-            Jacobian(1:n-d,ind) = Jacobian(1+d:end,ind) .* t .';
-            Jacobian(n-d+1:end,ind) = 0;
+            Jacobian = A(1+d:end,:);
+            Jacobian(:,ind) = Jacobian(:,ind) .* t .';
+            % Jacobian(n-d+1:end,ind) = 0;
             lastNonZeroRow = find(any(Jacobian ~= 0, 2), 1, 'last');
             Jacobian = Jacobian(1:lastNonZeroRow, :);
         end
@@ -583,9 +583,8 @@
             n = length(A);
             A = unique(A,'rows');
             t = prod((2:d+1).' + (0:n-d-1), 1);
-            FlippedJacobian = A;
-            FlippedJacobian(1:n-d,ind) = FlippedJacobian(1+d:end,ind) .* t .';
-            FlippedJacobian(n-d+1:end,ind) = 0;
+            FlippedJacobian = A(1+d:end,:);
+            FlippedJacobian(:,ind) = FlippedJacobian(:,ind) .* t .';
             lastNonZeroRow = find(any(FlippedJacobian ~= 0, 2), 1, 'last');
             FlippedJacobian = FlippedJacobian(1:lastNonZeroRow, [2 1]);
         end
@@ -924,7 +923,40 @@
             product(:,1) = conv(A(:,1), B(:,1));
             product(:,2) = conv(A(:,2), B(:,2));
         end
+        function output = transform(input_image, mode, scale, threshold)
+            % input_image: grayscale image, double or uint8
+            % mode: 'cos' or 'sigmoid'
+            
+            % Convert to double in [0,1] if needed
+            if ~isa(input_image, 'double')
+                input_image = double(input_image) / 255;
+            end
+
+            [height, width] = size(input_image);
+            output = zeros(size(input_image));
+
+            for x = 1:height
+                for y = 1:width
+                    t = input_image(x, y);
+                    val = ( (x-1)*width + (y-1) ) * t;  % Note: adjust index for 0-based equivalent
+                    if strcmp(mode, 'cos')
+                        output(x, y) = abs(cos(val));
+                    elseif strcmp(mode, 'cos2')
+                        output(x, y) = (cos(val)+1)/2;
+                    elseif strcmp(mode, 'cos3')
+                        output(x, y) = cos(pi / (2 * scale * val));
+                    elseif strcmp(mode, 'sigmoid')
+                        output(x, y) = 1 / (1 + exp(-scale * (val - threshold)));
+                    elseif strcmp(mode, 'log')
+                        output(x, y) = log(1 + scale * (val - threshold));
+                    else
+                        output(x, y) = val;
+                    end
+                end
+            end
+        end
     end
+
     properties (Constant)
         EXTRA = struct('DILATION', @ImageProcessor.extraDilation, 'DILATIONSET', @ImageProcessor.extraDilationSet, 'EROSION', @ImageProcessor.extraErosion, 'EROSIONSET', @ImageProcessor.extraErosionSet);
     end
