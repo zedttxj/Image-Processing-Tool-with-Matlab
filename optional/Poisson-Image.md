@@ -41,8 +41,8 @@
   imshow(log(1 + magnitude), []);
   title('Log Magnitude Spectrum of Decorated Image');
   ```
-- Image:
-- DCT Image:
+- Image: ![Gray scale image](https://github.com/zedttxj/Image-Processing-Tool-with-Matlab/blob/main/optional/poisson.png)
+- DCT Image: ![Gray scale image](https://github.com/zedttxj/Image-Processing-Tool-with-Matlab/blob/main/optional/poisson_fft.png)
 # Poisson Image with Cosine
 We apply this function on the Poisson image: `abs(cos(<intensity>))`  
 - MATLAB code:
@@ -64,8 +64,8 @@ We apply this function on the Poisson image: `abs(cos(<intensity>))`
   imshow(log(1 + magnitude), []);
   title('Log Magnitude Spectrum of Decorated Image');
   ```
-- Image:
-- DCT Image:
+- Image: ![Gray scale image](https://github.com/zedttxj/Image-Processing-Tool-with-Matlab/blob/main/optional/cos.png)
+- DCT Image: ![Gray scale image](https://github.com/zedttxj/Image-Processing-Tool-with-Matlab/blob/main/optional/cos_fft.png)
 # Poisson Image with Sigmoid
 We apply this function on the Poisson image: `1 / (1 + exp(-scale * (<intensity> - threshold)))`  
 - MATLAB code:
@@ -87,8 +87,8 @@ We apply this function on the Poisson image: `1 / (1 + exp(-scale * (<intensity>
   imshow(log(1 + magnitude), []);
   title('Log Magnitude Spectrum of Decorated Image');
   ```
-- Image:
-- DCT Image:
+- Image: ![Gray scale image](https://github.com/zedttxj/Image-Processing-Tool-with-Matlab/blob/main/optional/sigmoid.png)
+- DCT Image: ![Gray scale image](https://github.com/zedttxj/Image-Processing-Tool-with-Matlab/blob/main/optional/sigmoid_fft.png)
 # Poisson Image with Log
 We apply this function on the Poisson image: `log(1 + scale * (<intensity> - threshold))`  
 - MATLAB code:
@@ -110,5 +110,5 @@ We apply this function on the Poisson image: `log(1 + scale * (<intensity> - thr
   imshow(log(1 + magnitude), []);
   title('Log Magnitude Spectrum of Decorated Image');
   ```
-- Image:
-- DCT Image:
+- Image: ![Gray scale image](https://github.com/zedttxj/Image-Processing-Tool-with-Matlab/blob/main/optional/log.png)
+- DCT Image: ![Gray scale image](https://github.com/zedttxj/Image-Processing-Tool-with-Matlab/blob/main/optional/log_fft.png)
