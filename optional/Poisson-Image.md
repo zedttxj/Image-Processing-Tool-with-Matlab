@@ -19,8 +19,8 @@
   imshow(log(1 + magnitude), []);
   title('Log Magnitude Spectrum of Decorated Image');
   ```
-- Image:
-- DCT Image:
+- Image: ![Gray scale image](https://github.com/zedttxj/Image-Processing-Tool-with-Matlab/blob/main/optional/grayscale.png)
+- DCT Image: ![Gray scale image](https://github.com/zedttxj/Image-Processing-Tool-with-Matlab/blob/main/optional/grayscale_fft.png)
 # Poisson Image
 - MATLAB code:
   ```matlab
