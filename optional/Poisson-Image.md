@@ -231,6 +231,6 @@ But P can be tiny → so only strong regions appear visible.
 
 ---
 
-| Original Grayscale     | Log-PMF (shifted)               | `exp` version (original multinomial)               | FFT (original multinomial)                            |
-| ---------------------- | ------------------------------- | -------------------------------------------------- | ----------------------------------------------------- |
-| ![Gray](https://github.com/zedttxj/Image-Processing-Tool-with-Matlab/blob/main/optional/grayscale.png) | ![LogPMF](https://github.com/zedttxj/Image-Processing-Tool-with-Matlab/blob/main/optional/multinomialwoexp.png) | ![Exp](https://github.com/zedttxj/Image-Processing-Tool-with-Matlab/blob/main/optional/multinomialwexp.png) | ![FFT](https://github.com/zedttxj/Image-Processing-Tool-with-Matlab/blob/main/optional/multinomialwexp_fft.png) |
+| Original Grayscale     | Reference Image (colored) | Log-PMF (shifted)               | `exp` version (original multinomial)               | FFT (original multinomial)                            |
+| ---------------------- | ------------------------- | ------------------------------- | -------------------------------------------------- | ----------------------------------------------------- |
+| ![Gray](https://github.com/zedttxj/Image-Processing-Tool-with-Matlab/blob/main/optional/grayscale.png) | ![Gray](https://github.com/zedttxj/Image-Processing-Tool-with-Matlab/blob/main/optional/test.png) | ![LogPMF](https://github.com/zedttxj/Image-Processing-Tool-with-Matlab/blob/main/optional/multinomialwoexp.png) | ![Exp](https://github.com/zedttxj/Image-Processing-Tool-with-Matlab/blob/main/optional/multinomialwexp.png) | ![FFT](https://github.com/zedttxj/Image-Processing-Tool-with-Matlab/blob/main/optional/multinomialwexp_fft.png) |
