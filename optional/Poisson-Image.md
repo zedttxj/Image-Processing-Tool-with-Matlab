@@ -175,6 +175,21 @@ We interpret this triplet as pseudo-counts in a multinomial distribution:
 - Store the result as the decorated image
 - Optional: To recover the actual multinomial probability: `P(x, y, t) = exp(<ln P>)`. This gives the true probability. In practice, it’s usually extremely tiny —  so the **log-space version** is what you visualize.
 
+---
+
+**Below:**  
+These example outputs show why the log version is useful and how the PMF behaves:
+
+- **Decorated (Raw Multinomial PMF)**  
+  ![Multinomial PMF](https://github.com/zedttxj/Image-Processing-Tool-with-Matlab/blob/main/optional/multinomial.png)
+
+- **FFT Spectrum of the PMF**  
+  ![Multinomial FFT](https://github.com/zedttxj/Image-Processing-Tool-with-Matlab/blob/main/optional/multinomial_fft.png)
+
+- **Histogram + CDF of the PMF**  
+  ![Multinomial Histogram](https://github.com/zedttxj/Image-Processing-Tool-with-Matlab/blob/main/optional/multinomial_histo.png)
+
+The PMF itself is nearly zero for most pixels — only the log-PMF reveals the structure clearly.
 ## Example Output
 Below:
 - The decorated image (log-PMF): ![Gray scale image](https://github.com/zedttxj/Image-Processing-Tool-with-Matlab/blob/main/optional/multinomialLog.png)
