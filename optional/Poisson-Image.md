@@ -173,9 +173,10 @@ We interpret this triplet as pseudo-counts in a multinomial distribution:
 ## How it works
 - For each pixel, compute its ((x,y,t) and the log-PMF
 - Store the result as the decorated image
-- Optional: exponentiate the log to get the true PMF — but this is usually tiny though the log-PMF ranges from 0 to 1
+- Optional: To recover the actual multinomial probability: `P(x, y, t) = exp(<ln P>)`. This gives the true probability. In practice, it’s usually extremely tiny —  so the **log-space version** is what you visualize.
+
 ## Example Output
 Below:
 - The decorated image (log-PMF): ![Gray scale image](https://github.com/zedttxj/Image-Processing-Tool-with-Matlab/blob/main/optional/multinomialLog.png)
 - The FFT spectrum (frequency content of the transform): ![Gray scale image](https://github.com/zedttxj/Image-Processing-Tool-with-Matlab/blob/main/optional/multinomialLog_fft.png)
-- The histogram + CDF of the log-PMF values: ![Gray scale image](https://github.com/zedttxj/Image-Processing-Tool-with-Matlab/blob/main/optional/motinomialLog_cdf.png)
+- The histogram + CDF of the log-PMF values: ![Gray scale image](https://github.com/zedttxj/Image-Processing-Tool-with-Matlab/blob/main/optional/multinomialLog_cdf.png)
