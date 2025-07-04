@@ -162,18 +162,16 @@ We apply this function on the Poisson image: `log(1 + scale * (<intensity> - thr
 # Multinomial Log-PMF for Grayscale Images
 Explores how a multinomial probability model can be used to transform a grayscale image into a new representation that combines position and intensity as pseudo-counts
 ## Model Idea
-Each pixel is treated as a “sample” described by:
-- x → horizontal coordinate (range: 0 to 400)
-- y → vertical coordinate (range: 0 to 600)
-- t → grayscale intensity (range: 0 to 255)
+Each pixel is treated as a ``sample'' described by:
+- x → horizontal coordinate (range: 0 to 400) (could be different)
+- y → vertical coordinate (range: 0 to 600) (could be different)
+- t → grayscale intensity (range: 0 to 255) (could be double value ranging from 0 to 1)
 - The sum: S=x+y+t
 ## Multinomial Log-PMF
 We interpret this triplet as pseudo-counts in a multinomial distribution:
 `lnP(x,y,t)=ln(S!)−ln(x!)−ln(y!)−ln(t!)+xln(x/S)+yln(y/S)+tln(t/S)`
-## How it works
-- For each pixel, compute its ((x,y,t) and the log-PMF
-- Store the result as the decorated image
-- Optional: To recover the actual multinomial probability: `P(x, y, t) = exp(<ln P>)`. This gives the true probability. In practice, it’s usually extremely tiny —  so the **log-space version** is what you visualize.
+
+- Optional: To recover the actual multinomial probability: `P(x, y, t) = exp(<ln P>)`. This gives the true probability. In practice, it’s usually extremely tiny — so the **log-space version** is what you visualize.
 
 **Below:**  
 These example outputs show how the original version behaves:
