@@ -234,3 +234,48 @@ But P can be tiny → so only strong regions appear visible.
 | Original Grayscale     | Reference Image (colored) | Log-PMF (shifted)               | `exp` version (original multinomial)               | FFT (original multinomial)                            |
 | ---------------------- | ------------------------- | ------------------------------- | -------------------------------------------------- | ----------------------------------------------------- |
 | ![Gray](https://github.com/zedttxj/Image-Processing-Tool-with-Matlab/blob/main/optional/grayscale.png) | ![Gray](https://github.com/zedttxj/Image-Processing-Tool-with-Matlab/blob/main/optional/test.png) | ![LogPMF](https://github.com/zedttxj/Image-Processing-Tool-with-Matlab/blob/main/optional/multinomialwoexp.png) | ![Exp](https://github.com/zedttxj/Image-Processing-Tool-with-Matlab/blob/main/optional/multinomialwexp.png) | ![FFT](https://github.com/zedttxj/Image-Processing-Tool-with-Matlab/blob/main/optional/multinomialwexp_fft.png) |
+
+## Multinomial Log vs Fixed Probabilities
+
+This section shows what happens when you compute the **multinomial log PMF** on a grayscale image using **fixed probabilities** for \( p_1, p_2, p_3 \) instead of a color reference image.
+
+### What changes?
+
+In the **original version**, you used:
+- \( t \) = grayscale intensity at each pixel.
+- \( p_1, p_2, p_3 \) = RGB reference fractions at each pixel.
+- So each pixel’s log PMF:
+
+\[
+\ln P(x,y,t) = \ln(S!) - \ln(x!) - \ln(y!) - \ln(t!) + x \ln(p_1) + y \ln(p_2) + t \ln(p_3)
+\]
+
+In the **fixed version**, you **force**:
+- \( p_1, p_2, p_3 \) to be the **same for all pixels** (e.g. 1/3, 1/3, 1/3) or any other constant.
+- So the only varying parts are \( x, y, t \).
+
+This means:
+- The **shape** comes purely from the spatial coordinates and pixel intensity.
+- The color influence is removed.
+
+
+### Example: Fixed \( p_1, p_2, p_3 \)
+
+Below is a sample output when you use **fixed** \( p \):
+
+| Image | FFT | Histogram + CDF |
+|-------|-----|------------------|
+| ![Decorated](./multinomial_fixedp.png) | ![FFT](./multinomial_fixedp_fft.png) | ![CDF](./multinomial_fixedp_cdf.png) |
+
+- **Left:** Decorated image — visible pattern depends on coordinate \((x, y)\) and intensity \( t \).
+- **Middle:** FFT shows the frequency structure — patterns often appear near the DC component.
+- **Right:** Histogram + CDF show the spread — usually different shape than natural grayscale.
+- **Using fixed \( p \)** → multinomial log is purely combinatorial: same weights everywhere.
+- **Using local RGB reference** → the multinomial log is adaptive: the probability weights come from actual color data.
+- In both, you visualize the **log PMF** or the **real PMF** with `exp`.
+
+### Key equation (fixed)
+
+\[
+\ln P(x,y,t) = \ln(S!) - \ln(x!) - \ln(y!) - \ln(t!) + x \ln(p_1) + y \ln(p_2) + t \ln(p_3), \quad p_1 + p_2 + p_3 = 1.
+\]
