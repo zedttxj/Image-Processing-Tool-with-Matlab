@@ -187,7 +187,7 @@ These example outputs show why the log version is useful and how the PMF behaves
   ![Multinomial FFT](https://github.com/zedttxj/Image-Processing-Tool-with-Matlab/blob/main/optional/multinomial_fft.png)
 
 - **Histogram + CDF of the PMF**  
-  ![Multinomial Histogram](https://github.com/zedttxj/Image-Processing-Tool-with-Matlab/blob/main/optional/multinomial_histo.png)
+  ![Multinomial Histogram](https://github.com/zedttxj/Image-Processing-Tool-with-Matlab/blob/main/optional/multinomial_histogram.png)
 
 The PMF itself is nearly zero for most pixels — only the log-PMF reveals the structure clearly.
 ## Example Output
