@@ -184,7 +184,7 @@ These example outputs show how the original version behaves:
 - **FFT Spectrum of the PMF**  
   ![Multinomial FFT](https://github.com/zedttxj/Image-Processing-Tool-with-Matlab/blob/main/optional/multinomial_fft.png)
 
-- **Histogram + CDF of the PMF**  
+- **Histogram of the PMF**  
   ![Multinomial Histogram](https://github.com/zedttxj/Image-Processing-Tool-with-Matlab/blob/main/optional/multinomial_histogram.png)
 
 The PMF itself is nearly zero for most pixels — only the log-PMF reveals the structure clearly:
