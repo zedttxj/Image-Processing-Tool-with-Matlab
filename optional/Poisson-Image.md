@@ -175,10 +175,8 @@ We interpret this triplet as pseudo-counts in a multinomial distribution:
 - Store the result as the decorated image
 - Optional: To recover the actual multinomial probability: `P(x, y, t) = exp(<ln P>)`. This gives the true probability. In practice, it’s usually extremely tiny —  so the **log-space version** is what you visualize.
 
----
-
 **Below:**  
-These example outputs show why the log version is useful and how the PMF behaves:
+These example outputs show how the original version behaves:
 
 - **Decorated (Raw Multinomial PMF)**  
   ![Multinomial PMF](https://github.com/zedttxj/Image-Processing-Tool-with-Matlab/blob/main/optional/multinomial.png)
@@ -189,9 +187,7 @@ These example outputs show why the log version is useful and how the PMF behaves
 - **Histogram + CDF of the PMF**  
   ![Multinomial Histogram](https://github.com/zedttxj/Image-Processing-Tool-with-Matlab/blob/main/optional/multinomial_histogram.png)
 
-The PMF itself is nearly zero for most pixels — only the log-PMF reveals the structure clearly.
-## Example Output
-Below:
+The PMF itself is nearly zero for most pixels — only the log-PMF reveals the structure clearly:
 - The decorated image (log-PMF): ![Gray scale image](https://github.com/zedttxj/Image-Processing-Tool-with-Matlab/blob/main/optional/multinomialLog.png)
 - The FFT spectrum (frequency content of the transform): ![Gray scale image](https://github.com/zedttxj/Image-Processing-Tool-with-Matlab/blob/main/optional/multinomialLog_fft.png)
 - The histogram + CDF of the log-PMF values: ![Gray scale image](https://github.com/zedttxj/Image-Processing-Tool-with-Matlab/blob/main/optional/multinomialLog_cdf.png)
