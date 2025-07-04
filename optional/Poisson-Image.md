@@ -242,22 +242,13 @@ This section shows what happens when you compute the **multinomial log PMF** on 
 ### What changes?
 
 In the **original version**, you used:
-- \( t \) = grayscale intensity at each pixel.
-- \( p_1, p_2, p_3 \) = RGB reference fractions at each pixel.
-- So each pixel’s log PMF:
+- `t` = grayscale intensity at each pixel.
+- `p_1, p_2, p_3 = RGB` reference fractions at each pixel.
+- So each pixel’s log PMF: `ln P(x,y,t) = ln(S!) - ln(x!) - ln(y!) - ln(t!) + x*ln(p_1) + y*ln(p_2) + t*ln(p_3)`
 
-\[
-\ln P(x,y,t) = \ln(S!) - \ln(x!) - \ln(y!) - \ln(t!) + x \ln(p_1) + y \ln(p_2) + t \ln(p_3)
-\]
-
-In the **fixed version**, you **force**:
-- \( p_1, p_2, p_3 \) to be the **same for all pixels** (e.g. 1/3, 1/3, 1/3) or any other constant.
-- So the only varying parts are \( x, y, t \).
-
-This means:
-- The **shape** comes purely from the spatial coordinates and pixel intensity.
-- The color influence is removed.
-
+In the **fixed version**, we **force**:
+- `p_1, p_2, p_3` to be the **same for all pixels** (e.g. 1/3, 1/3, 1/3) or any other constant.
+- So the only varying parts are `( x, y, t )`.
 
 ### Example: Fixed \( p_1, p_2, p_3 \)
 
@@ -270,12 +261,8 @@ Below is a sample output when you use **fixed** \( p \):
 - **Left:** Decorated image — visible pattern depends on coordinate \((x, y)\) and intensity \( t \).
 - **Middle:** FFT shows the frequency structure — patterns often appear near the DC component.
 - **Right:** Histogram + CDF show the spread — usually different shape than natural grayscale.
-- **Using fixed \( p \)** → multinomial log is purely combinatorial: same weights everywhere.
-- **Using local RGB reference** → the multinomial log is adaptive: the probability weights come from actual color data.
-- In both, you visualize the **log PMF** or the **real PMF** with `exp`.
+- **Using fixed `p`** → multinomial log is purely combinatorial: same weights everywhere.
 
 ### Key equation (fixed)
 
-\[
-\ln P(x,y,t) = \ln(S!) - \ln(x!) - \ln(y!) - \ln(t!) + x \ln(p_1) + y \ln(p_2) + t \ln(p_3), \quad p_1 + p_2 + p_3 = 1.
-\]
+`ln P(x,y,t) = ln(S!) - ln(x!) - ln(y!) - ln(t!) + x*ln(p_1) + y*ln(p_2) + t*ln(p_3), where p_1 + p_2 + p_3 = 1`
