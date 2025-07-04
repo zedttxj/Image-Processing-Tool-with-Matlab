@@ -189,3 +189,48 @@ The PMF itself is nearly zero for most pixels — only the log-PMF reveals the s
 - The decorated image (log-PMF): ![Gray scale image](https://github.com/zedttxj/Image-Processing-Tool-with-Matlab/blob/main/optional/multinomialLog.png)
 - The FFT spectrum (frequency content of the transform): ![Gray scale image](https://github.com/zedttxj/Image-Processing-Tool-with-Matlab/blob/main/optional/multinomialLog_fft.png)
 - The histogram + CDF of the log-PMF values: ![Gray scale image](https://github.com/zedttxj/Image-Processing-Tool-with-Matlab/blob/main/optional/multinomialLog_cdf.png)
+## Multinomial Log-PMF vs Probability
+
+```matlab
+% MATLAB example
+decorated = ImageProcessor.multinomialLog(img2, img);
+```
+
+* **img2** → the grayscale image → provides `t` (pixel intensity)
+* **img** → the RGB image → provides `p1, p2, p3` at each pixel (normalized)
+
+**For each pixel:**
+
+ln P(x, y, t) = ln(S!) - ln(x!) - ln(y!) - ln(t!) + x ln(p1) + y ln(p2) + t ln(p3)
+
+where S = x + y + t.
+
+**Normalization:**
+
+p1 = R / Sr,  p2 = G / Sr,  p3 = B / Sr,  where Sr = R + G + B.
+
+---
+
+### ✅ `decorated` vs `exp(decorated)`
+
+* **`decorated`** → the raw log-PMF → usually negative, because log-probabilities of tiny values are negative.
+* `imshow(decorated, [])` may look dark — so always normalize first:
+
+```matlab
+I_min = min(decorated(:));
+I_max = max(decorated(:));
+decorated = (decorated - I_min) / (I_max - I_min);
+imshow(decorated, []);
+```
+
+* **`exp(decorated)`** → gives you the real multinomial probability:
+
+P(x,y,t) = exp(ln P)
+
+But P can be tiny → so only strong regions appear visible.
+
+---
+
+| Original Grayscale     | Log-PMF (shifted)               | `exp` version (original multinomial)               | FFT (original multinomial)                            |
+| ---------------------- | ------------------------------- | -------------------------------------------------- | ----------------------------------------------------- |
+| ![Gray](https://github.com/zedttxj/Image-Processing-Tool-with-Matlab/blob/main/optional/grayscale.png) | ![LogPMF](https://github.com/zedttxj/Image-Processing-Tool-with-Matlab/blob/main/optional/multinomialwoexp.png) | ![Exp](https://github.com/zedttxj/Image-Processing-Tool-with-Matlab/blob/main/optional/multinomialwexp.png) | ![FFT](https://github.com/zedttxj/Image-Processing-Tool-with-Matlab/blob/main/optional/multinomialwexp_fft.png) |
