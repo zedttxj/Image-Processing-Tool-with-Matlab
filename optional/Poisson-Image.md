@@ -241,7 +241,7 @@ This section shows what happens when you compute the **multinomial log PMF** on 
 
 ### What changes?
 
-In the **original version**, you used:
+In the **original version**, we used:
 - `t` = grayscale intensity at each pixel.
 - `p_1, p_2, p_3 = RGB` reference fractions at each pixel.
 - So each pixel’s log PMF: `ln P(x,y,t) = ln(S!) - ln(x!) - ln(y!) - ln(t!) + x*ln(p_1) + y*ln(p_2) + t*ln(p_3)`
@@ -250,9 +250,9 @@ In the **fixed version**, we **force**:
 - `p_1, p_2, p_3` to be the **same for all pixels** (e.g. 1/3, 1/3, 1/3) or any other constant.
 - So the only varying parts are `( x, y, t )`.
 
-### Example: Fixed \( p_1, p_2, p_3 \)
+### Example: Fixed `( p_1, p_2, p_3 )`
 
-Below is a sample output when you use **fixed** \( p \):
+Below is a sample output when you use **fixed** `( p )`:
 
 | Image | FFT | Histogram + CDF |
 |-------|-----|------------------|
