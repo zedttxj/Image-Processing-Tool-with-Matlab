@@ -211,7 +211,7 @@ p1 = R / Sr,  p2 = G / Sr,  p3 = B / Sr,  where Sr = R + G + B.
 
 ---
 
-### ✅ `decorated` vs `exp(decorated)`
+### `decorated` vs `exp(decorated)`
 
 * **`decorated`** → the raw log-PMF → usually negative, because log-probabilities of tiny values are negative.
 * `imshow(decorated, [])` may look dark — so always normalize first:
